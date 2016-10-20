@@ -2,8 +2,8 @@
 #define _SB_TREE__
 
 #include <vector>
+#include "repeatsbalance.h"
 #include "Node.hpp"
-
 class Tree {
   public:
 
@@ -19,12 +19,10 @@ class Tree {
       _post_order_nodes.clear();
     }
 
-    unsigned int get_nodes_number() const {
-      return _nodes_pool.size();
-    }
-
-    Node *get_node(unsigned int i) {
-      return _post_order_nodes[i];
+    void update_SRcount(const InputSequences &sequences, std::vector<int> &o_SRCount) {
+      for (unsigned int i = 0; i < _post_order_nodes.size(); ++i) {
+        _post_order_nodes[i]->fill_identifier(sequences._sequences.size(), sequences, o_SRCount);
+      }
     }
 
     friend std::ostream& operator<< (std::ostream &out, const Tree &tree) {

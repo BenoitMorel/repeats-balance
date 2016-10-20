@@ -100,8 +100,20 @@ void test_print_random_trees() {
   }
 }
 
-
-
+void compute_average_SRcount(const std::string &sequences_file_name) {
+  InputSequences sequences;
+  parse_sequences(sequences_file_name.c_str(), sequences);  
+  Tree tree;
+  std::vector<int> SRCount(sequences._seq_size);
+  for (int i = 0; i < 1; ++i) {
+    tree.set_random(10, time(0) + i);
+    tree.update_SRcount(sequences, SRCount); 
+  }
+  for (unsigned int site = 0; site < SRCount.size(); ++site) {
+    std::cout << SRCount[site] << " ";
+  }  
+  std::cout << std::endl;
+}
 
 int main()
 {
@@ -109,5 +121,6 @@ int main()
   test2();
   test_sequences_parser("../data/minimal-6/minimal-6.phy");
   test_print_random_trees();
+  compute_average_SRcount("../data/minimal-6/minimal-6.phy");
   return 0;
 }
