@@ -4,6 +4,7 @@
 #include <time.h>
 #include "repeatsbalance.h"
 #include "Node.hpp"
+#include "Tree.hpp"
 
 int check(std::vector<Node> &nodes, InputSequences & sequences, int *expectedSRNumbers, const char *test_name) {
   unsigned int seq_size = sequences._seq_size;
@@ -90,22 +91,23 @@ void test_sequences_parser (const std::string &sequences_file_name) {
   }
 }
 
-void print_random(unsigned int leaves, unsigned int seed) {
-  std::vector<Node> nodes;
-  std::cout << *Node::generate_random_tree(leaves, seed, nodes) << std::endl;
+void test_print_random_trees() {
+  std::cout << "random trees :" << std::endl;
+  Tree tree;
+  for (int i = 0; i < 5; ++i) {
+    tree.set_random(10, time(0) + i);
+    std::cout << tree << std::endl;
+  }
 }
+
+
+
 
 int main()
 {
   test1();
   test2();
   test_sequences_parser("../data/minimal-6/minimal-6.phy");
-  std::cout << "random trees :" << std::endl;
-  print_random(10, time(0));
-  print_random(10, time(0) + 5);
-  print_random(10, time(0) + 10);
-  print_random(10, time(0) + 100);
-  print_random(10, time(0) + 190);
-  print_random(10, time(0) + 107);
+  test_print_random_trees();
   return 0;
 }

@@ -98,8 +98,14 @@ class Node {
       }
       return out;
     }
-
     
+    void get_postorder(std::vector<Node *> &postorder) {
+      if (_left) {
+        _left->get_postorder(postorder);
+        _right->get_postorder(postorder);
+      }
+      postorder.push_back(this);
+    }
 
   private:
     Node *_left;
