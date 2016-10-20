@@ -21,7 +21,7 @@ class Tree {
 
     void update_SRcount(const InputSequences &sequences, std::vector<int> &o_SRCount) {
       for (unsigned int i = 0; i < _post_order_nodes.size(); ++i) {
-        _post_order_nodes[i]->fill_identifier(sequences._sequences.size(), sequences, o_SRCount);
+        _post_order_nodes[i]->fill_identifier(sequences, o_SRCount);
       }
     }
 

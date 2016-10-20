@@ -26,6 +26,6 @@ test:
 	./${EXEC}
 
 clean:
-	rm -rf *.o $(EXEC)
+	rm -rf *.o $(EXEC) parse*.h
 
 

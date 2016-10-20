@@ -26,13 +26,14 @@ class Node {
      * Fill the site repeats identifiers in this from the input sequences and update the global o_srcounts
      * Must be called in postprocess order
      */
-    void fill_identifier(int sitesNumber, const InputSequences &sequences, std::vector<int> &o_srcounts) {
-      _identifiers.resize(sitesNumber);
+    void fill_identifier(const InputSequences &sequences, std::vector<int> &o_srcounts) {
+      unsigned int sites_number = sequences._seq_size;
+      _identifiers.resize(sites_number);
       if (!_left) { // leaf node
         // TODO dirty, must be optimized
         std::vector<int> map(256);
         std::fill(map.begin(), map.end(), 0);
-        for (int site = 0; site < sitesNumber; site++) {
+        for (int site = 0; site < sites_number; site++) {
           char c = sequences._sequences[_seq_index][site];
           if (!map[c]) {
             map[c] = ++_max_identifier;
@@ -44,7 +45,7 @@ class Node {
         // TODO allocate map only once
         std::vector<int> map(_left->_max_identifier * _right->_max_identifier); 
         std::fill(map.begin(), map.end(), 0);
-        for (int site = 0; site < sitesNumber; ++site) {
+        for (int site = 0; site < sites_number; ++site) {
           int index_map = _left->_identifiers[site] - 1 + _left->_max_identifier * (_right->_identifiers[site] - 1);
           if (!map[index_map]) { // new identifier
             map[index_map] = ++_max_identifier;
