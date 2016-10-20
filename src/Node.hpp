@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <vector>
-
+#include "repeatsbalance.h"
 
 
 class Node {
@@ -65,7 +65,6 @@ class Node {
 
     int id;
     
-
 
   private:
     Node *_left;

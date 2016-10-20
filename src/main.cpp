@@ -1,5 +1,7 @@
+
 #include <iostream>
 #include <vector>
+#include "repeatsbalance.h"
 #include "Node.hpp"
 
 int check(std::vector<Node> &nodes, int seq_size, int *expectedSRNumbers, const char *test_name) {
@@ -74,11 +76,29 @@ int test2() {
   return check(nodes, seq_size, expectedSRNumbers, "test2");
 }
 
+void test_sequences_parser (const std::string &sequences_file_name) {
+  InputSequences sequences;
+  parse_sequences(sequences_file_name.c_str(), sequences);  
+  bool ok = true;
+  ok &= (6 == sequences._seq_number);
+  ok &= (60 == sequences._seq_size);
+  ok &= (std::string("Chicken") == sequences._names[1]);
+  ok &= (std::string("Whale") == sequences._names[5]);
+  ok &= (std::string("ATGGCATATCCATTCCAACTAGGTTTCCAAGATGCAGCATCACCCATCATAGAAGAGCTC") == sequences._sequences[5]);
+  
+  if (!ok) {
+    std::cout << "an error occured in test_sequences_parser" << std::endl;
+    std::cout << "got : " << sequences << std::endl;
+  } else {
+    std::cout << "test_sequences_parser ok !" << std::endl;
+  }
+}
 
 
 int main()
 {
   test1();
   test2();
+  test_sequences_parser("../data/minimal-6/minimal-6.phy");
   return 0;
 }
