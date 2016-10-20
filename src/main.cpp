@@ -106,7 +106,7 @@ void compute_average_SRcount(const std::string &sequences_file_name) {
   Tree tree;
   std::vector<int> SRCount(sequences._seq_size);
   for (int i = 0; i < 1; ++i) {
-    tree.set_random(10, time(0) + i);
+    tree.set_random(sequences._seq_number, time(0) + i);
     tree.update_SRcount(sequences, SRCount); 
   }
   for (unsigned int site = 0; site < SRCount.size(); ++site) {
