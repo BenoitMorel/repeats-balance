@@ -9,7 +9,7 @@ OBJDIR=generated
 BISON= bison
 FLEX= flex
 
-all: directories $(EXEC) 
+all: clean directories $(EXEC) 
 
 directories:
 	@mkdir -p $(OBJDIR)

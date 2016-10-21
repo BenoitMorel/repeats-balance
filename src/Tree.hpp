@@ -2,10 +2,15 @@
 #define _SB_TREE__
 
 #include <vector>
+#include <algorithm>
 #include "repeatsbalance.h"
 #include "Node.hpp"
 class Tree {
   public:
+    Tree() : _buffer(100000000) {
+      std::fill(_buffer.begin(), _buffer.end(), 0); 
+    }
+
 
     void set_random(unsigned int leaves_number, unsigned int seed) {
       reset();
@@ -21,7 +26,7 @@ class Tree {
 
     void update_SRcount(const InputSequences &sequences, std::vector<int> &o_SRCount) {
       for (unsigned int i = 0; i < _post_order_nodes.size(); ++i) {
-        _post_order_nodes[i]->fill_identifier(sequences, o_SRCount);
+        _post_order_nodes[i]->fill_identifier(sequences, _buffer, o_SRCount);
       }
     }
 
@@ -33,6 +38,7 @@ class Tree {
     Node *_root;
     std::vector<Node> _nodes_pool;
     std::vector<Node *> _post_order_nodes;
+    std::vector<int> _buffer;
 };
 
 #endif

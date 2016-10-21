@@ -9,8 +9,10 @@
 int check(std::vector<Node> &nodes, InputSequences & sequences, int *expectedSRNumbers, const char *test_name) {
   unsigned int seq_size = sequences._seq_size;
   std::vector<int> srcounts(seq_size);
+  std::vector<int> buffer(100);
+  std::fill(buffer.begin(), buffer.end(), 0);
   for (unsigned int node = 0; node < nodes.size(); ++node) {
-    nodes[node].fill_identifier(sequences, srcounts);
+    nodes[node].fill_identifier(sequences, buffer, srcounts);
   } 
   std::cout << "srcounts : " ;
   for (unsigned int i = 0 ; i < srcounts.size(); ++i) {
@@ -109,6 +111,7 @@ void compute_average_SRcount(const std::string &sequences_file_name) {
   Tree tree;
   std::vector<int> SRCount(sequences._seq_size);
   for (unsigned int i = 0; i < iterations; ++i) {
+    SRLOG("iteration" << i);
     tree.set_random(sequences._seq_number, time(0) + i);
     tree.update_SRcount(sequences, SRCount); 
   }

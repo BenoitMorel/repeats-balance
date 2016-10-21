@@ -26,34 +26,45 @@ class Node {
      * Fill the site repeats identifiers in this from the input sequences and update the global o_srcounts
      * Must be called in postprocess order
      */
-    void fill_identifier(const InputSequences &sequences, std::vector<int> &o_srcounts) {
+    void fill_identifier(const InputSequences &sequences, std::vector<int> &buffer, std::vector<int> &o_srcounts) {
+      _computed = true;
       unsigned int sites_number = sequences._seq_size;
+      std::vector<int> &map = buffer;
+      //std::fill(map.begin(), map.end(), 0);
       _identifiers.resize(sites_number);
+      std::vector<unsigned int> toclean;
       if (!_left) { // leaf node
-        // TODO dirty, must be optimized
-        std::vector<int> map(256);
-        std::fill(map.begin(), map.end(), 0);
         for (unsigned int site = 0; site < sites_number; site++) {
           char c = sequences._sequences[_seq_index][site];
           if (!map[c]) {
             map[c] = ++_max_identifier;
+            toclean.push_back(c);
           }
           _identifiers[site] = map[c];
         }
 
       } else { // internal node
         // TODO allocate map only once
-        std::vector<int> map(_left->_max_identifier * _right->_max_identifier); 
-        std::fill(map.begin(), map.end(), 0);
-        for (unsigned int site = 0; site < sites_number; ++site) {
-          int index_map = _left->_identifiers[site] - 1 + _left->_max_identifier * (_right->_identifiers[site] - 1);
-          if (!map[index_map]) { // new identifier
-            map[index_map] = ++_max_identifier;
-          } else {
-            o_srcounts[site]++;
+        if (!_left->_computed || !_right->_computed ||_left->_max_identifier * _right->_max_identifier > map.size()) {
+          // the map buffer is to small
+          //SRLOG("[WARNING] Node::fill_identifier : too small buffer, ignoring this step");
+          //SRLOG("[WARNING] Node::fill_identifier : rightmaxid " << _right->_max_identifier << " leftmaxid " << _left->_max_identifier);
+          _computed = false;
+        } else {
+          for (unsigned int site = 0; site < sites_number; ++site) {
+            int index_map = _left->_identifiers[site] - 1 + _left->_max_identifier * (_right->_identifiers[site] - 1);
+            if (!map[index_map]) { // new identifier
+              map[index_map] = ++_max_identifier;
+              toclean.push_back(index_map);
+            } else {
+              o_srcounts[site]++;
+            }
+            _identifiers[site] = map[index_map];
           }
-          _identifiers[site] = map[index_map];
         }
+      }
+      for (unsigned int i = 0; i < toclean.size(); ++i) {
+        map[toclean[i]] = 0;
       }
     }
 
@@ -114,6 +125,7 @@ class Node {
     unsigned int _seq_index;
     unsigned int _max_identifier;
     std::vector<int> _identifiers; // 1 to _max_identifier
+    bool _computed;
 };
 
 #endif
