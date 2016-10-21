@@ -6,14 +6,14 @@
 #include "Node.hpp"
 #include "Tree.hpp"
 
-int check(std::vector<Node> &nodes, InputSequences & sequences, int *expectedSRNumbers, const char *test_name) {
-  unsigned int seq_size = sequences.width();
+int check(std::vector<Node> &nodes, InputSequences & sequences, int offset, int size, int *expectedSRNumbers, const char *test_name) {
+  unsigned int seq_size = size;
   std::vector<int> srcounts(seq_size);
   std::vector<int> buffer(100);
   std::fill(buffer.begin(), buffer.end(), 0);
   std::vector<int> cleanbuffer(buffer);
   for (unsigned int node = 0; node < nodes.size(); ++node) {
-    nodes[node].fill_identifier(sequences, buffer, cleanbuffer, srcounts);
+    nodes[node].fill_identifier(sequences, offset, buffer, cleanbuffer, srcounts);
   } 
   std::cout << "srcounts : " ;
   for (unsigned int i = 0 ; i < srcounts.size(); ++i) {
@@ -35,7 +35,7 @@ int check(std::vector<Node> &nodes, InputSequences & sequences, int *expectedSRN
   return 0;
 }
 
-int test1() {
+int test_count_sr_simple_1() {
   InputSequences sequences;
   parse_sequences("../data/simple_seq/simple4-4.phy", sequences);
   const int nodes_number = 7;
@@ -48,10 +48,10 @@ int test1() {
   nodes[3].set_sequence(2);
   nodes[4].set_sequence(3);
   int expectedSRNumbers[] = {0, 3, 1, 1};
-  return check(nodes, sequences, expectedSRNumbers, "test1");
+  return check(nodes, sequences, 0, sequences.width(), expectedSRNumbers, "test_count_sr_simple_1");
 }
 
-int test2() {
+int test_count_sr_simple_2() {
   InputSequences sequences;
   parse_sequences("../data/simple_seq/simple5-6.phy", sequences);
   const int nodes_number = 9;
@@ -73,7 +73,26 @@ int test2() {
   nodes[5].set_sequence(3);
   nodes[6].set_sequence(4);
   int expectedSRNumbers[] = {0, 0, 0, 1, 2, 4};
-  return check(nodes, sequences, expectedSRNumbers, "test2");
+  return check(nodes, sequences, 0, sequences.width(), expectedSRNumbers, "test_count_sr_simple_2");
+}
+
+// same sequence as before but with prefix and suffix wich will be ignored
+int test_count_sr_simple_2_offset() {
+  InputSequences sequences;
+  parse_sequences("../data/simple_seq/simple5-6_extended.phy", sequences);
+  const int nodes_number = 9;
+  std::vector<Node> nodes(nodes_number);
+  nodes[8].set_children(&nodes[4], &nodes[7]);
+  nodes[4].set_children(&nodes[2], &nodes[3]);
+  nodes[7].set_children(&nodes[5], &nodes[6]);
+  nodes[2].set_children(&nodes[0], &nodes[1]);
+  nodes[0].set_sequence(0);
+  nodes[1].set_sequence(1);
+  nodes[3].set_sequence(2);
+  nodes[5].set_sequence(3);
+  nodes[6].set_sequence(4);
+  int expectedSRNumbers[] = {0, 0, 0, 1, 2, 4};
+  return check(nodes, sequences, 6, 6, expectedSRNumbers, "test_count_sr_simple_2_offset");
 }
 
 void test_sequences_parser () {
@@ -123,8 +142,9 @@ void test_print_random_trees() {
 
 int main()
 {
-  test1();
-  test2();
+  test_count_sr_simple_1();
+  test_count_sr_simple_2();
+  test_count_sr_simple_2_offset();
   test_sequences_parser();
   test_partitions_parser();
   test_print_random_trees();

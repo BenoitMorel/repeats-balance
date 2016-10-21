@@ -25,17 +25,23 @@ class Node {
     /*
      * Fill the site repeats identifiers in this from the input sequences and update the global o_srcounts
      * Must be called in postprocess order
+     * The sites from offset to o_srcounts.size are processed
+     * @param sequences       the input sequences
+     * @param sequence_offset the position of the first site to process
+     * @param buffer          buffer used to map the identifiers. When it's not big enough, site repeats are ignored. Should be filled with 0
+     * @param cleanbuffer     buffer used to clean buffer. Should be at least as long as o_srcounts
+     * @param o_srcounts      output : the number of new site repeats of each sites starting from sequence_offset is ADDED here
      */
-    void fill_identifier(const InputSequences &sequences, std::vector<int> &buffer, std::vector<int> &cleanbuffer, std::vector<int> &o_srcounts) {
+    void fill_identifier(const InputSequences &sequences, unsigned int sequence_offset, std::vector<int> &buffer, std::vector<int> &cleanbuffer, std::vector<int> &o_srcounts) {
       _computed = true;
       int _toclean_index = 0;
-      unsigned int sites_number = sequences.width();
+      unsigned int sites_number = o_srcounts.size();
       std::vector<int> &map = buffer;
       //std::fill(map.begin(), map.end(), 0);
       _identifiers.resize(sites_number);
       if (!_left) { // leaf node
         for (unsigned int site = 0; site < sites_number; site++) {
-          char c = sequences.sequence(_seq_index)[site];
+          char c = sequences.sequence(_seq_index)[sequence_offset + site];
           if (!map[c]) {
             map[c] = ++_max_identifier;
             cleanbuffer[_toclean_index++] = c;
