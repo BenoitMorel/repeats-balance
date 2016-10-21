@@ -27,10 +27,10 @@ tests: $(OBJ) $(OBJDIR)/Tests.o
 $(OBJDIR)/%.o : %.cpp
 	$(CC) $(CFLAGS) -o $@ -c $<
 
-$(OBJDIR)/parse%.c: parse%.y
+$(OBJDIR)/parse%.c: parsers/parse%.y
 		$(BISON) -d -o $@ $<
 
-$(OBJDIR)/%.c: %.l
+$(OBJDIR)/%.c: parsers/%.l
 		$(FLEX) -o $@ $<
 
 test:
