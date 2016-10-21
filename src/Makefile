@@ -1,10 +1,13 @@
 CC=g++
 
-CFLAGS=-g -W -Wall -ansi -pedantic 
-LDFLAGS=-g
-EXEC=srlb
+
+DBG= -O3 -g -pg
+CFLAGS= $(DBG) -W -Wall -ansi -pedantic 
+LDFLAGS= $(DBG)
+EXEC=srlb tests
 SRC= $(wildcard *.cpp)
-OBJ= $(SRC:%.cpp=$(OBJDIR)/%.o) $(OBJDIR)/parse_sequences.o $(OBJDIR)/scan_sequences.o
+OBJ= $(OBJDIR)/parse_sequences.o  $(OBJDIR)/scan_sequences.o
+
 OBJDIR=generated
 BISON= bison
 FLEX= flex
@@ -14,8 +17,12 @@ all: clean directories $(EXEC)
 directories:
 	@mkdir -p $(OBJDIR)
 
-srlb: $(OBJ)
+srlb: $(OBJ) $(OBJDIR)/main.o
 	$(CC) $(LDFLAGS) -o $@ $^
+
+tests: $(OBJ) $(OBJDIR)/Tests.o
+	$(CC) $(LDFLAGS) -o $@ $^
+
 
 $(OBJDIR)/%.o : %.cpp
 	$(CC) $(CFLAGS) -o $@ -c $<
@@ -27,9 +34,16 @@ $(OBJDIR)/%.c: %.l
 		$(FLEX) -o $@ $<
 
 test:
-	./${EXEC}
+	./tests
+
+run:
+	./srlb
+
+time:
+	time ./srlb
 
 clean:
 	rm -rf $(EXEC) generated
 
-
+prof:
+	gprof -b srlb gmon.out > analysis.txt

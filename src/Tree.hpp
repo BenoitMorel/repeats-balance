@@ -25,8 +25,9 @@ class Tree {
     }
 
     void update_SRcount(const InputSequences &sequences, std::vector<int> &o_SRCount) {
+      _cleanbuffer.resize(sequences._seq_size);
       for (unsigned int i = 0; i < _post_order_nodes.size(); ++i) {
-        _post_order_nodes[i]->fill_identifier(sequences, _buffer, o_SRCount);
+        _post_order_nodes[i]->fill_identifier(sequences, _buffer, _cleanbuffer,  o_SRCount);
       }
     }
 
@@ -39,6 +40,7 @@ class Tree {
     std::vector<Node> _nodes_pool;
     std::vector<Node *> _post_order_nodes;
     std::vector<int> _buffer;
+    std::vector<int> _cleanbuffer;
 };
 
 #endif

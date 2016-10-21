@@ -26,19 +26,19 @@ class Node {
      * Fill the site repeats identifiers in this from the input sequences and update the global o_srcounts
      * Must be called in postprocess order
      */
-    void fill_identifier(const InputSequences &sequences, std::vector<int> &buffer, std::vector<int> &o_srcounts) {
+    void fill_identifier(const InputSequences &sequences, std::vector<int> &buffer, std::vector<int> &cleanbuffer, std::vector<int> &o_srcounts) {
       _computed = true;
+      int _toclean_index = 0;
       unsigned int sites_number = sequences._seq_size;
       std::vector<int> &map = buffer;
       //std::fill(map.begin(), map.end(), 0);
       _identifiers.resize(sites_number);
-      std::vector<unsigned int> toclean;
       if (!_left) { // leaf node
         for (unsigned int site = 0; site < sites_number; site++) {
           char c = sequences._sequences[_seq_index][site];
           if (!map[c]) {
             map[c] = ++_max_identifier;
-            toclean.push_back(c);
+            cleanbuffer[_toclean_index++] = c;
           }
           _identifiers[site] = map[c];
         }
@@ -55,7 +55,7 @@ class Node {
             int index_map = _left->_identifiers[site] - 1 + _left->_max_identifier * (_right->_identifiers[site] - 1);
             if (!map[index_map]) { // new identifier
               map[index_map] = ++_max_identifier;
-              toclean.push_back(index_map);
+              cleanbuffer[_toclean_index++] = index_map;
             } else {
               o_srcounts[site]++;
             }
@@ -63,8 +63,8 @@ class Node {
           }
         }
       }
-      for (unsigned int i = 0; i < toclean.size(); ++i) {
-        map[toclean[i]] = 0;
+      for (int i = 0; i < _toclean_index; ++i) {
+        map[cleanbuffer[i]] = 0;
       }
     }
 
