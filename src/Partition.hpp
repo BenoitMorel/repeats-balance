@@ -41,4 +41,6 @@ class Partition {
     std::vector<double> _site_costs;
 };
 
+typedef std::vector<Partition> Partitions;
+
 #endif

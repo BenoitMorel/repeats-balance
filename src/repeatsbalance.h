@@ -97,7 +97,7 @@ class InputPartitions {
       return out;
     }
 
-    void generate_partitions(std::vector<Partition> &o_partitions) {
+    void generate_partitions(Partitions &o_partitions) {
       o_partitions.resize(size()); 
       for (unsigned int i = 0; i < size(); ++i) {
         o_partitions[i].init(offset(i), size(i));

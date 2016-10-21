@@ -5,6 +5,7 @@
 #include "repeatsbalance.h"
 #include "Node.hpp"
 #include "Tree.hpp"
+#include "LoadBalancing.hpp"
 
 
 void compute_average_SRcount(const std::string &sequences_file_name) {
@@ -31,7 +32,7 @@ void compute_partitions_sr_count(const std::string &sequences_file_name, const s
   parse_sequences(sequences_file_name.c_str(), sequences);  
   InputPartitions inputpartitions;
   parse_partitions(partitions_file_name.c_str(), inputpartitions);  
-  std::vector<Partition> partitions;
+  Partitions partitions;
   inputpartitions.generate_partitions(partitions);
 
   std::cout << "compute_partitions_sr_count" << std::endl;
