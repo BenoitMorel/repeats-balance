@@ -7,7 +7,7 @@
 #include "Tree.hpp"
 
 int check(std::vector<Node> &nodes, InputSequences & sequences, int *expectedSRNumbers, const char *test_name) {
-  unsigned int seq_size = sequences._seq_size;
+  unsigned int seq_size = sequences.width();
   std::vector<int> srcounts(seq_size);
   std::vector<int> buffer(100);
   std::fill(buffer.begin(), buffer.end(), 0);
@@ -80,11 +80,11 @@ void test_sequences_parser () {
   InputSequences sequences;
   parse_sequences("../data/minimal-6/minimal-6.phy", sequences);  
   bool ok = true;
-  ok &= (6 == sequences._seq_number);
-  ok &= (60 == sequences._seq_size);
-  ok &= (std::string("Chicken") == sequences._names[1]);
-  ok &= (std::string("Whale") == sequences._names[5]);
-  ok &= (std::string("ATGGCATATCCATTCCAACTAGGTTTCCAAGATGCAGCATCACCCATCATAGAAGAGCTC") == sequences._sequences[5]);
+  ok &= (6 == sequences.number());
+  ok &= (60 == sequences.width());
+  ok &= (std::string("Chicken") == sequences.sequence_name(1));
+  ok &= (std::string("Whale") == sequences.sequence_name(5));
+  ok &= (std::string("ATGGCATATCCATTCCAACTAGGTTTCCAAGATGCAGCATCACCCATCATAGAAGAGCTC") == sequences.sequence(5));
   
   if (!ok) {
     std::cout << "an error occured in test_sequences_parser" << std::endl;

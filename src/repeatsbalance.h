@@ -12,34 +12,55 @@
 #endif
 
 #include <string>
+#include <cstring>
 
 class InputSequences {
   public:
     ~InputSequences() {
-      for (unsigned int i = 0; i < _seq_number; ++i) {
+      for (unsigned int i = 0; i < number(); ++i) {
         delete[] _names[i];
         delete[] _sequences[i];
       } 
     }
 
     void add_sequence(char *name, char *sequence) {
+      if (!number()) {
+        _seq_size = strlen(sequence);
+      }
       _names.push_back(name);
       _sequences.push_back(sequence);
     }
 
-    unsigned int _seq_number;
-    unsigned int _seq_size;
-    std::vector<char *> _names;
-    std::vector<char *> _sequences;
+    unsigned int number() const {
+      return _sequences.size();
+    }
+
+    unsigned int width() const {
+      return _seq_size;
+    }
+
+    const char *sequence(unsigned int i) const {
+      return _sequences[i];
+    }
+
+    const char *sequence_name(unsigned int i) const {
+      return _names[i];
+    }
+
+
 
     friend std::ostream& operator<< (std::ostream &out, const InputSequences &seq) {
-      out << seq._seq_number << " " << seq._seq_size << std::endl;
-      for (unsigned int i = 0; i < seq._seq_number; ++i) {
+      out << seq.number() << " " << seq._seq_size << std::endl;
+      for (unsigned int i = 0; i < seq.number(); ++i) {
         out << seq._names[i] << " " << seq._sequences[i] << std::endl;
       }
       return out;
     }
 
+  private:
+    unsigned int _seq_size;
+    std::vector<char *> _names;
+    std::vector<char *> _sequences;
 };
 
 class InputPartitions {

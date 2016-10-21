@@ -29,13 +29,13 @@ class Node {
     void fill_identifier(const InputSequences &sequences, std::vector<int> &buffer, std::vector<int> &cleanbuffer, std::vector<int> &o_srcounts) {
       _computed = true;
       int _toclean_index = 0;
-      unsigned int sites_number = sequences._seq_size;
+      unsigned int sites_number = sequences.width();
       std::vector<int> &map = buffer;
       //std::fill(map.begin(), map.end(), 0);
       _identifiers.resize(sites_number);
       if (!_left) { // leaf node
         for (unsigned int site = 0; site < sites_number; site++) {
-          char c = sequences._sequences[_seq_index][site];
+          char c = sequences.sequence(_seq_index)[site];
           if (!map[c]) {
             map[c] = ++_max_identifier;
             cleanbuffer[_toclean_index++] = c;

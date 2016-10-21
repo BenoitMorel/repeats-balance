@@ -37,7 +37,7 @@ sequences:
   ;
 
 first_line:
-          INT INT NEWLINE {oseq->_seq_number = $1; oseq->_seq_size = $2;}
+          INT INT NEWLINE {}
 ;
 
 %%

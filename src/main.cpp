@@ -12,12 +12,12 @@ void compute_average_SRcount(const std::string &sequences_file_name) {
   InputSequences sequences;
   const unsigned int iterations = 100;
   parse_sequences(sequences_file_name.c_str(), sequences);  
-  SRLOG("conpute_average_SRcount with " << sequences._seq_number << " seq of size " << sequences._seq_size);
+  SRLOG("conpute_average_SRcount with " << sequences.number() << " seq of size " << sequences.width());
   Tree tree;
-  std::vector<int> SRCount(sequences._seq_size);
+  std::vector<int> SRCount(sequences.width());
   for (unsigned int i = 0; i < iterations; ++i) {
     SRLOG("iteration" << i);
-    tree.set_random(sequences._seq_number, time(0) + i);
+    tree.set_random(sequences.number(), time(0) + i);
     tree.update_SRcount(sequences, SRCount); 
   }
   //  for (unsigned int site = 0; site < SRCount.size(); ++site) {
