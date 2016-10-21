@@ -33,7 +33,7 @@ class Node {
         // TODO dirty, must be optimized
         std::vector<int> map(256);
         std::fill(map.begin(), map.end(), 0);
-        for (int site = 0; site < sites_number; site++) {
+        for (unsigned int site = 0; site < sites_number; site++) {
           char c = sequences._sequences[_seq_index][site];
           if (!map[c]) {
             map[c] = ++_max_identifier;
@@ -45,7 +45,7 @@ class Node {
         // TODO allocate map only once
         std::vector<int> map(_left->_max_identifier * _right->_max_identifier); 
         std::fill(map.begin(), map.end(), 0);
-        for (int site = 0; site < sites_number; ++site) {
+        for (unsigned int site = 0; site < sites_number; ++site) {
           int index_map = _left->_identifiers[site] - 1 + _left->_max_identifier * (_right->_identifiers[site] - 1);
           if (!map[index_map]) { // new identifier
             map[index_map] = ++_max_identifier;

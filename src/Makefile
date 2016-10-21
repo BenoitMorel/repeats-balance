@@ -4,28 +4,32 @@ CFLAGS=-g -W -Wall -ansi -pedantic
 LDFLAGS=-g
 EXEC=srlb
 SRC= $(wildcard *.cpp)
-OBJ= $(SRC:.cpp=.o) parse_sequences.o scan_sequences.o
+OBJ= $(SRC:%.cpp=$(OBJDIR)/%.o) $(OBJDIR)/parse_sequences.o $(OBJDIR)/scan_sequences.o
+OBJDIR=generated
 BISON= bison
 FLEX= flex
 
-all: $(EXEC)
+all: directories $(EXEC) 
+
+directories:
+	@mkdir -p $(OBJDIR)
 
 srlb: $(OBJ)
 	$(CC) $(LDFLAGS) -o $@ $^
 
-%.o : %.cpp
+$(OBJDIR)/%.o : %.cpp
 	$(CC) $(CFLAGS) -o $@ -c $<
 
-parse%.c: parse%.y
+$(OBJDIR)/parse%.c: parse%.y
 		$(BISON) -d -o $@ $<
 
-%.c: %.l
+$(OBJDIR)/%.c: %.l
 		$(FLEX) -o $@ $<
 
 test:
 	./${EXEC}
 
 clean:
-	rm -rf *.o $(EXEC) parse*.h
+	rm -rf $(EXEC) generated
 
 

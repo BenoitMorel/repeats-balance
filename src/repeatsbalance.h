@@ -1,7 +1,15 @@
 #ifndef _REPEATBALANCE_H_
 #define _REPEATBALANCE_H_
 
+#define SRLOG_ENABLED
 
+#ifdef SRLOG_ENABLED
+  #include <iostream>
+  #define SRLOG(msg) \
+      std::cout << __FILE__ << "(" << __LINE__ << "): " << msg << std::endl 
+#else
+  #define SRLOG(msg)
+#endif
 class InputSequences {
   public:
     ~InputSequences() {

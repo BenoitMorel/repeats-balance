@@ -2,7 +2,7 @@
 #include <cstdio>
 #include <iostream>
 #include <vector>
-#include "repeatsbalance.h"
+#include "../repeatsbalance.h"
 using namespace std;
 
 // stuff from flex that bison needs to know about:

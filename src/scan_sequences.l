@@ -2,7 +2,7 @@
 #include <cstdio>
 #include <iostream>
 #include <vector>
-#include "repeatsbalance.h"  // to get the token types that we return
+#include "../repeatsbalance.h"  // to get the token types that we return
 #include "parse_sequences.h"  // to get the token types that we return
 
 %}
@@ -13,7 +13,7 @@
 %%
 [\n]           {return NEWLINE;}
 [0-9]+            { yylval.ival = atoi(yytext); return INT; }
-[a-zA-Z0-9]+      {
+[a-zA-Z0-9\-_\?]+      {
 
   yylval.sval = new char [ strlen(yytext) + 1 ];
   strcpy(yylval.sval, yytext);
