@@ -6,9 +6,9 @@ CFLAGS= $(DBG) -W -Wall -ansi -pedantic
 LDFLAGS= $(DBG)
 EXEC=srlb tests
 SRC= $(wildcard *.cpp)
-OBJ= $(OBJDIR)/parse_sequences.o  $(OBJDIR)/scan_sequences.o
-
 OBJDIR=generated
+OBJ=  $(addprefix $(OBJDIR)/, parse_sequences.o  scan_sequences.o parse_partitions.o scan_partitions.o)
+
 BISON= bison
 FLEX= flex
 

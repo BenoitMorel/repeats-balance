@@ -76,9 +76,9 @@ int test2() {
   return check(nodes, sequences, expectedSRNumbers, "test2");
 }
 
-void test_sequences_parser (const std::string &sequences_file_name) {
+void test_sequences_parser () {
   InputSequences sequences;
-  parse_sequences(sequences_file_name.c_str(), sequences);  
+  parse_sequences("../data/minimal-6/minimal-6.phy", sequences);  
   bool ok = true;
   ok &= (6 == sequences._seq_number);
   ok &= (60 == sequences._seq_size);
@@ -92,6 +92,23 @@ void test_sequences_parser (const std::string &sequences_file_name) {
   } else {
     std::cout << "test_sequences_parser ok !" << std::endl;
   }
+}
+
+void test_partitions_parser() {
+  InputPartitions partitions;
+  parse_partitions("../data/128/128.part", partitions);
+  bool ok = true;
+  ok &= partitions.size() == 34;
+  ok &= partitions.name(21) == "ATP7A";
+  ok &= partitions.offset(21) == 22068;
+  ok &= partitions.size(21) == 684;
+  if (!ok) {
+    std::cout << "an error occured in test_partitions_parser" << std::endl;
+    std::cout << "got : " << partitions << std::endl;
+  } else {
+    std::cout << "test_partitions_parser ok !" << std::endl;
+  }
+
 }
 
 void test_print_random_trees() {
@@ -108,7 +125,8 @@ int main()
 {
   test1();
   test2();
-  test_sequences_parser("../data/minimal-6/minimal-6.phy");
+  test_sequences_parser();
+  test_partitions_parser();
   test_print_random_trees();
   return 0;
 }

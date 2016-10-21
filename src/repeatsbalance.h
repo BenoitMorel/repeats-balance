@@ -10,6 +10,9 @@
 #else
   #define SRLOG(msg)
 #endif
+
+#include <string>
+
 class InputSequences {
   public:
     ~InputSequences() {
@@ -39,7 +42,46 @@ class InputSequences {
 
 };
 
+class InputPartitions {
+  public:
+    void add_partition(const std::string &name, unsigned int offset, unsigned int size) {
+      _names.push_back(name);
+      _offsets.push_back(offset);
+      _sizes.push_back(size);
+    }
+
+    const std::string name(unsigned int i) const {
+      return _names[i];
+    }
+
+    unsigned int offset(unsigned int i) const {
+      return _offsets[i];
+    }
+
+    unsigned int size(unsigned int i) const {
+      return _sizes[i];
+    }
+
+    unsigned int size() const {
+      return _names.size();
+    }
+
+    friend std::ostream& operator<< (std::ostream &out, const InputPartitions &part) {
+      for (unsigned int i = 0; i < part._names.size(); ++i) {
+        out << part._names[i] << " " << part._offsets[i] << " " << part._sizes[i] << std::endl;
+      }
+
+      return out;
+    }
+
+  private:
+    std::vector<std::string> _names;
+    std::vector<unsigned int> _offsets;
+    std::vector<unsigned int> _sizes;
+};
+
 void parse_sequences(const char *file, InputSequences &sequences);
+void parse_partitions(const char *file, InputPartitions &sequences);
 
 #endif
 
