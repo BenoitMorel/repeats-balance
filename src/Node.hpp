@@ -32,7 +32,7 @@ class Node {
      * @param cleanbuffer     buffer used to clean buffer. Should be at least as long as o_srcounts
      * @param o_srcounts      output : the number of new site repeats of each sites starting from sequence_offset is ADDED here
      */
-    void fill_identifier(const InputSequences &sequences, unsigned int sequence_offset, std::vector<int> &buffer, std::vector<int> &cleanbuffer, std::vector<int> &o_srcounts) {
+    void fill_identifier(const InputSequences &sequences, unsigned int sequence_offset, std::vector<int> &buffer, std::vector<int> &cleanbuffer, std::vector<double> &o_srcounts) {
       _computed = true;
       int _toclean_index = 0;
       unsigned int sites_number = o_srcounts.size();

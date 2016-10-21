@@ -14,6 +14,8 @@
 #include <string>
 #include <cstring>
 
+#include "Partition.hpp"
+
 class InputSequences {
   public:
     ~InputSequences() {
@@ -95,11 +97,18 @@ class InputPartitions {
       return out;
     }
 
+    void generate_partitions(std::vector<Partition> &o_partitions) {
+      o_partitions.resize(size()); 
+      for (unsigned int i = 0; i < size(); ++i) {
+        o_partitions[i].init(offset(i), size(i));
+      }   
+    }
+
   private:
     std::vector<std::string> _names;
     std::vector<unsigned int> _offsets;
     std::vector<unsigned int> _sizes;
-};
+  };
 
 void parse_sequences(const char *file, InputSequences &sequences);
 void parse_partitions(const char *file, InputPartitions &sequences);

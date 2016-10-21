@@ -14,11 +14,11 @@ void compute_average_SRcount(const std::string &sequences_file_name) {
   parse_sequences(sequences_file_name.c_str(), sequences);  
   SRLOG("conpute_average_SRcount with " << sequences.number() << " seq of size " << sequences.width());
   Tree tree;
-  std::vector<int> SRCount(sequences.width());
+  std::vector<double> SRCount(sequences.width());
   for (unsigned int i = 0; i < iterations; ++i) {
     SRLOG("iteration" << i);
     tree.set_random(sequences.number(), time(0) + i);
-    tree.update_SRcount(sequences, SRCount); 
+    tree.update_SRcount(sequences, 0, SRCount); 
   }
   //  for (unsigned int site = 0; site < SRCount.size(); ++site) {
   //  std::cout << (double)SRCount[site] / ((double)iterations * (sequences._seq_number - 1)) << " ";
@@ -26,14 +26,38 @@ void compute_average_SRcount(const std::string &sequences_file_name) {
   std::cout << std::endl;
 }
 
+void compute_partitions_sr_count(const std::string &sequences_file_name, const std::string &partitions_file_name, unsigned int iterations) {
+  InputSequences sequences;
+  parse_sequences(sequences_file_name.c_str(), sequences);  
+  InputPartitions inputpartitions;
+  parse_partitions(partitions_file_name.c_str(), inputpartitions);  
+  std::vector<Partition> partitions;
+  inputpartitions.generate_partitions(partitions);
+
+  std::cout << "compute_partitions_sr_count" << std::endl;
+  std::cout << "-- sequences number :     " << sequences.number() << std::endl;
+  std::cout << "-- total sequences size : " << sequences.width() << std::endl;
+  std::cout << "-- partitions number :    " << partitions.size() << std::endl;
+  Tree tree;
+  for (unsigned int i = 0; i < iterations; ++i) {
+    SRLOG("iteration" << i);
+    tree.set_random(sequences.number(), time(0) + i);
+    for (unsigned int j = 0; j < partitions.size(); ++j) {
+      tree.update_SRcount(sequences, partitions[j].start(), partitions[j].site_costs()); 
+    }
+  }
+  // max site repeats count : iterations * number of inner nodes
+  for (unsigned int j = 0; j < partitions.size(); ++j) {
+    partitions[j].normalize_costs(double(iterations * (sequences.number() - 1)));
+  }
+  for (unsigned int j = 0; j < partitions.size(); ++j) {
+    std::cout << partitions[j] << std::endl;
+  }
+}
+
 int main()
 {
-  //test1();
-  //test2();
-  //test_sequences_parser("../data/minimal-6/minimal-6.phy");
-  //test_print_random_trees();
-  //compute_average_SRcount("../data/minimal-6/minimal-6.phy");
-  //compute_average_SRcount("../data/simple_seq/simple4-4.phy");
-  compute_average_SRcount("../data/128/128.phy");
+  //compute_average_SRcount("../data/128/128.phy");
+  compute_partitions_sr_count("../data/128/128.phy", "../data/128/128.part", 50);
   return 0;
 }

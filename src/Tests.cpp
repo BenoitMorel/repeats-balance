@@ -8,7 +8,7 @@
 
 int check(std::vector<Node> &nodes, InputSequences & sequences, int offset, int size, int *expectedSRNumbers, const char *test_name) {
   unsigned int seq_size = size;
-  std::vector<int> srcounts(seq_size);
+  std::vector<double> srcounts(seq_size);
   std::vector<int> buffer(100);
   std::fill(buffer.begin(), buffer.end(), 0);
   std::vector<int> cleanbuffer(buffer);
