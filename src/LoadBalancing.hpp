@@ -5,6 +5,8 @@
 #include "Partition.hpp"
 #include <vector>
 
+
+
 class LoadBalancing {
   public:
     LoadBalancing(const Partitions & partitions, unsigned int CPU_number) : 
@@ -24,7 +26,13 @@ class LoadBalancing {
     }
 
     void compute_kassian() {
-       
+		// TODO sort the partitions in ascending order
+		
+		unsigned int total_sites_number = 0;
+		for (unsigned int i = 0; i < _partitions.size(); ++i) {
+			total_sites_number += _partitions[i].size();
+		}   
+		
     }
 
     void compute_kassian_weighted() {

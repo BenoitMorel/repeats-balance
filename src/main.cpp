@@ -11,19 +11,20 @@
 void compute_average_SRcount(const std::string &sequences_file_name) {
   
   InputSequences sequences;
-  const unsigned int iterations = 100;
+  const unsigned int iterations = 1;
   parse_sequences(sequences_file_name.c_str(), sequences);  
   SRLOG("conpute_average_SRcount with " << sequences.number() << " seq of size " << sequences.width());
   Tree tree;
   std::vector<double> SRCount(sequences.width());
   for (unsigned int i = 0; i < iterations; ++i) {
     SRLOG("iteration" << i);
-    tree.set_random(sequences.number(), time(0) + i);
-    tree.update_SRcount(sequences, 0, SRCount); 
+    tree.set_random(sequences.number(), rand());
+    tree.update_SRcount(sequences, 0, SRCount);
+	std::cout << tree << std::endl; 
   }
-  //  for (unsigned int site = 0; site < SRCount.size(); ++site) {
-  //  std::cout << (double)SRCount[site] / ((double)iterations * (sequences._seq_number - 1)) << " ";
-  //}  
+  for (unsigned int site = 0; site < SRCount.size(); ++site) {
+    std::cout << (double)SRCount[site] / ((double)iterations * (sequences.number() - 1)) << " ";
+  }  
   std::cout << std::endl;
 }
 
@@ -58,7 +59,11 @@ void compute_partitions_sr_count(const std::string &sequences_file_name, const s
 
 int main()
 {
-  //compute_average_SRcount("../data/128/128.phy");
-  compute_partitions_sr_count("../data/128/128.phy", "../data/128/128.part", 50);
+  compute_average_SRcount("../data/simple_seq/simple4-4.phy");
+  compute_average_SRcount("../data/simple_seq/simple4-4.phy");
+  compute_average_SRcount("../data/simple_seq/simple4-4.phy");
+  compute_average_SRcount("../data/simple_seq/simple4-4.phy");
+  compute_average_SRcount("../data/simple_seq/simple4-4.phy");
+  //compute_partitions_sr_count("../data/128/128.phy", "../data/128/128.part", 50);
   return 0;
 }

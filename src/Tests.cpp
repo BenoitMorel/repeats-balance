@@ -6,6 +6,15 @@
 #include "Node.hpp"
 #include "Tree.hpp"
 
+
+#define RBCHECK(value, testname, additional_error_msg) \
+  if (value) {\
+    std::cout << testname << " ok !" << std::endl;\
+  } else {\
+    std::cout << "An error occured in " << testname << std::endl;\
+    std::cout << additional_error_msg << std::endl; \
+  }
+
 int check(std::vector<Node> &nodes, InputSequences & sequences, int offset, int size, int *expectedSRNumbers, const char *test_name) {
   unsigned int seq_size = size;
   std::vector<double> srcounts(seq_size);
@@ -14,25 +23,13 @@ int check(std::vector<Node> &nodes, InputSequences & sequences, int offset, int 
   std::vector<int> cleanbuffer(buffer);
   for (unsigned int node = 0; node < nodes.size(); ++node) {
     nodes[node].fill_identifier(sequences, offset, buffer, cleanbuffer, srcounts);
-  } 
-  std::cout << "srcounts : " ;
-  for (unsigned int i = 0 ; i < srcounts.size(); ++i) {
-    if (srcounts[i] != expectedSRNumbers[i]) {
-      std::cout << "ERROR IN " << test_name << std::endl;
-      std::cout << "Expected: "; 
-      for (unsigned int j = 0; j < seq_size; ++j) {
-        std::cout << expectedSRNumbers[j] << ' ';
-      }
-      std::cout << std::endl << "Found:    ";
-      for (unsigned int j = 0; j < seq_size; ++j) {
-        std::cout << srcounts[j] << ' ';
-      }
-      std::cout << std::endl;
-      return 1;
-    }
   }
-  std::cout << "--- " << test_name << " ok !" << std::endl;
-  return 0;
+  bool ok = true; 
+  for (unsigned int i = 0 ; i < srcounts.size(); ++i) {
+    ok &=  (srcounts[i] == expectedSRNumbers[i]); 
+  }
+  RBCHECK(ok, test_name, "");
+  return !ok;
 }
 
 int test_count_sr_simple_1() {
@@ -104,13 +101,7 @@ void test_sequences_parser () {
   ok &= (std::string("Chicken") == sequences.sequence_name(1));
   ok &= (std::string("Whale") == sequences.sequence_name(5));
   ok &= (std::string("ATGGCATATCCATTCCAACTAGGTTTCCAAGATGCAGCATCACCCATCATAGAAGAGCTC") == sequences.sequence(5));
-  
-  if (!ok) {
-    std::cout << "an error occured in test_sequences_parser" << std::endl;
-    std::cout << "got : " << sequences << std::endl;
-  } else {
-    std::cout << "test_sequences_parser ok !" << std::endl;
-  }
+  RBCHECK(ok, "test_sequences_parser", ""); 
 }
 
 void test_partitions_parser() {
@@ -121,13 +112,22 @@ void test_partitions_parser() {
   ok &= partitions.name(21) == "ATP7A";
   ok &= partitions.offset(21) == 22068;
   ok &= partitions.size(21) == 684;
-  if (!ok) {
-    std::cout << "an error occured in test_partitions_parser" << std::endl;
-    std::cout << "got : " << partitions << std::endl;
-  } else {
-    std::cout << "test_partitions_parser ok !" << std::endl;
-  }
+  RBCHECK(ok, "test_partitions_parser", ""); 
+}
 
+
+void test_partitions_sort() {
+  Partitions partitions(100);
+  for (unsigned int i = 0; i < partitions.size(); ++i) {
+    partitions[i].init(0, (rand() % 10000) + 1); 
+  }
+  PartitionsPointers partitions_ptr;
+  Partition::get_sorted_partitions(partitions, partitions_ptr);
+  bool ok = true;
+  for (unsigned int i = 1; i < partitions.size(); ++i) {
+    ok &= (partitions_ptr[i - 1]->size() <= partitions_ptr[i]->size()); 
+  }
+  RBCHECK(ok, "test_partitions_sort", "")
 }
 
 void test_print_random_trees() {
@@ -148,5 +148,6 @@ int main()
   test_sequences_parser();
   test_partitions_parser();
   test_print_random_trees();
+  test_partitions_sort();
   return 0;
 }
