@@ -59,6 +59,24 @@ class LoadBalancing {
       }
       // break the remaining partitions to fill the remaining cpus
 	    // I use the notations off Kassian's pseudo code
+      unsigned int low = _CPUs.size() - 1;	
+      unsigned int l = _CPUs.size() - 1;	
+      unsigned int high = 0;
+      unsigned int h = 0;
+      unsigned int add = 0;// TODO why 0 ??
+      while (current_partition < _partitions.size()) {
+        while (cpu_weights[l] >= max_sites_per_cpu) {
+          l = --low;
+        }
+        while (cpu_weights[h] >= max_sites_per_cpu) {
+          h = ++high;
+        }
+        // try to dequeue a process from Qmore and to fill it 
+        if (cpu_weights[h] + add >= max_sites_per_cpu) {
+          //_CPUs.assign_sites 
+        }
+
+      }
     }
 
     void compute_kassian_weighted() {
