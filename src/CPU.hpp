@@ -10,6 +10,15 @@ struct CPU {
   std::vector<unsigned int> offsets;
   std::vector<unsigned int> sizes;
 
+
+  void assign_sites(const Partition *partition, 
+                      unsigned int offset, 
+                      unsigned int size) {
+    partitions.push_back(partition);
+    offsets.push_back(offset);
+    sizes.push_back(size);
+  }
+
   unsigned int partitions_number() const {
     return partitions.size();
   }
