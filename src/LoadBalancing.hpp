@@ -31,8 +31,8 @@ class LoadBalancing {
 		  for (unsigned int i = 0; i < _partitions.size(); ++i) {
 			  total_sites_number += _partitions[i].size();
 		  }   
-      unsigned int max_sites_per_cpu = (total_sites_number - 1) / _partitions.size() + 1;
-      unsigned int r = (max_sites_per_cpu * _partitions.size()) - total_sites_number;
+      unsigned int max_sites_per_cpu = (total_sites_number - 1) / _CPUs.size() + 1;
+      unsigned int r = (max_sites_per_cpu * _CPUs.size()) - total_sites_number;
       unsigned int current_partition = 0;
       unsigned int full_cpus = 0;
       std::vector<unsigned int> cpu_weights(_CPUs.size()); // current number of sites
@@ -50,15 +50,15 @@ class LoadBalancing {
         cpu_weights[current_cpu] += partition->size();
         if (cpu_weights[current_cpu] == max_sites_per_cpu) {
           // one more cpu is exactly full
-          if (++full_cpus == (_partitions.size() - r)) {
+          if (++full_cpus == (_CPUs.size() - r)) {
             // border case : the remaining cpus should not exceed max_sites_per_cpu - 1
             max_sites_per_cpu--;
           }
         }
 
       }
-      // break the remaining partitions to fill the remaingin cpus
-		
+      // break the remaining partitions to fill the remaining cpus
+	    // I use the notations off Kassian's pseudo code
     }
 
     void compute_kassian_weighted() {
