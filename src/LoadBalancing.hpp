@@ -16,7 +16,7 @@ class LoadBalancing {
       
     }
 
-    void compute_stupid();
+    void compute_naive();
 
     void compute_kassian();
 
@@ -26,8 +26,11 @@ class LoadBalancing {
       return _CPUs;
     }
 
-    bool is_consistent() const;
 
+    // the follozing mehtods are only used to test and make statistics
+    bool is_consistent() const;
+    bool is_sites_balanced() const;
+    unsigned int max_partitions_difference() const; // different between the max and the min number of partitions in the cpus
   private:
     const Partitions & _partitions;
     std::vector<CPU> _CPUs;

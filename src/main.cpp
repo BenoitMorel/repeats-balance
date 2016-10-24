@@ -18,7 +18,7 @@ void compute_average_SRcount(const std::string &sequences_file_name) {
   std::vector<double> SRCount(sequences.width());
   for (unsigned int i = 0; i < iterations; ++i) {
     SRLOG("iteration" << i);
-    tree.set_random(sequences.number(), rand());
+    tree.set_random(sequences.number());
     tree.update_SRcount(sequences, 0, SRCount);
 	std::cout << tree << std::endl; 
   }
@@ -43,7 +43,7 @@ void compute_partitions_sr_count(const std::string &sequences_file_name, const s
   Tree tree;
   for (unsigned int i = 0; i < iterations; ++i) {
     SRLOG("iteration" << i);
-    tree.set_random(sequences.number(), time(0) + i);
+    tree.set_random(sequences.number());
     for (unsigned int j = 0; j < partitions.size(); ++j) {
       tree.update_SRcount(sequences, partitions[j].start(), partitions[j].site_costs()); 
     }

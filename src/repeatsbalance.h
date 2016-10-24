@@ -100,7 +100,7 @@ class InputPartitions {
     void generate_partitions(Partitions &o_partitions) {
       o_partitions.resize(size()); 
       for (unsigned int i = 0; i < size(); ++i) {
-        o_partitions[i].init(offset(i), size(i));
+        o_partitions[i].init(i, offset(i), size(i));
       }   
     }
 

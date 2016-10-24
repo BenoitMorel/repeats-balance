@@ -12,9 +12,9 @@ class Tree {
     }
 
 
-    void set_random(unsigned int leaves_number, unsigned int seed) {
+    void set_random(unsigned int leaves_number) {
       reset();
-      _root = Node::generate_random_tree(leaves_number, seed, _nodes_pool);
+      _root = Node::generate_random_tree(leaves_number, _nodes_pool);
       _root->get_postorder(_post_order_nodes);
     }
 

@@ -12,9 +12,14 @@ typedef std::vector<const Partition *> PartitionsPointers;
 
 class Partition {
   public:
-    void init(unsigned int start, unsigned int size) {
+    void init(unsigned int index, unsigned int start, unsigned int size) {
       _start = start;
       _site_costs.resize(size);
+      _index = index;
+    }
+
+    unsigned int index() const {
+      return _index;
     }
     
     unsigned int start() const {
@@ -57,6 +62,7 @@ class Partition {
 
   private:
 	  static bool compare_ptr_partitions(const Partition* a, const Partition* b) { return (a->size() < b->size()); }
+    unsigned int _index;
     unsigned int _start;
     std::vector<double> _site_costs;
 };

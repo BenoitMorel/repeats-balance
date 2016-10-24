@@ -75,8 +75,7 @@ class Node {
     }
 
     // not really random with respect to left and right. but it doesnt matter here
-    static Node *generate_random_tree(unsigned int leafs_number, unsigned int seed, std::vector<Node> &nodes) {
-      srand(seed);
+    static Node *generate_random_tree(unsigned int leafs_number, std::vector<Node> &nodes) {
       nodes = std::vector<Node>(2 * leafs_number - 1);
       std::vector<int> leaves(leafs_number);
       for (unsigned int i = 0; i < leafs_number; ++i) {
