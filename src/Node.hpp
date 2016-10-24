@@ -13,11 +13,17 @@ class Node {
     Node() : _left(0), _right(0), _seq_index(0), _max_identifier(0) {      
     }
 
+    /*
+     * Set the children (so this is an inner node)
+     */
     void set_children(Node *left, Node *right) {
       _left = left;
       _right = right;
     }
 
+    /*
+     *  Set the index of the taxa described by this Node (which is a leaf is set_sequence is called)
+     */
     void set_sequence(int seq_index) {
       _seq_index = seq_index;
     }
@@ -74,7 +80,6 @@ class Node {
       }
     }
 
-    // not really random with respect to left and right. but it doesnt matter here
     static Node *generate_random_tree(unsigned int leafs_number, std::vector<Node> &nodes) {
       nodes = std::vector<Node>(2 * leafs_number - 1);
       std::vector<int> leaves(leafs_number);
@@ -115,7 +120,10 @@ class Node {
       }
       return out;
     }
-    
+   
+    /*
+     *  get the sequence of nodes in the post order with this as the root
+     */ 
     void get_postorder(std::vector<Node *> &postorder) {
       if (_left) {
         _left->get_postorder(postorder);

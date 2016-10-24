@@ -97,10 +97,10 @@ class InputPartitions {
       return out;
     }
 
-    void generate_partitions(Partitions &o_partitions) {
+    void generate_partitions(Partitions &o_partitions, InputSequences *sequences) {
       o_partitions.resize(size()); 
       for (unsigned int i = 0; i < size(); ++i) {
-        o_partitions[i].init(i, offset(i), size(i));
+        o_partitions[i].init(sequences, i, offset(i), size(i));
       }   
     }
 

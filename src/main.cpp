@@ -34,7 +34,7 @@ void compute_partitions_sr_count(const std::string &sequences_file_name, const s
   InputPartitions inputpartitions;
   parse_partitions(partitions_file_name.c_str(), inputpartitions);  
   Partitions partitions;
-  inputpartitions.generate_partitions(partitions);
+  inputpartitions.generate_partitions(partitions, &sequences);
 
   std::cout << "compute_partitions_sr_count" << std::endl;
   std::cout << "-- sequences number :     " << sequences.number() << std::endl;

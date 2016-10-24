@@ -6,15 +6,24 @@
 #include <algorithm>
 
 class Partition; 
+class InputSequences;
 
 typedef std::vector<Partition> Partitions;
 typedef std::vector<const Partition *> PartitionsPointers;
 
+
+
 class Partition {
   public:
-    void init(unsigned int index, unsigned int start, unsigned int size) {
+    Partition() : _sequences(0) {
+
+    }
+
+    void init(const InputSequences *sequences, unsigned int index, unsigned int start, unsigned int size) {
+      _sequences = sequences;
       _start = start;
       _site_costs.resize(size);
+      std::fill(_site_costs.begin(), _site_costs.endl(), 0.0);
       _index = index;
     }
 
@@ -28,6 +37,10 @@ class Partition {
 
     unsigned int size() const {
       return _site_costs.size();
+    }
+
+    const InputSequences *sequences() const {
+      return _sequences;
     }
 
     std::vector<double> &site_costs() {
@@ -64,6 +77,7 @@ class Partition {
 	  static bool compare_ptr_partitions(const Partition* a, const Partition* b) { return (a->size() < b->size()); }
     unsigned int _index;
     unsigned int _start;
+    const InputSequences *_sequences;
     std::vector<double> _site_costs;
 };
 

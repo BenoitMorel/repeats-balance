@@ -121,7 +121,7 @@ void test_partitions_parser() {
 void test_partitions_sort() {
   Partitions partitions(10000);
   for (unsigned int i = 0; i < partitions.size(); ++i) {
-    partitions[i].init(i, 0, (rand() % 100000) + 1); 
+    partitions[i].init(0, i, 0, (rand() % 100000) + 1); 
   }
   PartitionsPointers partitions_ptr;
   Partition::get_sorted_partitions(partitions, partitions_ptr);
@@ -144,7 +144,7 @@ void test_print_random_trees() {
 void test_naive_loadbalancing (unsigned int partitions_number, unsigned int cpus_number) {
   Partitions partitions(partitions_number);
   for (unsigned int i = 0; i < partitions.size(); ++i) {
-    partitions[i].init(i, 0, (rand() % 100000) + 1); 
+    partitions[i].init(0, i, 0, (rand() % 100000) + 1); 
   }
   LoadBalancing lb(partitions, cpus_number);
   lb.compute_naive();
@@ -155,7 +155,7 @@ void test_naive_loadbalancing (unsigned int partitions_number, unsigned int cpus
 void test_kassian_loadbalancing (unsigned int partitions_number, unsigned int cpus_number) {
   Partitions partitions(partitions_number);
   for (unsigned int i = 0; i < partitions.size(); ++i) {
-    partitions[i].init(i, 0, (rand() % 100000) + 1); 
+    partitions[i].init(0, i, 0, (rand() % 100000) + 1); 
   }
   LoadBalancing lb(partitions, cpus_number);
   lb.compute_kassian();
@@ -167,6 +167,20 @@ void test_kassian_loadbalancing (unsigned int partitions_number, unsigned int cp
   std::ostringstream os;
   os << "test_kassian_loadbalancing(" << partitions_number << "," << cpus_number << ")";
   RBCHECK(ok, os.str(), "");
+}
+
+void test_kassian_128() {
+  InputPartitions ipartitions;
+  parse_partitions("../data/128/128.part", ipartitions);
+  Partitions partitions;
+  ipartitions.generate_partitions(partitions, 0);
+  bool ok = true;
+  LoadBalancing lb(partitions, 4);
+  lb.compute_kassian();
+  ok &= lb.is_consistent();
+  ok &= lb.is_sites_balanced();
+  ok &= lb.max_partitions_difference() <= 1;
+  RBCHECK(ok, "test_kassian_128", "");
 }
 
 
@@ -185,5 +199,6 @@ int main()
   test_kassian_loadbalancing(150, 10);
   test_kassian_loadbalancing(100, 100);
   test_kassian_loadbalancing(1500, 100);
+  test_kassian_128();
   return 0;
 }

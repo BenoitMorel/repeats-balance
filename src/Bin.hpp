@@ -1,5 +1,5 @@
-#ifndef _SB_CPU_H_
-#define _SB_CPU_H_
+#ifndef _SB_BIN_H_
+#define _SB_BIN_H_
 
 #include "repeatsbalance.h"
 #include <iostream> 
@@ -8,13 +8,13 @@
 
 class Partition;
 
-struct CPU { 
-  std::vector<const Partition *> partitions; // partitions assigned to this cpu 
+struct Bin { 
+  std::vector<const Partition *> partitions; // partitions assigned to this bin 
   std::vector<unsigned int> offsets; // offsets off the subpartitions from the start of the partitions
-  std::vector<unsigned int> sizes; // sizes off the subpartitions assigned to this cpu
+  std::vector<unsigned int> sizes; // sizes off the subpartitions assigned to this bin
   unsigned int weight;
 
-  CPU() : weight(0){
+  Bin() : weight(0){
   }
 
   void assign_sites(const Partition * partition, 

@@ -1,17 +1,19 @@
 #ifndef _RB_LOADBALANCING_H_
 #define _RB_LOADBALANCING_H_
 
-#include "CPU.hpp"
+#include "Bin.hpp"
 #include "Partition.hpp"
 #include <vector>
 
 
+typedef std::vector<Partition> CPUAssignment;
+typedef std::vector<CPUAssignment> Assignment;
 
 class LoadBalancing {
   public:
-    LoadBalancing(const Partitions & partitions, unsigned int CPU_number) : 
+    LoadBalancing(const Partitions & partitions, unsigned int Bin_number) : 
       _partitions(partitions),
-      _CPUs(CPU_number)
+      _bins(Bin_number)
     {
       
     }
@@ -22,18 +24,20 @@ class LoadBalancing {
 
     void compute_kassian_weighted();
 
-    const std::vector<CPU> &load_balancing() const {
-      return _CPUs;
+    const std::vector<Bin> &load_balancing() const {
+      return _bins;
     }
+
+    void build_assignment(Assignment &assignment);
 
 
     // the follozing mehtods are only used to test and make statistics
     bool is_consistent() const;
     bool is_sites_balanced() const;
-    unsigned int max_partitions_difference() const; // different between the max and the min number of partitions in the cpus
+    unsigned int max_partitions_difference() const; // different between the max and the min number of partitions in the bins
   private:
     const Partitions & _partitions;
-    std::vector<CPU> _CPUs;
+    std::vector<Bin> _bins;
 
 };
 
