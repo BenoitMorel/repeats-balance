@@ -117,9 +117,9 @@ void test_partitions_parser() {
 
 
 void test_partitions_sort() {
-  Partitions partitions(100);
+  Partitions partitions(10000);
   for (unsigned int i = 0; i < partitions.size(); ++i) {
-    partitions[i].init(0, (rand() % 10000) + 1); 
+    partitions[i].init(0, (rand() % 100000) + 1); 
   }
   PartitionsPointers partitions_ptr;
   Partition::get_sorted_partitions(partitions, partitions_ptr);

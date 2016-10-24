@@ -39,7 +39,7 @@ class LoadBalancing {
       std::fill(cpu_weights.begin(),cpu_weights.end(), 0);
       // Assign partitions in a cyclic manner to cpus until one is too big 
       for (; current_partition < sorted_partitions.size(); ++current_partition) {
-        Partition *partition = sorted_partitions[current_partition];
+        const Partition *partition = sorted_partitions[current_partition];
         unsigned int current_cpu = current_partition % _CPUs.size();
         if ((partition->size() + cpu_weights[current_cpu]) > max_sites_per_cpu) {
           // the partition exceeds the current cpu's size, go to the next step of the algo

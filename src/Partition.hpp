@@ -7,7 +7,7 @@
 class Partition; 
 
 typedef std::vector<Partition> Partitions;
-typedef std::vector<Partition *> PartitionsPointers;
+typedef std::vector<const Partition *> PartitionsPointers;
 
 class Partition {
   public:
@@ -46,7 +46,7 @@ class Partition {
     }
 
  
-	static void get_sorted_partitions(Partitions partitions, PartitionsPointers &o_partitions_ptr) {
+	static void get_sorted_partitions(const Partitions &partitions, PartitionsPointers &o_partitions_ptr) {
     o_partitions_ptr.resize(partitions.size());
     for (unsigned int i = 0; i < partitions.size(); ++i) {
       o_partitions_ptr[i] = &partitions[i];
@@ -55,7 +55,7 @@ class Partition {
   }
 
   private:
-	  static bool compare_ptr_partitions(Partition* a, Partition* b) { return (a->size() < b->size()); }
+	  static bool compare_ptr_partitions(const Partition* a, const Partition* b) { return (a->size() < b->size()); }
     unsigned int _start;
     std::vector<double> _site_costs;
 };
