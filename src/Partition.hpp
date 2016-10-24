@@ -1,6 +1,7 @@
 #ifndef _RB_PARTITION_
 #define _RB_PARTITION_
 
+#include <iostream>
 #include <vector>
 #include <algorithm>
 

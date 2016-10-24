@@ -1,17 +1,18 @@
 #ifndef _SB_CPU_H_
 #define _SB_CPU_H_
 
+#include <iostream> 
 #include <vector> 
 #include "Partition.hpp"
 
 
 struct CPU { 
-  std::vector<const Partition *> partitions;
-  std::vector<unsigned int> offsets;
-  std::vector<unsigned int> sizes;
+  std::vector<unsigned int> partitions; // indices of the assigned partitions in the partitions array 
+  std::vector<unsigned int> offsets; // offsets off the subpartitions from the start of the partitions
+  std::vector<unsigned int> sizes; // sizes off the subpartitions assigned to this cpu
 
 
-  void assign_sites(const Partition *partition, 
+  void assign_sites(unsigned int partition, 
                       unsigned int offset, 
                       unsigned int size) {
     partitions.push_back(partition);
