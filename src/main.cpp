@@ -6,6 +6,7 @@
 #include "Node.hpp"
 #include "Tree.hpp"
 #include "LoadBalancing.hpp"
+#include "Helper.hpp"
 
 
 void compute_average_SRcount(const std::string &sequences_file_name) {
@@ -59,11 +60,9 @@ void compute_partitions_sr_count(const std::string &sequences_file_name, const s
 
 int main()
 {
-  compute_average_SRcount("../data/simple_seq/simple4-4.phy");
-  compute_average_SRcount("../data/simple_seq/simple4-4.phy");
-  compute_average_SRcount("../data/simple_seq/simple4-4.phy");
-  compute_average_SRcount("../data/simple_seq/simple4-4.phy");
-  compute_average_SRcount("../data/simple_seq/simple4-4.phy");
+  //compute_average_SRcount("../data/simple_seq/simple4-4.phy");
   //compute_partitions_sr_count("../data/128/128.phy", "../data/128/128.part", 50);
+  Helper::treat("../data/128/128.phy", "../data/128/128.part", 50, 5, "stats128");
+  
   return 0;
 }

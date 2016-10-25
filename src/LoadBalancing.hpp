@@ -6,8 +6,8 @@
 #include <vector>
 
 
-typedef std::vector<Partition> CPUAssignment;
-typedef std::vector<CPUAssignment> Assignment;
+typedef std::vector<Partition> Assignment;
+typedef std::vector<Assignment> Assignments;
 
 class LoadBalancing {
   public:
@@ -28,12 +28,13 @@ class LoadBalancing {
       return _bins;
     }
 
-    void build_assignment(Assignment &assignment);
+    void build_assignments(Assignments &assignments);
 
 
     // the follozing mehtods are only used to test and make statistics
     bool is_consistent() const;
     bool is_sites_balanced() const;
+    bool is_weights_balanced() const;
     unsigned int max_partitions_difference() const; // different between the max and the min number of partitions in the bins
   private:
     const Partitions & _partitions;

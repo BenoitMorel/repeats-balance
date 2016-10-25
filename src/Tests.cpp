@@ -157,6 +157,27 @@ void test_kassian_loadbalancing (unsigned int partitions_number, unsigned int cp
   for (unsigned int i = 0; i < partitions.size(); ++i) {
     partitions[i].init(0, i, 0, (rand() % 100000) + 1); 
   }
+  for (unsigned int i = 0; i < partitions.size(); ++i) {
+    partitions[i].fill_costs_randomly();
+    partitions[i].normalize_costs(1.0);
+  }
+  LoadBalancing lb(partitions, cpus_number);
+  lb.compute_kassian_weighted();
+  bool ok = true;
+  ok &= lb.is_consistent();
+  ok &= lb.is_weights_balanced();
+  ok &= lb.max_partitions_difference() <= 1;
+
+  std::ostringstream os;
+  os << "test_kassian_loadbalancing(" << partitions_number << "," << cpus_number << ")";
+  RBCHECK(ok, os.str(), "");
+}
+
+void test_kassian_weighted_loadbalancing (unsigned int partitions_number, unsigned int cpus_number) {
+  Partitions partitions(partitions_number);
+  for (unsigned int i = 0; i < partitions.size(); ++i) {
+    partitions[i].init(0, i, 0, (rand() % 100000) + 1); 
+  }
   LoadBalancing lb(partitions, cpus_number);
   lb.compute_kassian();
   bool ok = true;
@@ -165,7 +186,7 @@ void test_kassian_loadbalancing (unsigned int partitions_number, unsigned int cp
   ok &= lb.max_partitions_difference() <= 1;
 
   std::ostringstream os;
-  os << "test_kassian_loadbalancing(" << partitions_number << "," << cpus_number << ")";
+  os << "test_kassian_weighted_loadbalancing(" << partitions_number << "," << cpus_number << ")";
   RBCHECK(ok, os.str(), "");
 }
 
@@ -181,6 +202,27 @@ void test_kassian_128() {
   ok &= lb.is_sites_balanced();
   ok &= lb.max_partitions_difference() <= 1;
   RBCHECK(ok, "test_kassian_128", "");
+}
+
+
+void test_kassian_weighted_128() {
+  InputPartitions ipartitions;
+  parse_partitions("../data/128/128.part", ipartitions);
+  Partitions partitions;
+  ipartitions.generate_partitions(partitions, 0);
+  for (unsigned int i = 0; i < partitions.size(); ++i) {
+    partitions[i].fill_costs_randomly();
+    partitions[i].normalize_costs(1.0);
+  }
+  bool ok = true;
+  LoadBalancing lb(partitions, 4);
+
+
+  lb.compute_kassian_weighted();
+  ok &= lb.is_consistent();
+  ok &= lb.is_weights_balanced();
+  ok &= lb.max_partitions_difference() <= 1;
+  RBCHECK(ok, "test_kassian_weighted_128", "");
 }
 
 
@@ -200,5 +242,12 @@ int main()
   test_kassian_loadbalancing(100, 100);
   test_kassian_loadbalancing(1500, 100);
   test_kassian_128();
+  test_kassian_weighted_loadbalancing(5, 3);
+  test_kassian_weighted_loadbalancing(10, 10);
+  test_kassian_weighted_loadbalancing(150, 10);
+  test_kassian_weighted_loadbalancing(100, 100);
+  test_kassian_weighted_loadbalancing(1500, 100);
+  test_kassian_weighted_128();
+
   return 0;
 }

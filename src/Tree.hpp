@@ -1,5 +1,5 @@
 #ifndef _SB_TREE_H_
-#define _SB_TREE__
+#define _SB_TREE_H_
 
 #include <vector>
 #include <algorithm>
@@ -18,6 +18,10 @@ class Tree {
       reset();
       _root = Node::generate_random_tree(leaves_number, _nodes_pool);
       _root->get_postorder(_post_order_nodes);
+    }
+
+    void update_SRcount(Partition &partition) {
+      update_SRcount(*partition.sequences(), partition.start(), partition.site_costs());
     }
 
     /*
