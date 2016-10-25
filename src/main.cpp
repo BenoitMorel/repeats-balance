@@ -60,9 +60,10 @@ void compute_partitions_sr_count(const std::string &sequences_file_name, const s
 
 int main()
 {
+  srand(time(0));
   //compute_average_SRcount("../data/simple_seq/simple4-4.phy");
   //compute_partitions_sr_count("../data/128/128.phy", "../data/128/128.part", 50);
-  Helper::treat("../data/128/128.phy", "../data/128/128.part", 50, 5, "stats128");
+  Helper::treat("../data/128/128.phy", "../data/128/128.part", 1, 5, "stats128");
   
   return 0;
 }
