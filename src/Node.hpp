@@ -131,7 +131,10 @@ class Node {
       }
       postorder.push_back(this);
     }
-
+    
+    unsigned int get_seq_id() const {
+      return _seq_index;
+    }
   private:
     Node *_left;
     Node *_right;

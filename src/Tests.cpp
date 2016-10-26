@@ -116,6 +116,17 @@ void test_partitions_parser() {
   ok &= partitions.size(21) == 684;
   RBCHECK(ok, "test_partitions_parser", ""); 
 }
+void test_tree_parser() {
+  InputSequences sequences;
+  parse_sequences("../data/128/128.phy", sequences);  
+  Tree tree;
+  parse_tree("../data/128/RAxML_parsimonyTree.128", sequences, tree);
+  bool ok = true;
+  Node &Dasypus_Xen3 = tree.get_node(0);
+  ok &= Dasypus_Xen3.get_seq_id() == 2;
+  RBCHECK(ok, "test_tree_parser", ""); 
+
+}
 
 
 void test_partitions_sort() {
@@ -234,6 +245,7 @@ int main()
   test_count_sr_simple_2_offset();
   test_sequences_parser();
   test_partitions_parser();
+  test_tree_parser();
   test_partitions_sort();
   test_naive_loadbalancing(1000, 100);
   test_kassian_loadbalancing(5, 3);

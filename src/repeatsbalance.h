@@ -13,8 +13,18 @@
 
 #include <string>
 #include <cstring>
-
+#include <map>
 #include "Partition.hpp"
+
+class Tree;
+
+struct StrCompare : public std::binary_function<const char*, const char*, bool> {
+  public:
+        bool operator() (const char* str1, const char* str2) const
+              { return std::strcmp(str1, str2) < 0; }
+};
+
+typedef std::map<const char*, unsigned int, StrCompare> SeqNameToInt;
 
 class InputSequences {
   public:
@@ -25,10 +35,11 @@ class InputSequences {
       } 
     }
 
-    void add_sequence(char *name, char *sequence) {
+    void add_sequence(const char *name, char *sequence) {
       if (!number()) {
         _seq_size = strlen(sequence);
       }
+      _map[name] = _names.size();
       _names.push_back(name);
       _sequences.push_back(sequence);
     }
@@ -49,7 +60,9 @@ class InputSequences {
       return _names[i];
     }
 
-
+    unsigned int get_taxa_index(const char* taxa_name) const {
+      return (_map.find(taxa_name) != _map.end()) ?_map.at(taxa_name) : 0;
+    }
 
     friend std::ostream& operator<< (std::ostream &out, const InputSequences &seq) {
       out << seq.number() << " " << seq._seq_size << std::endl;
@@ -61,8 +74,9 @@ class InputSequences {
 
   private:
     unsigned int _seq_size;
-    std::vector<char *> _names;
-    std::vector<char *> _sequences;
+    std::vector<const char *> _names;
+    std::vector<const char *> _sequences;
+    SeqNameToInt _map;
 };
 
 class InputPartitions {
@@ -110,8 +124,17 @@ class InputPartitions {
     std::vector<unsigned int> _sizes;
   };
 
+struct TreeScanner {
+  TreeScanner(const InputSequences &iseq, Tree &itree): seq(iseq), tree(itree), current_node(0) {}
+  const InputSequences &seq;
+  Tree &tree;
+  unsigned int current_node;
+};
+
+
 void parse_sequences(const char *file, InputSequences &sequences);
 void parse_partitions(const char *file, InputPartitions &sequences);
+void parse_tree(const char *file, const InputSequences &sequences, Tree &tree);
 
 #endif
 

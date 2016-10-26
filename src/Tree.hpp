@@ -11,6 +11,21 @@ class Tree {
       std::fill(_buffer.begin(), _buffer.end(), 0); 
     }
 
+
+    // used by the tree parser
+    void init(unsigned int leaves_number) {
+      reset();
+      _nodes_pool.resize(leaves_number * 2 - 1);
+    }
+    // used by the tree parser
+    void set_root(Node *node) {
+      _root = node;
+      _root->get_postorder(_post_order_nodes);
+      if (_post_order_nodes.size() != _nodes_pool.size()) {
+        SRLOG("Warning : something might be wrong between the nodes pool and the post order (or wrong root ?)");
+      }
+    }
+
     /* 
      * generate a random tree with leaves_number leaves
      */
@@ -41,6 +56,10 @@ class Tree {
     friend std::ostream& operator<< (std::ostream &out, const Tree &tree) {
       out << *tree._root;
       return out;
+    }
+
+    Node &get_node(unsigned int i) {
+      return _nodes_pool[i];
     }
   private:
     

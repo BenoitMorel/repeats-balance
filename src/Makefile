@@ -7,7 +7,7 @@ LDFLAGS= $(DBG)
 EXEC=srlb tests
 SRC= $(wildcard *.cpp)
 OBJDIR=generated
-OBJ=  $(addprefix $(OBJDIR)/, parse_sequences.o  scan_sequences.o parse_partitions.o scan_partitions.o LoadBalancing.o)
+OBJ=  $(addprefix $(OBJDIR)/, parse_sequences.o  scan_sequences.o  parse_partitions.o scan_partitions.o	parse_tree.o scan_tree.o LoadBalancing.o)
 
 BISON= bison
 FLEX= flex
