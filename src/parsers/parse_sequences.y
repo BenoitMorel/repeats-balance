@@ -62,7 +62,7 @@ void parse_sequences(const char *file, InputSequences &sequences) {
 
 
 void yyerror(InputSequences *oseq, const char *s) {
-  cout << "EEK, parse error!  Message: " << oseq << " " << s << endl;
+  cout << "Sequences, parse error!  Message: " << oseq << " " << s << endl;
   // might as well halt now:
   exit(-1);
 }

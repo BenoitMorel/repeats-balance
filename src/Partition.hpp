@@ -69,6 +69,9 @@ class Partition {
     double total_weight() const {
       return _accumulated[_accumulated.size() - 1];
     }
+    double average_sr_rate() const {
+      return 1.0 - (total_weight() / double(size()));
+    }
 
     unsigned int find_upper_bound(double value) const {
       return  std::upper_bound(_accumulated.begin(), _accumulated.end(), value) - _accumulated.begin();

@@ -63,7 +63,7 @@ void parse_partitions(const char *file, InputPartitions &partitions) {
 
 
 void rb_parterror(InputPartitions *opart, const char *s) {
-  cout << "EEK, parse error!  Message: " << opart << " " << s << endl;
+  cout << "Partitions, parse error!  Message: " << opart << " " << s << endl;
   // might as well halt now:
   exit(-1);
 }

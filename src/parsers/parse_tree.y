@@ -61,7 +61,7 @@ void parse_tree(const char *file, const InputSequences &sequences, Tree &o_tree)
 
 
 void rb_treeerror(TreeScanner &scanner, const char *s) {
-  cout << "EEK, parse error!  Message: " << &scanner << s << endl;
+  cout << "Trees, parse error!  Message: " << &scanner << s << endl;
   // might as well halt now:
   exit(-1);
 }

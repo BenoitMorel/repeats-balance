@@ -14,6 +14,26 @@ enum Method {
 
 class Helper {
 public:
+  static void count_sr(const std::string &sequences_file,
+                      const std::string &partitions_file,
+                      const std::string &tree_file) {
+
+    InputSequences sequences;
+    parse_sequences(sequences_file.c_str(), sequences);
+    InputPartitions inputPartitions;
+    parse_partitions(partitions_file.c_str(), inputPartitions);
+    Partitions partitions;
+    inputPartitions.generate_partitions(partitions, &sequences);
+    Tree tree;
+    parse_tree(tree_file.c_str(), sequences, tree);
+    std::cout << "Average site repeat rate for each partition : " << std::endl;
+    for (unsigned int i = 0; i < partitions.size(); ++i) {
+      tree.update_SRcount(partitions[i]);
+      partitions[i].normalize_costs(sequences.number() - 1);
+      std::cout << inputPartitions.name(i) << ":" << partitions[i].average_sr_rate() << std::endl;
+    }
+    
+  }
 
   static void treat(const std::string &sequences_file,
                     const std::string &partitions_file,
