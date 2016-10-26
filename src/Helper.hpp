@@ -35,19 +35,12 @@ public:
     
   }
 
-  static void treat(const std::string &sequences_file,
+  static void print_stats(const std::string &sequences_file,
                     const std::string &partitions_file,
                     unsigned int tree_samples_number,
                     unsigned int cpu_number, 
-                    const std::string &output_dir) {
-    std::string dir = (output_dir[output_dir.size() - 1] == '/') ? output_dir : (output_dir + "/");
-    if (system((std::string("mkdir -p ") + dir).c_str())) {
-      std::cerr << "Cannot create directory " << dir << std::endl;
-      return;
-    }
-
-    
-    std::ofstream input_os((dir + "results_infos.txt").c_str(), std::ofstream::out);
+                    const std::string &output_file) {
+    std::ofstream input_os(output_file.c_str(), std::ofstream::out);
     input_os << "sequences file : " << sequences_file << ::std::endl;
     input_os << "partitions file : " << partitions_file << ::std::endl;
     input_os << "number of tree to generate : " << tree_samples_number << ::std::endl;
@@ -105,6 +98,7 @@ private:
     os << "Max partitions difference : " << lb.max_partitions_difference() << std::endl;
     Assignments assignments;
     lb.build_assignments(assignments);
+    unsigned int total_sites = 0;
     os << "sites per cpu : ";
     for (unsigned int i = 0; i < assignments.size(); ++i) {
       Assignment &assign = assignments[i];
@@ -113,10 +107,12 @@ private:
         Partition &partition = assign[j];
         sites += partition.size();
       }
+      total_sites += sites;
       os << sites << " ";
     }
-    os << std::endl;
+    os << "(total : " << total_sites << ")" << std::endl;
     os << "weights per cpu : " ;
+    double total_weights = 0;
     for (unsigned int i = 0; i < assignments.size(); ++i) {
       Assignment &assign = assignments[i];
       double weights = 0.0;
@@ -126,9 +122,10 @@ private:
         partition.normalize_costs(partition.sequences()->number());
         weights += partition.total_weight();
       }
+      total_weights += weights;
       os << weights << " ";
     }
-    os << std::endl;
+    os << "(total : " << total_weights << ")" << std::endl;
     os << "partitions per cpu : " ; 
     for (unsigned int i = 0; i < assignments.size(); ++i) {
       os << assignments[i].size() << " ";

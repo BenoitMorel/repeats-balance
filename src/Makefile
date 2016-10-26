@@ -1,7 +1,7 @@
 CC=g++
 
 
-DBG=  -g -pg
+DBG=  -O3 #-g -pg
 CFLAGS= $(DBG) -W -Wall -ansi -pedantic 
 LDFLAGS= $(DBG)
 EXEC=srlb tests
