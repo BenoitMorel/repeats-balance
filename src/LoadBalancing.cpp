@@ -118,7 +118,6 @@ void LoadBalancing::compute_kassian_weighted() {
     total_weight += _partitions[i].total_weight();
   }   
   double max_weight = total_weight / _bins.size();
-  std::cout << "max weight " << max_weight << std::endl;
   unsigned int curr_part = 0; // index in sorted_partitons (AND NOT IN _partitions)
   unsigned int current_bin = 0;
   // Assign partitions in a cyclic manner to bins until one is too big 

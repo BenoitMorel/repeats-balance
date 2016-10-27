@@ -6,21 +6,39 @@ partitions file : ../data/59/59.part
 number of taxa : 59
 size of sequences : 6951
 number of partitions : 8
----------------------------------
-naive
-Max partitions difference : 1
-sites per cpu : 2811 3300 840 (total : 6951)
-weights per cpu : 359.983 217.103 78.7414 (total : 655.828, max : 359.983, ratio : 0.392723)
-partitions per cpu : 3 3 2 
----------------------------------
-kassian
-Max partitions difference : 1
-sites per cpu : 2317 2317 2317 (total : 6951)
-weights per cpu : 148.276 266.086 270.966 (total : 685.328, max : 270.966, ratio : 0.156931)
-partitions per cpu : 4 3 3 
----------------------------------
-weighted
-Max partitions difference : 1
-sites per cpu : 2100 2034 2817 (total : 6951)
-weights per cpu : 223.948 227.276 229.621 (total : 680.845, max : 229.621, ratio : 0.0116384)
-partitions per cpu : 4 3 3 
+
+Naive : 
+Total sites number = 6951
+Total weight       = 1010.33
+Max weight         = 524.069
+Weight ratio       = 0.357383 ((max - average) / max)
+Max partitions     = 0
+Sites per cpu      = 2811 3300 840 
+Weight per cpu     = 524.069 356.81 129.448 
+Sites per cpu      = 3 3 2 
+
+Kassian : 
+Total sites number = 6951
+Total weight       = 1039.71
+Max weight         = 417.448
+Weight ratio       = 0.169792 ((max - average) / max)
+Max partitions     = 0
+Sites per cpu      = 2317 2317 2317 
+Weight per cpu     = 241.931 380.328 417.448 
+Sites per cpu      = 4 3 3 
+
+Kassian weighted : 
+Total sites number = 6951
+Total weight       = 1032.19
+Max weight         = 347.983
+Weight ratio       = 0.0112636 ((max - average) / max)
+Max partitions     = 0
+Sites per cpu      = 2102 1926 2923 
+Weight per cpu     = 347.983 343.397 340.81 
+Sites per cpu      = 4 3 3 
+
+Expectations with the sites repeats (if the sites repeats computation time is negligible and without the constant partition cost)): 
+Speedup [no SR, parall] -> // [SR (kassian), parall] : 5.55039
+Speedup [no SR, parall] -> // [SR (kassian weighted), parall] : 6.65838
+Speedup [Kassian, parall] -> [Kassian weighted, parall] : 1.19962
+Speedup [no SR, sequential] => [SR (kassian weighted), parall] 19.9751

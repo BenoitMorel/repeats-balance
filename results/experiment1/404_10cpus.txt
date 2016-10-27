@@ -6,21 +6,39 @@ partitions file : ../data/404/404.part
 number of taxa : 404
 size of sequences : 13158
 number of partitions : 11
----------------------------------
-naive
-Max partitions difference : 1
-sites per cpu : 3742 802 1646 588 852 828 1437 1218 1020 1025 (total : 13158)
-weights per cpu : 320.593 98.9727 211.007 13.1663 30.2109 159.851 110.801 88.8933 9.57568 36.938 (total : 1080.01, max : 320.593, ratio : 0.663121)
-partitions per cpu : 2 1 1 1 1 1 1 1 1 1 
----------------------------------
-kassian
-Max partitions difference : 0
-sites per cpu : 1315 1315 1316 1316 1316 1316 1316 1316 1316 1316 (total : 13158)
-weights per cpu : 121.747 148.844 202.266 66.3722 35.794 62.9826 107.268 138.196 171.072 120.132 (total : 1174.67, max : 202.266, ratio : 0.419242)
-partitions per cpu : 2 2 2 2 2 2 2 2 2 2 
----------------------------------
-weighted
-Max partitions difference : 0
-sites per cpu : 1748 1951 1573 2226 1323 832 854 655 747 1249 (total : 13158)
-weights per cpu : 118.275 111.213 122.238 118.742 102.975 106.268 130.633 122.186 120.988 113.769 (total : 1167.29, max : 130.633, ratio : 0.106436)
-partitions per cpu : 2 2 2 2 2 2 2 2 2 2 
+
+Naive : 
+Total sites number = 13158
+Total weight       = 1112.03
+Max weight         = 327.64
+Weight ratio       = 0.660593 ((max - average) / max)
+Max partitions     = 0
+Sites per cpu      = 3742 802 1646 588 852 828 1437 1218 1020 1025 
+Weight per cpu     = 327.64 101.739 205.767 13.4739 26.3821 170.037 114.471 104.71 10.2481 37.5633 
+Sites per cpu      = 2 1 1 1 1 1 1 1 1 1 
+
+Kassian : 
+Total sites number = 13158
+Total weight       = 1206.6
+Max weight         = 211.362
+Weight ratio       = 0.429133 ((max - average) / max)
+Max partitions     = 0
+Sites per cpu      = 1315 1315 1316 1316 1316 1316 1316 1316 1316 1316 
+Weight per cpu     = 128.725 154.251 211.362 63.0521 36.4814 64.5682 123.283 139.891 167.04 117.945 
+Sites per cpu      = 2 2 2 2 2 2 2 2 2 2 
+
+Kassian weighted : 
+Total sites number = 13158
+Total weight       = 1198.96
+Max weight         = 127.682
+Weight ratio       = 0.0609822 ((max - average) / max)
+Max partitions     = 0
+Sites per cpu      = 1751 1953 1565 2220 1328 835 855 651 743 1257 
+Weight per cpu     = 125.94 116.727 115.186 121.246 119.474 110.124 127.677 127.682 123.923 110.98 
+Sites per cpu      = 2 2 2 2 2 2 2 2 2 2 
+
+Expectations with the sites repeats (if the sites repeats computation time is negligible and without the constant partition cost)): 
+Speedup [no SR, parall] -> // [SR (kassian), parall] : 6.22155
+Speedup [no SR, parall] -> // [SR (kassian weighted), parall] : 10.299
+Speedup [Kassian, parall] -> [Kassian weighted, parall] : 1.65538
+Speedup [no SR, sequential] => [SR (kassian weighted), parall] 103.053

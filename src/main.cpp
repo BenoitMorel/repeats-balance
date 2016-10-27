@@ -12,6 +12,12 @@ int main()
   srand(time(0));
   //compute_average_SRcount("../data/simple_seq/simple4-4.phy");
   //compute_partitions_sr_count("../data/128/128.phy", "../data/128/128.part", 50);
+ 
+  Helper::print_stats("../data/94/94.phy", "../data/94/94.part", 100, 10, "../results/experiment1/94_10cpus.txt");
+  Helper::print_stats("../data/94/94.phy", "../data/94/94.part", 100, 30, "../results/experiment1/94_30cpus.txt");
+  Helper::print_stats("../data/94/94.phy", "../data/94/94.part", 100, 100, "../results/experiment1/94_100cpus.txt");
+  Helper::print_stats("../data/94/94.phy", "../data/94/94.part", 100, 200, "../results/experiment1/94_200cpus.txt");
+  
   Helper::print_stats("../data/59/59.phy", "../data/59/59.part", 100, 3, "../results/experiment1/59_3cpus.txt");
   Helper::print_stats("../data/59/59.phy", "../data/59/59.part", 100, 10, "../results/experiment1/59_10cpus.txt");
   Helper::print_stats("../data/128/128.phy", "../data/128/128.part", 100, 3, "../results/experiment1/128_3cpus.txt");
