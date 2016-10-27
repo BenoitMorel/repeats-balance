@@ -1,11 +1,13 @@
 
 #include <iostream>
 #include <sstream>
+#include <cmath>
 #include <vector>
 #include <time.h>
 #include "repeatsbalance.h"
 #include "Node.hpp"
 #include "Tree.hpp"
+#include "Helper.hpp"
 #include "LoadBalancing.hpp"
 
 
@@ -47,6 +49,8 @@ int test_count_sr_simple_1() {
   nodes[3].set_sequence(2);
   nodes[4].set_sequence(3);
   int expectedSRNumbers[] = {0, 3, 1, 1};
+  check(nodes, sequences, 0, sequences.width(), expectedSRNumbers, "test_count_sr_simple_1");
+  check(nodes, sequences, 0, sequences.width(), expectedSRNumbers, "test_count_sr_simple_1");
   return check(nodes, sequences, 0, sequences.width(), expectedSRNumbers, "test_count_sr_simple_1");
 }
 
@@ -130,9 +134,9 @@ void test_tree_parser() {
 
 
 void test_partitions_sort() {
-  Partitions partitions(10000);
+  Partitions partitions(1000);
   for (unsigned int i = 0; i < partitions.size(); ++i) {
-    partitions[i].init(0, i, 0, (rand() % 100000) + 1); 
+    partitions[i].init(0, i, 0, (rand() % 1000) + 1); 
   }
   PartitionsPointers partitions_ptr;
   Partition::get_sorted_partitions(partitions, partitions_ptr);
@@ -215,6 +219,27 @@ void test_kassian_128() {
   RBCHECK(ok, "test_kassian_128", "");
 }
 
+// check the result twice to check that computing the sr on one same partition 
+// with the same instance of a tree gives the same result 
+void test_count_SR_128() {
+  InputSequences sequences;
+  parse_sequences("../data/128/128.phy", sequences);
+  InputPartitions ipartitions;
+  parse_partitions("../data/128/single_partition.part", ipartitions);
+  Partitions partitions;
+  ipartitions.generate_partitions(partitions, &sequences);
+  Tree tree;
+  parse_tree("../data/128/RAxML_parsimonyTree.128", sequences, tree);
+  std::vector<double> sr_rates;
+  Helper::compute_sr_rates(sequences, partitions, tree, sr_rates);
+  bool ok = true;
+  ok &= fabs(0.9178 - sr_rates[0]) < 0.0001;
+  partitions[0].reset_site_costs();
+  Helper::compute_sr_rates(sequences, partitions, tree, sr_rates);
+  ok &= fabs(0.9178 - sr_rates[0]) < 0.0001;
+  RBCHECK(ok, "test_count_SR_128", "");
+}
+
 
 void test_kassian_weighted_128() {
   InputPartitions ipartitions;
@@ -247,6 +272,8 @@ int main()
   test_partitions_parser();
   test_tree_parser();
   test_partitions_sort();
+  test_count_SR_128();
+
   test_naive_loadbalancing(1000, 100);
   test_kassian_loadbalancing(5, 3);
   test_kassian_loadbalancing(10, 10);

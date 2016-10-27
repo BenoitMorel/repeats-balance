@@ -43,8 +43,8 @@ class Node {
       int _toclean_index = 0;
       unsigned int sites_number = o_srcounts.size();
       std::vector<int> &map = buffer;
-      //std::fill(map.begin(), map.end(), 0);
       _identifiers.resize(sites_number);
+      _max_identifier = 0;
       if (!_left) { // leaf node
         for (unsigned int site = 0; site < sites_number; site++) {
           char c = sequences.sequence(_seq_index)[sequence_offset + site];

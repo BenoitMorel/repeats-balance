@@ -44,7 +44,7 @@ class Tree {
      *  adds one to this element for each new repeat in this element according to this tree.
      */
     void update_SRcount(const InputSequences &sequences, unsigned int offset,  std::vector<double> &o_SRCount) {
-      _cleanbuffer.resize(sequences.width());
+      _cleanbuffer.resize(o_SRCount.size());
       for (unsigned int i = 0; i < _post_order_nodes.size(); ++i) {
         _post_order_nodes[i]->fill_identifier(sequences, offset, _buffer, _cleanbuffer,  o_SRCount);
       }

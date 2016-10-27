@@ -118,7 +118,6 @@ void LoadBalancing::compute_kassian_weighted() {
     total_weight += _partitions[i].total_weight();
   }   
   double max_weight = total_weight / _bins.size();
-  std::cout << "max weight : " << max_weight << std::endl;
   unsigned int curr_part = 0; // index in sorted_partitons (AND NOT IN _partitions)
   unsigned int current_bin = 0;
   // Assign partitions in a cyclic manner to bins until one is too big 
@@ -199,15 +198,15 @@ void LoadBalancing::compute_kassian_weighted() {
 void LoadBalancing::build_assignments(Assignments &assignments) {
   assignments = Assignments(_bins.size());
   for (unsigned int i = 0; i < _bins.size(); ++i) {
-    Assignment &cpu = assignments[i];
-    Bin &bin = _bins[i];
-    cpu.resize(bin.partitions_number());
-    for (unsigned int j = 0; j < bin.partitions_number(); ++j) {
-      const Partition *partition = bin.partitions[j]; 
-      cpu[j].init(partition->sequences(), 
+    Assignment &cpu_to_fill = assignments[i];
+    Bin &bin_to_assign = _bins[i];
+    cpu_to_fill.resize(bin_to_assign.partitions_number());
+    for (unsigned int j = 0; j < bin_to_assign.partitions_number(); ++j) {
+      const Partition *partition = bin_to_assign.partitions[j]; 
+      cpu_to_fill[j].init(partition->sequences(), 
                   j,
-                  partition->start() + bin.offsets[j],
-                  bin.sizes[j]);
+                  partition->start() + bin_to_assign.offsets[j],
+                  bin_to_assign.sizes[j]);
     }
   }
 }
@@ -246,7 +245,6 @@ bool LoadBalancing::is_weights_balanced() const {
   double weight = _bins[0].weight;
   for (unsigned int i = 1; i < _bins.size(); ++i) {
     if (fabs(weight - _bins[i].weight) / std::max(weight, _bins[i].weight) > 0.01) {
-      std::cout << weight << " " << _bins[i].weight << std::endl;
       return false;
     }
   } 

@@ -7,16 +7,14 @@
 #include "repeatsbalance.h"
 #include "Partition.hpp"
 #include "Tree.hpp"
-
-enum Method {
-  naive, kassian, siterepeats
-};
+#include "LoadBalancing.hpp"
 
 class Helper {
 public:
-  static void count_sr(const std::string &sequences_file,
-                      const std::string &partitions_file,
-                      const std::string &tree_file) {
+  static void print_count_sr(const std::string &sequences_file,
+                          const std::string &partitions_file,
+                          const std::string &tree_file
+                          ) {
 
     InputSequences sequences;
     parse_sequences(sequences_file.c_str(), sequences);
@@ -33,6 +31,15 @@ public:
       std::cout << inputPartitions.name(i) << ":" << partitions[i].average_sr_rate() << std::endl;
     }
     
+  }
+
+  static void compute_sr_rates(InputSequences &sequences, Partitions &partitions, Tree &tree, std::vector<double> &o_srrates) {
+    o_srrates.resize(partitions.size());
+    for (unsigned int i = 0; i < partitions.size(); ++i) {
+      tree.update_SRcount(partitions[i]);
+      partitions[i].normalize_costs(sequences.number() - 1);
+      o_srrates[i] = partitions[i].average_sr_rate();
+    }
   }
 
   static void print_stats(const std::string &sequences_file,
@@ -119,7 +126,7 @@ private:
       for (unsigned int j = 0; j < assign.size(); ++j) {
         Partition &partition = assign[j];
         random_tree.update_SRcount(partition);
-        partition.normalize_costs(partition.sequences()->number());
+        partition.normalize_costs(partition.sequences()->number() - 1);
         weights += partition.total_weight();
       }
       total_weights += weights;

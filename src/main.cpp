@@ -13,10 +13,9 @@ int main()
   //compute_average_SRcount("../data/simple_seq/simple4-4.phy");
   //compute_partitions_sr_count("../data/128/128.phy", "../data/128/128.part", 50);
   Helper::print_stats("../data/128/128.phy", "../data/128/128.part", 1, 5, "stats128.txt");
-  Helper::count_sr("../data/128/128.phy", "../data/128/single_partition.part","../data/128/RAxML_parsimonyTree.128");
-  Helper::count_sr("../data/128/128.phy", "../data/128/subdivisions.part","../data/128/RAxML_parsimonyTree.128");
-  Helper::count_sr("../data/libplldata/unrooted.phy", "../data/libplldata/single.part","../data/libplldata/rooted.newick");
-  Helper::count_sr("../data/libplldata/plop.phy", "../data/libplldata/single.part","../data/libplldata/rooted.newick");
+  //Helper::print_stats("../data/simple_seq/uniform.phy", "../data/simple_seq/uniform.part", 1, 5, "statsuniform.txt");
+  //Helper::print_count_sr("../data/128/128.phy", "../data/128/128.part","../data/128/RAxML_parsimonyTree.128");
+  //Helper::count_sr("../data/128/128.phy", "../data/128/subdivisions.part","../data/128/RAxML_parsimonyTree.128");
   
   return 0;
 }

@@ -15,7 +15,6 @@ class LoadBalancing {
       _partitions(partitions),
       _bins(Bin_number)
     {
-      
     }
 
     void compute_naive();

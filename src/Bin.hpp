@@ -20,6 +20,9 @@ struct Bin {
   void assign_sites(const Partition * partition, 
                       unsigned int offset, 
                       unsigned int size) {
+    if (!size) {
+      return;
+    }
     partitions.push_back(partition);
     offsets.push_back(offset);
     sizes.push_back(size);
@@ -31,6 +34,9 @@ struct Bin {
                       unsigned int offset, 
                       unsigned int size, 
                       double weight) {
+    if (!size) {
+      return;
+    }
     partitions.push_back(partition);
     offsets.push_back(offset);
     sizes.push_back(size);

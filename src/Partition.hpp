@@ -17,7 +17,8 @@ typedef std::vector<const Partition *> PartitionsPointers;
 class Partition {
   public:
     Partition() : _sequences(0) {
-
+      static unsigned int plop = 0;
+      secret = plop++;
     }
 
     void init(const InputSequences *sequences, unsigned int index, unsigned int start, unsigned int size) {
@@ -47,6 +48,10 @@ class Partition {
     std::vector<double> &site_costs() {
       return _site_costs;
     }
+    
+    void reset_site_costs() {
+      std::fill(_site_costs.begin(), _site_costs.end(), 0.0);
+    }
      
     // for tests
     void fill_costs_randomly() {
@@ -69,6 +74,7 @@ class Partition {
     double total_weight() const {
       return _accumulated[_accumulated.size() - 1];
     }
+
     double average_sr_rate() const {
       return 1.0 - (total_weight() / double(size()));
     }
@@ -84,11 +90,15 @@ class Partition {
     friend std::ostream& operator<< (std::ostream &out, const Partition &part) {
       out << "Partition starting from " << part.start() << std::endl;
       out << "size : " << part.size() << std::endl;
-      out << "average site repeats ratio : ";
+      out << "site costs : ";
+      double sum = 0;
       for (unsigned int i = 0; i < part.size(); ++i) {
-        out << part._site_costs[i] << " ";
+        sum += part._site_costs[i];
+        //out << part._site_costs[i] << " ";
       }
       out << std::endl;
+      out << "total site costs : " << sum << std::endl;
+      out << "secret id : " << part.secret << std::endl;
       return out;
     }
 
@@ -117,6 +127,7 @@ class Partition {
     const InputSequences *_sequences;
     std::vector<double> _site_costs;
     std::vector<double> _accumulated;
+    unsigned int secret;
 };
 
 
