@@ -1,0 +1,26 @@
+sequences file : ../data/128/128.phy
+partitions file : ../data/128/128.part
+number of tree to generate : 100
+number of cpus : 3
+partitions file : ../data/128/128.part
+number of taxa : 128
+size of sequences : 29198
+number of partitions : 34
+---------------------------------
+naive
+Max partitions difference : 1
+sites per cpu : 8558 12193 8447 (total : 29198)
+weights per cpu : 1788.17 2391.21 1749.94 (total : 5929.31, max : 2391.21, ratio : 0.173458)
+partitions per cpu : 12 11 11 
+---------------------------------
+kassian
+Max partitions difference : 0
+sites per cpu : 9732 9733 9733 (total : 29198)
+weights per cpu : 1970.61 1895.14 2132.76 (total : 5998.51, max : 2132.76, ratio : 0.0624822)
+partitions per cpu : 12 12 12 
+---------------------------------
+weighted
+Max partitions difference : 0
+sites per cpu : 9842 8751 10605 (total : 29198)
+weights per cpu : 1976.31 2016.54 2017.49 (total : 6010.34, max : 2017.49, ratio : 0.00696014)
+partitions per cpu : 12 12 12 

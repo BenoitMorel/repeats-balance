@@ -17,7 +17,7 @@
 [\n]           {return NEWLINE;}
 [=]           {return EQUAL;}
 [0-9]+            { rb_partlval.ival = atoi(rb_parttext); return INT; }
-[a-zA-Z0-9_]+      {
+[a-zA-Z0-9_\.]+      {
   rb_partlval.sval = new char [ strlen(rb_parttext) + 1 ];
   strcpy(rb_partlval.sval, rb_parttext);
   return STRING;

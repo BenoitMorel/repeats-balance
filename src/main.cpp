@@ -12,7 +12,12 @@ int main()
   srand(time(0));
   //compute_average_SRcount("../data/simple_seq/simple4-4.phy");
   //compute_partitions_sr_count("../data/128/128.phy", "../data/128/128.part", 50);
-  Helper::print_stats("../data/128/128.phy", "../data/128/128.part", 1, 5, "stats128.txt");
+  Helper::print_stats("../data/59/59.phy", "../data/59/59.part", 100, 3, "../results/experiment1/59_3cpus.txt");
+  Helper::print_stats("../data/59/59.phy", "../data/59/59.part", 100, 10, "../results/experiment1/59_10cpus.txt");
+  Helper::print_stats("../data/128/128.phy", "../data/128/128.part", 100, 3, "../results/experiment1/128_3cpus.txt");
+  Helper::print_stats("../data/128/128.phy", "../data/128/128.part", 100, 10, "../results/experiment1/128_10cpus.txt");
+  Helper::print_stats("../data/404/404.phy", "../data/404/404.part", 100, 3, "../results/experiment1/404_3cpus.txt");
+  Helper::print_stats("../data/404/404.phy", "../data/404/404.part", 100, 10, "../results/experiment1/404_10cpus.txt");
   //Helper::print_stats("../data/simple_seq/uniform.phy", "../data/simple_seq/uniform.part", 1, 5, "statsuniform.txt");
   //Helper::print_count_sr("../data/128/128.phy", "../data/128/128.part","../data/128/RAxML_parsimonyTree.128");
   //Helper::count_sr("../data/128/128.phy", "../data/128/subdivisions.part","../data/128/RAxML_parsimonyTree.128");

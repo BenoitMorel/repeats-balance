@@ -1,0 +1,26 @@
+sequences file : ../data/59/59.phy
+partitions file : ../data/59/59.part
+number of tree to generate : 100
+number of cpus : 10
+partitions file : ../data/59/59.part
+number of taxa : 59
+size of sequences : 6951
+number of partitions : 8
+---------------------------------
+naive
+Max partitions difference : 1
+sites per cpu : 2183 1344 680 364 1182 160 264 774 0 0 (total : 6951)
+weights per cpu : 253.448 77.2931 84.3966 106.293 165.069 16.0345 111.828 40.1207 0 0 (total : 854.483, max : 253.448, ratio : 0.662857)
+partitions per cpu : 1 1 1 1 1 1 1 1 0 0 
+---------------------------------
+kassian
+Max partitions difference : 1
+sites per cpu : 695 695 695 696 695 695 695 695 695 695 (total : 6951)
+weights per cpu : 56.9655 195.259 128.621 88.5 126.793 89.2931 68.6379 59.3276 83.9483 72.8793 (total : 970.224, max : 195.259, ratio : 0.503108)
+partitions per cpu : 2 2 2 2 1 1 1 2 2 2 
+---------------------------------
+weighted
+Max partitions difference : 1
+sites per cpu : 417 987 1357 595 830 884 659 464 223 535 (total : 6951)
+weights per cpu : 95.7931 75.7931 81.3793 107.31 111.828 100.552 102.655 94.7931 104.879 98.0172 (total : 973, max : 111.828, ratio : 0.129911)
+partitions per cpu : 2 2 2 1 1 2 1 2 2 2 

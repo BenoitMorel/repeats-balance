@@ -78,12 +78,11 @@ public:
     LoadBalancing lb_naive(partitions, cpu_number);
     LoadBalancing lb_kassian(partitions, cpu_number);
     LoadBalancing lb_weighted(partitions, cpu_number);
-    std::cout << "compute naive" << std::endl;
     lb_naive.compute_naive();
-    std::cout << "compute kassian" << std::endl;
     lb_kassian.compute_kassian();
-    std::cout << "compute weights" << std::endl;
     lb_weighted.compute_kassian_weighted();
+    
+    tree.set_random(sequences.number());
 
 //    tree.set_random(sequences.number());
     treatlb(lb_naive, "naive", tree, input_os);    
@@ -96,12 +95,11 @@ public:
   
 private:
   static void treatlb(LoadBalancing &lb, const std::string &method, Tree &random_tree, std::ofstream &os) {
-    std::cout << "treatlb " << method << std::endl;
     os << "---------------------------------" << std::endl;
     os << method << std::endl;
-    os << "Is consistent : " << (lb.is_consistent() ? "yes" : "no") << std::endl;
-    os << "Is sites balanced : " << (lb.is_sites_balanced() ? "yes" : "no") << std::endl;
-    os << "Is weight balanced : " << (lb.is_weights_balanced() ? "yes" : "no") << std::endl;
+    //os << "Is consistent : " << (lb.is_consistent() ? "yes" : "no") << std::endl;
+    //os << "Is sites balanced : " << (lb.is_sites_balanced() ? "yes" : "no") << std::endl;
+    //os << "Is weight balanced : " << (lb.is_weights_balanced() ? "yes" : "no") << std::endl;
     os << "Max partitions difference : " << lb.max_partitions_difference() << std::endl;
     Assignments assignments;
     lb.build_assignments(assignments);
@@ -120,6 +118,7 @@ private:
     os << "(total : " << total_sites << ")" << std::endl;
     os << "weights per cpu : " ;
     double total_weights = 0;
+    double max_weight = 0;
     for (unsigned int i = 0; i < assignments.size(); ++i) {
       Assignment &assign = assignments[i];
       double weights = 0.0;
@@ -130,9 +129,11 @@ private:
         weights += partition.total_weight();
       }
       total_weights += weights;
+      max_weight = std::max(weights, max_weight);
       os << weights << " ";
     }
-    os << "(total : " << total_weights << ")" << std::endl;
+    os << "(total : " << total_weights << ", max : " << max_weight << ", ratio : " <<
+       (max_weight - total_weights / double(assignments.size())) / max_weight  << ")" << std::endl;
     os << "partitions per cpu : " ; 
     for (unsigned int i = 0; i < assignments.size(); ++i) {
       os << assignments[i].size() << " ";

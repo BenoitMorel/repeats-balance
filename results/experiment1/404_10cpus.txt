@@ -1,0 +1,26 @@
+sequences file : ../data/404/404.phy
+partitions file : ../data/404/404.part
+number of tree to generate : 100
+number of cpus : 10
+partitions file : ../data/404/404.part
+number of taxa : 404
+size of sequences : 13158
+number of partitions : 11
+---------------------------------
+naive
+Max partitions difference : 1
+sites per cpu : 3742 802 1646 588 852 828 1437 1218 1020 1025 (total : 13158)
+weights per cpu : 320.593 98.9727 211.007 13.1663 30.2109 159.851 110.801 88.8933 9.57568 36.938 (total : 1080.01, max : 320.593, ratio : 0.663121)
+partitions per cpu : 2 1 1 1 1 1 1 1 1 1 
+---------------------------------
+kassian
+Max partitions difference : 0
+sites per cpu : 1315 1315 1316 1316 1316 1316 1316 1316 1316 1316 (total : 13158)
+weights per cpu : 121.747 148.844 202.266 66.3722 35.794 62.9826 107.268 138.196 171.072 120.132 (total : 1174.67, max : 202.266, ratio : 0.419242)
+partitions per cpu : 2 2 2 2 2 2 2 2 2 2 
+---------------------------------
+weighted
+Max partitions difference : 0
+sites per cpu : 1748 1951 1573 2226 1323 832 854 655 747 1249 (total : 13158)
+weights per cpu : 118.275 111.213 122.238 118.742 102.975 106.268 130.633 122.186 120.988 113.769 (total : 1167.29, max : 130.633, ratio : 0.106436)
+partitions per cpu : 2 2 2 2 2 2 2 2 2 2 
