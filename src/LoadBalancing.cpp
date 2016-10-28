@@ -202,7 +202,7 @@ void LoadBalancing::build_assignments(Assignments &assignments) {
     Bin &bin_to_assign = _bins[i];
     cpu_to_fill.resize(bin_to_assign.partitions_number());
     for (unsigned int j = 0; j < bin_to_assign.partitions_number(); ++j) {
-      const Partition *partition = bin_to_assign.partitions[j]; 
+      const Partition *partition = bin_to_assign.partitions[j];
       cpu_to_fill[j].init(partition->sequences(), 
                   j,
                   partition->start() + bin_to_assign.offsets[j],

@@ -16,6 +16,7 @@ struct AssignmentOverview {
   std::vector<unsigned int> partitions;
   std::vector<double> weights;
   unsigned int total_sites;
+  unsigned int max_sites;
   double total_weight;
   double max_weight;
   double ratio;
@@ -27,7 +28,7 @@ struct AssignmentOverview {
   }
   void reset(unsigned int cpus) {
     this->cpus = cpus;
-    total_sites = max_partitions = diff_partitions = 0;
+    total_sites = max_partitions = diff_partitions = max_sites = 0;
     total_weight = max_weight = ratio = 0.0;
     sites.resize(cpus);
     std::fill(sites.begin(), sites.end(), 0);
@@ -152,6 +153,16 @@ public:
              << res_kassian.max_weight / res_weighted.max_weight << std::endl;
     input_os << "Speedup [no SR, sequential] => [SR (kassian weighted), parall] " 
              << double(res_weighted.total_sites) / res_weighted.max_weight << std::endl;
+    input_os << std::endl; 
+
+    plot<unsigned int>(res_kassian.sites, res_kassian.max_sites, 
+      "Sites repartition with Kassian", input_os);
+    plot<double>(res_kassian.weights, std::max(res_kassian.max_weight, res_weighted.max_weight), 
+      "PLF-cost repartition with Kassian", input_os);
+    plot<unsigned int>(res_weighted.sites, res_weighted.max_sites, 
+      "Sites repartition with Weighted", input_os);
+    plot<double>(res_weighted.weights, std::max(res_kassian.max_weight, res_weighted.max_weight), 
+      "PLM-cost repartition with Weighted", input_os);
     input_os.close();
   }
   
@@ -174,9 +185,28 @@ private:
       res.total_sites += res.sites[i];
       res.total_weight += res.weights[i];
       res.max_weight = std::max(res.weights[i], res.max_weight);
+      res.max_sites = std::max(res.sites[i], res.max_sites);
     }
     res.ratio = (res.max_weight - res.total_weight / double(assignments.size())) / res.max_weight;
   }
+  template<typename T>
+  static void plot(const std::vector<T> &toplot, T max, const std::string &caption, std::ofstream &os) {
+    os << "\\begin{minipage}{0.49\\textwidth}" << std::endl;
+    os << "\\begin{tikzpicture}[scale=0.75]" << std::endl;
+    os << "  \\begin{axis}[ybar interval, ymax=" << T(double(max) * 1.1)  << ",ymin=0, minor y tick num = 3]" << std::endl;
+    os << "    \\addplot coordinates { ";
+    for (unsigned int i = 0; i < toplot.size(); ++i) {
+      os << "(" << i << "," << toplot[i] << ") "; 
+    }
+    // add one value because latex ignores the last one (i dont know why)
+    os << "(" << toplot.size() << ", " << max / 2 << ") "; 
+    os << "};" << std::endl;
+    os << "  \\end{axis}" << std::endl;
+    os << "\\end{tikzpicture}" << std::endl;
+    os << "\\caption*{" << caption << "}" << std::endl;
+    os << "\\end{minipage}" << std::endl;
+  }
+
 
 };
 

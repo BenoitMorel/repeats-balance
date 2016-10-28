@@ -9,36 +9,69 @@ number of partitions : 34
 
 Naive : 
 Total sites number = 29198
-Total weight       = 5514.11
-Max weight         = 773.913
-Weight ratio       = 0.287503 ((max - average) / max)
+Total weight       = 5630.75
+Max weight         = 793.055
+Weight ratio       = 0.289993 ((max - average) / max)
 Max partitions     = 0
 Sites per cpu      = 2394 3710 1893 3246 3090 3024 4182 2910 2526 2223 
-Weight per cpu     = 447.449 773.913 377.465 681.063 575.331 532.173 676.756 529.071 495.071 425.819 
+Weight per cpu     = 461.055 793.055 382.024 686.331 579.441 545.764 719 520.654 506.457 436.969 
 Sites per cpu      = 4 4 4 4 3 3 3 3 3 3 
 
 Kassian : 
 Total sites number = 29198
-Total weight       = 5787.54
-Max weight         = 709.472
-Weight ratio       = 0.184247 ((max - average) / max)
+Total weight       = 5884.33
+Max weight         = 713.969
+Weight ratio       = 0.175828 ((max - average) / max)
 Max partitions     = 0
 Sites per cpu      = 2919 2919 2920 2920 2920 2920 2920 2920 2920 2920 
-Weight per cpu     = 549.717 541.78 530.937 528.291 709.472 655.102 581.134 648.843 422.071 620.197 
+Weight per cpu     = 576.961 571.921 540.811 537.354 713.969 640.764 593.866 652.701 428.433 627.551 
 Sites per cpu      = 4 4 5 4 5 4 5 4 4 4 
 
 Kassian weighted : 
 Total sites number = 29198
-Total weight       = 5729.18
-Max weight         = 601.205
-Weight ratio       = 0.0470499 ((max - average) / max)
+Total weight       = 5845.83
+Max weight         = 610.937
+Weight ratio       = 0.0431363 ((max - average) / max)
 Max partitions     = 0
-Sites per cpu      = 3369 3229 3266 3385 3207 2312 2889 2683 2933 1925 
-Weight per cpu     = 552.638 555.276 595.953 539.543 572.567 590.024 601.205 577.323 570.071 574.583 
+Sites per cpu      = 2820 2801 3757 3918 3229 2289 2880 2668 2918 1918 
+Weight per cpu     = 610.937 579.89 601.165 554.661 594.291 588.417 594.472 576.843 562.283 582.874 
 Sites per cpu      = 4 5 4 5 4 5 4 4 4 4 
 
 Expectations with the sites repeats (if the sites repeats computation time is negligible and without the constant partition cost)): 
-Speedup [no SR, parall] -> // [SR (kassian), parall] : 4.11432
-Speedup [no SR, parall] -> // [SR (kassian weighted), parall] : 4.85525
-Speedup [Kassian, parall] -> [Kassian weighted, parall] : 1.18008
-Speedup [no SR, sequential] => [SR (kassian weighted), parall] 48.5658
+Speedup [no SR, parall] -> // [SR (kassian), parall] : 4.08842
+Speedup [no SR, parall] -> // [SR (kassian weighted), parall] : 4.77791
+Speedup [Kassian, parall] -> [Kassian weighted, parall] : 1.16865
+Speedup [no SR, sequential] => [SR (kassian weighted), parall] 47.7922
+
+\begin{minipage}{0.49\textwidth}
+\begin{tikzpicture}[scale=0.75]
+  \begin{axis}[ybar interval, ymax=3212,ymin=0, minor y tick num = 3]
+    \addplot coordinates { (0,2919) (1,2919) (2,2920) (3,2920) (4,2920) (5,2920) (6,2920) (7,2920) (8,2920) (9,2920) (10, 1460) };
+  \end{axis}
+\end{tikzpicture}
+\caption*{Sites repartition with Kassian}
+\end{minipage}
+\begin{minipage}{0.49\textwidth}
+\begin{tikzpicture}[scale=0.75]
+  \begin{axis}[ybar interval, ymax=785.365,ymin=0, minor y tick num = 3]
+    \addplot coordinates { (0,576.961) (1,571.921) (2,540.811) (3,537.354) (4,713.969) (5,640.764) (6,593.866) (7,652.701) (8,428.433) (9,627.551) (10, 356.984) };
+  \end{axis}
+\end{tikzpicture}
+\caption*{PLF-cost repartition with Kassian}
+\end{minipage}
+\begin{minipage}{0.49\textwidth}
+\begin{tikzpicture}[scale=0.75]
+  \begin{axis}[ybar interval, ymax=4309,ymin=0, minor y tick num = 3]
+    \addplot coordinates { (0,2820) (1,2801) (2,3757) (3,3918) (4,3229) (5,2289) (6,2880) (7,2668) (8,2918) (9,1918) (10, 1959) };
+  \end{axis}
+\end{tikzpicture}
+\caption*{Sites repartition with Weighted}
+\end{minipage}
+\begin{minipage}{0.49\textwidth}
+\begin{tikzpicture}[scale=0.75]
+  \begin{axis}[ybar interval, ymax=785.365,ymin=0, minor y tick num = 3]
+    \addplot coordinates { (0,610.937) (1,579.89) (2,601.165) (3,554.661) (4,594.291) (5,588.417) (6,594.472) (7,576.843) (8,562.283) (9,582.874) (10, 356.984) };
+  \end{axis}
+\end{tikzpicture}
+\caption*{PLM-cost repartition with Weighted}
+\end{minipage}

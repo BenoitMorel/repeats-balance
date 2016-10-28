@@ -9,36 +9,69 @@ number of partitions : 11
 
 Naive : 
 Total sites number = 13158
-Total weight       = 1097.31
-Max weight         = 398.454
-Weight ratio       = 0.082025 ((max - average) / max)
+Total weight       = 1053.64
+Max weight         = 361.504
+Weight ratio       = 0.028463 ((max - average) / max)
 Max partitions     = 0
 Sites per cpu      = 5211 4453 3494 
-Weight per cpu     = 359.099 339.759 398.454 
+Weight per cpu     = 360.179 331.96 361.504 
 Sites per cpu      = 4 4 3 
 
 Kassian : 
 Total sites number = 13158
-Total weight       = 1115.15
-Max weight         = 382.963
-Weight ratio       = 0.0293692 ((max - average) / max)
+Total weight       = 1071.43
+Max weight         = 363.439
+Weight ratio       = 0.0173214 ((max - average) / max)
 Max partitions     = 0
 Sites per cpu      = 4386 4386 4386 
-Weight per cpu     = 371.414 360.769 382.963 
+Weight per cpu     = 347.409 360.583 363.439 
 Sites per cpu      = 5 4 4 
 
 Kassian weighted : 
 Total sites number = 13158
-Total weight       = 1113.32
-Max weight         = 375.975
-Weight ratio       = 0.0129512 ((max - average) / max)
+Total weight       = 1070.23
+Max weight         = 371.62
+Weight ratio       = 0.0400299 ((max - average) / max)
 Max partitions     = 0
-Sites per cpu      = 5136 4581 3441 
-Weight per cpu     = 371.362 375.975 365.98 
+Sites per cpu      = 5139 4612 3407 
+Weight per cpu     = 349.288 371.62 349.325 
 Sites per cpu      = 5 4 4 
 
 Expectations with the sites repeats (if the sites repeats computation time is negligible and without the constant partition cost)): 
-Speedup [no SR, parall] -> // [SR (kassian), parall] : 11.4528
-Speedup [no SR, parall] -> // [SR (kassian weighted), parall] : 11.6657
-Speedup [Kassian, parall] -> [Kassian weighted, parall] : 1.01859
-Speedup [no SR, sequential] => [SR (kassian weighted), parall] 34.997
+Speedup [no SR, parall] -> // [SR (kassian), parall] : 12.068
+Speedup [no SR, parall] -> // [SR (kassian weighted), parall] : 11.8024
+Speedup [Kassian, parall] -> [Kassian weighted, parall] : 0.977985
+Speedup [no SR, sequential] => [SR (kassian weighted), parall] 35.4071
+
+\begin{minipage}{0.49\textwidth}
+\begin{tikzpicture}[scale=0.75]
+  \begin{axis}[ybar interval, ymax=4824,ymin=0, minor y tick num = 3]
+    \addplot coordinates { (0,4386) (1,4386) (2,4386) (3, 2193) };
+  \end{axis}
+\end{tikzpicture}
+\caption*{Sites repartition with Kassian}
+\end{minipage}
+\begin{minipage}{0.49\textwidth}
+\begin{tikzpicture}[scale=0.75]
+  \begin{axis}[ybar interval, ymax=408.782,ymin=0, minor y tick num = 3]
+    \addplot coordinates { (0,347.409) (1,360.583) (2,363.439) (3, 185.81) };
+  \end{axis}
+\end{tikzpicture}
+\caption*{PLF-cost repartition with Kassian}
+\end{minipage}
+\begin{minipage}{0.49\textwidth}
+\begin{tikzpicture}[scale=0.75]
+  \begin{axis}[ybar interval, ymax=5652,ymin=0, minor y tick num = 3]
+    \addplot coordinates { (0,5139) (1,4612) (2,3407) (3, 2569) };
+  \end{axis}
+\end{tikzpicture}
+\caption*{Sites repartition with Weighted}
+\end{minipage}
+\begin{minipage}{0.49\textwidth}
+\begin{tikzpicture}[scale=0.75]
+  \begin{axis}[ybar interval, ymax=408.782,ymin=0, minor y tick num = 3]
+    \addplot coordinates { (0,349.288) (1,371.62) (2,349.325) (3, 185.81) };
+  \end{axis}
+\end{tikzpicture}
+\caption*{PLM-cost repartition with Weighted}
+\end{minipage}
