@@ -1,0 +1,20 @@
+ 
+\documentclass[12pt,a4paper]{article}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{import}
+\usepackage[font=small,labelfont=bf]{caption}
+
+\begin{document}
+
+\begin{figure}
+\caption*{Sequences 59, 10 cpus, with the starting tree from treechar}
+\subimport{../experiment2/}{59_10cpus_seed12345_top0.tex}
+\end{figure}
+ 
+\begin{figure}
+\caption*{Sequences 59, 10 cpus, with the last tree from treechar}
+\subimport{../experiment2/}{59_10cpus_seed12345_top79.tex}
+\end{figure}
+
+\end{document}

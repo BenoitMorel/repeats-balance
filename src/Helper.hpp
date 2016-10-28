@@ -87,17 +87,15 @@ public:
     }
   }
 
-  static void print_stats(const std::string &sequences_file,
+
+  /**
+  * Test kassian and weighted method with a random independant reference tree
+  */
+  static void experiment1(const std::string &sequences_file,
                     const std::string &partitions_file,
                     unsigned int tree_samples_number,
                     unsigned int cpu_number, 
                     const std::string &output_file) {
-    std::ofstream input_os(output_file.c_str(), std::ofstream::out);
-    input_os << "sequences file : " << sequences_file << ::std::endl;
-    input_os << "partitions file : " << partitions_file << ::std::endl;
-    input_os << "number of tree to generate : " << tree_samples_number << ::std::endl;
-    input_os << "number of cpus : " << cpu_number << ::std::endl;
-    input_os << "partitions file : " << partitions_file << ::std::endl;
 
     InputSequences sequences;
     parse_sequences(sequences_file.c_str(), sequences);
@@ -105,11 +103,64 @@ public:
     parse_partitions(partitions_file.c_str(), inputPartitions);
     Partitions partitions;
     inputPartitions.generate_partitions(partitions, &sequences);
+    Tree tree;
+    tree.set_random(sequences.number());
+    std::ofstream out((output_file + ".txt").c_str(), std::ofstream::out);
+    std::ofstream latex_out((output_file + ".tex").c_str(), std::ofstream::out);
+    out << "Experiment 1 !" << std::endl;
+    out << "sequences file : " << sequences_file << ::std::endl;
+    out << "partitions file : " << partitions_file << ::std::endl;
+    print_stats(sequences, partitions, tree, tree_samples_number, cpu_number, out, latex_out);
+    latex_out.close();
+    out.close();
 
-    input_os << "number of taxa : " << sequences.number() << ::std::endl;
-    input_os << "size of sequences : " << sequences.width() << ::std::endl;
-    input_os << "number of partitions : " << partitions.size() << ::std::endl;
+  }
 
+  /**
+  * Test kassian and weighted method with a reference tree parsed in a file
+  */
+  static void experiment2(const std::string &sequences_file,
+                    const std::string &partitions_file,
+                    const std::string &tree_file,
+                    unsigned int tree_samples_number,
+                    unsigned int cpu_number, 
+                    const std::string &output_file) {
+
+    InputSequences sequences;
+    parse_sequences(sequences_file.c_str(), sequences);
+    InputPartitions inputPartitions;
+    parse_partitions(partitions_file.c_str(), inputPartitions);
+    Partitions partitions;
+    inputPartitions.generate_partitions(partitions, &sequences);
+    Tree tree;
+    parse_tree(tree_file.c_str(), sequences, tree);
+    std::ofstream out((output_file + ".txt").c_str(), std::ofstream::out);
+    std::ofstream latex_out((output_file + ".tex").c_str(), std::ofstream::out);
+    out << "Experiment 2 !" << std::endl;
+    out << "sequences file : " << sequences_file << ::std::endl;
+    out << "partitions file : " << partitions_file << ::std::endl;
+    out << "tree file : " << partitions_file << ::std::endl;
+    print_stats(sequences, partitions, tree, tree_samples_number, cpu_number, out, latex_out);
+    out.close();
+
+  }
+
+private:
+  static void print_stats(const InputSequences &sequences,
+                    Partitions &partitions,
+                    Tree &reference_tree,
+                    unsigned int tree_samples_number,
+                    unsigned int cpu_number, 
+                    std::ofstream &out,
+                    std::ofstream &latex_out) {
+    out << "number of tree to generate : " << tree_samples_number << ::std::endl;
+    out << "number of cpus : " << cpu_number << ::std::endl;
+
+    out << "number of taxa : " << sequences.number() << ::std::endl;
+    out << "size of sequences : " << sequences.width() << ::std::endl;
+    out << "number of partitions : " << partitions.size() << ::std::endl;
+
+    // compute the average PLF-C vector
     Tree tree;
     for (unsigned int i = 0; i < tree_samples_number; ++i) {
       tree.set_random(sequences.number());
@@ -120,6 +171,8 @@ public:
     for (unsigned int p = 0; p < partitions.size(); ++p) {
       partitions[p].normalize_costs(tree_samples_number * (sequences.number() - 1));
     }
+
+    // generate load balancing with the different algorithms
     LoadBalancing lb_naive(partitions, cpu_number);
     LoadBalancing lb_kassian(partitions, cpu_number);
     LoadBalancing lb_weighted(partitions, cpu_number);
@@ -127,46 +180,48 @@ public:
     lb_kassian.compute_kassian();
     lb_weighted.compute_kassian_weighted();
     
-    tree.set_random(sequences.number());
-
-//    tree.set_random(sequences.number());
+    // get a summary of the results 
     AssignmentOverview res_naive, res_kassian, res_weighted;
-    treatlb(lb_naive, tree, res_naive);    
-    treatlb(lb_kassian, tree, res_kassian);    
-    treatlb(lb_weighted, tree, res_weighted);    
+    treatlb(lb_naive, reference_tree, res_naive);    
+    treatlb(lb_kassian, reference_tree, res_kassian);    
+    treatlb(lb_weighted, reference_tree, res_weighted);    
+
+    // and priiiiiint !
     double sites_per_cpu = sequences.width() / cpu_number;
-    input_os << std::endl; 
-    input_os << "Naive : " << std::endl << res_naive << std::endl;
-    input_os << "Kassian : " << std::endl << res_kassian << std::endl;
-    input_os << "Kassian weighted : " << std::endl << res_weighted << std::endl;
+    out << std::endl; 
+    out << "Naive : " << std::endl << res_naive << std::endl;
+    out << "Kassian : " << std::endl << res_kassian << std::endl;
+    out << "Kassian weighted : " << std::endl << res_weighted << std::endl;
     
 
   
-    input_os << "Expectations with the sites repeats (if the sites repeats "
+    out << "Expectations with the sites repeats (if the sites repeats "
                  "computation time is negligible and without the constant "
                  "partition cost)): " << std::endl;
-    input_os << "Speedup [no SR, parall] -> // [SR (kassian), parall] : " 
+    out << "Speedup [no SR, parall] -> // [SR (kassian), parall] : " 
              << sites_per_cpu / res_kassian.max_weight << std::endl;
-    input_os << "Speedup [no SR, parall] -> // [SR (kassian weighted), parall] : " 
+    out << "Speedup [no SR, parall] -> // [SR (kassian weighted), parall] : " 
              << sites_per_cpu / res_weighted.max_weight << std::endl;
-    input_os << "Speedup [Kassian, parall] -> [Kassian weighted, parall] : " 
+    out << "Speedup [Kassian, parall] -> [Kassian weighted, parall] : " 
              << res_kassian.max_weight / res_weighted.max_weight << std::endl;
-    input_os << "Speedup [no SR, sequential] => [SR (kassian weighted), parall] " 
+    out << "Speedup [no SR, sequential] => [SR (kassian weighted), parall] " 
              << double(res_weighted.total_sites) / res_weighted.max_weight << std::endl;
-    input_os << std::endl; 
+    out << std::endl;
+    out << std::endl;
+    
 
-    plot<unsigned int>(res_kassian.sites, res_kassian.max_sites, 
-      "Sites repartition with Kassian", input_os);
-    plot<double>(res_kassian.weights, std::max(res_kassian.max_weight, res_weighted.max_weight), 
-      "PLF-cost repartition with Kassian", input_os);
-    plot<unsigned int>(res_weighted.sites, res_weighted.max_sites, 
-      "Sites repartition with Weighted", input_os);
+    plot<unsigned int>(res_kassian.sites, res_kassian.max_sites, 0, 
+      "Sites repartition with Kassian", latex_out);
+    plot<double>(res_kassian.weights, std::max(res_kassian.max_weight, 
+      res_weighted.max_weight),res_kassian.max_weight, 
+      "PLF-cost repartition with Kassian", latex_out);
+    plot<unsigned int>(res_weighted.sites, res_weighted.max_sites, 0,
+      "Sites repartition with Weighted", latex_out);
     plot<double>(res_weighted.weights, std::max(res_kassian.max_weight, res_weighted.max_weight), 
-      "PLM-cost repartition with Weighted", input_os);
-    input_os.close();
+      res_kassian.max_weight,
+      "PLF-cost repartition with Weighted", latex_out);
   }
   
-private:
   static void treatlb(LoadBalancing &lb, Tree &tree, AssignmentOverview &res) {
     Assignments assignments;
     lb.build_assignments(assignments);
@@ -190,17 +245,22 @@ private:
     res.ratio = (res.max_weight - res.total_weight / double(assignments.size())) / res.max_weight;
   }
   template<typename T>
-  static void plot(const std::vector<T> &toplot, T max, const std::string &caption, std::ofstream &os) {
+  static void plot(const std::vector<T> &toplot, T max, T max_kassian, const std::string &caption, std::ofstream &os) {
     os << "\\begin{minipage}{0.49\\textwidth}" << std::endl;
     os << "\\begin{tikzpicture}[scale=0.75]" << std::endl;
     os << "  \\begin{axis}[ybar interval, ymax=" << T(double(max) * 1.1)  << ",ymin=0, minor y tick num = 3]" << std::endl;
     os << "    \\addplot coordinates { ";
     for (unsigned int i = 0; i < toplot.size(); ++i) {
-      os << "(" << i << "," << toplot[i] << ") "; 
+      os << "(" << i << "," << toplot[i] << ") ";
     }
     // add one value because latex ignores the last one (i dont know why)
     os << "(" << toplot.size() << ", " << max / 2 << ") "; 
     os << "};" << std::endl;
+    if ((double)max_kassian > 0.01) {
+      os << "\\draw [red, dashed] ({rel axis cs:0,0}|-{axis cs:0," << max_kassian 
+         << "}) -- ({rel axis cs:1,0}|-{axis cs:" << toplot.size() << "," << max_kassian 
+         << "}) node [pos=0.5, above] {Max PLF-C with Kassian};" << std::endl;
+    }
     os << "  \\end{axis}" << std::endl;
     os << "\\end{tikzpicture}" << std::endl;
     os << "\\caption*{" << caption << "}" << std::endl;

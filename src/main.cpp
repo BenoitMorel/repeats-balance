@@ -7,27 +7,35 @@
 #include "Tree.hpp"
 #include "LoadBalancing.hpp"
 #include "Helper.hpp"
+
+void experience1() {
+  Helper::experiment1("../data/94/94.phy", "../data/94/94.part", 100, 30, "../results/experiment1/94_30cpus");
+  Helper::experiment1("../data/94/94.phy", "../data/94/94.part", 100, 200, "../results/experiment1/94_200cpus");
+  
+  Helper::experiment1("../data/59/59.phy", "../data/59/59.part", 100, 10, "../results/experiment1/59_10cpus");
+  Helper::experiment1("../data/128/128.phy", "../data/128/128.part", 100, 10, "../results/experiment1/128_10cpus");
+  Helper::experiment1("../data/404/404.phy", "../data/404/404.part", 100, 10, "../results/experiment1/404_10cpus");
+}
+
+void experience2() {
+  Helper::experiment2("../data/128/128.phy", "../data/128/128.part", "../data/128/RAxML_parsimonyTree.128", 
+                      1, 10, "../results/experiment2/128_10cpus_parsimonytree");
+  Helper::experiment2("../data/59/59.phy", "../data/59/59.part", "../data/59/seed12345_top0.newick", 
+                      1, 10, "../results/experiment2/59_10cpus_seed12345_top0");
+  Helper::experiment2("../data/59/59.phy", "../data/59/59.part", "../data/59/seed12345_top79.newick", 
+                      1, 10, "../results/experiment2/59_10cpus_seed12345_top79");
+
+}
+
 int main()
 {
-  srand(time(0));
-  //compute_average_SRcount("../data/simple_seq/simple4-4.phy");
-  //compute_partitions_sr_count("../data/128/128.phy", "../data/128/128.part", 50);
- 
-  Helper::print_stats("../data/94/94.phy", "../data/94/94.part", 100, 10, "../results/experiment1/94_10cpus.txt");
-  Helper::print_stats("../data/94/94.phy", "../data/94/94.part", 100, 30, "../results/experiment1/94_30cpus.txt");
-  Helper::print_stats("../data/94/94.phy", "../data/94/94.part", 100, 100, "../results/experiment1/94_100cpus.txt");
-  Helper::print_stats("../data/94/94.phy", "../data/94/94.part", 100, 200, "../results/experiment1/94_200cpus.txt");
-  
-  Helper::print_stats("../data/59/59.phy", "../data/59/59.part", 100, 3, "../results/experiment1/59_3cpus.txt");
-  Helper::print_stats("../data/59/59.phy", "../data/59/59.part", 100, 10, "../results/experiment1/59_10cpus.txt");
-  Helper::print_stats("../data/128/128.phy", "../data/128/128.part", 100, 3, "../results/experiment1/128_3cpus.txt");
-  Helper::print_stats("../data/128/128.phy", "../data/128/128.part", 100, 10, "../results/experiment1/128_10cpus.txt");
-  Helper::print_stats("../data/404/404.phy", "../data/404/404.part", 100, 3, "../results/experiment1/404_3cpus.txt");
-  Helper::print_stats("../data/404/404.phy", "../data/404/404.part", 100, 10, "../results/experiment1/404_10cpus.txt");
-  //Helper::print_stats("../data/simple_seq/uniform.phy", "../data/simple_seq/uniform.part", 1, 5, "statsuniform.txt");
-  //Helper::print_count_sr("../data/128/128.phy", "../data/128/128.part","../data/128/RAxML_parsimonyTree.128");
-  //Helper::count_sr("../data/128/128.phy", "../data/128/subdivisions.part","../data/128/RAxML_parsimonyTree.128");
-  
+  int seed = time(0);
+  // bug with seed = 1477659246
+  //seed = 1477659246;
+  std::cout << "seed : " << seed << std::endl;
+  srand(seed);
+  experience1();
+  experience2(); 
   return 0;
 }
 

@@ -1,0 +1,34 @@
+\begin{minipage}{0.49\textwidth}
+\begin{tikzpicture}[scale=0.75]
+  \begin{axis}[ybar interval, ymax=765,ymin=0, minor y tick num = 3]
+    \addplot coordinates { (0,695) (1,695) (2,695) (3,696) (4,695) (5,695) (6,695) (7,695) (8,695) (9,695) (10, 348) };
+  \end{axis}
+\end{tikzpicture}
+\caption*{Sites repartition with Kassian}
+\end{minipage}
+\begin{minipage}{0.49\textwidth}
+\begin{tikzpicture}[scale=0.75]
+  \begin{axis}[ybar interval, ymax=152.805,ymin=0, minor y tick num = 3]
+    \addplot coordinates { (0,42.6034) (1,138.914) (2,103.069) (3,78.3448) (4,89.1034) (5,67.2586) (6,52.2069) (7,42.3793) (8,63.7759) (9,66.8103) (10, 69.4569) };
+\draw [red, dashed] ({rel axis cs:0,0}|-{axis cs:0,138.914}) -- ({rel axis cs:1,0}|-{axis cs:10,138.914}) node [pos=0.5, above] {Max PLF-C with Kassian};
+  \end{axis}
+\end{tikzpicture}
+\caption*{PLF-cost repartition with Kassian}
+\end{minipage}
+\begin{minipage}{0.49\textwidth}
+\begin{tikzpicture}[scale=0.75]
+  \begin{axis}[ybar interval, ymax=1493,ymin=0, minor y tick num = 3]
+    \addplot coordinates { (0,343) (1,978) (2,1358) (3,577) (4,881) (5,884) (6,654) (7,413) (8,282) (9,581) (10, 679) };
+  \end{axis}
+\end{tikzpicture}
+\caption*{Sites repartition with Weighted}
+\end{minipage}
+\begin{minipage}{0.49\textwidth}
+\begin{tikzpicture}[scale=0.75]
+  \begin{axis}[ybar interval, ymax=152.805,ymin=0, minor y tick num = 3]
+    \addplot coordinates { (0,67.8448) (1,74.2586) (2,58.4483) (3,71.4483) (4,90.4828) (5,77.3103) (6,80.1207) (7,72.6897) (8,75.4828) (9,82.9138) (10, 69.4569) };
+\draw [red, dashed] ({rel axis cs:0,0}|-{axis cs:0,138.914}) -- ({rel axis cs:1,0}|-{axis cs:10,138.914}) node [pos=0.5, above] {Max PLF-C with Kassian};
+  \end{axis}
+\end{tikzpicture}
+\caption*{PLF-cost repartition with Weighted}
+\end{minipage}

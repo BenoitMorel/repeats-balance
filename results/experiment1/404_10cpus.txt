@@ -1,77 +1,8 @@
+Experiment 1 !
 sequences file : ../data/404/404.phy
 partitions file : ../data/404/404.part
 number of tree to generate : 100
 number of cpus : 10
-partitions file : ../data/404/404.part
 number of taxa : 404
 size of sequences : 13158
 number of partitions : 11
-
-Naive : 
-Total sites number = 13158
-Total weight       = 871.422
-Max weight         = 261.826
-Weight ratio       = 0.667176 ((max - average) / max)
-Max partitions     = 0
-Sites per cpu      = 3742 802 1646 588 852 828 1437 1218 1020 1025 
-Weight per cpu     = 261.826 78.5831 159.223 10.6576 17.0893 147.573 91.1414 80.5881 7.05955 17.6799 
-Sites per cpu      = 2 1 1 1 1 1 1 1 1 1 
-
-Kassian : 
-Total sites number = 13158
-Total weight       = 968.03
-Max weight         = 182.844
-Weight ratio       = 0.47057 ((max - average) / max)
-Max partitions     = 0
-Sites per cpu      = 1315 1315 1316 1316 1316 1316 1316 1316 1316 1316 
-Weight per cpu     = 106.975 121.598 182.844 47.1663 29.0496 40.7246 97.3747 112.427 131.164 98.7072 
-Sites per cpu      = 2 2 2 2 2 2 2 2 2 2 
-
-Kassian weighted : 
-Total sites number = 13158
-Total weight       = 954.318
-Max weight         = 109.141
-Weight ratio       = 0.125614 ((max - average) / max)
-Max partitions     = 0
-Sites per cpu      = 1749 1949 1361 2227 1322 832 857 861 745 1255 
-Weight per cpu     = 103.479 91.2581 104.556 83.1141 93.1588 85.3846 103.583 87.7395 109.141 92.9032 
-Sites per cpu      = 2 2 2 2 2 2 2 2 2 2 
-
-Expectations with the sites repeats (if the sites repeats computation time is negligible and without the constant partition cost)): 
-Speedup [no SR, parall] -> // [SR (kassian), parall] : 7.19194
-Speedup [no SR, parall] -> // [SR (kassian weighted), parall] : 12.0486
-Speedup [Kassian, parall] -> [Kassian weighted, parall] : 1.67529
-Speedup [no SR, sequential] => [SR (kassian weighted), parall] 120.559
-
-\begin{minipage}{0.49\textwidth}
-\begin{tikzpicture}[scale=0.75]
-  \begin{axis}[ybar interval, ymax=1447,ymin=0, minor y tick num = 3]
-    \addplot coordinates { (0,1315) (1,1315) (2,1316) (3,1316) (4,1316) (5,1316) (6,1316) (7,1316) (8,1316) (9,1316) (10, 658) };
-  \end{axis}
-\end{tikzpicture}
-\caption*{Sites repartition with Kassian}
-\end{minipage}
-\begin{minipage}{0.49\textwidth}
-\begin{tikzpicture}[scale=0.75]
-  \begin{axis}[ybar interval, ymax=201.128,ymin=0, minor y tick num = 3]
-    \addplot coordinates { (0,106.975) (1,121.598) (2,182.844) (3,47.1663) (4,29.0496) (5,40.7246) (6,97.3747) (7,112.427) (8,131.164) (9,98.7072) (10, 91.4218) };
-  \end{axis}
-\end{tikzpicture}
-\caption*{PLF-cost repartition with Kassian}
-\end{minipage}
-\begin{minipage}{0.49\textwidth}
-\begin{tikzpicture}[scale=0.75]
-  \begin{axis}[ybar interval, ymax=2449,ymin=0, minor y tick num = 3]
-    \addplot coordinates { (0,1749) (1,1949) (2,1361) (3,2227) (4,1322) (5,832) (6,857) (7,861) (8,745) (9,1255) (10, 1113) };
-  \end{axis}
-\end{tikzpicture}
-\caption*{Sites repartition with Weighted}
-\end{minipage}
-\begin{minipage}{0.49\textwidth}
-\begin{tikzpicture}[scale=0.75]
-  \begin{axis}[ybar interval, ymax=201.128,ymin=0, minor y tick num = 3]
-    \addplot coordinates { (0,103.479) (1,91.2581) (2,104.556) (3,83.1141) (4,93.1588) (5,85.3846) (6,103.583) (7,87.7395) (8,109.141) (9,92.9032) (10, 91.4218) };
-  \end{axis}
-\end{tikzpicture}
-\caption*{PLM-cost repartition with Weighted}
-\end{minipage}

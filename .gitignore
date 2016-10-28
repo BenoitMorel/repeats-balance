@@ -1,3 +1,7 @@
+# generated directories
+generated
+
+
 # Compiled Object files
 *.slo
 *.lo
@@ -22,6 +26,14 @@
 *.la
 *.a
 *.lib
+
+# latex
+*.aux
+*.log
+*.synctex.gz
+
+#vim
+*.swp
 
 # Executables
 *.exe
