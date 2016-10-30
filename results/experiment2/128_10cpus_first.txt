@@ -1,0 +1,47 @@
+Experiment 2 !
+sequences file : ../data/128/128.phy
+partitions file : ../data/128/128.part
+tree file : ../data/128/128.part
+number of tree to generate : 10
+number of cpus : 10
+number of taxa : 128
+size of sequences : 29198
+number of partitions : 34
+
+Naive : 
+Total sites number = 29198
+Total weight       = 2903.94
+Max weight         = 402.323
+Weight ratio       = 0.278205 ((max - average) / max)
+Max partitions     = 0
+Sites per cpu      = 2394 3710 1893 3246 3090 3024 4182 2910 2526 2223 
+Weight per cpu     = 236.283 402.323 214.874 353.866 301.008 287.142 360.016 277.134 250.142 221.157 
+Sites per cpu      = 4 4 4 4 3 3 3 3 3 3 
+
+Kassian : 
+Total sites number = 29198
+Total weight       = 3081.35
+Max weight         = 374.598
+Weight ratio       = 0.177427 ((max - average) / max)
+Max partitions     = 0
+Sites per cpu      = 2919 2919 2920 2920 2920 2920 2920 2920 2920 2920 
+Weight per cpu     = 282.173 286.945 287.11 292.559 374.598 360.921 311 348.449 221.102 316.488 
+Sites per cpu      = 4 4 5 4 5 4 5 4 4 4 
+
+Kassian weighted : 
+Total sites number = 29198
+Total weight       = 3050.87
+Max weight         = 326.614
+Weight ratio       = 0.0659089 ((max - average) / max)
+Max partitions     = 0
+Sites per cpu      = 2804 3093 3492 3559 3581 2293 2874 2668 2922 1912 
+Weight per cpu     = 326.614 315.685 284.386 280.528 296.024 320.409 311.118 306.063 312.89 297.157 
+Sites per cpu      = 4 5 4 5 4 5 4 4 4 4 
+
+Expectations with the sites repeats (if the sites repeats computation time is negligible and without the constant partition cost)): 
+Speedup [no SR, parall] -> // [SR (kassian), parall] : 7.79234
+Speedup [no SR, parall] -> // [SR (kassian weighted), parall] : 8.93715
+Speedup [Kassian, parall] -> [Kassian weighted, parall] : 1.14691
+Speedup [no SR, sequential] => [SR (kassian weighted), parall] 89.396
+
+
