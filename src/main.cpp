@@ -18,12 +18,14 @@ void experience1() {
 }
 
 void experience2() {
-  Helper::experiment2("../data/128/128.phy", "../data/128/128.part", "../data/128/RAxML_parsimonyTree.128", 
-                      10, 10, "../results/experiment2/128_10cpus_parsimonytree");
   Helper::experiment2("../data/59/59.phy", "../data/59/59.part", "../data/59/seed12345_top0.newick", 
                       10, 10, "../results/experiment2/59_10cpus_seed12345_top0");
   Helper::experiment2("../data/59/59.phy", "../data/59/59.part", "../data/59/seed12345_top79.newick", 
                       10, 10, "../results/experiment2/59_10cpus_seed12345_top79");
+  Helper::experiment2("../data/404/404.phy", "../data/404/404.part", "../data/404/seed42_firsttree.newick", 
+                      10, 10, "../results/experiment2/404_10cpus_first");
+  Helper::experiment2("../data/404/404.phy", "../data/404/404.part", "../data/404/seed42_tree_98240.newick", 
+                      10, 10, "../results/experiment2/404_10cpus_98240");
 
 }
 
@@ -39,7 +41,7 @@ int main()
 //  seed = 1477659246;
   std::cout << "seed : " << seed << std::endl;
   srand(seed);
-  experience1();
+  //experience1();
   experience2(); 
   experience3(); 
   return 0;
