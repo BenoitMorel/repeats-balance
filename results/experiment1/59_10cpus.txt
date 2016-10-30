@@ -1,7 +1,7 @@
 Experiment 1 !
 sequences file : ../data/59/59.phy
 partitions file : ../data/59/59.part
-number of tree to generate : 100
+number of tree to generate : 10
 number of cpus : 10
 number of taxa : 59
 size of sequences : 6951
@@ -9,38 +9,38 @@ number of partitions : 8
 
 Naive : 
 Total sites number = 6951
-Total weight       = 777.224
-Max weight         = 220.621
-Weight ratio       = 0.64771 ((max - average) / max)
+Total weight       = 677.155
+Max weight         = 192.552
+Weight ratio       = 0.648326 ((max - average) / max)
 Max partitions     = 0
 Sites per cpu      = 2183 1344 680 364 1182 160 264 774 0 0 
-Weight per cpu     = 220.621 67.7414 84.431 92.9138 155.534 14.3793 101.138 40.4655 0 0 
+Weight per cpu     = 192.552 63.3621 70.8276 78.7586 129.655 14.431 98.8103 28.7586 0 0 
 Sites per cpu      = 1 1 1 1 1 1 1 1 0 0 
 
 Kassian : 
 Total sites number = 6951
-Total weight       = 883.431
-Max weight         = 179.776
-Weight ratio       = 0.508593 ((max - average) / max)
+Total weight       = 787.224
+Max weight         = 171.241
+Weight ratio       = 0.540284 ((max - average) / max)
 Max partitions     = 0
 Sites per cpu      = 695 695 695 696 695 695 695 695 695 695 
-Weight per cpu     = 53.2931 179.776 114.776 88.6724 113.655 76.6897 57.569 54.4655 75.4483 69.0862 
+Weight per cpu     = 50.7241 171.241 95.4138 74.8103 101.31 70.7931 52.6207 51.6897 66.1379 52.4828 
 Sites per cpu      = 2 2 2 2 1 1 1 2 2 2 
 
 Kassian weighted : 
 Total sites number = 6951
-Total weight       = 888.103
-Max weight         = 97.4655
-Weight ratio       = 0.0888024 ((max - average) / max)
+Total weight       = 795.586
+Max weight         = 88.9828
+Weight ratio       = 0.10591 ((max - average) / max)
 Max partitions     = 0
-Sites per cpu      = 419 985 1359 590 825 882 667 463 223 538 
-Weight per cpu     = 86 73.8448 72.6724 95.8448 96.569 88.3276 93.7241 90.1897 93.4655 97.4655 
+Sites per cpu      = 347 1015 1367 586 798 873 693 442 265 565 
+Weight per cpu     = 88.9828 62.9655 69.5345 83.9828 86.2069 75.8103 84.2414 78.3103 81.1379 84.4138 
 Sites per cpu      = 2 2 2 1 1 2 1 2 2 2 
 
 Expectations with the sites repeats (if the sites repeats computation time is negligible and without the constant partition cost)): 
-Speedup [no SR, parall] -> // [SR (kassian), parall] : 3.86593
-Speedup [no SR, parall] -> // [SR (kassian weighted), parall] : 7.13073
-Speedup [Kassian, parall] -> [Kassian weighted, parall] : 1.84451
-Speedup [no SR, sequential] => [SR (kassian weighted), parall] 71.3175
+Speedup [no SR, parall] -> // [SR (kassian), parall] : 4.0586
+Speedup [no SR, parall] -> // [SR (kassian weighted), parall] : 7.8105
+Speedup [Kassian, parall] -> [Kassian weighted, parall] : 1.92443
+Speedup [no SR, sequential] => [SR (kassian weighted), parall] 78.1163
 
 

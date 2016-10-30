@@ -56,7 +56,6 @@ class Node {
         }
 
       } else { // internal node
-        // TODO allocate map only once
         if (!_left->_computed || !_right->_computed ||_left->_max_identifier * _right->_max_identifier > map.size()) {
           // the map buffer is to small
           //SRLOG("[WARNING] Node::fill_identifier : too small buffer, ignoring this step");

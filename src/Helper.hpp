@@ -4,6 +4,7 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <cmath>
 #include "repeatsbalance.h"
 #include "Partition.hpp"
 #include "Tree.hpp"
@@ -56,27 +57,6 @@ struct AssignmentOverview {
 
 class Helper {
 public:
-  static void print_count_sr(const std::string &sequences_file,
-                          const std::string &partitions_file,
-                          const std::string &tree_file
-                          ) {
-
-    InputSequences sequences;
-    parse_sequences(sequences_file.c_str(), sequences);
-    InputPartitions inputPartitions;
-    parse_partitions(partitions_file.c_str(), inputPartitions);
-    Partitions partitions;
-    inputPartitions.generate_partitions(partitions, &sequences);
-    Tree tree;
-    parse_tree(tree_file.c_str(), sequences, tree);
-    std::cout << "Average site repeat rate for each partition : " << std::endl;
-    for (unsigned int i = 0; i < partitions.size(); ++i) {
-      tree.update_SRcount(partitions[i]);
-      partitions[i].normalize_costs(sequences.number() - 1);
-      std::cout << inputPartitions.name(i) << ":" << partitions[i].average_sr_rate() << std::endl;
-    }
-    
-  }
 
   static void compute_sr_rates(InputSequences &sequences, Partitions &partitions, Tree &tree, std::vector<double> &o_srrates) {
     o_srrates.resize(partitions.size());
@@ -88,6 +68,47 @@ public:
   }
 
 
+  static void experiment3(const std::string &sequences_file,
+                          const std::string &output_file) {
+    std::ofstream os(output_file.c_str());
+    InputSequences sequences;
+    parse_sequences(sequences_file.c_str(), sequences); 
+    std::vector<double> srvector1(sequences.width());
+    std::vector<double> srvector2(sequences.width());
+    std::vector<double> acc1(sequences.width());
+    std::vector<double> acc2(sequences.width());
+    std::fill(srvector1.begin(), srvector1.end(), 0.0);
+    std::fill(srvector2.begin(), srvector2.end(), 0.0);
+    Tree t1;
+    Tree t2;
+    t1.set_random(sequences.number());
+    t2.set_random(sequences.number());
+    t1.update_SRcount(sequences, 0, srvector1);
+    t2.update_SRcount(sequences, 0, srvector2);
+    std::vector<double> diff(sequences.width());
+    // normalize
+    for (unsigned int i = 0; i < diff.size(); ++i) {
+      srvector1[i] = 1.0 - (srvector1[i] / double(sequences.number()));
+      srvector2[i] = 1.0 - (srvector2[i] / double(sequences.number()));
+    }
+    acc1[0] = srvector1[0];
+    acc2[0] = srvector2[0];
+    diff[0] = fabs(acc1[0] - acc2[0]);
+    for (unsigned int i = 1; i < diff.size(); ++i) {
+      acc1[i] = acc1[i-1] + srvector1[i];
+      acc2[i] = acc2[i-1] + srvector2[i];
+      diff[i] = fabs(acc1[i] - acc2[i]); 
+    }
+    //plot<double>(srvector1, "srvector computed from t1", os);   
+    //plot<double>(srvector2, "srvector computed from t2", os);   
+    plot<double>(srvector1, "first PLF-C vector", false, os);   
+    plot<double>(srvector2, "second PLF-C vector", false, os);   
+    plot<double>(acc1, "one accumulated PLF-C vector", false, os);   
+    plot<double>(diff, "difference between two accumulated PLF-C vectors", false, os);   
+
+    os.close();
+  }
+
   /**
   * Test kassian and weighted method with a random independant reference tree
   */
@@ -96,7 +117,7 @@ public:
                     unsigned int tree_samples_number,
                     unsigned int cpu_number, 
                     const std::string &output_file) {
-
+    std::cout << "experiment 1 " << std::endl;
     InputSequences sequences;
     parse_sequences(sequences_file.c_str(), sequences);
     InputPartitions inputPartitions;
@@ -209,17 +230,16 @@ private:
     out << std::endl;
     out << std::endl;
     
-
     plot<unsigned int>(res_kassian.sites, res_kassian.max_sites, 0, 
-      "Sites repartition with Kassian", latex_out);
+      "Sites repartition with Kassian", (partitions.size() < 50), latex_out);
     plot<double>(res_kassian.weights, std::max(res_kassian.max_weight, 
       res_weighted.max_weight),res_kassian.max_weight, 
-      "PLF-cost repartition with Kassian", latex_out);
+      "PLF-cost repartition with Kassian", (partitions.size() < 50), latex_out);
     plot<unsigned int>(res_weighted.sites, res_weighted.max_sites, 0,
-      "Sites repartition with Weighted", latex_out);
+      "Sites repartition with Weighted", (partitions.size() < 50), latex_out);
     plot<double>(res_weighted.weights, std::max(res_kassian.max_weight, res_weighted.max_weight), 
       res_kassian.max_weight,
-      "PLF-cost repartition with Weighted", latex_out);
+      "PLF-cost repartition with Weighted", (partitions.size() < 50), latex_out);
   }
   
   static void treatlb(LoadBalancing &lb, Tree &tree, AssignmentOverview &res) {
@@ -244,18 +264,38 @@ private:
     }
     res.ratio = (res.max_weight - res.total_weight / double(assignments.size())) / res.max_weight;
   }
+
+
+
   template<typename T>
-  static void plot(const std::vector<T> &toplot, T max, T max_kassian, const std::string &caption, std::ofstream &os) {
+  static void plot(const std::vector<T> &toplot, const std::string &caption, bool histo, std::ofstream &os) {
+    T max = 0;
+    for (unsigned int i = 0; i < toplot.size(); ++i) {
+      max = std::max(max, toplot[i]);
+    }
+    plot<T>(toplot, max, (T)0, caption, histo, os);
+  }
+  
+  
+  template<typename T>
+  static void plot(const std::vector<T> &toplot, T max, T max_kassian, const std::string &caption, bool histo, std::ofstream &os) {
     os << "\\begin{minipage}{0.49\\textwidth}" << std::endl;
     os << "\\begin{tikzpicture}[scale=0.75]" << std::endl;
-    os << "  \\begin{axis}[ybar interval, ymax=" << T(double(max) * 1.1)  << ",ymin=0, minor y tick num = 3]" << std::endl;
-    os << "    \\addplot coordinates { ";
+    if (histo) {
+      os << "  \\begin{axis}[ybar interval, ymax=" << T(double(max) * 1.1)  << ",ymin=0, minor y tick num = 3]" << std::endl;
+      os << "    \\addplot coordinates { ";
+    } else {
+      os << "  \\begin{axis}[ymax=" << T(double(max) * 1.1)  << ",ymin=0]" << std::endl;
+      os << "    \\addplot[color=blue, mark=.] coordinates { ";
+    }
     for (unsigned int i = 0; i < toplot.size(); ++i) {
       os << "(" << i << "," << toplot[i] << ") ";
     }
-    // add one value because latex ignores the last one (i dont know why)
-    os << "(" << toplot.size() << ", " << max / 2 << ") "; 
-    os << "};" << std::endl;
+    if (histo) {
+      // add one value because latex ignores the last one (i dont know why)
+      os << "(" << toplot.size() << ", " << max / 2 << ") ";
+    }
+      os << "};" << std::endl;
     if ((double)max_kassian > 0.01) {
       os << "\\draw [red, dashed] ({rel axis cs:0,0}|-{axis cs:0," << max_kassian 
          << "}) -- ({rel axis cs:1,0}|-{axis cs:" << toplot.size() << "," << max_kassian 

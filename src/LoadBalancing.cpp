@@ -49,7 +49,7 @@ void LoadBalancing::compute_kassian() {
   }
 
   std::stack<Bin *> qlow_;
-  std::stack<Bin *> &qlow = qlow_; // hack to assign qhigh to qlow when qlow is empty
+  std::stack<Bin *> *qlow = &qlow_; // hack to assign qhigh to qlow when qlow is empty
   std::stack<Bin *> qhigh;
   for (unsigned int i = 0; i < current_bin; ++i) {
     if (!_bins[current_bin].is_full()) {
@@ -58,11 +58,11 @@ void LoadBalancing::compute_kassian() {
   }
   for (unsigned int i = current_bin; i < _bins.size(); ++i) {
     if (!_bins[current_bin].is_full()) {
-      qlow.push(&_bins[i]);
+      qlow->push(&_bins[i]);
     }
   }
   unsigned int remaining = sorted_partitions[curr_part]->size();
-  while (curr_part < _partitions.size() && (qlow.size() || qhigh.size())) {
+  while (curr_part < _partitions.size() && (qlow->size() || qhigh.size())) {
     const Partition *partition = sorted_partitions[curr_part];
     // try to dequeue a process from Qhigh and to fill it 
     if (qhigh.size() && (qhigh.top()->weight + remaining >= max_sites)) {
@@ -75,9 +75,9 @@ void LoadBalancing::compute_kassian() {
       if (++full_bins == (_bins.size() - r)) {
         max_sites--;
       }
-    } else if ((qlow.top()->weight + remaining >= max_sites)) { // same with qlow
-      Bin * bin = qlow.top();
-      qlow.pop();
+    } else if ((qlow->top()->weight + remaining >= max_sites)) { // same with qlow
+      Bin * bin = qlow->top();
+      qlow->pop();
       unsigned int toassign = max_sites - bin->weight;
       bin->assign_sites(partition, partition->size() - remaining, 
                         toassign);
@@ -86,16 +86,16 @@ void LoadBalancing::compute_kassian() {
         max_sites--;
       }
     } else { 
-      Bin * bin = qlow.top();
-      qlow.pop();
+      Bin * bin = qlow->top();
+      qlow->pop();
       bin->assign_sites(partition, partition->size() - remaining,
                         remaining);
       remaining = 0; 
       qhigh.push(bin);
     }
 
-    if (!qlow.size()) {
-      qlow = qhigh;
+    if (!qlow->size()) {
+      qlow = &qhigh;
     }
     if (!remaining) {
       if (++curr_part < _partitions.size()) {
@@ -106,9 +106,7 @@ void LoadBalancing::compute_kassian() {
   }
 }
 
-void LoadBalancing::compute_kassian_weighted() {
-  const double tolerance = 0.1;
-  
+void LoadBalancing::compute_kassian_weighted(bool only_first_phase) {
   // Sort the partitions by size in ascending order
   PartitionsPointers sorted_partitions;
   Partition::get_sorted_partitions_weighted(_partitions, sorted_partitions);
@@ -130,60 +128,62 @@ void LoadBalancing::compute_kassian_weighted() {
     }
     // add the partition !
     _bins[current_bin].assign_sites(partition, 0, partition->size(), partition->total_weight());
-    if (_bins[current_bin].weight > max_weight + tolerance) {
+    if (_bins[current_bin].weight >= max_weight) {
       _bins[current_bin].tag_full();
     }
   }
-
+  if (only_first_phase) {
+    return;
+  }
 
 
   std::stack<Bin *> qlow_;
-  std::stack<Bin *> &qlow = qlow_; // hack to assign qhigh to qlow when qlow is empty
+  std::stack<Bin *> *qlow = &qlow_; // hack to assign qhigh to qlow when qlow is empty
   std::stack<Bin *> qhigh;
   for (unsigned int i = 0; i < current_bin; ++i) {
-    if (!_bins[current_bin].is_full()) {
+    if (!_bins[i].is_full()) {
       qhigh.push(&_bins[i]);
     }
   }
   for (unsigned int i = current_bin; i < _bins.size(); ++i) {
-    if (!_bins[current_bin].is_full()) {
-      qlow.push(&_bins[i]);
+    if (!_bins[i].is_full()) {
+      qlow->push(&_bins[i]);
     }
   }
   double assigned_weight = 0;
   unsigned int assigned_sites = 0;
-  while (curr_part < _partitions.size() && (qlow.size() || qhigh.size())) {
+  while (curr_part < _partitions.size() && (qlow->size() || qhigh.size())) {
     const Partition *partition = sorted_partitions[curr_part];
     // try to dequeue a process from Qhigh and to fill it 
     if (qhigh.size() && (qhigh.top()->weight + partition->total_weight() - assigned_weight >= max_weight)) {
       Bin * bin = qhigh.top();
       qhigh.pop();
       double new_weights = max_weight - bin->weight;
-      unsigned int new_sites = partition->find_upper_bound(new_weights + assigned_weight) - assigned_sites; 
-      new_weights = partition->get_accumulated_weight(assigned_sites + new_sites) - assigned_weight;
+      unsigned int new_sites = (partition->find_upper_bound(new_weights + assigned_weight) + 1) - assigned_sites; 
+      new_weights = partition->get_accumulated_weight(assigned_sites + new_sites - 1) - assigned_weight;
       assigned_weight += new_weights;
       bin->assign_sites(partition, assigned_sites, new_sites, new_weights);
       assigned_sites += new_sites;
-    } else if ((qlow.top()->weight + partition->total_weight() - assigned_weight >= max_weight)) { // same with qlow
-      Bin * bin = qlow.top();
-      qlow.pop();
+    } else if ((qlow->top()->weight + partition->total_weight() - assigned_weight >= max_weight)) { // same with qlow
+      Bin * bin = qlow->top();
+      qlow->pop();
       double new_weights = max_weight - bin->weight;
-      unsigned int new_sites = partition->find_upper_bound(new_weights + assigned_weight) - assigned_sites; 
-      new_weights = partition->get_accumulated_weight(assigned_sites + new_sites) - assigned_weight;
+      unsigned int new_sites = (partition->find_upper_bound(new_weights + assigned_weight) + 1) - assigned_sites; 
+      new_weights = partition->get_accumulated_weight(assigned_sites + new_sites - 1) - assigned_weight;
       assigned_weight += new_weights;
       bin->assign_sites(partition, assigned_sites, new_sites, new_weights);
       assigned_sites += new_sites;
     } else { 
-      Bin * bin = qlow.top();
-      qlow.pop();
+      Bin * bin = qlow->top();
+      qlow->pop();
       double new_weights = partition->total_weight() - assigned_weight;
       bin->assign_sites(partition, assigned_sites, partition->size() - assigned_sites, new_weights);
       assigned_sites = partition->size();
       qhigh.push(bin);
     }
 
-    if (!qlow.size()) {
-      qlow = qhigh;
+    if (!qlow->size()) {
+      qlow = &qhigh;
     }
     if (assigned_sites >= partition->size()) {
       if (++curr_part < _partitions.size()) {

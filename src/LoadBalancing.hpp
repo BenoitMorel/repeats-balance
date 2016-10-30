@@ -21,7 +21,7 @@ class LoadBalancing {
 
     void compute_kassian();
 
-    void compute_kassian_weighted();
+    void compute_kassian_weighted(bool only_first_phase = false);
 
     const std::vector<Bin> &load_balancing() const {
       return _bins;

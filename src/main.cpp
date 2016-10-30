@@ -9,33 +9,39 @@
 #include "Helper.hpp"
 
 void experience1() {
-  Helper::experiment1("../data/94/94.phy", "../data/94/94.part", 100, 30, "../results/experiment1/94_30cpus");
-  Helper::experiment1("../data/94/94.phy", "../data/94/94.part", 100, 200, "../results/experiment1/94_200cpus");
+  Helper::experiment1("../data/94/94.phy", "../data/94/94.part", 10, 30, "../results/experiment1/94_30cpus");
+  Helper::experiment1("../data/94/94.phy", "../data/94/94.part", 10, 200, "../results/experiment1/94_200cpus");
   
-  Helper::experiment1("../data/59/59.phy", "../data/59/59.part", 100, 10, "../results/experiment1/59_10cpus");
-  Helper::experiment1("../data/128/128.phy", "../data/128/128.part", 100, 10, "../results/experiment1/128_10cpus");
-  Helper::experiment1("../data/404/404.phy", "../data/404/404.part", 100, 10, "../results/experiment1/404_10cpus");
+  Helper::experiment1("../data/59/59.phy", "../data/59/59.part", 10, 10, "../results/experiment1/59_10cpus");
+  Helper::experiment1("../data/128/128.phy", "../data/128/128.part", 10, 10, "../results/experiment1/128_10cpus");
+  Helper::experiment1("../data/404/404.phy", "../data/404/404.part", 10, 10, "../results/experiment1/404_10cpus");
 }
 
 void experience2() {
   Helper::experiment2("../data/128/128.phy", "../data/128/128.part", "../data/128/RAxML_parsimonyTree.128", 
-                      1, 10, "../results/experiment2/128_10cpus_parsimonytree");
+                      10, 10, "../results/experiment2/128_10cpus_parsimonytree");
   Helper::experiment2("../data/59/59.phy", "../data/59/59.part", "../data/59/seed12345_top0.newick", 
-                      1, 10, "../results/experiment2/59_10cpus_seed12345_top0");
+                      10, 10, "../results/experiment2/59_10cpus_seed12345_top0");
   Helper::experiment2("../data/59/59.phy", "../data/59/59.part", "../data/59/seed12345_top79.newick", 
-                      1, 10, "../results/experiment2/59_10cpus_seed12345_top79");
+                      10, 10, "../results/experiment2/59_10cpus_seed12345_top79");
 
+}
+
+void experience3() {
+  Helper::experiment3("../data/128/split-partitions/12S_rRNA.phy", "../results/experiment3/exp3_12S_rRNA.tex");
+  Helper::experiment3("../data/128/split-partitions/CREM.phy", "../results/experiment3/exp3_CREM.tex");
+  Helper::experiment3("../data/128/split-partitions/BRCA1.phy", "../results/experiment3/exp3_BRCA1.tex");
 }
 
 int main()
 {
   int seed = time(0);
-  // bug with seed = 1477659246
-  //seed = 1477659246;
+//  seed = 1477659246;
   std::cout << "seed : " << seed << std::endl;
   srand(seed);
   experience1();
   experience2(); 
+  experience3(); 
   return 0;
 }
 

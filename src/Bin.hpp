@@ -57,12 +57,6 @@ struct Bin {
     return res;
   }
 
-  // expansive ! 
-  unsigned int total_site_costs() const {
-    std::cout << "not implemented !" << std::endl;
-    return 0;
-  }
-
   void tag_full() {
     weight = UINT_MAX;
   }
