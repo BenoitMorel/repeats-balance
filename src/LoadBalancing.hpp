@@ -31,6 +31,7 @@ class LoadBalancing {
 
 
     // the follozing mehtods are only used to test and make statistics
+    const std::vector<Bin> bins() const {return _bins;}
     bool is_consistent() const;
     bool is_sites_balanced() const;
     bool is_weights_balanced() const;

@@ -23,6 +23,7 @@ struct AssignmentOverview {
   double ratio;
   unsigned int max_partitions;
   unsigned int diff_partitions;
+  Assignments assignments;
 
   AssignmentOverview() {
     reset(0);
@@ -240,10 +241,13 @@ private:
     plot<double>(res_weighted.weights, std::max(res_kassian.max_weight, res_weighted.max_weight), 
       res_kassian.max_weight,
       "PLF-cost repartition with Weighted", (partitions.size() < 50), latex_out);
+    if (partitions.size() < 50) {
+      plot_partitions(partitions, lb_weighted.bins(), "col", latex_out);
+    }
   }
   
   static void treatlb(LoadBalancing &lb, Tree &tree, AssignmentOverview &res) {
-    Assignments assignments;
+    Assignments &assignments = res.assignments;
     lb.build_assignments(assignments);
     res.reset(assignments.size());
     res.diff_partitions = lb.max_partitions_difference();
@@ -265,7 +269,50 @@ private:
     res.ratio = (res.max_weight - res.total_weight / double(assignments.size())) / res.max_weight;
   }
 
+  
+  static void plot_partitions(const Partitions &partitions, const std::vector<Bin> &bins, const std::string &color_prefix, std::ofstream &os) {
+    for (unsigned int i = 0; i < partitions.size(); ++i) {
+      os << "\\definecolor{" << color_prefix << i << "}{RGB}{";
+      os << rand() % 256 << "," << rand() % 256 << "," << rand() % 256 << "}" << std::endl;
+    }
+    os << "\\begin{tikzpicture} \n"
+          "\\begin{axis}[\n"
+          "  title={Partitions repartitions with estimated weights},\n"
+          "  ybar stacked, ymin=0,\n"  
+          "  bar width=3mm,\n"
+          "  symbolic x coords={b0";
 
+    for (unsigned int b = 1; b < bins.size(); ++b) {
+      os << ",b" << b;
+    }
+    
+    os << "},\n"
+          "  xtick=data,\n"
+          "  every node near coord/.style={\n"
+          "  } ]" << std::endl;
+
+    std::vector<std::vector<double> > partitions_bins(partitions.size());
+    std::vector<double> init(bins.size());
+    std::fill(init.begin(), init.end(), 0.0);
+    std::fill(partitions_bins.begin(), partitions_bins.end(), init);
+    for (unsigned int b = 0; b < bins.size(); ++b) {
+      int curr = 0;
+      for (unsigned int p = 0; p < bins[b].partitions.size(); ++p) {
+        unsigned int partition = bins[b].partitions[p]->index();
+        partitions_bins[partition][b] = bins[b].weights[curr++];
+      }
+    }
+    for (unsigned int p = 0; p < partitions.size(); ++p) {
+      os << "\\addplot [fill=" << color_prefix << p << "] coordinates {";
+      for (unsigned int b = 0; b < bins.size(); ++b) {
+        os << "({b" << b << "}," << partitions_bins[p][b] << ") ";
+      }
+      os << "}; " << std::endl;
+    }
+
+    os << "\\end{axis}" << std::endl;
+    os << "\\end{tikzpicture}" << std::endl;
+  }
 
   template<typename T>
   static void plot(const std::vector<T> &toplot, const std::string &caption, bool histo, std::ofstream &os) {

@@ -17,8 +17,6 @@ typedef std::vector<const Partition *> PartitionsPointers;
 class Partition {
   public:
     Partition() : _sequences(0) {
-      static unsigned int plop = 0;
-      secret = plop++;
     }
 
     void init(const InputSequences *sequences, unsigned int index, unsigned int start, unsigned int size) {
@@ -98,7 +96,6 @@ class Partition {
       }
       out << std::endl;
       out << "total site costs : " << sum << std::endl;
-      out << "secret id : " << part.secret << std::endl;
       return out;
     }
 
@@ -127,7 +124,6 @@ class Partition {
     const InputSequences *_sequences;
     std::vector<double> _site_costs;
     std::vector<double> _accumulated;
-    unsigned int secret;
 };
 
 

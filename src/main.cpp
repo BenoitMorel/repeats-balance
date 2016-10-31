@@ -9,9 +9,8 @@
 #include "Helper.hpp"
 
 void experience1() {
-  Helper::experiment1("../data/94/94.phy", "../data/94/94.part", 10, 30, "../results/experiment1/94_30cpus");
-  Helper::experiment1("../data/94/94.phy", "../data/94/94.part", 10, 200, "../results/experiment1/94_200cpus");
-  
+//  Helper::experiment1("../data/94/94.phy", "../data/94/94.part", 10, 30, "../results/experiment1/94_30cpus");
+  Helper::experiment1("../data/94/94.phy", "../data/94/94.part", 10, 200, "../results/experiment1/94_200cpus");  
   Helper::experiment1("../data/59/59.phy", "../data/59/59.part", 10, 10, "../results/experiment1/59_10cpus");
   Helper::experiment1("../data/128/128.phy", "../data/128/128.part", 10, 10, "../results/experiment1/128_10cpus");
   Helper::experiment1("../data/404/404.phy", "../data/404/404.part", 10, 10, "../results/experiment1/404_10cpus");
@@ -45,8 +44,8 @@ int main()
   seed = 1477856748;
   std::cout << "seed : " << seed << std::endl;
   srand(seed);
-  //experience1();
-  //experience2(); 
+  experience1();
+  experience2(); 
   //experience3(); 
   return 0;
 }
