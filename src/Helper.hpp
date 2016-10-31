@@ -215,8 +215,6 @@ private:
     out << "Kassian : " << std::endl << res_kassian << std::endl;
     out << "Kassian weighted : " << std::endl << res_weighted << std::endl;
     
-
-  
     out << "Expectations with the sites repeats (if the sites repeats "
                  "computation time is negligible and without the constant "
                  "partition cost)): " << std::endl;
@@ -231,19 +229,18 @@ private:
     out << std::endl;
     out << std::endl;
     
-    plot<unsigned int>(res_kassian.sites, res_kassian.max_sites, 0, 
+    double worse_weight = std::max(res_kassian.max_weight, res_weighted.max_weight);
+    double lower_bound = res_naive.total_weight / double(cpu_number); 
+    plot<unsigned int>(res_kassian.sites, res_kassian.max_sites, 0, 0, 
       "Sites repartition with Kassian", (partitions.size() < 50), latex_out);
-    plot<double>(res_kassian.weights, std::max(res_kassian.max_weight, 
-      res_weighted.max_weight),res_kassian.max_weight, 
+    plot<double>(res_kassian.weights, worse_weight, res_kassian.max_weight, lower_bound,
       "PLF-cost repartition with Kassian", (partitions.size() < 50), latex_out);
-    plot<unsigned int>(res_weighted.sites, res_weighted.max_sites, 0,
+    plot<unsigned int>(res_weighted.sites, res_weighted.max_sites, 0, 0,
       "Sites repartition with Weighted", (partitions.size() < 50), latex_out);
-    plot<double>(res_weighted.weights, std::max(res_kassian.max_weight, res_weighted.max_weight), 
-      res_kassian.max_weight,
+    plot<double>(res_weighted.weights, worse_weight, 
+      res_kassian.max_weight, lower_bound,
       "PLF-cost repartition with Weighted", (partitions.size() < 50), latex_out);
-    if (partitions.size() < 50) {
-      plot_partitions(partitions, lb_weighted.bins(), "col", latex_out);
-    }
+   
   }
   
   static void treatlb(LoadBalancing &lb, Tree &tree, AssignmentOverview &res) {
@@ -320,12 +317,12 @@ private:
     for (unsigned int i = 0; i < toplot.size(); ++i) {
       max = std::max(max, toplot[i]);
     }
-    plot<T>(toplot, max, (T)0, caption, histo, os);
+    plot<T>(toplot, max, (T)0, T(0), caption, histo, os);
   }
   
   
   template<typename T>
-  static void plot(const std::vector<T> &toplot, T max, T max_kassian, const std::string &caption, bool histo, std::ofstream &os) {
+  static void plot(const std::vector<T> &toplot, T max, T max_kassian, T lower_bound, const std::string &caption, bool histo, std::ofstream &os) {
     os << "\\begin{minipage}{0.49\\textwidth}" << std::endl;
     os << "\\begin{tikzpicture}[scale=0.75]" << std::endl;
     if (histo) {
@@ -347,6 +344,11 @@ private:
       os << "\\draw [red, dashed] ({rel axis cs:0,0}|-{axis cs:0," << max_kassian 
          << "}) -- ({rel axis cs:1,0}|-{axis cs:" << toplot.size() << "," << max_kassian 
          << "}) node [pos=0.5, above] {Max PLF-C with Kassian};" << std::endl;
+    }
+    if ((double)lower_bound > 0.01) {
+      os << "\\draw [red, dashed] ({rel axis cs:0,0}|-{axis cs:0," << lower_bound 
+         << "}) -- ({rel axis cs:1,0}|-{axis cs:" << toplot.size() << "," << lower_bound 
+         << "}) node [pos=0.5, above] {Lower bound};" << std::endl;
     }
     os << "  \\end{axis}" << std::endl;
     os << "\\end{tikzpicture}" << std::endl;

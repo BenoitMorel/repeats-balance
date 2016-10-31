@@ -30,18 +30,18 @@ Sites per cpu      = 2 2 2 2 1 1 1 2 2 2
 
 Kassian weighted : 
 Total sites number = 6951
-Total weight       = 764.603
-Max weight         = 88.0172
-Weight ratio       = 0.131303 ((max - average) / max)
+Total weight       = 761.776
+Max weight         = 86.1897
+Weight ratio       = 0.116163 ((max - average) / max)
 Max partitions     = 0
-Sites per cpu      = 414 996 1370 595 835 893 642 458 223 525 
-Weight per cpu     = 72.2759 76.3966 62.8448 75.6552 88.0172 78.7931 78.2586 75.1552 74 83.2069 
+Sites per cpu      = 421 1011 1354 578 805 889 675 464 224 530 
+Weight per cpu     = 73.8276 78.4828 59.5 73.2241 86.1897 77.8448 78.8448 74.7241 74.8621 84.2759 
 Sites per cpu      = 2 2 2 1 1 2 1 2 2 2 
 
 Expectations with the sites repeats (if the sites repeats computation time is negligible and without the constant partition cost)): 
 Speedup [no SR, parall] -> // [SR (kassian), parall] : 4.86307
-Speedup [no SR, parall] -> // [SR (kassian weighted), parall] : 7.89618
-Speedup [Kassian, parall] -> [Kassian weighted, parall] : 1.6237
-Speedup [no SR, sequential] => [SR (kassian weighted), parall] 78.9732
+Speedup [no SR, parall] -> // [SR (kassian weighted), parall] : 8.06361
+Speedup [Kassian, parall] -> [Kassian weighted, parall] : 1.65813
+Speedup [no SR, sequential] => [SR (kassian weighted), parall] 80.6477
 
 

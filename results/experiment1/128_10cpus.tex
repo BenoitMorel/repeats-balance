@@ -8,106 +8,29 @@
 \end{minipage}
 \begin{minipage}{0.49\textwidth}
 \begin{tikzpicture}[scale=0.75]
-  \begin{axis}[ybar interval, ymax=789.15,ymin=0, minor y tick num = 3]
-    \addplot coordinates { (0,568.189) (1,559.079) (2,540.157) (3,525.976) (4,717.409) (5,646.063) (6,591.409) (7,651.677) (8,444.346) (9,623.094) (10, 358.705) };
-\draw [red, dashed] ({rel axis cs:0,0}|-{axis cs:0,717.409}) -- ({rel axis cs:1,0}|-{axis cs:10,717.409}) node [pos=0.5, above] {Max PLF-C with Kassian};
+  \begin{axis}[ybar interval, ymax=748.485,ymin=0, minor y tick num = 3]
+    \addplot coordinates { (0,524.614) (1,528.575) (2,518.78) (3,510.835) (4,680.441) (5,625.291) (6,555.346) (7,635.764) (8,407.48) (9,596.921) (10, 340.22) };
+\draw [red, dashed] ({rel axis cs:0,0}|-{axis cs:0,680.441}) -- ({rel axis cs:1,0}|-{axis cs:10,680.441}) node [pos=0.5, above] {Max PLF-C with Kassian};
+\draw [red, dashed] ({rel axis cs:0,0}|-{axis cs:0,530.724}) -- ({rel axis cs:1,0}|-{axis cs:10,530.724}) node [pos=0.5, above] {Lower bound};
   \end{axis}
 \end{tikzpicture}
 \caption*{PLF-cost repartition with Kassian}
 \end{minipage}
 \begin{minipage}{0.49\textwidth}
 \begin{tikzpicture}[scale=0.75]
-  \begin{axis}[ybar interval, ymax=4191,ymin=0, minor y tick num = 3]
-    \addplot coordinates { (0,2795) (1,3095) (2,3511) (3,3810) (4,3312) (5,2287) (6,2879) (7,2672) (8,2922) (9,1915) (10, 1905) };
+  \begin{axis}[ybar interval, ymax=3857,ymin=0, minor y tick num = 3]
+    \addplot coordinates { (0,3328) (1,2764) (2,2949) (3,3321) (4,3507) (5,2846) (6,2551) (7,2532) (8,2908) (9,2492) (10, 1753) };
   \end{axis}
 \end{tikzpicture}
 \caption*{Sites repartition with Weighted}
 \end{minipage}
 \begin{minipage}{0.49\textwidth}
 \begin{tikzpicture}[scale=0.75]
-  \begin{axis}[ybar interval, ymax=789.15,ymin=0, minor y tick num = 3]
-    \addplot coordinates { (0,597.299) (1,582.063) (2,601.094) (3,557.417) (4,573.551) (5,589.598) (6,599.528) (7,577.488) (8,562.071) (9,576.433) (10, 358.705) };
-\draw [red, dashed] ({rel axis cs:0,0}|-{axis cs:0,717.409}) -- ({rel axis cs:1,0}|-{axis cs:10,717.409}) node [pos=0.5, above] {Max PLF-C with Kassian};
+  \begin{axis}[ybar interval, ymax=748.485,ymin=0, minor y tick num = 3]
+    \addplot coordinates { (0,524.976) (1,552.551) (2,574.228) (3,519.11) (4,535.205) (5,559.866) (6,585.969) (7,561.016) (8,553.504) (9,545.181) (10, 340.22) };
+\draw [red, dashed] ({rel axis cs:0,0}|-{axis cs:0,680.441}) -- ({rel axis cs:1,0}|-{axis cs:10,680.441}) node [pos=0.5, above] {Max PLF-C with Kassian};
+\draw [red, dashed] ({rel axis cs:0,0}|-{axis cs:0,530.724}) -- ({rel axis cs:1,0}|-{axis cs:10,530.724}) node [pos=0.5, above] {Lower bound};
   \end{axis}
 \end{tikzpicture}
 \caption*{PLF-cost repartition with Weighted}
 \end{minipage}
-\definecolor{col0}{RGB}{229,25,0}
-\definecolor{col1}{RGB}{72,184,98}
-\definecolor{col2}{RGB}{28,90,243}
-\definecolor{col3}{RGB}{28,212,36}
-\definecolor{col4}{RGB}{221,233,24}
-\definecolor{col5}{RGB}{126,64,170}
-\definecolor{col6}{RGB}{90,152,110}
-\definecolor{col7}{RGB}{25,67,83}
-\definecolor{col8}{RGB}{190,148,61}
-\definecolor{col9}{RGB}{133,174,75}
-\definecolor{col10}{RGB}{158,175,169}
-\definecolor{col11}{RGB}{87,17,142}
-\definecolor{col12}{RGB}{177,4,214}
-\definecolor{col13}{RGB}{133,40,242}
-\definecolor{col14}{RGB}{110,64,15}
-\definecolor{col15}{RGB}{175,235,236}
-\definecolor{col16}{RGB}{71,89,107}
-\definecolor{col17}{RGB}{138,172,197}
-\definecolor{col18}{RGB}{31,233,222}
-\definecolor{col19}{RGB}{205,52,157}
-\definecolor{col20}{RGB}{124,221,34}
-\definecolor{col21}{RGB}{141,107,193}
-\definecolor{col22}{RGB}{145,66,24}
-\definecolor{col23}{RGB}{186,52,201}
-\definecolor{col24}{RGB}{250,67,79}
-\definecolor{col25}{RGB}{229,48,189}
-\definecolor{col26}{RGB}{62,155,108}
-\definecolor{col27}{RGB}{234,96,180}
-\definecolor{col28}{RGB}{211,63,62}
-\definecolor{col29}{RGB}{8,220,93}
-\definecolor{col30}{RGB}{229,254,43}
-\definecolor{col31}{RGB}{81,191,167}
-\definecolor{col32}{RGB}{147,215,53}
-\definecolor{col33}{RGB}{199,161,198}
-\begin{tikzpicture} 
-\begin{axis}[
-  title={Partitions repartitions with estimated weights},
-  ybar stacked, ymin=0,
-  bar width=3mm,
-  symbolic x coords={b0,b1,b2,b3,b4,b5,b6,b7,b8,b9},
-  xtick=data,
-  every node near coord/.style={
-  } ]
-\addplot [fill=col0] coordinates {({b0},0) ({b1},0) ({b2},218.214) ({b3},0) ({b4},0) ({b5},0) ({b6},0) ({b7},0) ({b8},0) ({b9},0) }; 
-\addplot [fill=col1] coordinates {({b0},0) ({b1},0) ({b2},0) ({b3},0) ({b4},0) ({b5},0) ({b6},281.739) ({b7},0) ({b8},0) ({b9},0) }; 
-\addplot [fill=col2] coordinates {({b0},206.565) ({b1},0) ({b2},0) ({b3},0) ({b4},0) ({b5},0) ({b6},0) ({b7},0) ({b8},0) ({b9},0) }; 
-\addplot [fill=col3] coordinates {({b0},0) ({b1},0) ({b2},0) ({b3},0) ({b4},0) ({b5},94.2) ({b6},0) ({b7},0) ({b8},0) ({b9},0) }; 
-\addplot [fill=col4] coordinates {({b0},0) ({b1},0) ({b2},0) ({b3},0) ({b4},0) ({b5},0) ({b6},168.733) ({b7},120.471) ({b8},25.1) ({b9},24.9094) }; 
-\addplot [fill=col5] coordinates {({b0},0) ({b1},0) ({b2},0) ({b3},0) ({b4},0) ({b5},0) ({b6},0) ({b7},0) ({b8},198.018) ({b9},0) }; 
-\addplot [fill=col6] coordinates {({b0},0) ({b1},209.119) ({b2},0) ({b3},0) ({b4},0) ({b5},0) ({b6},0) ({b7},0) ({b8},0) ({b9},0) }; 
-\addplot [fill=col7] coordinates {({b0},0) ({b1},0) ({b2},0) ({b3},0) ({b4},0) ({b5},0) ({b6},0) ({b7},0) ({b8},312.545) ({b9},0) }; 
-\addplot [fill=col8] coordinates {({b0},0) ({b1},0) ({b2},0) ({b3},0) ({b4},0) ({b5},274.345) ({b6},0) ({b7},0) ({b8},0) ({b9},0) }; 
-\addplot [fill=col9] coordinates {({b0},0) ({b1},0) ({b2},0) ({b3},0) ({b4},0) ({b5},52.3331) ({b6},0) ({b7},0) ({b8},0) ({b9},307.836) }; 
-\addplot [fill=col10] coordinates {({b0},0) ({b1},0) ({b2},0) ({b3},0) ({b4},0) ({b5},0) ({b6},0) ({b7},126.349) ({b8},0) ({b9},0) }; 
-\addplot [fill=col11] coordinates {({b0},0) ({b1},0) ({b2},0) ({b3},22.089) ({b4},242.111) ({b5},145.254) ({b6},0) ({b7},0) ({b8},0) ({b9},0) }; 
-\addplot [fill=col12] coordinates {({b0},0) ({b1},0) ({b2},0) ({b3},0) ({b4},0) ({b5},0) ({b6},113.368) ({b7},0) ({b8},0) ({b9},0) }; 
-\addplot [fill=col13] coordinates {({b0},303.313) ({b1},248.679) ({b2},0) ({b3},0) ({b4},0) ({b5},0) ({b6},0) ({b7},0) ({b8},0) ({b9},0) }; 
-\addplot [fill=col14] coordinates {({b0},0) ({b1},0) ({b2},0) ({b3},0) ({b4},0) ({b5},0) ({b6},0) ({b7},0) ({b8},0) ({b9},200.934) }; 
-\addplot [fill=col15] coordinates {({b0},0) ({b1},0) ({b2},0) ({b3},0) ({b4},0) ({b5},0) ({b6},0) ({b7},301.831) ({b8},0) ({b9},0) }; 
-\addplot [fill=col16] coordinates {({b0},0) ({b1},43.0945) ({b2},265.682) ({b3},226.979) ({b4},0) ({b5},0) ({b6},0) ({b7},0) ({b8},0) ({b9},0) }; 
-\addplot [fill=col17] coordinates {({b0},0) ({b1},0) ({b2},0) ({b3},0) ({b4},232.588) ({b5},0) ({b6},0) ({b7},0) ({b8},0) ({b9},0) }; 
-\addplot [fill=col18] coordinates {({b0},0) ({b1},0) ({b2},0) ({b3},228.898) ({b4},0) ({b5},0) ({b6},0) ({b7},0) ({b8},0) ({b9},0) }; 
-\addplot [fill=col19] coordinates {({b0},86.7772) ({b1},0) ({b2},0) ({b3},0) ({b4},0) ({b5},0) ({b6},0) ({b7},0) ({b8},0) ({b9},0) }; 
-\addplot [fill=col20] coordinates {({b0},0) ({b1},0) ({b2},0) ({b3},0) ({b4},92.3882) ({b5},0) ({b6},0) ({b7},0) ({b8},0) ({b9},0) }; 
-\addplot [fill=col21] coordinates {({b0},0) ({b1},0) ({b2},87.8402) ({b3},0) ({b4},0) ({b5},0) ({b6},0) ({b7},0) ({b8},0) ({b9},0) }; 
-\addplot [fill=col22] coordinates {({b0},0) ({b1},0) ({b2},0) ({b3},0) ({b4},0) ({b5},52.0685) ({b6},0) ({b7},0) ({b8},0) ({b9},0) }; 
-\addplot [fill=col23] coordinates {({b0},0) ({b1},0) ({b2},0) ({b3},0) ({b4},0) ({b5},0) ({b6},0) ({b7},0) ({b8},82.7929) ({b9},0) }; 
-\addplot [fill=col24] coordinates {({b0},0) ({b1},87.6323) ({b2},0) ({b3},0) ({b4},0) ({b5},0) ({b6},0) ({b7},0) ({b8},0) ({b9},0) }; 
-\addplot [fill=col25] coordinates {({b0},0) ({b1},0) ({b2},0) ({b3},92.2071) ({b4},0) ({b5},0) ({b6},0) ({b7},0) ({b8},0) ({b9},0) }; 
-\addplot [fill=col26] coordinates {({b0},0) ({b1},0) ({b2},46.3433) ({b3},0) ({b4},0) ({b5},0) ({b6},0) ({b7},0) ({b8},0) ({b9},0) }; 
-\addplot [fill=col27] coordinates {({b0},0) ({b1},0) ({b2},0) ({b3},0) ({b4},0) ({b5},0) ({b6},54.0591) ({b7},0) ({b8},0) ({b9},0) }; 
-\addplot [fill=col28] coordinates {({b0},0) ({b1},0) ({b2},0) ({b3},0) ({b4},51.0307) ({b5},0) ({b6},0) ({b7},0) ({b8},0) ({b9},0) }; 
-\addplot [fill=col29] coordinates {({b0},0) ({b1},29.4591) ({b2},0) ({b3},0) ({b4},0) ({b5},0) ({b6},0) ({b7},0) ({b8},0) ({b9},0) }; 
-\addplot [fill=col30] coordinates {({b0},0) ({b1},0) ({b2},0) ({b3},0) ({b4},0) ({b5},0) ({b6},0) ({b7},69.5504) ({b8},0) ({b9},0) }; 
-\addplot [fill=col31] coordinates {({b0},0) ({b1},0) ({b2},0) ({b3},0) ({b4},0) ({b5},0) ({b6},0) ({b7},0) ({b8},0) ({b9},84.352) }; 
-\addplot [fill=col32] coordinates {({b0},0) ({b1},0) ({b2},0) ({b3},48.0244) ({b4},0) ({b5},0) ({b6},0) ({b7},0) ({b8},0) ({b9},0) }; 
-\addplot [fill=col33] coordinates {({b0},18.8433) ({b1},0) ({b2},0) ({b3},0) ({b4},0) ({b5},0) ({b6},0) ({b7},0) ({b8},0) ({b9},0) }; 
-\end{axis}
-\end{tikzpicture}
