@@ -61,13 +61,13 @@ class Tree {
     Node &get_node(unsigned int i) {
       return _nodes_pool[i];
     }
-  private:
-    
     void reset() {
       _root = 0;
       _nodes_pool.clear();
       _post_order_nodes.clear();
     }
+  private:
+    
 
     Node *_root;
     std::vector<Node> _nodes_pool;

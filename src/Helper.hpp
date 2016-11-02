@@ -3,6 +3,7 @@
 
 #include <string>
 #include <fstream>
+#include <sstream>
 #include <vector>
 #include <cmath>
 #include "repeatsbalance.h"
@@ -67,7 +68,93 @@ public:
       o_srrates[i] = partitions[i].average_sr_rate();
     }
   }
+  
+  static void experiment4(const std::string &sequences_file,
+                    const std::string &partitions_file,
+                    const std::string &tree_files,
+                    unsigned int trees_number,
+                    unsigned int tree_samples_number,
+                    unsigned int cpu_number, 
+                    const std::string &output_file) {
+    treat_trees(sequences_file, partitions_file, tree_files, trees_number, tree_samples_number, cpu_number, output_file);
+  }
+  
+  static void experiment5(const std::string &sequences_file,
+                    const std::string &partitions_file,
+                    unsigned int trees_number,
+                    unsigned int tree_samples_number,
+                    unsigned int cpu_number, 
+                    const std::string &output_file) {
+    treat_trees(sequences_file, partitions_file, "", trees_number, tree_samples_number, cpu_number, output_file);
+  }
 
+
+  static void treat_trees(const std::string &sequences_file,
+                    const std::string &partitions_file,
+                    const std::string &tree_files,
+                    unsigned int trees_number,
+                    unsigned int tree_samples_number,
+                    unsigned int cpu_number, 
+                    const std::string &output_file) {
+    std::ofstream os(output_file.c_str());
+    InputSequences sequences;
+    parse_sequences(sequences_file.c_str(), sequences);
+    InputPartitions inputPartitions;
+    parse_partitions(partitions_file.c_str(), inputPartitions);
+    Partitions partitions;
+    inputPartitions.generate_partitions(partitions, &sequences);
+    Tree tree_sample;
+    for (unsigned int i = 0; i < tree_samples_number; ++i) {
+      tree_sample.set_random(sequences.number());
+      for (unsigned int p = 0; p < partitions.size(); ++p) {
+        tree_sample.update_SRcount(partitions[p]);
+      }
+    }
+    for (unsigned int p = 0; p < partitions.size(); ++p) {
+      partitions[p].normalize_costs(tree_samples_number * (sequences.number() - 1));
+    }
+    LoadBalancing lb(partitions, cpu_number);
+    lb.compute_kassian_weighted();
+    Assignments assignments;
+    lb.build_assignments(assignments);
+     
+    std::vector<double> average(cpu_number, 0.0);
+    std::fill(average.begin(), average.end(), 0.0);
+    std::vector<std::vector<double> > weights(trees_number, average); // weights[tree][cpu]
+    double max = 0;
+    for (unsigned int t = 0; t < trees_number; ++t) {
+      Tree tree;
+      tree.reset();
+      if (tree_files.size()) {
+        std::ostringstream tmp;
+        tmp << tree_files << t;
+        parse_tree(tmp.str().c_str(), sequences, tree);
+      } else {
+          tree.set_random(sequences.number());
+      }
+      for (unsigned int i = 0; i < assignments.size(); ++i) {
+        Assignment &assign = assignments[i];
+        for (unsigned int j = 0; j < assign.size(); ++j) {
+          Partition &partition = assign[j];
+          partition.reset_site_costs();
+          tree.update_SRcount(partition);
+          partition.normalize_costs(partition.sequences()->number() - 1);
+          weights[t][i] += partition.total_weight();
+        }
+        average[i] += weights[t][i] / trees_number;
+        max = std::max(max, weights[t][i]);
+      }
+    }
+    plot<double>(average, max, 0, 0, 
+      "Average weights repartitions on several trees", (partitions.size() < 50), os);
+    plot<double>(weights[0], max, 0, 0, 
+      "Average weights repartitions on one of the trees", (partitions.size() < 50), os);
+    plot<double>(weights[trees_number / 2], max, 0, 0, 
+      "Average weights repartitions on one of the trees", (partitions.size() < 50), os);
+    plot<double>(weights[trees_number - 1], max, 0, 0, 
+      "Average weights repartitions on one of the trees", (partitions.size() < 50), os);
+     
+  }
 
   static void experiment3(const std::string &sequences_file,
                           const std::string &output_file) {

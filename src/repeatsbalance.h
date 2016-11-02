@@ -1,7 +1,7 @@
 #ifndef _REPEATBALANCE_H_
 #define _REPEATBALANCE_H_
 
-#define SRLOG_ENABLED
+//#define SRLOG_ENABLED
 
 #ifdef SRLOG_ENABLED
   #include <iostream>

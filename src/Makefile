@@ -1,9 +1,9 @@
 CC=g++
 
 
-DBG=  -O3 -g -pg
-CFLAGS= $(DBG) -W -Wall -ansi -pedantic 
-LDFLAGS= $(DBG)
+DBG=  -O3 -g 
+CFLAGS=  $(DBG) -W -Wall -ansi -pedantic 
+LDFLAGS= $(DBG) 
 EXEC=srlb tests
 SRC= $(wildcard *.cpp)
 OBJDIR=generated
@@ -47,3 +47,9 @@ clean:
 
 prof:
 	gprof -b srlb gmon.out > analysis.txt
+mem:
+	valgrind --leak-check=full ./srlb
+
+memfull:
+	valgrind --leak-check=full --show-leak-kinds=all ./srlb
+

@@ -39,7 +39,6 @@ tree: node SEMI_COLON {scan.tree.set_root($1);}
 
 node: LEFT_PAR node COMMA node RIGHT_PAR {$$ = &scan.tree.get_node(scan.current_node++); $$->set_children($2, $4);}
       | LEFT_PAR node COMMA node COMMA node RIGHT_PAR {
-          std::cout << "WARNING, UNROOTED TREE... adding a root" << std::endl;
           Node *node  = &scan.tree.get_node(scan.current_node++); node->set_children($2, $4);
           $$ = &scan.tree.get_node(scan.current_node++); $$->set_children(node, $6);
         }
