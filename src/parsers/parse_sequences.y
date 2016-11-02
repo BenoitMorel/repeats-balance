@@ -57,7 +57,7 @@ void parse_sequences(const char *file, InputSequences &sequences) {
   do {
     yyparse(&sequences);
   } while (!feof(yyin));
-
+  fclose(myfile);
 }
 
 

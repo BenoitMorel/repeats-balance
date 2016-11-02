@@ -36,8 +36,8 @@ void rb_parterror(InputPartitions *opart, const char *s);
 
 
 partitions:
-   STRING COMMA STRING  EQUAL INT DASH INT NEWLINE { opart->add_partition($3, $5 - 1, $7 - $5 + 1);}
-  | partitions STRING COMMA STRING  EQUAL INT DASH INT NEWLINE { opart->add_partition($4, $6 - 1, $8 - $6 + 1);}
+   STRING COMMA STRING  EQUAL INT DASH INT NEWLINE { opart->add_partition($3, $5 - 1, $7 - $5 + 1); delete[] $3; delete[] $1;}
+  | partitions STRING COMMA STRING  EQUAL INT DASH INT NEWLINE { opart->add_partition($4, $6 - 1, $8 - $6 + 1); delete [] $4; delete[] $2;}
   ;
 
 
@@ -58,7 +58,7 @@ void parse_partitions(const char *file, InputPartitions &partitions) {
   do {
     rb_partparse(&partitions);
   } while (!feof(rb_partin));
-
+  fclose(myfile);
 }
 
 

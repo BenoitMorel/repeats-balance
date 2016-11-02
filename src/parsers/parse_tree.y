@@ -43,7 +43,7 @@ node: LEFT_PAR node COMMA node RIGHT_PAR {$$ = &scan.tree.get_node(scan.current_
           Node *node  = &scan.tree.get_node(scan.current_node++); node->set_children($2, $4);
           $$ = &scan.tree.get_node(scan.current_node++); $$->set_children(node, $6);
         }
-      | STRING {$$ = &scan.tree.get_node(scan.current_node++); $$->set_sequence(scan.seq.get_taxa_index($1));} 
+      | STRING {$$ = &scan.tree.get_node(scan.current_node++); $$->set_sequence(scan.seq.get_taxa_index($1)); delete[] $1;} 
 ;
 
 %%
@@ -61,7 +61,7 @@ void parse_tree(const char *file, const InputSequences &sequences, Tree &o_tree)
   do {
     rb_treeparse(scanner);
   } while (!feof(rb_treein));
-
+  fclose(myfile);
 }
 
 
