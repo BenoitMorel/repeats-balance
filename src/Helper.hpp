@@ -121,6 +121,8 @@ public:
     std::vector<double> average(cpu_number, 0.0);
     std::fill(average.begin(), average.end(), 0.0);
     std::vector<std::vector<double> > weights(trees_number, average); // weights[tree][cpu]
+    std::vector<double> lower_bounds(trees_number, 0.0);
+    double lower_bound_average = 0;
     double max = 0;
     for (unsigned int t = 0; t < trees_number; ++t) {
       Tree tree;
@@ -132,6 +134,13 @@ public:
       } else {
           tree.set_random(sequences.number());
       }
+      for (unsigned int p = 0; p < partitions.size(); ++p) {
+        partitions[p].reset_site_costs();
+        tree.update_SRcount(partitions[p]);
+        partitions[p].normalize_costs(partitions[p].sequences()->number() - 1);
+        lower_bounds[t] += partitions[p].total_weight() / cpu_number;
+      }
+      lower_bound_average += lower_bounds[t] / trees_number;
       for (unsigned int i = 0; i < assignments.size(); ++i) {
         Assignment &assign = assignments[i];
         for (unsigned int j = 0; j < assign.size(); ++j) {
@@ -145,13 +154,13 @@ public:
         max = std::max(max, weights[t][i]);
       }
     }
-    plot<double>(average, max, 0, 0, 
+    plot<double>(average, max, 0, lower_bound_average, 
       "Average weights repartitions on several trees", (partitions.size() < 50), os);
-    plot<double>(weights[0], max, 0, 0, 
+    plot<double>(weights[0], max, 0, lower_bounds[0], 
       "Average weights repartitions on one of the trees", (partitions.size() < 50), os);
-    plot<double>(weights[trees_number / 2], max, 0, 0, 
+    plot<double>(weights[trees_number / 2], max, 0, lower_bounds[trees_number / 2], 
       "Average weights repartitions on one of the trees", (partitions.size() < 50), os);
-    plot<double>(weights[trees_number - 1], max, 0, 0, 
+    plot<double>(weights[trees_number - 1], max, 0, lower_bounds[trees_number - 1], 
       "Average weights repartitions on one of the trees", (partitions.size() < 50), os);
      
   }
