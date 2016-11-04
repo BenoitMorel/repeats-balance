@@ -113,14 +113,21 @@ public:
     for (unsigned int p = 0; p < partitions.size(); ++p) {
       partitions[p].normalize_costs(tree_samples_number * (sequences.number() - 1));
     }
+    LoadBalancing lb_k(partitions, cpu_number);
     LoadBalancing lb(partitions, cpu_number);
+    lb_k.compute_kassian();
     lb.compute_kassian_weighted();
     Assignments assignments;
+    Assignments assignments_k;
     lb.build_assignments(assignments);
+    lb_k.build_assignments(assignments_k);
      
     std::vector<double> average(cpu_number, 0.0);
-    std::fill(average.begin(), average.end(), 0.0);
+    std::vector<double> max_weights(trees_number, 0.0);
+    std::vector<double> max_weights_k(trees_number, 0.0);
+    std::vector<unsigned int> max_weights_indices(trees_number, 0);
     std::vector<std::vector<double> > weights(trees_number, average); // weights[tree][cpu]
+    std::vector<std::vector<double> > weights_k(trees_number, average); // weights[tree][cpu]
     std::vector<double> lower_bounds(trees_number, 0.0);
     double lower_bound_average = 0;
     double max = 0;
@@ -141,6 +148,20 @@ public:
         lower_bounds[t] += partitions[p].total_weight() / cpu_number;
       }
       lower_bound_average += lower_bounds[t] / trees_number;
+      for (unsigned int i = 0; i < assignments_k.size(); ++i) {
+        Assignment &assign = assignments_k[i];
+        for (unsigned int j = 0; j < assign.size(); ++j) {
+          Partition &partition = assign[j];
+          partition.reset_site_costs();
+          tree.update_SRcount(partition);
+          partition.normalize_costs(partition.sequences()->number() - 1);
+          weights_k[t][i] += partition.total_weight();
+        }
+        if (max_weights_k[t] < weights_k[t][i]) {
+          max_weights_k[t] = weights_k[t][i];
+          max = std::max(max, weights_k[t][i]);
+        }
+      }
       for (unsigned int i = 0; i < assignments.size(); ++i) {
         Assignment &assign = assignments[i];
         for (unsigned int j = 0; j < assign.size(); ++j) {
@@ -151,18 +172,36 @@ public:
           weights[t][i] += partition.total_weight();
         }
         average[i] += weights[t][i] / trees_number;
-        max = std::max(max, weights[t][i]);
+        if (max_weights[t] < weights[t][i]) {
+          max_weights[t] = weights[t][i];
+          max_weights_indices[t] = i;
+          max = std::max(max, weights[t][i]);
+        }
       }
     }
-    plot<double>(average, max, 0, lower_bound_average, 
-      "Average weights repartitions on several trees", (partitions.size() < 50), os);
-    plot<double>(weights[0], max, 0, lower_bounds[0], 
-      "Average weights repartitions on one of the trees", (partitions.size() < 50), os);
-    plot<double>(weights[trees_number / 2], max, 0, lower_bounds[trees_number / 2], 
-      "Average weights repartitions on one of the trees", (partitions.size() < 50), os);
-    plot<double>(weights[trees_number - 1], max, 0, lower_bounds[trees_number - 1], 
-      "Average weights repartitions on one of the trees", (partitions.size() < 50), os);
-     
+    std::vector<double> worse_diff_pertree(trees_number);
+    double mean = 0;
+    double variance = 0;
+    for (unsigned int t = 0; t < trees_number; ++t) {
+      worse_diff_pertree[t] = (max_weights[t] - lower_bounds[t]) / lower_bound_average;
+      mean += worse_diff_pertree[t] / trees_number;
+    }
+    for (unsigned int t = 0; t < trees_number; ++t) {
+      variance += pow(mean - worse_diff_pertree[t] / trees_number, 2);
+    }
+    variance = sqrt(variance) / trees_number;
+    std::cout << "variance : " << variance << std::endl;
+    plot<double>(weights[0], max, 0, lower_bounds[0], 0.0, 0.0, max_weights_indices[0],
+      "Weights repartitions on the first tree", (partitions.size() < 50), os);
+    plot<double>(weights[trees_number - 1], max, 0, lower_bounds[trees_number - 1], 0.0, 0.0, max_weights_indices[trees_number - 1],
+      "Weights repartitions on the last", (partitions.size() < 50), os);
+    /*iplot<double>(average, max, 0, lower_bound_average, 0.0, -1, 
+      "Average weights repartitions on several trees", (partitions.size() < 50), os);*/
+    plot3(max_weights_k, max_weights, lower_bounds, max, os);
+    
+    /*plot<double>(worse_diff_pertree, (max - lower_bound_average) / lower_bound_average, 0, 0, mean, variance, -1,
+      "Per tree, normalized difference between the worse weight and the lower bound", false, os);
+     */
   }
 
   static void experiment3(const std::string &sequences_file,
@@ -327,14 +366,14 @@ private:
     
     double worse_weight = std::max(res_kassian.max_weight, res_weighted.max_weight);
     double lower_bound = res_naive.total_weight / double(cpu_number); 
-    plot<unsigned int>(res_kassian.sites, res_kassian.max_sites, 0, 0, 
+    plot<unsigned int>(res_kassian.sites, res_kassian.max_sites, 0, 0, 0, 0.0, -1,
       "Sites repartition with Kassian", (partitions.size() < 50), latex_out);
-    plot<double>(res_kassian.weights, worse_weight, res_kassian.max_weight, lower_bound,
+    plot<double>(res_kassian.weights, worse_weight, res_kassian.max_weight, lower_bound, 0, 0.0, -1,
       "PLF-cost repartition with Kassian", (partitions.size() < 50), latex_out);
-    plot<unsigned int>(res_weighted.sites, res_weighted.max_sites, 0, 0,
+    plot<unsigned int>(res_weighted.sites, res_weighted.max_sites, 0, 0, 0, 0.0, -1,
       "Sites repartition with Weighted", (partitions.size() < 50), latex_out);
-    plot<double>(res_weighted.weights, worse_weight, 
-      res_kassian.max_weight, lower_bound,
+    plot<double>(res_weighted.weights, worse_weight, 0, 0.0,
+      res_kassian.max_weight, lower_bound, -1,
       "PLF-cost repartition with Weighted", (partitions.size() < 50), latex_out);
    
   }
@@ -413,19 +452,63 @@ private:
     for (unsigned int i = 0; i < toplot.size(); ++i) {
       max = std::max(max, toplot[i]);
     }
-    plot<T>(toplot, max, (T)0, T(0), caption, histo, os);
+    plot<T>(toplot, max, (T)0, T(0), T(0), 0.0, -1, caption, histo, os);
   }
   
-  
-  template<typename T>
-  static void plot(const std::vector<T> &toplot, T max, T max_kassian, T lower_bound, const std::string &caption, bool histo, std::ofstream &os) {
+  static void plot3(const std::vector<double> &kassian, 
+                   const std::vector<double> &weighted, 
+                   const std::vector<double> &lower_band,
+                   double ymax,
+                   std::ofstream &os) {
+    
     os << "\\begin{minipage}{0.49\\textwidth}" << std::endl;
     os << "\\begin{tikzpicture}[scale=0.75]" << std::endl;
+      os << "  \\begin{axis}[ymax=" << ymax * 1.1  << ",ymin=0]" << std::endl;
+    os << "    \\addplot[color=green, mark=x] coordinates { ";
+    for (unsigned int i = 0; i < kassian.size(); ++i) {
+      os << "(" << i << "," << kassian[i] << ") ";
+    }
+    os << "};" << std::endl;
+    os << "    \\addplot[color=blue, mark=x] coordinates { ";
+    for (unsigned int i = 0; i < weighted.size(); ++i) {
+      os << "(" << i << "," << weighted[i] << ") ";
+    }
+    os << "};" << std::endl;
+    os << "    \\addplot[color=red, mark=x] coordinates { ";
+    for (unsigned int i = 0; i < lower_band.size(); ++i) {
+      os << "(" << i << "," << lower_band[i] << ") ";
+    }
+    os << "};" << std::endl;
+
+    os << "\\node[draw=black,thick,rounded corners=2pt,above right=2mm] at (0, 0) {%" << std::endl;
+    os << "  \\begin{tabular}{@{}r@{ }l@{}}" << std::endl;
+    os << "    \\raisebox{2pt}{\\tikz{\\draw[green] (0,0) -- (5mm,0);}}&kassian\\\\" << std::endl;
+    os << "    \\raisebox{2pt}{\\tikz{\\draw[blue] (0,0) -- (5mm,0);}}&kassian weighted\\\\" << std::endl;
+    os << "    \\raisebox{2pt}{\\tikz{\\draw[red] (0,0) -- (5mm,0);}}&lower band" << std::endl;
+    os << "  \\end{tabular}};" << std::endl;
+
+
+    os << "\\end{axis}" << std::endl;
+    os << "\\end{tikzpicture}" << std::endl;
+    os << "\\caption*{ Per tree, maximum weights with kassian and our algorithm, and lower band }" << std::endl;
+    os << "\\end{minipage}" << std::endl;
+  }
+
+  template<typename T>
+  static void plot(const std::vector<T> &toplot, 
+                   T ymax, T max_kassian, T lower_bound, 
+                   T mean,
+                   double variance,
+                   int index_max,
+                   const std::string &caption, bool histo, std::ofstream &os) {
+    os << "\\begin{minipage}{0.49\\textwidth}" << std::endl;
+    os << "\\begin{tikzpicture}[scale=0.75]" << std::endl;
+
     if (histo) {
-      os << "  \\begin{axis}[ybar interval, ymax=" << T(double(max) * 1.1)  << ",ymin=0, minor y tick num = 3]" << std::endl;
+      os << "  \\begin{axis}[ybar interval, ymax=" << T(double(ymax) * 1.1)  << ",ymin=0, minor y tick num = 3]" << std::endl;
       os << "    \\addplot coordinates { ";
     } else {
-      os << "  \\begin{axis}[ymax=" << T(double(max) * 1.1)  << ",ymin=0]" << std::endl;
+      os << "  \\begin{axis}[ymax=" << T(double(ymax) * 1.1)  << ",ymin=0]" << std::endl;
       os << "    \\addplot[color=blue, mark=.] coordinates { ";
     }
     for (unsigned int i = 0; i < toplot.size(); ++i) {
@@ -433,9 +516,10 @@ private:
     }
     if (histo) {
       // add one value because latex ignores the last one (i dont know why)
-      os << "(" << toplot.size() << ", " << max / 2 << ") ";
+      os << "(" << toplot.size() << ", " << ymax / 2 << ") ";
     }
-      os << "};" << std::endl;
+    os << "};" << std::endl;
+
     if ((double)max_kassian > 0.01) {
       os << "\\draw [red, dashed] ({rel axis cs:0,0}|-{axis cs:0," << max_kassian 
          << "}) -- ({rel axis cs:1,0}|-{axis cs:" << toplot.size() << "," << max_kassian 
@@ -444,7 +528,23 @@ private:
     if ((double)lower_bound > 0.01) {
       os << "\\draw [red, dashed] ({rel axis cs:0,0}|-{axis cs:0," << lower_bound 
          << "}) -- ({rel axis cs:1,0}|-{axis cs:" << toplot.size() << "," << lower_bound 
-         << "}) node [pos=0.5, above] {Lower bound};" << std::endl;
+         << "}) node [pos=0.5, below] {Lower bound};" << std::endl;
+        if (index_max >= 0) {
+          os << "\\draw [red, <->] ({axis cs:" << (double)index_max + 0.5
+            << "," << lower_bound << "}) -- ({axis cs:" << (double)index_max + 0.5 << 
+            "," << toplot[index_max] << "}) node [pos=0.5, left] { " << toplot[index_max] - lower_bound
+            << "};" << std::endl;
+        }
+    }
+    std::cout << "mean : " << mean << std::endl;
+    if ((double)mean > 0.00001) {
+      os << "\\draw [olive, dashed] ({rel axis cs:0,0}|-{axis cs:0," << mean
+         << "}) -- ({rel axis cs:1,0}|-{axis cs:" << toplot.size() << "," << mean 
+         << "}) node [pos=0.5, below] {Mean : "<< mean  <<"};" << std::endl;
+    }
+    if ((double)variance > 0.0000001) {
+      os << "\\node[red, draw, scale=1.2] at ({rel axis cs:0.5,0.75}) {Variance: :"
+         << variance<< "};" << std::endl;
     }
     os << "  \\end{axis}" << std::endl;
     os << "\\end{tikzpicture}" << std::endl;

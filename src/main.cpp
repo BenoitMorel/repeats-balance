@@ -38,16 +38,16 @@ void experiment3() {
 
 void experiment4() {
   Helper::experiment4("../data/404/404.phy", "../data/404/404.part", "../data/404/treechar_samples/tree404.", 
-                      53, 10, 10, "../results/experiment4/404_10cpus.tex");
+                      53, 50, 10, "../results/experiment4/404_10cpus.tex");
 }
 
 void experiment5() {
   Helper::experiment5("../data/404/404.phy", "../data/404/404.part",  
-                      10, 10, 10, "../results/experiment5/404_10cpus.tex");
+                      30, 50, 10, "../results/experiment5/404_10cpus.tex");
   Helper::experiment5("../data/59/59.phy", "../data/59/59.part",  
-                      10, 10, 10, "../results/experiment5/59_10cpus.tex");
+                      30, 50, 10, "../results/experiment5/59_10cpus.tex");
   Helper::experiment5("../data/128/128.phy", "../data/128/128.part",  
-                      10, 10, 10, "../results/experiment5/128_10cpus.tex");
+                      30, 50, 10, "../results/experiment5/128_10cpus.tex");
 }
 
 int main()
