@@ -1,36 +1,38 @@
 \begin{minipage}{0.49\textwidth}
 \begin{tikzpicture}[scale=0.75]
-  \begin{axis}[ybar interval, ymax=4000,ymin=0, minor y tick num = 3
+  \begin{axis}[ybar interval, ymax=4195.82,ymin=0, minor y tick num = 3
 , xlabel={CPU}, ylabel={Elapsed time (ms)}]
-    \addplot coordinates { (0,3611.811000) (1,3009.518000) (2,895.014000) (3,3841.932000) (4,3322.871000) (5,3893.955000) (6,2163.116000) (7,3077.964000) (8,2902.618000) (9,2133.953000) (10, 658) };
+    \addplot coordinates { (0,3644.38) (1,2884.27) (2,934.048) (3,3694.86) (4,3157.71) (5,3814.38) (6,2169.76) (7,3002.12) (8,2807.64) (9,2075.17) (10, 1907.19) };
   \end{axis}
 \end{tikzpicture}
-\caption{Elapsed time to compute the likelihood, without site repeats, with Kassian's load balancing}
+\caption*{Elapsed time to compute the likelihood, without site repeats, with Kassian's load balancing}
 \end{minipage}
 \begin{minipage}{0.49\textwidth}
 \begin{tikzpicture}[scale=0.75]
-  \begin{axis}[ybar interval, ymax=1000,ymin=0, minor y tick num = 3
+  \begin{axis}[ybar interval, ymax=632.174,ymin=0, minor y tick num = 3
 , xlabel={CPU}, ylabel={Elapsed time (ms)}]
-    \addplot coordinates {(0,447.519000) (1,343.761000) (2,111.402000) (3,583.096000) (4,431.066000) (5,485.746000) (6,205.548000) (7,348.200000) (8,357.013000) (9,195.790000) (10,195.790000)  };
+    \addplot coordinates { (0,440.941) (1,333.134) (2,106.224) (3,574.704) (4,422.314) (5,471.661) (6,219.151) (7,342.658) (8,409.76) (9,199.398) (10, 287.352) };
+\draw [red, dashed] ({rel axis cs:0,0}|-{axis cs:0,574.704}) -- ({rel axis cs:1,0}|-{axis cs:10,574.704}) node [pos=0.5, below] {worst cpu time with Kassian};
   \end{axis}
 \end{tikzpicture}
-\caption{Elapsed time to compute the likelihood, with site repeats, with Kassian's load balancing}
+\caption*{Elapsed time to compute the likelihood, with site repeats, with Kassian's load balancing}
 \end{minipage}
 \begin{minipage}{0.49\textwidth}
 \begin{tikzpicture}[scale=0.75]
-  \begin{axis}[ybar interval, ymax=4000,ymin=0, minor y tick num = 3
+  \begin{axis}[ybar interval, ymax=4195.82,ymin=0, minor y tick num = 3
 , xlabel={CPU}, ylabel={Elapsed time (ms)}]
-    \addplot coordinates { (0,2667.973000) (1,2717.418000) (2,3050.031000) (3,2933.127000) (4,3040.252000) (5,2119.503000) (6,2673.619000) (7,3015.354000) (8,3308.388000) (9,3770.589000) (10, 658) };
+    \addplot coordinates { (0,3668.73) (1,2947.29) (2,3073.53) (3,3387.34) (4,2042.79) (5,2182.17) (6,2542.21) (7,3008.89) (8,2873.12) (9,3728.2) (10, 1907.19) };
   \end{axis}
 \end{tikzpicture}
-\caption{Elapsed time to compute the likelihood, without site repeats, with Weighted's load balancing}
+\caption*{Elapsed time to compute the likelihood, without site repeats, with Weighted's load balancing}
 \end{minipage}
 \begin{minipage}{0.49\textwidth}
 \begin{tikzpicture}[scale=0.75]
-  \begin{axis}[ybar interval, ymax=1000,ymin=0, minor y tick num = 3
+  \begin{axis}[ybar interval, ymax=632.174,ymin=0, minor y tick num = 3
 , xlabel={CPU}, ylabel={Elapsed time (ms)}]
-    \addplot coordinates {(0,324.819000) (1,350.999000) (2,364.182000) (3,401.982000) (4,370.867000) (5,342.416000) (6,336.036000) (7,350.798000) (8,420.803000) (9,360.584000) (10, 658) };
+    \addplot coordinates { (0,375.445) (1,379.711) (2,366.796) (3,344.966) (4,370.313) (5,340.779) (6,311.796) (7,330.298) (8,369.681) (9,355.511) (10, 287.352) };
+\draw [red, dashed] ({rel axis cs:0,0}|-{axis cs:0,574.704}) -- ({rel axis cs:1,0}|-{axis cs:10,574.704}) node [pos=0.5, below] {worst cpu time with Kassian};
   \end{axis}
 \end{tikzpicture}
-\caption{Elapsed time to compute the likelihood, with site repeats, with Weighted's load balancing}
+\caption*{Elapsed time to compute the likelihood, with site repeats, with Weighted's load balancing}
 \end{minipage}
