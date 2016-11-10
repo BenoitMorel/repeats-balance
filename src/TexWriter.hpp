@@ -29,6 +29,7 @@ struct Plot {
   Plot(T max, const std::string caption) {
     this->max = max;
     this->caption = caption;
+    this->histo = false;
   }
 
   
@@ -54,13 +55,12 @@ struct Plot {
     return *this;
   }
 
-  Plot &add_arrow(double x, T ymin, T ymax, const std::string &color, const std::string &text) {
+  Plot &add_arrow(double x, T ymin, T ymax, const std::string &color = "red") {
     Arrow a;
     a.x = x;
     a.ymin = ymin;
     a.ymax = ymax;
     a.color = color;
-    a.text = text;
     arrows.push_back(a);
     return *this;
   }
@@ -124,7 +124,7 @@ struct Plot {
       os << "\\draw [" << p.lines[l].color  << (p.lines[l].dashed ? ", dashed" : "") 
          << "] ({rel axis cs:0,0}|-{axis cs:0," << p.lines[l].y 
          << "}) -- ({rel axis cs:1,0}|-{axis cs:" << p.plots[0]->size() << "," << p.lines[l].y 
-         << "}) node [pos=0.5, above] {" << p.lines[l].caption << "};" << std::endl;
+         << "}) node [pos=0.5, below] {" << p.lines[l].caption << "};" << std::endl;
     }
     if (p.legend.size()) {
       os << "\\node[draw=black,thick,rounded corners=2pt,above right=2mm] at (0, 0) {%" << std::endl;

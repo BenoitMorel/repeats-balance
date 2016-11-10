@@ -9,38 +9,38 @@ number of partitions : 34
 
 Naive : 
 Total sites number = 29198
-Total weight       = 5794.49
-Max weight         = 801.094
-Weight ratio       = 0.276679 ((max - average) / max)
+Total weight       = 5307.24
+Max weight         = 755.236
+Weight ratio       = 0.297275 ((max - average) / max)
 Max partitions     = 0
 Sites per cpu      = 2394 3710 1893 3246 3090 3024 4182 2910 2526 2223 
-Weight per cpu     = 473.921 801.094 389.331 695.898 580.134 543.118 764.024 569.457 537.606 439.906 
+Weight per cpu     = 439.417 755.236 368.307 649.339 544.094 520.693 646.929 498.528 470.181 414.512 
 Sites per cpu      = 4 4 4 4 3 3 3 3 3 3 
 
 Kassian : 
 Total sites number = 29198
-Total weight       = 6062.12
-Max weight         = 732.535
-Weight ratio       = 0.172447 ((max - average) / max)
+Total weight       = 5584.05
+Max weight         = 680.441
+Weight ratio       = 0.179349 ((max - average) / max)
 Max partitions     = 0
 Sites per cpu      = 2919 2919 2920 2920 2920 2920 2920 2920 2920 2920 
-Weight per cpu     = 595 587.929 558.551 547.394 732.535 652.402 629.74 657.11 472.559 628.898 
+Weight per cpu     = 524.614 528.575 518.78 510.835 680.441 625.291 555.346 635.764 407.48 596.921 
 Sites per cpu      = 4 4 5 4 5 4 5 4 4 4 
 
 Kassian weighted : 
 Total sites number = 29198
-Total weight       = 6023.32
-Max weight         = 637.339
-Weight ratio       = 0.0549257 ((max - average) / max)
+Total weight       = 5511.61
+Max weight         = 585.969
+Weight ratio       = 0.0594023 ((max - average) / max)
 Max partitions     = 0
-Sites per cpu      = 2792 2788 3812 3700 3494 2275 2868 2656 2907 1906 
-Weight per cpu     = 609.953 593.126 618.756 637.339 624.906 599.26 597.504 577.063 570.543 594.874 
-Sites per cpu      = 4 5 4 5 4 5 4 4 4 4 
+Sites per cpu      = 3328 2764 2949 3321 3507 2846 2551 2532 2908 2492 
+Weight per cpu     = 524.976 552.551 574.228 519.11 535.205 559.866 585.969 561.016 553.504 545.181 
+Sites per cpu      = 4 5 4 4 5 5 4 4 4 4 
 
 Expectations with the sites repeats (if the sites repeats computation time is negligible and without the constant partition cost)): 
-Speedup [no SR, parall] -> // [SR (kassian), parall] : 3.98479
-Speedup [no SR, parall] -> // [SR (kassian weighted), parall] : 4.57998
-Speedup [Kassian, parall] -> [Kassian weighted, parall] : 1.14937
-Speedup [no SR, sequential] => [SR (kassian weighted), parall] 45.8124
+Speedup [no SR, parall] -> // [SR (kassian), parall] : 4.28987
+Speedup [no SR, parall] -> // [SR (kassian weighted), parall] : 4.9815
+Speedup [Kassian, parall] -> [Kassian weighted, parall] : 1.16122
+Speedup [no SR, sequential] => [SR (kassian weighted), parall] 49.8286
 
 

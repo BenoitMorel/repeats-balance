@@ -1,0 +1,22 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{import}
+\usepackage[font=scriptsize,labelfont=bf]{caption}
+
+\begin{document}
+
+\newcommand*{\figuretitle}[1]{%
+    {\centering%   <--------  will only affect the title because of the grouping (by the
+    \textbf{#1}%              braces before \centering and behind \medskip). If you remove
+    \par\medskip}%            these braces the whole body of a {figure} env will be centered.
+}
+
+\begin{figure}
+\figuretitle{Sequences 404, 10 CPUS. Likelihood is computed 100 times with the same (parsimony) tree topology using libpll}
+\subimport{../libpll_results/}{404_10cpus.tex}
+\end{figure}
+
+
+
+\end{document}

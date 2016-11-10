@@ -10,6 +10,7 @@
 #include "Partition.hpp"
 #include "Tree.hpp"
 #include "LoadBalancing.hpp"
+#include "TexWriter.hpp"
 
 
 struct AssignmentOverview {
@@ -60,6 +61,68 @@ struct AssignmentOverview {
 class Helper {
 public:
 
+  static int create_dir(const std::string &dir) {
+    return system((std::string("mkdir -p ") + dir).c_str());
+  }
+
+
+  static void export_cpu(const InputSequences &seq, const Bin &bin, const std::string &output_dir) {
+    create_dir(output_dir);
+    for (unsigned int p = 0; p < bin.partitions.size(); ++p) {
+      std::ostringstream file;
+      file << output_dir << "/partition" << p << ".phy";
+      std::ofstream os(file.str().c_str());
+      const Partition *partition = bin.partitions[p]; 
+      unsigned int offset = partition->start() + bin.offsets[p];
+      unsigned int size = bin.sizes[p];
+      seq.write_subseq(offset, size, os);
+      os.close();
+    }
+  }
+
+  static void export_lb(const InputSequences &seq, LoadBalancing &lb, const std::string &output_dir) {
+    create_dir(output_dir);
+    for (unsigned int b = 0; b < lb.bins().size();  ++b) {
+      std::ostringstream file;
+      file << output_dir << "/cpu" << b;
+      export_cpu(seq, lb.bins()[b],  file.str());
+    }
+  }
+
+  static void compute_export_lb(const std::string &sequences_file, 
+                                const std::string &partitions_file, 
+                                unsigned int tree_samples_number, 
+                                unsigned int cpu_number, 
+                                const std::string &output_dir) { 
+
+    create_dir(output_dir);
+    InputSequences sequences;
+    parse_sequences(sequences_file.c_str(), sequences);
+    InputPartitions inputPartitions;
+    parse_partitions(partitions_file.c_str(), inputPartitions);
+    Partitions partitions;
+    inputPartitions.generate_partitions(partitions, &sequences);
+    Tree tree_sample;
+    for (unsigned int i = 0; i < tree_samples_number; ++i) {
+      tree_sample.set_random(sequences.number());
+      for (unsigned int p = 0; p < partitions.size(); ++p) {
+        tree_sample.update_SRcount(partitions[p]);
+      }
+    }
+    for (unsigned int p = 0; p < partitions.size(); ++p) {
+      partitions[p].normalize_costs(tree_samples_number * (sequences.number() - 1));
+    }
+    LoadBalancing lb_k(partitions, cpu_number);
+    LoadBalancing lb(partitions, cpu_number);
+    lb_k.compute_kassian();
+    lb.compute_kassian_weighted();
+    Assignments assignments;
+    Assignments assignments_k;
+    lb.build_assignments(assignments);
+    lb_k.build_assignments(assignments_k);
+    export_lb(sequences, lb_k, output_dir + "/kassian");
+    export_lb(sequences, lb, output_dir + "/weighted");
+  }
   static void compute_sr_rates(InputSequences &sequences, Partitions &partitions, Tree &tree, std::vector<double> &o_srrates) {
     o_srrates.resize(partitions.size());
     for (unsigned int i = 0; i < partitions.size(); ++i) {
@@ -96,7 +159,7 @@ public:
                     unsigned int tree_samples_number,
                     unsigned int cpu_number, 
                     const std::string &output_file) {
-    std::ofstream os(output_file.c_str());
+    TexWriter writer(output_file);
     InputSequences sequences;
     parse_sequences(sequences_file.c_str(), sequences);
     InputPartitions inputPartitions;
@@ -191,14 +254,34 @@ public:
     }
     variance = sqrt(variance) / trees_number;
     std::cout << "variance : " << variance << std::endl;
-    plot<double>(weights[0], max, 0, lower_bounds[0], 0.0, 0.0, max_weights_indices[0],
-      "Weights repartitions on the first tree", (partitions.size() < 50), os);
-    plot<double>(weights[trees_number - 1], max, 0, lower_bounds[trees_number - 1], 0.0, 0.0, max_weights_indices[trees_number - 1],
-      "Weights repartitions on the last", (partitions.size() < 50), os);
-    /*iplot<double>(average, max, 0, lower_bound_average, 0.0, -1, 
-      "Average weights repartitions on several trees", (partitions.size() < 50), os);*/
-    plot3(max_weights_k, max_weights, lower_bounds, max, os);
-    
+    int x = max_weights_indices[0];
+    writer.write_plot(Plot<double>(max, "Weights repartition on the first tree")
+                      .add_plot(weights[0]) 
+                      .add_horizontal_line(lower_bounds[0], "red", true, "Lower bound")
+                      .is_histo(partitions.size() < 50)
+                      .add_arrow(x, lower_bounds[0], weights[0][x])
+                      .xlabel("CPU")
+                      .ylabel("PLF-Cost")
+                      ); 
+    x = max_weights_indices[trees_number - 1];
+    writer.write_plot(Plot<double>(max, "Weights repartition on the last tree")
+                      .add_plot(weights[trees_number - 1]) 
+                      .add_horizontal_line(lower_bounds[trees_number - 1], "red", true, "Lower bound")
+                      .is_histo(partitions.size() < 50)
+                      .add_arrow(x, lower_bounds[trees_number - 1], weights[trees_number - 1][x])
+                      .xlabel("CPU")
+                      .ylabel("PLF-Cost")
+                      );
+   writer.write_plot(Plot<double>(max, "Worst cpu weight for each tree with Kassian and with Weighted, and plot the lower bound for each tree")
+                    .add_plot(max_weights, "blue", '.')
+                    .add_plot(max_weights_k, "olive", '.')
+                    .add_plot(lower_bounds, "red", '.')
+                    .add_legend("olive", "Kassian")
+                    .add_legend("blue", "Weighted")
+                    .add_legend("red", "Lower bounds")
+                    .xlabel("Tree")
+                    .ylabel("Worst cpu PLF-Cost")
+                    );  
     /*plot<double>(worse_diff_pertree, (max - lower_bound_average) / lower_bound_average, 0, 0, mean, variance, -1,
       "Per tree, normalized difference between the worse weight and the lower bound", false, os);
      */
@@ -263,12 +346,11 @@ public:
     Tree tree;
     tree.set_random(sequences.number());
     std::ofstream out((output_file + ".txt").c_str(), std::ofstream::out);
-    std::ofstream latex_out((output_file + ".tex").c_str(), std::ofstream::out);
+    TexWriter latex_out(output_file + ".tex");
     out << "Experiment 1 !" << std::endl;
     out << "sequences file : " << sequences_file << ::std::endl;
     out << "partitions file : " << partitions_file << ::std::endl;
     print_stats(sequences, partitions, tree, tree_samples_number, cpu_number, out, latex_out);
-    latex_out.close();
     out.close();
 
   }
@@ -292,7 +374,7 @@ public:
     Tree tree;
     parse_tree(tree_file.c_str(), sequences, tree);
     std::ofstream out((output_file + ".txt").c_str(), std::ofstream::out);
-    std::ofstream latex_out((output_file + ".tex").c_str(), std::ofstream::out);
+    TexWriter latex_out(output_file + ".tex");
     out << "Experiment 2 !" << std::endl;
     out << "sequences file : " << sequences_file << ::std::endl;
     out << "partitions file : " << partitions_file << ::std::endl;
@@ -309,7 +391,7 @@ private:
                     unsigned int tree_samples_number,
                     unsigned int cpu_number, 
                     std::ofstream &out,
-                    std::ofstream &latex_out) {
+                    TexWriter &writer) {
     out << "number of tree to generate : " << tree_samples_number << ::std::endl;
     out << "number of cpus : " << cpu_number << ::std::endl;
 
@@ -364,9 +446,39 @@ private:
     out << std::endl;
     out << std::endl;
     
-    double worse_weight = std::max(res_kassian.max_weight, res_weighted.max_weight);
     double lower_bound = res_naive.total_weight / double(cpu_number); 
-    plot<unsigned int>(res_kassian.sites, res_kassian.max_sites, 0, 0, 0, 0.0, -1,
+    writer.write_plot(Plot<unsigned int>(res_kassian.max_sites, "Sites repartition with Kassian")
+                      .add_plot(res_kassian.sites) 
+                      .is_histo(cpu_number < 30)
+                      .xlabel("CPU")
+                      .ylabel("Allocated sites")
+                      );
+    writer.write_plot(Plot<double>(res_kassian.max_weight, "PLF\\_cost repartition with Kassian")
+                      .add_plot(res_kassian.weights) 
+                      .is_histo(cpu_number < 30)
+                      .add_horizontal_line(res_kassian.max_weight, "olive", true, "Worst PLF\\_cost with Kassian")
+                      .add_horizontal_line(lower_bound, "red", true, "Lower bound")
+                      .is_histo(partitions.size() < 50)
+                      .xlabel("CPU")
+                      .ylabel("PLF-Cost")
+                      );
+    writer.write_plot(Plot<unsigned int>(res_weighted.max_sites, "Sites repartition with Weighted")
+                      .add_plot(res_weighted.sites) 
+                      .is_histo(cpu_number < 30)
+                      .xlabel("CPU")
+                      .ylabel("Allocated sites")
+                      );
+    writer.write_plot(Plot<double>(res_kassian.max_weight, "PLF\\_cost repartition with Kassian")
+                      .add_plot(res_weighted.weights) 
+                      .is_histo(cpu_number < 30)
+                      .add_horizontal_line(res_kassian.max_weight, "olive", true, "Worst PLF\\_cost with Kassian")
+                      .add_horizontal_line(lower_bound, "red", true, "Lower bound")
+                      .is_histo(partitions.size() < 50)
+                      .xlabel("CPU")
+                      .ylabel("PLF-Cost")
+                      );
+    /*
+      plot<unsigned int>(res_kassian.sites, res_kassian.max_sites, 0, 0, 0, 0.0, -1,
       "Sites repartition with Kassian", (partitions.size() < 50), latex_out);
     plot<double>(res_kassian.weights, worse_weight, res_kassian.max_weight, lower_bound, 0, 0.0, -1,
       "PLF-cost repartition with Kassian", (partitions.size() < 50), latex_out);
@@ -375,7 +487,7 @@ private:
     plot<double>(res_weighted.weights, worse_weight, 0, 0.0,
       res_kassian.max_weight, lower_bound, -1,
       "PLF-cost repartition with Weighted", (partitions.size() < 50), latex_out);
-   
+   */
   }
   
   static void treatlb(LoadBalancing &lb, Tree &tree, AssignmentOverview &res) {

@@ -7,6 +7,7 @@
 #include "Tree.hpp"
 #include "LoadBalancing.hpp"
 #include "Helper.hpp"
+#include "TexWriter.hpp"
 
 void experiment1() {
 //  Helper::experiment1("../data/94/94.phy", "../data/94/94.part", 10, 30, "../results/experiment1/94_30cpus");
@@ -19,7 +20,9 @@ void experiment1() {
 void experiment2() {
   Helper::experiment2("../data/59/59.phy", "../data/59/59.part", "../data/59/seed12345_top0.newick", 
                       10, 10, "../results/experiment2/59_10cpus_seed12345_top0");
-/*  Helper::experiment2("../data/128/128.phy", "../data/128/128.part", "../data/128/firsttree.newick", 
+  Helper::experiment2("../data/59/59.phy", "../data/59/59.part", "../data/59/seed12345_top79.newick", 
+                      10, 10, "../results/experiment2/59_10cpus_seed12345_top79");
+  Helper::experiment2("../data/128/128.phy", "../data/128/128.part", "../data/128/firsttree.newick", 
                       10, 10, "../results/experiment2/128_10cpus_first");
   Helper::experiment2("../data/128/128.phy", "../data/128/128.part", "../data/128/tree86894.newick", 
                       10, 10, "../results/experiment2/128_10cpus_tree86894");
@@ -27,7 +30,6 @@ void experiment2() {
                       10, 10, "../results/experiment2/404_10cpus_first");
   Helper::experiment2("../data/404/404.phy", "../data/404/404.part", "../data/404/seed42_tree_98240.newick", 
                       10, 10, "../results/experiment2/404_10cpus_98240");
-*/
 }
 
 void experiment3() {
@@ -45,10 +47,18 @@ void experiment5() {
   Helper::experiment5("../data/404/404.phy", "../data/404/404.part",  
                       30, 50, 10, "../results/experiment5/404_10cpus.tex");
   Helper::experiment5("../data/59/59.phy", "../data/59/59.part",  
+ 
                       30, 50, 10, "../results/experiment5/59_10cpus.tex");
   Helper::experiment5("../data/128/128.phy", "../data/128/128.part",  
                       30, 50, 10, "../results/experiment5/128_10cpus.tex");
 }
+
+void export_lbs() {
+  Helper::compute_export_lb("../data/404/404.phy", "../data/404/404.part", 30, 10,
+                            "../results/exports/404_10");
+    
+}
+
 
 int main()
 {
@@ -59,8 +69,9 @@ int main()
   //experiment1();
   //experiment2(); 
   //experiment3(); 
-  experiment4(); 
-  experiment5(); 
+  // experiment4(); 
+  //experiment5(); 
+  export_lbs();
   return 0;
 }
 

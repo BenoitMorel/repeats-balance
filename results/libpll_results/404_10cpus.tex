@@ -1,0 +1,36 @@
+\begin{minipage}{0.49\textwidth}
+\begin{tikzpicture}[scale=0.75]
+  \begin{axis}[ybar interval, ymax=4000,ymin=0, minor y tick num = 3
+, xlabel={CPU}, ylabel={Elapsed time (ms)}]
+    \addplot coordinates { (0,3611.811000) (1,3009.518000) (2,895.014000) (3,3841.932000) (4,3322.871000) (5,3893.955000) (6,2163.116000) (7,3077.964000) (8,2902.618000) (9,2133.953000) (10, 658) };
+  \end{axis}
+\end{tikzpicture}
+\caption{Elapsed time to compute the likelihood, without site repeats, with Kassian's load balancing}
+\end{minipage}
+\begin{minipage}{0.49\textwidth}
+\begin{tikzpicture}[scale=0.75]
+  \begin{axis}[ybar interval, ymax=1000,ymin=0, minor y tick num = 3
+, xlabel={CPU}, ylabel={Elapsed time (ms)}]
+    \addplot coordinates {(0,447.519000) (1,343.761000) (2,111.402000) (3,583.096000) (4,431.066000) (5,485.746000) (6,205.548000) (7,348.200000) (8,357.013000) (9,195.790000) (10,195.790000)  };
+  \end{axis}
+\end{tikzpicture}
+\caption{Elapsed time to compute the likelihood, with site repeats, with Kassian's load balancing}
+\end{minipage}
+\begin{minipage}{0.49\textwidth}
+\begin{tikzpicture}[scale=0.75]
+  \begin{axis}[ybar interval, ymax=4000,ymin=0, minor y tick num = 3
+, xlabel={CPU}, ylabel={Elapsed time (ms)}]
+    \addplot coordinates { (0,2667.973000) (1,2717.418000) (2,3050.031000) (3,2933.127000) (4,3040.252000) (5,2119.503000) (6,2673.619000) (7,3015.354000) (8,3308.388000) (9,3770.589000) (10, 658) };
+  \end{axis}
+\end{tikzpicture}
+\caption{Elapsed time to compute the likelihood, without site repeats, with Weighted's load balancing}
+\end{minipage}
+\begin{minipage}{0.49\textwidth}
+\begin{tikzpicture}[scale=0.75]
+  \begin{axis}[ybar interval, ymax=1000,ymin=0, minor y tick num = 3
+, xlabel={CPU}, ylabel={Elapsed time (ms)}]
+    \addplot coordinates {(0,324.819000) (1,350.999000) (2,364.182000) (3,401.982000) (4,370.867000) (5,342.416000) (6,336.036000) (7,350.798000) (8,420.803000) (9,360.584000) (10, 658) };
+  \end{axis}
+\end{tikzpicture}
+\caption{Elapsed time to compute the likelihood, with site repeats, with Weighted's load balancing}
+\end{minipage}

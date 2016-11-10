@@ -72,6 +72,13 @@ class InputSequences {
       return out;
     }
 
+    void write_subseq(unsigned int offset, unsigned int size, std::ostream &out) const {
+      out << number() << " " << size << std::endl;
+      for (unsigned int s = 0; s < number(); ++s) {
+        out << _names[s] << " " << std::string(_sequences[s] + offset, size) << std::endl;
+      }
+    }
+
   private:
     unsigned int _seq_size;
     std::vector<const char *> _names;
