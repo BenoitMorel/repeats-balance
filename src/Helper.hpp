@@ -122,6 +122,10 @@ public:
     lb_k.build_assignments(assignments_k);
     export_lb(sequences, lb_k, output_dir + "/kassian");
     export_lb(sequences, lb, output_dir + "/weighted");
+    create_dir(output_dir + "/sequential");
+    create_dir(output_dir + "/sequential/cpu0");
+    std::ofstream os((output_dir + "/sequential/cpu0/fullseq.phy").c_str());
+    sequences.write_subseq(0, sequences.width(), os);
   }
   static void compute_sr_rates(InputSequences &sequences, Partitions &partitions, Tree &tree, std::vector<double> &o_srrates) {
     o_srrates.resize(partitions.size());

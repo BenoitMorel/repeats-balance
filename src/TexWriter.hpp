@@ -172,7 +172,11 @@ struct Plot {
 
 class TexWriter {
 public:
-  TexWriter(const std::string &file): os(file.c_str()) {  }
+  TexWriter(const std::string &file): os(file.c_str()) { 
+    if (!os.is_open()) {
+      std::cerr << "Warning, cannot open : " << file << " for writing" << std::endl;
+    }
+  }
   ~TexWriter() {os.close();}
   
   template <typename T>
