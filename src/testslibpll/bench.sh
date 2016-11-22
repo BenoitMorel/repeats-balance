@@ -1,8 +1,8 @@
 #!/bin/bash
 outputdir="../../results/sequential_benchs/"
-outputfile="bench_50_iterations"
+outputfile="bench_500_iterations"
 outputfile="$outputdir$outputfile"
-iterations=50
+iterations=500
 dataset_number=3
 file=""
 
@@ -16,6 +16,7 @@ writeln() {
 }
 
 launch() {
+  echo "./test $1 $2 $3 $4 $5 $6 $7"
   ./test $1 $2 $3 $4 $5 $6 $7 > temp
   cat temp | grep ms | tr -d '\n'   >> $file  
   cat temp | grep ll
@@ -53,11 +54,22 @@ bench_arch() {
   cp tomas/* .
   make clean && make # header changed
   bench_dataset $iterations 1 0 0 "xflouris default mode" $1
-  bench_dataset $iterations 1 0 1 "xflouris tip pattern" $1
   cp benoit/* .
   make clean && make # header changed
   bench_dataset $iterations 1 0 0 "bmorel default mode" $1
+  cp benoit2/* .
+  bench_dataset $iterations 1 0 0 "bmorel2 default mode" $1
+  
+  cp tomas/* .
+  make clean && make # header changed
+  bench_dataset $iterations 1 0 1 "xflouris tip pattern" $1
+  cp benoit/* .
+  make clean && make # header changed
   bench_dataset $iterations 1 0 1 "bmorel tip pattern" $1
+  cp benoit2/* .
+  bench_dataset $iterations 1 0 1 "bmorel2 tip pattern" $1
+  
+  
   cp benoit1000/* .
   bench_dataset $iterations 1 1 0 "bmorel sites repeats M=1000" $1
   cp benoit10000/* .

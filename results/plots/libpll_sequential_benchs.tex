@@ -26,6 +26,7 @@ The following benchmarks compare several libpll implementations with different m
 \begin{itemize}
 \item xflouris means that the implentation used is this one: \\ https://github.com/xflouris/libpll.
 \item bmorel means that the implementation  used is this one: \\ https://github.com/BenoitMorel/libpll. It supports sites repeats, and the data structure used is a bit different from xflouris (even without sites repeats): CLVs are not supposed to be sorted by sites, and an additional lookup table is used to access them in most of the core functions.
+\item bmorel2 is a (temporary) hacked version of bmorel where I do not use the new lookup structure for the scalers, because it slows down the execution.
 \item default mode means that the option \texttt{PLL\_ATTRIB\_PATTERN\_TIP} and \texttt{PLL\_ATTRIB\_SITES\_REPEATS} are unset.
 \item tip pattern means that the option \texttt{PLL\_ATTRIB\_PATTERN\_TIP} is set.
 \item sites repeats means that the option \texttt{PLL\_ATTRIB\_SITES\_REPEATS} is set.
@@ -46,6 +47,19 @@ The following benchmarks compare several libpll implementations with different m
 \begin{figure}[!htb]
 \figuretitle{AVX architecture, 50 iterations}
 \subimport{../sequential_benchs/}{bench_50_iterationsavx.tex}
+\end{figure}
+
+\begin{figure}[!htb]
+\figuretitle{CPU architecture, 500 iterations}
+\subimport{../sequential_benchs/}{bench_500_iterationscpu.tex}
+\end{figure}
+\begin{figure}[!htb]
+\figuretitle{SSE architecture, 500 iterations}
+\subimport{../sequential_benchs/}{bench_500_iterationssse.tex}
+\end{figure}
+\begin{figure}[!htb]
+\figuretitle{AVX architecture, 500 iterations}
+\subimport{../sequential_benchs/}{bench_500_iterationsavx.tex}
 \end{figure}
 
 \end{document}
