@@ -1,5 +1,5 @@
 CC=g++
-DBG=  -O3 -g 
+DBG=  -O3 -g -pg 
 CFLAGS=  $(DBG) -W -Wall -ansi -pedantic 
 LDFLAGS= $(DBG) -L/home/kaplipa/benoit/github/repeats-balance/src/testslibpll/ 
 EXEC=test

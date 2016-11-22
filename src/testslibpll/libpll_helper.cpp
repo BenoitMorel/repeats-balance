@@ -11,30 +11,32 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <dirent.h>
-
+#include <iostream>
 #define STATES    4
 #define RATE_CATS 4
+#ifndef PLL_ATTRIB_SITES_REPEATS // old pll version
+  #define PLL_ATTRIB_SITES_REPEATS 0
+#endif
+  static void fatal(const char * format, ...) __attribute__ ((noreturn));
 
-static void fatal(const char * format, ...) __attribute__ ((noreturn));
-
-typedef struct
-{
-  int clv_valid;
-} node_info_t;
-
-/* a callback function for performing a full traversal */
-static int cb_full_traversal(pll_utree_t * node)
-{
-  return 1;
-}
-
-
-static void set_missing_branch_length_recursive(pll_utree_t * tree,
-    double length)
-{
-  if (tree)
+  typedef struct
   {
-    /* set branch length to default if not set */
+    int clv_valid;
+  } node_info_t;
+
+  /* a callback function for performing a full traversal */
+  static int cb_full_traversal(pll_utree_t * node)
+  {
+    return 1;
+  }
+
+
+  static void set_missing_branch_length_recursive(pll_utree_t * tree,
+      double length)
+  {
+    if (tree)
+    {
+      /* set branch length to default if not set */
     if (!tree->length)
       tree->length = length;
 
@@ -74,7 +76,7 @@ static void fatal(const char * format, ...)
 
 double compute_partition(const char * newick,
     const char * seq,
-    unsigned int use_repeats,
+    unsigned int attribute,
     unsigned int iterations)
 {
   unsigned int i;
@@ -135,10 +137,6 @@ double compute_partition(const char * newick,
       &(msa->length));
 
 
-  unsigned int attribute = (use_repeats) ?
-    PLL_ATTRIB_ARCH_CPU | PLL_ATTRIB_SITES_REPEATS :
-    PLL_ATTRIB_ARCH_CPU;
-  //attribute = attribute | PLL_ATTRIB_PATTERN_TIP;
   partition = pll_partition_create(tip_nodes_count,
       inner_nodes_count,
       STATES,
@@ -210,6 +208,7 @@ double compute_partition(const char * newick,
         params_indices,
         NULL);
   }
+  std::cout << "ll " << logl << std::endl;
   pll_partition_destroy(partition);
   free(travbuffer);
   free(branch_lengths);
@@ -222,7 +221,7 @@ double compute_partition(const char * newick,
 
 double compute_partitions(const char * newick,
     const char * seqdir,
-    unsigned int use_repeats,
+    unsigned int attribute,
     unsigned int iterations,
     std::vector<double> &times)
 {
@@ -238,7 +237,7 @@ double compute_partitions(const char * newick,
     const char * seq = myfile->d_name;
     if (seq[strlen(seq) - 1] == 'y') {
       sprintf(buf, "%s/%s", seqdir, myfile->d_name);
-      res += compute_partition(newick, buf, use_repeats, iterations);
+      res += compute_partition(newick, buf, attribute, iterations);
     }
   }
   closedir(mydir);
@@ -251,7 +250,7 @@ double compute_partitions(const char * newick,
 
 double compute_loadbalancing(const char * newick,
     const char * lbdir,
-    unsigned int use_repeats,
+    unsigned int attribute,
     unsigned int iterations,
     std::vector<double> &times)
 {
@@ -265,7 +264,7 @@ double compute_loadbalancing(const char * newick,
     const char * seqdir = myfile->d_name;
     if (seqdir[0] == 'c') {
       sprintf(buf, "%s/%s", lbdir, myfile->d_name);
-      res += compute_partitions(newick, buf, use_repeats, iterations, times);
+      res += compute_partitions(newick, buf, attribute, iterations, times);
     }
   }
   closedir(mydir);

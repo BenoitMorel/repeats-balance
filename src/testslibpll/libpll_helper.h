@@ -6,7 +6,7 @@
 
 double compute_loadbalancing(const char * newick,
                       const char * lbdir,
-                      unsigned int use_repeats,
+                      unsigned int attribute,
                       unsigned int iterations,
                       std::vector<double> &times);
 
