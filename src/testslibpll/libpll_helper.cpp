@@ -196,9 +196,22 @@ double compute_partition(const char * newick,
       branch_lengths,
       matrix_count);
   double logl = 0;
-  for (i = 0; i < iterations; ++i) 
+  pll_update_partials(partition, operations, ops_count);
+  logl = pll_compute_edge_loglikelihood(partition,
+      tree->clv_index,
+      tree->scaler_index,
+      tree->back->clv_index,
+      tree->back->scaler_index,
+      tree->pmatrix_index,
+      params_indices,
+      NULL);
+  for (i = 1; i < iterations; ++i) 
   {
+#if PLL_ATTRIB_SITES_REPEATS != 0
+    pll_update_partials_top(partition, operations, ops_count, !(attribute & (1 << 10)));
+#else
     pll_update_partials(partition, operations, ops_count);
+#endif
     logl = pll_compute_edge_loglikelihood(partition,
         tree->clv_index,
         tree->scaler_index,

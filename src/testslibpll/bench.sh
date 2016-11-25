@@ -1,10 +1,11 @@
 #!/bin/bash
 outputdir="../../results/sequential_benchs/"
-outputfile="bench_500_iterations"
+outputfile="bench_50_iterations"
 outputfile="$outputdir$outputfile"
-iterations=500
+iterations==50
 dataset_number=3
 file=""
+export LD_LIBRARY_PATH=.
 
 echo $outputfile
 
@@ -33,6 +34,14 @@ bench_dataset() {
   launch ../../data/128/treechar_samples/tree128. ../../results/exports/128_10  $1 $2 $3 $4 $6
   write " & " 
   launch ../../data/404/treechar_samples/tree404. ../../results/exports/404_10  $1 $2 $3 $4 $6
+  #write " & " 
+  #if [ $7 = "1" ]
+  #then
+  #  launch ../../data/94/tree94. ../../results/exports/94_10  $1 $2 $3 $4 $6
+  #else
+  #  echo "skip"
+  #  write " skip "
+  #fi
   writeln "\\\\"
 }
 
@@ -49,35 +58,31 @@ bench_arch() {
   writeln "}"
 
   writeln "\\hline"
-  writeln " & seq59 & seq128 & seq404 \\\\"
+  writeln " & seq59 & seq128 & seq404  \\\\"
 
   cp tomas/* .
   make clean && make # header changed
-  bench_dataset $iterations 1 0 0 "xflouris default mode" $1
-  cp benoit/* .
+  bench_dataset $iterations 1 0 0 "xflouris default mode" $1 1
+  cp benoit1000/* .
   make clean && make # header changed
-  bench_dataset $iterations 1 0 0 "bmorel default mode" $1
-  cp benoit2/* .
-  bench_dataset $iterations 1 0 0 "bmorel2 default mode" $1
+  bench_dataset $iterations 1 0 0 "bmorel default mode" $1 1
   
   cp tomas/* .
   make clean && make # header changed
-  bench_dataset $iterations 1 0 1 "xflouris tip pattern" $1
-  cp benoit/* .
+  bench_dataset $iterations 1 0 1 "xflouris tip pattern" $1 1
+  cp benoit1000/* .
   make clean && make # header changed
-  bench_dataset $iterations 1 0 1 "bmorel tip pattern" $1
-  cp benoit2/* .
-  bench_dataset $iterations 1 0 1 "bmorel2 tip pattern" $1
+  bench_dataset $iterations 1 0 1 "bmorel tip pattern" $1 1
   
   
   cp benoit1000/* .
-  bench_dataset $iterations 1 1 0 "bmorel sites repeats M=1000" $1
+  bench_dataset $iterations 1 1 0 "bmorel sites repeats M=1000" $1 0
   cp benoit10000/* .
-  bench_dataset $iterations 1 1 0 "bmorel sites repeats M=10000" $1
-  cp benoit100000/* . 
-  bench_dataset $iterations 1 1 0 "bmorel sites repeats M=100000" $1
+  bench_dataset $iterations 1 1 0 "bmorel sites repeats M=10000" $1 0
   cp benoit1000000/* . 
-  bench_dataset $iterations 1 1 0 "bmorel sites repeats M=1000000" $1
+  bench_dataset $iterations 1 1 0 "bmorel sites repeats M=1000000" $1 1
+  cp benoit1000000/* . 
+  bench_dataset $iterations 1 2 0 "bmorel sites repeats no update sr  M=1000000" $1 1
   writeln "\\hline"
   writeln "\\end{tabular}"
 }

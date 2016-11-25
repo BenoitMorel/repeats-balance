@@ -36,6 +36,8 @@ void export_lbs() {
                               "../../results/exports/128_10");        
     Helper::compute_export_lb("../../data/404/404.phy", "../../data/404/404.part", 30, 10, 
                               "../../results/exports/404_10");        
+    Helper::compute_export_lb("../../data/94/94.phy", "../../data/94/94.part", 30, 10, 
+                              "../../results/exports/94_10");        
 }
 
 /**
@@ -73,6 +75,9 @@ void bench(int argc, char *params[]) {
   if (atoi(params[5])) {
     attribute |= PLL_ATTRIB_SITES_REPEATS;
   }
+  if (atoi(params[5]) == 2) {
+    attribute |= (1 << 10);;
+  }
   if (atoi(params[6])) {
     attribute |= PLL_ATTRIB_PATTERN_TIP;
   }
@@ -82,6 +87,9 @@ void bench(int argc, char *params[]) {
   if (0 == strcmp("avx", params[7])) {
     attribute |= PLL_ATTRIB_ARCH_AVX;
   } 
+  if (0 == strcmp("avx2", params[7])) {
+    attribute |= PLL_ATTRIB_ARCH_AVX2;
+  }
   if (0 == strcmp("avx2", params[7])) {
     attribute |= PLL_ATTRIB_ARCH_AVX2;
   }
