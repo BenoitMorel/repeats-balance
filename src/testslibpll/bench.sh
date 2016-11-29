@@ -1,8 +1,8 @@
 #!/bin/bash
 outputdir="../../results/sequential_benchs/"
-outputfile="bench_50_iterations"
+outputfile="bench_500_iterations"
 outputfile="$outputdir$outputfile"
-iterations==50
+iterations=500
 dataset_number=3
 file=""
 export LD_LIBRARY_PATH=.
