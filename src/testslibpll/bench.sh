@@ -60,12 +60,12 @@ bench_arch() {
   writeln "\\hline"
   writeln " & seq59 & seq128 & seq404  \\\\"
 
-  cp tomas/* .
-  make clean && make # header changed
-  bench_dataset $iterations 1 0 0 "xflouris default mode" $1 1
-  cp benoit1000/* .
-  make clean && make # header changed
-  bench_dataset $iterations 1 0 0 "bmorel default mode" $1 1
+ # cp tomas/* .
+ # make clean && make # header changed
+ # bench_dataset $iterations 1 0 0 "xflouris default mode" $1 1
+ # cp benoit1000/* .
+ # make clean && make # header changed
+ # bench_dataset $iterations 1 0 0 "bmorel default mode" $1 1
   
   cp tomas/* .
   make clean && make # header changed
@@ -87,7 +87,7 @@ bench_arch() {
   writeln "\\end{tabular}"
 }
 
-bench_arch "cpu"
 bench_arch "avx"
+bench_arch "cpu"
 bench_arch "sse"
 
