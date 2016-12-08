@@ -4,7 +4,7 @@ tempfile1="temp1"
 tempfile2="temp2"
 iterations=1000
 
-export LD_LIBRARY_PATH=../lib/current/
+export LD_LIBRARY_PATH=../../lib/current/
 
 write() {
   echo $1 >> $tempfile1

@@ -12,10 +12,21 @@ struct PLLHelper {
   void update_partial(pll_operation_t *operation, 
       unsigned int iterations = 1, 
       bool update_repeats = true);
+  void update_partials(std::vector<pll_operation_t> &operations, 
+      unsigned int iterations = 1, 
+      bool update_repeats = true);
   double get_likelihood();
   void save_svg(const char* file);
   void plop();
   void fill_children_number(std::vector<unsigned int> &children);
+  // return true if path.size() == max_size
+  bool build_path(unsigned int max_size, std::vector<pll_operation_t> &path);
+  void build_random_path(double p, std::vector<pll_operation_t> &path);
+  void build_path_bi(pll_utree_t *start, 
+      unsigned int max_size, 
+      double p, 
+      std::vector<pll_operation_t> &path);
+  pll_utree_t *get_random_branch();
 
   pll_utree_t * tree;
   pll_partition_t *partition;

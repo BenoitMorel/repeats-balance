@@ -1,11 +1,13 @@
 #include "../common/common.h"
 #include <iostream>
+#include <time.h>
 
 int main(int argc, char *params[])
 {
-  if (argc != 6) {
-    std::cout << "Expected syntax : ./pernode_bench newick phy "
-      "iterations use_repeats update_repeats" << std::endl;
+  srand(43);
+  if (argc != 8) {
+    std::cout << "Expected syntax : ./rootpath_bench newick phy "
+      "iterations use_repeats update_repeats size paths_number" << std::endl;
     return 1;
   }
   const char *tree = params[1];
@@ -13,7 +15,10 @@ int main(int argc, char *params[])
   unsigned int iterations = atoi(params[3]);
   bool use_repeats = atoi(params[4]);
   bool update_repeats = atoi(params[5]) && use_repeats;
+  unsigned int max_path_size = atoi(params[6]);
+  unsigned int paths_number = atoi(params[7]);
   unsigned int attribute = 0;
+  double p = 0.95;
   if (use_repeats) {
     attribute |= PLL_ATTRIB_SITES_REPEATS;
   } else {
@@ -22,14 +27,15 @@ int main(int argc, char *params[])
   PLLHelper d(tree, seq, attribute);
   d.update_all_partials();
 
-  std::vector<unsigned int> children_number(d.nodes_count * 2);
-  d.fill_children_number(children_number);
+  std::vector<pll_operation_t> ops;
 
-  for (unsigned int i = 0; i < d.inner_nodes_count; ++i) {
+  for (unsigned int i = 0; i < paths_number; ++i) {
+    d.build_path_bi(d.get_random_branch(), max_path_size, p, ops);
     Timer t;
-    d.update_partial(&d.operations[i], iterations, update_repeats);
+    d.update_partials(ops, iterations, update_repeats);
     unsigned int elapsed = t.get_time();
-    std::cout  <<  children_number[d.operations[i].parent_clv_index] << "," << elapsed << std::endl;
+    std::cout  <<  ops.size() << "," << elapsed << std::endl;
   }
+  
   return 1;
 }

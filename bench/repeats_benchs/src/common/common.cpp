@@ -235,20 +235,117 @@ void PLLHelper::fill_children_number_rec(pll_utree_t *root, std::vector<unsigned
     + children[root->next->next->back->clv_index];
 }
 
+void fill_op(const pll_utree_t &tree, pll_operation_t &op)
+{
+  op.parent_clv_index = tree.clv_index;
+  op.parent_scaler_index = tree.scaler_index;
+
+  op.child1_clv_index = tree.next->back->clv_index;
+  op.child1_scaler_index = tree.next->back->scaler_index;
+  op.child1_matrix_index = tree.next->back->pmatrix_index;
+
+  op.child2_clv_index = tree.next->next->back->clv_index;
+  op.child2_scaler_index = tree.next->next->back->scaler_index;
+  op.child2_matrix_index = tree.next->next->back->pmatrix_index;
+}
+
+bool coin() {
+  return rand() % 2;
+}
+
+bool PLLHelper::build_path(unsigned int max_size, std::vector<pll_operation_t> &path)
+{
+  path.clear();
+  pll_utree_t *current = tree;
+  if (coin()) {
+    tree = tree->back;
+  }
+  for (unsigned int i = 0; i < max_size && current->next; ++i)
+  {
+    pll_operation_t op;
+    fill_op(*current, op);
+    path.push_back(op);
+    if (coin()) {
+      current = tree->next->back;
+    } else {
+      current = tree->next->next->back;
+    }
+  }
+  return path.size() == max_size;
+}
+
+void PLLHelper::build_random_path(double p, std::vector<pll_operation_t> &path)
+{
+  path.clear();
+  pll_utree_t *current = tree;
+  do
+  {
+    pll_operation_t op;
+    fill_op(*current, op);
+    path.push_back(op);
+    if (coin()) {
+      current = tree->next->back;
+    } else {
+      current = tree->next->next->back;
+    }
+  } while (double(rand()) / double(RAND_MAX) < p && current->next);
+}
+
+void PLLHelper::build_path_bi(pll_utree_t *start, 
+      unsigned int max_size, 
+      double p, 
+      std::vector<pll_operation_t> &path)
+{
+  path.clear();
+  pll_utree_t *t1 = start;
+  pll_operation_t op;
+  pll_utree_t *t2 = start->back;
+  for (unsigned int i = 0; i < max_size; ++i) {
+    if (t1 && t1->next) {
+      fill_op(*t1, op);
+      path.push_back(op);
+    }
+    if (t2 && t2->back->next) {
+      fill_op(*t2->back, op);
+      path.push_back(op);
+    }
+    if (double(rand()) / double(RAND_MAX) >= p)
+      return;
+    if (t1 && t1->next) {
+      t1 = coin() ? t1->next->back : t1->next->next->back;
+    } else {
+      t1 = 0;
+    }
+    if (t2 && t2->next) {
+      t2 = coin() ? t2->next->back : t2->next->next->back;
+    } else {
+      t2 = 0;
+    }
+  }
+}
+
 void PLLHelper::plop()
 {
 }
 
 void PLLHelper::update_partial(pll_operation_t *operation, 
       unsigned int iterations, 
-      bool update_repeats)
+      bool update_repeats) 
 {
   std::vector<pll_operation_t> ops(iterations);
   std::fill(ops.begin(), ops.end(), *operation);
   pll_update_partials_top(partition, &ops[0], iterations, update_repeats);
 }
+void PLLHelper::update_partials(std::vector<pll_operation_t> &operations, 
+      unsigned int iterations, 
+      bool update_repeats)
+{
+  for (unsigned int i = 0; i < iterations; ++i) {
+    pll_update_partials_top(partition, &operations[0], operations.size(), update_repeats);
+  }
+}
 
-void PLLHelper::save_svg(const char *file)
+void PLLHelper::save_svg(const char *file) 
 {
   pll_svg_attrib_t *plop = pll_svg_attrib_create();
   pll_utree_export_svg(tree, tip_nodes_count, plop, file);
@@ -283,3 +380,11 @@ long Timer::get_time() {
   }
   return (temp.tv_sec * 1000000000 + temp.tv_nsec) / 1000000; 
 }
+
+pll_utree_t *PLLHelper::get_random_branch()
+{
+    return travbuffer[rand() % nodes_count];
+}
+
+
+
