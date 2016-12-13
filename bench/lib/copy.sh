@@ -8,4 +8,5 @@ touch $to/plop
 rm $to/*
 cp $from/src/.libs/*.so* $to
 cp $from/src/pll.h $to
+cp $to/* current
 echo "done"

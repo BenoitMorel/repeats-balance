@@ -1,8 +1,8 @@
 #!/bin/bash
 outputdir="../../results/sequential_benchs/"
-outputfile="bench_500_iterations"
+outputfile="bench_50_iterations"
 outputfile="$outputdir$outputfile"
-iterations=500
+iterations=50
 dataset_number=3
 file=""
 export LD_LIBRARY_PATH=.
@@ -67,27 +67,38 @@ bench_arch() {
  # make clean && make # header changed
  # bench_dataset $iterations 1 0 0 "bmorel default mode" $1 1
   
-  cp tomas/* .
-  make clean && make # header changed
-  bench_dataset $iterations 1 0 1 "xflouris tip pattern" $1 1
+  #cp tomas/* .
+  #make clean && make # header changed
+  #bench_dataset $iterations 1 0 1 "xflouris tip pattern" $1 1
   cp benoit1000/* .
   make clean && make # header changed
   bench_dataset $iterations 1 0 1 "bmorel tip pattern" $1 1
   
   
-  cp benoit1000/* .
-  bench_dataset $iterations 1 1 0 "bmorel sites repeats M=1000" $1 0
-  cp benoit10000/* .
-  bench_dataset $iterations 1 1 0 "bmorel sites repeats M=10000" $1 0
+  #cp benoit1000/* .
+  #bench_dataset $iterations 1 1 0 "bmorel sites repeats M=1000" $1 0
+  #cp benoit10000/* .
+  #bench_dataset $iterations 1 1 0 "bmorel sites repeats M=10000" $1 0
   cp benoit1000000/* . 
   bench_dataset $iterations 1 1 0 "bmorel sites repeats M=1000000" $1 1
-  cp benoit1000000/* . 
-  bench_dataset $iterations 1 2 0 "bmorel sites repeats no update sr  M=1000000" $1 1
+  #cp benoit1000000/* . 
+  #bench_dataset $iterations 1 2 0 "bmorel sites repeats no update sr  M=1000000" $1 1
+  cp tipinner/* .
+  make clean && make
+  bench_dataset $iterations 1 1 0 "bmorel sites repeats tipinner opt M=2000000" $1 1
+  cp libpll_tipinner2/* .
+  make clean && make
+  bench_dataset $iterations 1 1 0 "bmorel sites repeats tipinner2 opt M=1000000" $1 1
+  cp libpll_notipinner/* .
+  make clean && make
+  bench_dataset $iterations 1 1 0 "bmorel sites repeats no tipinner opt M=1000000" $1 1
+  bench_dataset $iterations 1 0 0 "bmorel tip pattern" $1 1
+
   writeln "\\hline"
   writeln "\\end{tabular}"
 }
 
-bench_arch "avx"
+#bench_arch "avx"
 bench_arch "cpu"
-bench_arch "sse"
+#bench_arch "sse"
 

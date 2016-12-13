@@ -1,6 +1,6 @@
 #include <iostream>
-#include "../Helper.hpp"
-#include "../TexWriter.hpp"
+#include "../../src/Helper.hpp"
+#include "../../src/TexWriter.hpp"
 #include "libpll_helper.h"
 #include "pll.h"
 

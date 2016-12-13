@@ -9,6 +9,13 @@ struct PLLHelper {
   PLLHelper(const char *newick, const char *seq, unsigned int attribute);
   ~PLLHelper();
   void update_all_partials();
+  void update_partials(int (*cbtrav)(pll_utree_t *), 
+      unsigned int update_repeats, 
+      unsigned int &traversal_size);
+
+  void update_operations(int (*cbtrav)(pll_utree_t *), unsigned int &traversal_size);
+  void update_partials(unsigned int update_repeats); 
+
   void update_partial(pll_operation_t *operation, 
       unsigned int iterations = 1, 
       bool update_repeats = true);
@@ -17,15 +24,10 @@ struct PLLHelper {
       bool update_repeats = true);
   double get_likelihood();
   void save_svg(const char* file);
-  void plop();
   void fill_children_number(std::vector<unsigned int> &children);
   // return true if path.size() == max_size
   bool build_path(unsigned int max_size, std::vector<pll_operation_t> &path);
   void build_random_path(double p, std::vector<pll_operation_t> &path);
-  void build_path_bi(pll_utree_t *start, 
-      unsigned int max_size, 
-      double p, 
-      std::vector<pll_operation_t> &path);
   pll_utree_t *get_random_branch();
 
   pll_utree_t * tree;
@@ -39,6 +41,9 @@ struct PLLHelper {
   unsigned int inner_nodes_count;
   unsigned int nodes_count;
   unsigned int branch_count;
+
+  unsigned int ops_count;
+  unsigned int matrix_count;
 
   pll_utree_t ** travbuffer;
   pll_operation_t * operations;

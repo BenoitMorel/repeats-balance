@@ -27,6 +27,7 @@
   /* a callback function for performing a full traversal */
   static int cb_full_traversal(pll_utree_t * node)
   {
+    node->data = (void *)~0;
     return 1;
   }
 
@@ -177,14 +178,24 @@ PLLHelper::PLLHelper(const char * newick,
 
 void PLLHelper::update_all_partials()
 {
-  unsigned int traversal_size, matrix_count, ops_count;
+  unsigned int plop;
+  update_partials(cb_full_traversal, 1, plop);
+}
+
+void PLLHelper::update_partials(int (*cbtrav)(pll_utree_t *), 
+    unsigned int update_repeats, 
+    unsigned int &traversal_size)
+{
+  update_operations(cbtrav, traversal_size);  
+  update_partials(update_repeats);
+}
+void PLLHelper::update_operations(int (*cbtrav)(pll_utree_t *), unsigned int &traversal_size)
+{
   if (!pll_utree_traverse(tree,
-        cb_full_traversal,
+        cbtrav,
         travbuffer,
         &traversal_size))
     fatal("Function pll_utree_traverse() requires inner nodes as parameters");
-  
-  
   
   pll_utree_create_operations(travbuffer,
       traversal_size,
@@ -193,15 +204,12 @@ void PLLHelper::update_all_partials()
       operations,
       &matrix_count,
       &ops_count);
-  pll_update_prob_matrices(partition,
-      params_indices,
-      matrix_indices,
-      branch_lengths,
-      matrix_count);
-  
-  pll_update_partials(partition, operations, ops_count);
+}
 
 
+void PLLHelper::update_partials(unsigned int update_repeats)
+{
+  pll_update_partials_top(partition, operations, ops_count, update_repeats);
 }
 
 double PLLHelper::get_likelihood() 
@@ -291,42 +299,6 @@ void PLLHelper::build_random_path(double p, std::vector<pll_operation_t> &path)
   } while (double(rand()) / double(RAND_MAX) < p && current->next);
 }
 
-void PLLHelper::build_path_bi(pll_utree_t *start, 
-      unsigned int max_size, 
-      double p, 
-      std::vector<pll_operation_t> &path)
-{
-  path.clear();
-  pll_utree_t *t1 = start;
-  pll_operation_t op;
-  pll_utree_t *t2 = start->back;
-  for (unsigned int i = 0; i < max_size; ++i) {
-    if (t1 && t1->next) {
-      fill_op(*t1, op);
-      path.push_back(op);
-    }
-    if (t2 && t2->back->next) {
-      fill_op(*t2->back, op);
-      path.push_back(op);
-    }
-    if (double(rand()) / double(RAND_MAX) >= p)
-      return;
-    if (t1 && t1->next) {
-      t1 = coin() ? t1->next->back : t1->next->next->back;
-    } else {
-      t1 = 0;
-    }
-    if (t2 && t2->next) {
-      t2 = coin() ? t2->next->back : t2->next->next->back;
-    } else {
-      t2 = 0;
-    }
-  }
-}
-
-void PLLHelper::plop()
-{
-}
 
 void PLLHelper::update_partial(pll_operation_t *operation, 
       unsigned int iterations, 
