@@ -173,13 +173,48 @@ PLLHelper::PLLHelper(const char * newick,
       sizeof(pll_operation_t));
 
   memset(params_indices, 0, 4 * sizeof(unsigned int));
-
+  init_tree_stats();
 }
 
-void PLLHelper::update_all_partials()
+void PLLHelper::set_srlookup_size(unsigned int size)
+{
+  pll_repeats_t *repeats = partition->repeats;
+  if (!repeats) {
+    return;
+  }
+  repeats->lookup_buffer_size = size;
+  free(repeats->lookup_buffer);
+  repeats->lookup_buffer = (unsigned int *)
+     calloc(repeats->lookup_buffer_size, sizeof(unsigned int));
+}
+  
+unsigned int PLLHelper::compute_attribute(bool use_repeats, const char *arch)
+{
+  unsigned int attribute = 0;
+  if (!strcmp(arch, "cpu")) {
+    attribute = PLL_ATTRIB_ARCH_CPU;
+  } else if (!strcmp(arch, "sse")) {
+    attribute = PLL_ATTRIB_ARCH_SSE;
+  } else if (!strcmp(arch, "avx")) {
+    attribute = PLL_ATTRIB_ARCH_AVX;
+  } else if (!strcmp(arch, "avx2")) {
+    attribute = PLL_ATTRIB_ARCH_AVX2;
+  } else {
+    std::cerr << "Error : unknown architecture " << arch << std::endl;
+    return INVALID_ATTRIBUTE;
+  }
+  if (use_repeats) {
+    attribute |= PLL_ATTRIB_SITES_REPEATS;
+  } else {
+    attribute |= PLL_ATTRIB_PATTERN_TIP;
+  }
+  return attribute;
+}
+
+void PLLHelper::update_all_partials(bool update_repeats)
 {
   unsigned int plop;
-  update_partials(cb_full_traversal, 1, plop);
+  update_partials(cb_full_traversal, update_repeats, plop);
 }
 
 void PLLHelper::update_partials(int (*cbtrav)(pll_utree_t *), 
@@ -224,23 +259,26 @@ double PLLHelper::get_likelihood()
       NULL);
 }
   
-void PLLHelper::fill_children_number(std::vector<unsigned int> &children)
+void PLLHelper::init_tree_stats()
 {
-  fill_children_number_rec(tree, children);
-  fill_children_number_rec(tree->back, children);
+  children_number = std::vector<unsigned int>(nodes_count);
+  depths = std::vector<unsigned int>(nodes_count);
+  init_tree_stats_rec(tree, 0);
+  init_tree_stats_rec(tree->back, 0);
 }
 
-void PLLHelper::fill_children_number_rec(pll_utree_t *root, std::vector<unsigned int> &children)
+void PLLHelper::init_tree_stats_rec(pll_utree_t *root, unsigned int depth)
 {
+  depths[root->clv_index] = depth;
   if (!root->next) {
-    children[root->node_index] = 0;
+    children_number[root->clv_index] = 0;
     return;
   }
-  fill_children_number_rec(root->next->back, children);
-  fill_children_number_rec(root->next->next->back, children);
-  children[root->clv_index] = 2 
-    + children[root->next->back->clv_index]
-    + children[root->next->next->back->clv_index];
+  init_tree_stats_rec(root->next->back, depth + 1);
+  init_tree_stats_rec(root->next->next->back, depth + 1);
+  children_number[root->clv_index] = 2 
+    + children_number[root->next->back->clv_index]
+    + children_number[root->next->next->back->clv_index];
 }
 
 void fill_op(const pll_utree_t &tree, pll_operation_t &op)
@@ -261,51 +299,12 @@ bool coin() {
   return rand() % 2;
 }
 
-bool PLLHelper::build_path(unsigned int max_size, std::vector<pll_operation_t> &path)
-{
-  path.clear();
-  pll_utree_t *current = tree;
-  if (coin()) {
-    tree = tree->back;
-  }
-  for (unsigned int i = 0; i < max_size && current->next; ++i)
-  {
-    pll_operation_t op;
-    fill_op(*current, op);
-    path.push_back(op);
-    if (coin()) {
-      current = tree->next->back;
-    } else {
-      current = tree->next->next->back;
-    }
-  }
-  return path.size() == max_size;
-}
-
-void PLLHelper::build_random_path(double p, std::vector<pll_operation_t> &path)
-{
-  path.clear();
-  pll_utree_t *current = tree;
-  do
-  {
-    pll_operation_t op;
-    fill_op(*current, op);
-    path.push_back(op);
-    if (coin()) {
-      current = tree->next->back;
-    } else {
-      current = tree->next->next->back;
-    }
-  } while (double(rand()) / double(RAND_MAX) < p && current->next);
-}
-
-
-void PLLHelper::update_partial(pll_operation_t *operation, 
+void PLLHelper::update_partial(pll_operation_t &operation, 
       unsigned int iterations, 
       bool update_repeats) 
 {
   std::vector<pll_operation_t> ops(iterations);
-  std::fill(ops.begin(), ops.end(), *operation);
+  std::fill(ops.begin(), ops.end(), operation);
   pll_update_partials_top(partition, &ops[0], iterations, update_repeats);
 }
 void PLLHelper::update_partials(std::vector<pll_operation_t> &operations, 
@@ -323,6 +322,14 @@ void PLLHelper::save_svg(const char *file)
   pll_utree_export_svg(tree, tip_nodes_count, plop, file);
   pll_svg_attrib_destroy(plop);
 
+}
+  
+void PLLHelper::print_op_stats(pll_operation_t &op) const
+{
+  std::cout << depths[op.parent_clv_index] << " "
+            << children_number[op.child1_clv_index] << " " 
+            << children_number[op.child2_clv_index] 
+            << std::endl;
 }
 
 PLLHelper::~PLLHelper() {
@@ -353,10 +360,6 @@ long Timer::get_time() {
   return (temp.tv_sec * 1000000000 + temp.tv_nsec) / 1000000; 
 }
 
-pll_utree_t *PLLHelper::get_random_branch()
-{
-    return travbuffer[rand() % nodes_count];
-}
 
 
 
