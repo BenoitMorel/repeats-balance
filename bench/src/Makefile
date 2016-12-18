@@ -8,7 +8,10 @@ EXEC=main
 OBJ= $(addprefix $(OBJDIR)/,common.o full_traversal.o partitioned_full_traversal.o  pernode.o main.o)
 
 
-all: $(EXEC) 
+all: dir $(EXEC) 
+
+dir:
+	mkdir -p obj
 
 
 main: $(OBJ) 

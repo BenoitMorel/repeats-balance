@@ -1,7 +1,8 @@
 CC=g++
-DBG=  -O3 -g  
-CFLAGS=  $(DBG) -W -Wall -ansi -pedantic -I../lib/current
-LDFLAGS= $(DBG) -L../lib/current -I../lib/current
+DBG=  -O3 -g 
+LIBPLL=../../bench/lib/current 
+CFLAGS=  $(DBG) -W -Wall -ansi -pedantic -I$(LIBPLL)
+LDFLAGS= $(DBG) -L$(LIBPLL) -I$(LIBPLL)
 
 EXEC=print_tree
 
@@ -18,4 +19,4 @@ print_tree: main.o
 
 
 clean:
-	rm -rf print_tree main.o 
+	rm -rf print_tree print_tree.o 
