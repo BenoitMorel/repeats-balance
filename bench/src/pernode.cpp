@@ -6,29 +6,43 @@
  */
 void pernode(int argc, char *params[])
 {
-  if (argc != 7 && argc != 2) {
+  if (argc != 8 && argc != 7 && argc != 3 && argc != 2) {
     std::cerr << "Error : syntax is" << std::endl;
     std::cerr 
       << "newick sequence use_repeats update_repeats repeats_lookup_size iterations arch" 
       << std::endl;
     std::cerr 
+      << "newick sequence node_index use_repeats update_repeats repeats_lookup_size iterations arch" 
+      << std::endl;
+    std::cerr 
       << "newick sequence" 
+      << std::endl;
+    std::cerr 
+      << "newick sequence node_index" 
       << std::endl;
     return ;
   }
   unsigned int i = 0;
   const char *newick = params[i++];
   const char *seq = params[i++];
-
+  int node_index = -1;
+  if (argc == 8 || argc == 3) {
+    node_index = atoi(params[i++]);
+  }
   // just print nodes stats
-  if (argc == 2) {
+  if (argc == 2 || argc == 3) {
     PLLHelper helper(newick, seq, 0); 
     // a bit overkill to fill operations :)
     helper.update_all_partials();
-    for (unsigned int op = 0; op < helper.ops_count; ++op) {
-      Timer t;
-      std::cout << op << " ";
-      helper.print_op_stats(helper.operations[op]);
+    if (argc == 2) {
+      for (unsigned int op = 0; op < helper.ops_count; ++op) {
+        std::cout << op << " ";
+        helper.print_op_stats(helper.operations[op]);
+      }
+    } else {
+      std::cout << node_index << " ";
+      helper.print_op_stats(helper.operations[node_index]);
+
     }
     return;
   }
@@ -47,11 +61,18 @@ void pernode(int argc, char *params[])
   PLLHelper helper(newick, seq, attribute); 
   helper.set_srlookup_size(repeats_lookup_size);
   helper.update_all_partials();
-  
-  for (unsigned int op = 0; op < helper.ops_count; ++op) {
+ 
+  if (node_index == -1) {
+    for (unsigned int op = 0; op < helper.ops_count; ++op) {
+      Timer t;
+      helper.update_partial(helper.operations[op], iterations, update_repeats);
+      std::cout << t.get_time() << "ms" << std::endl; 
+    }
+  } else {
     Timer t;
-    helper.update_partial(helper.operations[op], iterations, update_repeats);
+    helper.update_partial(helper.operations[node_index], iterations, update_repeats);
     std::cout << t.get_time() << "ms" << std::endl; 
+
   }
 }
 

@@ -36,7 +36,7 @@ void full_traversal(int argc, char *params[])
     helper.update_all_partials(update_repeats);
     helper.get_likelihood();
   }
-  std::cout << "," << t.get_time() << "ms" << std::endl; 
+  std::cout << " " << t.get_time() << "ms" << std::endl; 
 }
 
 

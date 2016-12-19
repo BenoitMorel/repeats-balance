@@ -7,21 +7,22 @@ outputfile="$outputdir$outputfile"
 iterations=500
 dataset_number=3
 file=""
+filebuffer=buffer.txt
 export LD_LIBRARY_PATH=../lib/current
 
 echo $outputfile
 
 write() {
-  echo -n "$1"  >> $file
+  echo -n "$1"  >> $filebuffer
 }
 writeln() {
-  echo  "$1"  >> $file
+  echo  "$1"  >> $filebuffer
 }
 
 launch() {
   echo "./main full_traversal $1 $2 $3 $4 $5 $6 $7"
   ./main full_traversal $1 $2 $3 $4 $5 $6 $7  > temp
-  cat temp | grep ms | tr -d '\n'   >> $file  
+  cat temp | grep ms | tr -d '\n'   >> $filebuffer
   
 }
 
@@ -42,8 +43,8 @@ bench_arch() {
   extension=".tex"
   file=$outputfile$1$extension
   mkdir -p $outputdir
-  rm $file
-  touch $file
+  rm -r $filebuffer
+  touch $filebuffer
   write "\\begin{tabular}{|l|"
   for i in $(seq 1 $dataset_number); do
     write "c|"
@@ -56,7 +57,6 @@ bench_arch() {
   cp ../lib/libpll_benoit_dev/* ../lib/current
   make clean && make # header changed
   bench_dataset 0 0 10000 $iterations $1 "tip pattern" 
-  bench_dataset 1 1 100000 $iterations $1 "repeats 100000" 
   bench_dataset 1 1 1000000 $iterations $1 "repeats 1000000" 
   bench_dataset 1 0 1000000 $iterations $1 "repeats 1000000 no update" 
   cp ../lib/libpll_benoit_tipinner/* ../lib/current
@@ -66,6 +66,7 @@ bench_arch() {
 
   writeln "\\hline"
   writeln "\\end{tabular}"
+  mv $filebuffer $file
 }
 
 bench_arch "cpu"

@@ -12,7 +12,6 @@
 #include <stdlib.h>
 #include <dirent.h>
 #include <iostream>
-#define STATES    4
 #define RATE_CATS 4
 #ifndef PLL_ATTRIB_SITES_REPEATS // old pll version
   #define PLL_ATTRIB_SITES_REPEATS 0
@@ -77,12 +76,12 @@ static void fatal(const char * format, ...)
 
 PLLHelper::PLLHelper(const char * newick,
     const char * seq,
-    unsigned int attribute)
+    unsigned int attribute,
+    unsigned int states)
 {
 
   unsigned int i;
   unsigned int sequence_count;
-  
 
   /* parse the unrooted binary tree in newick format, and store the number
      of tip nodes in tip_nodes_count */
@@ -134,7 +133,7 @@ PLLHelper::PLLHelper(const char * newick,
 
   partition = pll_partition_create(tip_nodes_count,
       inner_nodes_count,
-      STATES,
+      states,
       (unsigned int)(msa->length),
       1,
       branch_count,

@@ -9,7 +9,7 @@
 
 struct PLLHelper {
   static unsigned int compute_attribute(bool use_repeats, const char *arch);
-  PLLHelper(const char *newick, const char *seq, unsigned int attribute); 
+  PLLHelper(const char *newick, const char *seq, unsigned int attribute, unsigned int states = 4); 
   ~PLLHelper();
   void set_srlookup_size(unsigned int size);
   

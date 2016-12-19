@@ -1,23 +1,27 @@
 #!/bin/bash
 
-outputtex="../../results/pernode/pernode.tex"
+outputtex="../../results/pernode/404.tex"
 
 iterations=2000
 arch[0]="cpu"
-arch[1]="avx"
-arch[2]="sse"
+#arch[1]="avx"
+#arch[2]="sse"
 
-dataset[0]="../../data/59/unrooted.newick ../../data/59/59.phy"
+dataset[0]="../../data/404/unrooted.newick ../../data/404/404.phy"
+
 runs[0]="1 1  1000000 $iterations"
 libs[0]="../lib/libpll_benoit_dev"
 runname[0]="repeats"
+
 runs[1]="1 1  1000000 $iterations"
 libs[1]="../lib/libpll_benoit_tipinner"
 runname[1]="repeats tipinner"
+
 runs[2]="0 0  1000000 $iterations"
 libs[2]="../lib/libpll_benoit_dev"
 runname[2]="tip pat"
 
+export LD_LIBRARY_PATH=../lib/current/
 make
 
 echo "" > starttab
@@ -48,6 +52,7 @@ for a in "${!arch[@]}"; do
   temps=""
   temp="tempinit"
   temps=$temps" "$temp
+  echo -n "" > $temp
   mycommand="./main pernode ${dataset[0]}"
   echo $mycommand 
   $mycommand > $temp
@@ -57,6 +62,7 @@ for a in "${!arch[@]}"; do
     make
     temp="temp"$i
     temps=$temps" "$temp
+    echo -n "" > $temp
     mycommand="./main pernode ${dataset[0]} ${runs[$i]} ${arch[$a]}"
     echo $mycommand 
     $mycommand > $temp
@@ -74,16 +80,11 @@ for a in "${!arch[@]}"; do
     fi
   done < temp
   
+  rm temp*
+  
   
   cat endtab >> $outputtex
 done
 
 rm starttab
 rm endtab
-rm $temps
-
-#./main pernode ${dataset[0]} ${runs[0]}
-#./main pernode ${dataset[0]} ${runs[1]}
-
-
-
