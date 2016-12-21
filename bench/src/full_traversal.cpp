@@ -29,13 +29,17 @@ void full_traversal(int argc, char *params[])
     return;
   }
   PLLHelper helper(newick, seq, attribute); 
+  std::cout << "srlookup" << std::endl;
   helper.set_srlookup_size(repeats_lookup_size);
+  std::cout << "update all" << std::endl;
   helper.update_all_partials();
+  std::cout << "done" << std::endl;
   Timer t;
   for (i = 0; i < iterations; ++i) {
     helper.update_all_partials(update_repeats);
     helper.get_likelihood();
   }
+  std::cerr << helper.get_likelihood() << std::endl; 
   std::cout << " " << t.get_time() << "ms" << std::endl; 
 }
 

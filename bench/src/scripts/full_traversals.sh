@@ -4,7 +4,7 @@
 outputdir="../../results/sequential_benchs/"
 outputfile="bench_500_iterations"
 outputfile="$outputdir$outputfile"
-iterations=500
+iterations=5
 dataset_number=3
 file=""
 filebuffer=buffer.txt

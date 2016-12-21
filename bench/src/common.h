@@ -9,7 +9,7 @@
 
 struct PLLHelper {
   static unsigned int compute_attribute(bool use_repeats, const char *arch);
-  PLLHelper(const char *newick, const char *seq, unsigned int attribute, unsigned int states = 4); 
+  PLLHelper(const char *newick, const char *seq, unsigned int attribute, unsigned int states = 20); 
   ~PLLHelper();
   void set_srlookup_size(unsigned int size);
   
@@ -27,6 +27,8 @@ struct PLLHelper {
   double get_likelihood();
   void save_svg(const char* file);
 
+  // call update_all_partials at least once before
+  void init_tree_stats();
   // prints : op_left_children_number, op_right_children_number, op_depth
   void print_op_stats(pll_operation_t &op) const;
 
@@ -46,6 +48,7 @@ struct PLLHelper {
   pll_operation_t * operations;
 
   // these values are indexed by the clv index
+  std::vector<unsigned int> srclasses_number;
   std::vector<unsigned int> children_number;
   std::vector<unsigned int> depths;
 
@@ -53,7 +56,6 @@ struct PLLHelper {
 
 private:
   // compute children_number and depths
-  void init_tree_stats();
   void init_tree_stats_rec(pll_utree_t *root, unsigned int depth);
   void update_partials(std::vector<pll_operation_t> &operations, 
       unsigned int iterations = 1, 

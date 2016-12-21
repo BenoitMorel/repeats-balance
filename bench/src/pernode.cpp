@@ -6,7 +6,7 @@
  */
 void pernode(int argc, char *params[])
 {
-  if (argc != 8 && argc != 7 && argc != 3 && argc != 2) {
+  if (argc != 8 && argc != 7 && argc != 4 && argc != 3) {
     std::cerr << "Error : syntax is" << std::endl;
     std::cerr 
       << "newick sequence use_repeats update_repeats repeats_lookup_size iterations arch" 
@@ -15,10 +15,10 @@ void pernode(int argc, char *params[])
       << "newick sequence node_index use_repeats update_repeats repeats_lookup_size iterations arch" 
       << std::endl;
     std::cerr 
-      << "newick sequence" 
+      << "newick sequence repeats_lookup_size" 
       << std::endl;
     std::cerr 
-      << "newick sequence node_index" 
+      << "newick sequence node_index repeats_lookup_size" 
       << std::endl;
     return ;
   }
@@ -26,15 +26,17 @@ void pernode(int argc, char *params[])
   const char *newick = params[i++];
   const char *seq = params[i++];
   int node_index = -1;
-  if (argc == 8 || argc == 3) {
+  if (argc == 8 || argc == 4) {
     node_index = atoi(params[i++]);
   }
   // just print nodes stats
-  if (argc == 2 || argc == 3) {
-    PLLHelper helper(newick, seq, 0); 
-    // a bit overkill to fill operations :)
+  if (argc == 4 || argc == 3) {
+    PLLHelper helper(newick, seq, PLL_ATTRIB_SITES_REPEATS); 
+    unsigned int repeats_lookup_size = atoi(params[i++]);
+    helper.set_srlookup_size(repeats_lookup_size);
     helper.update_all_partials();
-    if (argc == 2) {
+    helper.init_tree_stats();
+    if (argc == 3) {
       for (unsigned int op = 0; op < helper.ops_count; ++op) {
         std::cout << op << " ";
         helper.print_op_stats(helper.operations[op]);

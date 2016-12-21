@@ -82,7 +82,7 @@ PLLHelper::PLLHelper(const char * newick,
 
   unsigned int i;
   unsigned int sequence_count;
-
+  bool isdna = (states == 4);
   /* parse the unrooted binary tree in newick format, and store the number
      of tip nodes in tip_nodes_count */
   tree = pll_utree_parse_newick(newick, &tip_nodes_count);
@@ -126,7 +126,7 @@ PLLHelper::PLLHelper(const char * newick,
     fatal("Number of sequences does not match number of leaves in tree");
 
   unsigned int * weight = pll_compress_site_patterns(msa->sequence,
-      pll_map_nt,
+      isdna ? pll_map_nt : pll_map_aa,
       tip_nodes_count,
       &(msa->length));
 
@@ -145,8 +145,8 @@ PLLHelper::PLLHelper(const char * newick,
   double subst_params[6] = {1,1,1,1,1,1};
   double rate_cats[4] = {0};
   pll_compute_gamma_cats(1, 4, rate_cats);
-  pll_set_frequencies(partition, 0, frequencies);
-  pll_set_subst_params(partition, 0, subst_params);
+  pll_set_frequencies(partition, 0, isdna ? frequencies : pll_aa_freqs_dayhoff);
+  pll_set_subst_params(partition, 0, isdna ? subst_params : pll_aa_rates_dayhoff);
   pll_set_category_rates(partition, rate_cats);
   pll_set_pattern_weights(partition, weight);
   free(weight);
@@ -159,7 +159,9 @@ PLLHelper::PLLHelper(const char * newick,
     if (!found)
       fatal("Sequence with header %s does not appear in the tree", msa->label[i]);
     unsigned int tip_clv_index = *((unsigned int *)(found->data));
-    pll_set_tip_states(partition, tip_clv_index, pll_map_nt, msa->sequence[i]);
+    pll_set_tip_states(partition, tip_clv_index, 
+        isdna ? pll_map_nt : pll_map_aa,
+        msa->sequence[i]);
   }
   pll_msa_destroy(msa);
   hdestroy();
@@ -168,11 +170,11 @@ PLLHelper::PLLHelper(const char * newick,
   travbuffer = (pll_utree_t **)malloc(nodes_count * sizeof(pll_utree_t *));
   branch_lengths = (double *)malloc(branch_count * sizeof(double));
   matrix_indices = (unsigned int *)malloc(branch_count * sizeof(unsigned int));
+  memset(params_indices, 0, 4 * sizeof(unsigned int));
+  
   operations = (pll_operation_t *)malloc(inner_nodes_count *
       sizeof(pll_operation_t));
 
-  memset(params_indices, 0, 4 * sizeof(unsigned int));
-  init_tree_stats();
 }
 
 void PLLHelper::set_srlookup_size(unsigned int size)
@@ -238,6 +240,11 @@ void PLLHelper::update_operations(int (*cbtrav)(pll_utree_t *), unsigned int &tr
       operations,
       &matrix_count,
       &ops_count);
+  pll_update_prob_matrices(partition,
+            params_indices,
+            matrix_indices,
+            branch_lengths,
+            matrix_count);
 }
 
 
@@ -261,6 +268,7 @@ double PLLHelper::get_likelihood()
 void PLLHelper::init_tree_stats()
 {
   children_number = std::vector<unsigned int>(nodes_count);
+  srclasses_number = std::vector<unsigned int>(nodes_count);
   depths = std::vector<unsigned int>(nodes_count);
   init_tree_stats_rec(tree, 0);
   init_tree_stats_rec(tree->back, 0);
@@ -268,14 +276,19 @@ void PLLHelper::init_tree_stats()
 
 void PLLHelper::init_tree_stats_rec(pll_utree_t *root, unsigned int depth)
 {
-  depths[root->clv_index] = depth;
+  unsigned int index = root->clv_index;
+  depths[index] = depth;
+  if (partition->repeats) {
+    srclasses_number[index] = partition->repeats->pernode_max_id[index]; 
+    srclasses_number[index] = srclasses_number[index] ? srclasses_number[index] : partition->sites;
+  }
   if (!root->next) {
-    children_number[root->clv_index] = 0;
+    children_number[index] = 0;
     return;
   }
   init_tree_stats_rec(root->next->back, depth + 1);
   init_tree_stats_rec(root->next->next->back, depth + 1);
-  children_number[root->clv_index] = 2 
+  children_number[index] = 2 
     + children_number[root->next->back->clv_index]
     + children_number[root->next->next->back->clv_index];
 }
@@ -327,7 +340,10 @@ void PLLHelper::print_op_stats(pll_operation_t &op) const
 {
   std::cout << depths[op.parent_clv_index] << " "
             << children_number[op.child1_clv_index] << " " 
-            << children_number[op.child2_clv_index] 
+            << children_number[op.child2_clv_index] << " "
+            << srclasses_number[op.parent_clv_index] << " "
+            << srclasses_number[op.child1_clv_index] << " "
+            << srclasses_number[op.child2_clv_index] 
             << std::endl;
 }
 
