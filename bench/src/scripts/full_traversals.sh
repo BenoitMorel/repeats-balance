@@ -2,9 +2,9 @@
 
 #!/bin/bash
 outputdir="../../results/sequential_benchs/"
-outputfile="bench_500_iterations"
+outputfile="bench_tipinner_500"
 outputfile="$outputdir$outputfile"
-iterations=5
+iterations=500
 dataset_number=3
 file=""
 filebuffer=buffer.txt
@@ -54,15 +54,10 @@ bench_arch() {
   writeln "\\hline"
   writeln " & seq59 & seq128 & seq404  \\\\"
 
-  cp ../lib/libpll_benoit_dev/* ../lib/current
-  make clean && make # header changed
-  bench_dataset 0 0 10000 $iterations $1 "tip pattern" 
+  cp ../lib/libpll_benoit_dev/* ../lib/current && make clean && make # header changed
   bench_dataset 1 1 1000000 $iterations $1 "repeats 1000000" 
-  bench_dataset 1 0 1000000 $iterations $1 "repeats 1000000 no update" 
-  cp ../lib/libpll_benoit_tipinner/* ../lib/current
-  make clean && make # header changed
+  cp ../lib/libpll_benoit_tipinner/* ../lib/current && make clean && make # header changed
   bench_dataset 1 1 1000000 $iterations $1 "bmorel sites repeats (ti opt) 1000000" 
-  bench_dataset 1 0 1000000 $iterations $1 "bmorel sites repeats no update (ti opt) 1000000" 
 
   writeln "\\hline"
   writeln "\\end{tabular}"
@@ -70,7 +65,7 @@ bench_arch() {
 }
 
 bench_arch "cpu"
-bench_arch "avx"
-bench_arch "sse"
+#bench_arch "avx"
+#bench_arch "sse"
 
 

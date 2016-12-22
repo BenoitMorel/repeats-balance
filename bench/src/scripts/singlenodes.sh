@@ -1,19 +1,23 @@
 #!/bin/bash
 
-outputtex="../../results/singlenodes/59.tex"
-#outputtex="../../results/singlenodes/404.tex"
 
-iterations=1000
+iterations=10000
 arch[0]="cpu"
 #arch[1]="avx"
 #arch[2]="sse"
 
 #nodes[0]=54
-nodes[0]=33
+nodes[0]=132
 
-srlookupsize=1000000
+srlookupsize=2000000
 
-dataset[0]="../../data/59/unrooted.newick ../../data/59/59.phy"
+#outputtex="../../results/singlenodes/59.tex"
+#dataset[0]="../../data/59/unrooted.newick ../../data/59/59.phy"
+
+outputtex="../../results/singlenodes/140.tex"
+dataset[0]="../../data/140/unrooted.newick ../../data/140/140.phy"
+
+#outputtex="../../results/singlenodes/404.tex"
 #dataset[0]="../../data/404/unrooted.newick ../../data/404/404.phy"
 
 
@@ -31,7 +35,8 @@ runname[1]="tipinner opt"
 
 export LD_LIBRARY_PATH=../lib/current/
 cp ../lib/libpll_benoit_dev/* ../lib/current/
-make clean && make
+make clean 
+make
 
 echo "" > starttab
 echo "" > endtab
