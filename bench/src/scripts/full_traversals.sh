@@ -6,6 +6,7 @@ outputfile="bench_tipinner_500"
 outputfile="$outputdir$outputfile"
 iterations=500
 dataset_number=3
+srlookupsize=2000000
 file=""
 filebuffer=buffer.txt
 export LD_LIBRARY_PATH=../lib/current
@@ -55,9 +56,10 @@ bench_arch() {
   writeln " & seq59 & seq128 & seq404  \\\\"
 
   cp ../lib/libpll_benoit_dev/* ../lib/current && make clean && make # header changed
-  bench_dataset 1 1 1000000 $iterations $1 "repeats 1000000" 
+  bench_dataset 0 0 $srlookupsize $iterations $1 "tip pattern mode" 
+  bench_dataset 1 1 $srlookupsize $iterations $1 "repeats 1000000" 
   cp ../lib/libpll_benoit_tipinner/* ../lib/current && make clean && make # header changed
-  bench_dataset 1 1 1000000 $iterations $1 "bmorel sites repeats (ti opt) 1000000" 
+  bench_dataset 1 1 $srlookupsize $iterations $1 "bmorel sites repeats (bclv buffer opt) 1000000" 
 
   writeln "\\hline"
   writeln "\\end{tabular}"

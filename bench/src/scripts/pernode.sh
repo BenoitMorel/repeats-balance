@@ -9,14 +9,14 @@ arch[0]="cpu"
 
 srlookupsize=2000000
 
-#outputtex="../../results/pernode/404.tex"
-#dataset[0]="../../data/404/unrooted.newick ../../data/404/404.phy"
+outputtex="../../results/pernode/404.tex"
+dataset[0]="../../data/404/unrooted.newick ../../data/404/404.phy"
 
 #outputtex="../../results/pernode/140.tex"
 #dataset[0]="../../data/140/unrooted.newick ../../data/140/140.phy"
 
-outputtex="../../results/pernode/59.tex"
-dataset[0]="../../data/59/unrooted.newick ../../data/59/59.phy"
+#outputtex="../../results/pernode/59.tex"
+#dataset[0]="../../data/59/unrooted.newick ../../data/59/59.phy"
 
 runs[0]="1 1  $srlookupsize $iterations"
 libs[0]="../lib/libpll_benoit_dev"
@@ -32,7 +32,8 @@ runname[1]="repeats tipinner"
 
 export LD_LIBRARY_PATH=../lib/current/
 cp ../lib/libpll_benoit_dev/* ../lib/current/
-make clean && make
+make clean
+make
 
 echo "" > starttab
 echo "" > endtab
