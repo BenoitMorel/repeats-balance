@@ -11,8 +11,6 @@ int main(int argc, char *params[])
   }
   if (!strcmp(params[1], "full_traversal")) {
     full_traversal(argc - 2, params + 2);
-  } else if (!strcmp(params[1], "partitioned_full_traversal")) {
-    partitioned_full_traversal(argc - 2, params + 2);
   } else if (!strcmp(params[1], "pernode")) {
     pernode(argc - 2, params + 2);
   } else {

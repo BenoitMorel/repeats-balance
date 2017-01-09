@@ -7,10 +7,10 @@
  */
 void full_traversal(int argc, char *params[])
 {
-  if (argc != 7) {
+  if (argc != 8) {
     std::cerr << "Error : syntax is" << std::endl;
     std::cerr 
-      << "newick sequence use_repeats update_repeats repeats_lookup_size iterations arch" 
+      << "newick sequence use_repeats update_repeats additional_attr repeats_lookup_size iterations arch" 
       << std::endl;
     return ;
   }
@@ -19,12 +19,13 @@ void full_traversal(int argc, char *params[])
   const char *seq = params[i++];
   unsigned int use_repeats = atoi(params[i++]);
   unsigned int update_repeats = atoi(params[i++]);
+  unsigned int additional_attr = atoi(params[i++]);
   unsigned int repeats_lookup_size = atoi(params[i++]);
   unsigned int iterations = atoi(params[i++]);
   const char *arch = params[i++];
 
 
-  unsigned int attribute = PLLHelper::compute_attribute(use_repeats, arch);
+  unsigned int attribute = PLLHelper::compute_attribute(use_repeats, additional_attr, arch);
   if (INVALID_ATTRIBUTE == attribute) {
     return;
   }

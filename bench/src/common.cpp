@@ -189,7 +189,9 @@ void PLLHelper::set_srlookup_size(unsigned int size)
      calloc(repeats->lookup_buffer_size, sizeof(unsigned int));
 }
   
-unsigned int PLLHelper::compute_attribute(bool use_repeats, const char *arch)
+unsigned int PLLHelper::compute_attribute(bool use_repeats, 
+                                          unsigned int additional_attr,
+                                          const char *arch)
 {
   unsigned int attribute = 0;
   if (!strcmp(arch, "cpu")) {
@@ -209,6 +211,7 @@ unsigned int PLLHelper::compute_attribute(bool use_repeats, const char *arch)
   } else {
     attribute |= PLL_ATTRIB_PATTERN_TIP;
   }
+  attribute |= additional_attr;
   return attribute;
 }
 
@@ -338,9 +341,7 @@ void PLLHelper::save_svg(const char *file)
   
 void PLLHelper::print_op_stats(pll_operation_t &op) const
 {
-  std::cout << depths[op.parent_clv_index] << " "
-            << children_number[op.child1_clv_index] << " " 
-            << children_number[op.child2_clv_index] << " "
+  std::cout 
             << srclasses_number[op.parent_clv_index] << " "
             << srclasses_number[op.child1_clv_index] << " "
             << srclasses_number[op.child2_clv_index] 

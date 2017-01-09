@@ -6,13 +6,13 @@
  */
 void pernode(int argc, char *params[])
 {
-  if (argc != 8 && argc != 7 && argc != 4 && argc != 3) {
+  if (argc != 9 && argc != 8 && argc != 4 && argc != 3) {
     std::cerr << "Error : syntax is" << std::endl;
     std::cerr 
-      << "newick sequence use_repeats update_repeats repeats_lookup_size iterations arch" 
+      << "newick sequence use_repeats update_repeats additional_attr repeats_lookup_size iterations arch" 
       << std::endl;
     std::cerr 
-      << "newick sequence node_index use_repeats update_repeats repeats_lookup_size iterations arch" 
+      << "newick sequence node_index use_repeats update_repeats additional_attr repeats_lookup_size iterations arch" 
       << std::endl;
     std::cerr 
       << "newick sequence repeats_lookup_size" 
@@ -26,7 +26,7 @@ void pernode(int argc, char *params[])
   const char *newick = params[i++];
   const char *seq = params[i++];
   int node_index = -1;
-  if (argc == 8 || argc == 4) {
+  if (argc == 9 || argc == 4) {
     node_index = atoi(params[i++]);
   }
   // just print nodes stats
@@ -51,12 +51,13 @@ void pernode(int argc, char *params[])
 
   unsigned int use_repeats = atoi(params[i++]);
   unsigned int update_repeats = atoi(params[i++]);
+  unsigned int additional_attr = atoi(params[i++]);
   unsigned int repeats_lookup_size = atoi(params[i++]);
   unsigned int iterations = atoi(params[i++]);
   const char *arch = params[i++];
 
 
-  unsigned int attribute = PLLHelper::compute_attribute(use_repeats, arch);
+  unsigned int attribute = PLLHelper::compute_attribute(use_repeats, additional_attr, arch);
   if (INVALID_ATTRIBUTE == attribute) {
     return;
   }
