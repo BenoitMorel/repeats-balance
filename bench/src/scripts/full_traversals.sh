@@ -4,7 +4,7 @@
 outputdir="../../results/sequential_benchs/"
 outputfile="bench_tipinner_hitspc_10"
 outputfile="$outputdir$outputfile"
-iterations=10
+iterations=100
 dataset_number=3
 srlookupsize=2000000
 file=""
