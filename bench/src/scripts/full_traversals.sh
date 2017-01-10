@@ -1,5 +1,3 @@
-
-
 #!/bin/bash
 outputdir="../../results/sequential_benchs/"
 outputfile="bench_tipinner_mypc_10"
@@ -56,7 +54,7 @@ bench_arch() {
   writeln " & seq59 & seq128 & seq404  \\\\"
 
   cp ../lib/libpll_benoit_dev/* ../lib/current && make clean && make # header changed
-  bench_dataset 0 0 0 $srlookupsize $iterations $1 "tip pattern mode" 
+ # bench_dataset 0 0 0 $srlookupsize $iterations $1 "tip pattern mode" 
   bench_dataset 1 1 0 $srlookupsize $iterations $1 "repeats 2000000" 
   cp ../lib/libpll_benoit_tipinner/* ../lib/current && make clean && make # header changed
   bench_dataset 1 1 0 $srlookupsize $iterations $1 "bmorel sites repeats (bclv buffer opt) 2000000" 
