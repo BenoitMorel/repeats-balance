@@ -2,7 +2,7 @@
 
 #!/bin/bash
 outputdir="../../results/sequential_benchs/"
-outputfile="bench_tipinner_mypc_10"
+outputfile="bench_tipinner_hitspc_10"
 outputfile="$outputdir$outputfile"
 iterations=10
 dataset_number=3
