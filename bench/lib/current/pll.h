@@ -88,7 +88,9 @@
 
 /* sites repeats */
 #define PLL_ATTRIB_SITES_REPEATS    (1 << 9)
-#define PLL_ATTRIB_SITES_REPEATS_TI    (1 << 10)
+#define PLL_ATTRIB_SITES_REPEATS_BCLV    (1 << 10)
+#define PLL_ATTRIB_SITES_REPEATS_BCLV2    (1 << 11)
+#define PLL_ATTRIB_SITES_REPEATS_BCLVHYBRID    (1 << 12)
 
 /* topological rearrangements */
 
@@ -748,6 +750,27 @@ PLL_EXPORT void pll_core_update_partial_repeats_ii(unsigned int states,
                                            unsigned int * left_site_id,
                                            double * left_buffer,
                                            double ** right_persite_clv,
+                                           const double * left_matrix,
+                                           const double * right_matrix,
+                                           unsigned int ** left_persite_scaler,
+                                           unsigned int ** right_persite_scaler,
+                                           const unsigned int * sites_to_update,
+                                           unsigned int sites_to_update_number,
+                                           unsigned int attrib);
+
+PLL_EXPORT void pll_core_update_partial_repeats_2_ii(unsigned int states,
+                                           unsigned int sites,
+                                           unsigned int rate_cats,
+                                           double ** parent_persite_clv,
+                                           unsigned int ** parent_persite_scaler,
+                                           double * left_clv,
+                                           unsigned int left_clv_size,
+                                           unsigned int * left_site_id,
+                                           double * left_buffer,
+                                           double * right_clv,
+                                           unsigned int right_clv_size,
+                                           unsigned int * right_site_id,
+                                           double * right_buffer,
                                            const double * left_matrix,
                                            const double * right_matrix,
                                            unsigned int ** left_persite_scaler,
