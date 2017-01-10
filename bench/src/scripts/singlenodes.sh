@@ -20,22 +20,14 @@ dataset[0]="../../data/140/unrooted.newick ../../data/140/140.phy"
 #outputtex="../../results/singlenodes/404.tex"
 #dataset[0]="../../data/404/unrooted.newick ../../data/404/404.phy"
 
-runs[0]="1 1 0  $srlookupsize $iterations"
+
+runs[0]="1 1  $srlookupsize $iterations"
 libs[0]="../lib/libpll_benoit_dev"
 runname[0]="repeats"
 
-runs[1]="1 1 0 $srlookupsize $iterations"
+runs[1]="1 0  $srlookupsize $iterations"
 libs[1]="../lib/libpll_benoit_tipinner"
-runname[1]="bclv"
-
-runs[2]="1 1 2048 $srlookupsize $iterations"
-libs[2]="../lib/libpll_benoit_tipinner"
-runname[2]="bclv 2"
-
-runs[3]="1 1 4096  $srlookupsize $iterations"
-libs[3]="../lib/libpll_benoit_tipinner"
-runname[3]="hybrid"
-
+runname[1]="tipinner opt"
 
 #runs[2]="0 0  $srlookupsize $iterations"
 #libs[2]="../lib/libpll_benoit_dev"
