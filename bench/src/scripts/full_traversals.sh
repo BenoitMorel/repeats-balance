@@ -4,7 +4,7 @@
 outputdir="../../results/sequential_benchs/"
 outputfile="bench_tipinner_hitspc_10"
 outputfile="$outputdir$outputfile"
-iterations=100
+iterations=300
 dataset_number=3
 srlookupsize=2000000
 file=""
@@ -63,17 +63,17 @@ bench_arch() {
   cp ../lib/libpll_benoit_tipinner/* ../lib/current 
   make clean 
   make 
-  bench_dataset 1 1 0 $srlookupsize $iterations $1 "bmorel sites repeats (bclv buffer opt) 2000000" 
+#  bench_dataset 1 1 0 $srlookupsize $iterations $1 "bmorel sites repeats (bclv buffer opt) 2000000" 
   bench_dataset 1 1 2048 $srlookupsize $iterations $1 "bmorel sites repeats (bclv buffer opt 2) 2000000" 
-  bench_dataset 1 1 4096 $srlookupsize $iterations $1 "bmorel sites repeats (bclv buffer opt hybrid) 2000000" 
+#  bench_dataset 1 1 4096 $srlookupsize $iterations $1 "bmorel sites repeats (bclv buffer opt hybrid) 2000000" 
 
   writeln "\\hline"
   writeln "\\end{tabular}"
   mv $filebuffer $file
 }
 
-bench_arch "cpu"
-#bench_arch "avx"
+#bench_arch "cpu"
+bench_arch "avx"
 #bench_arch "sse"
 
 
