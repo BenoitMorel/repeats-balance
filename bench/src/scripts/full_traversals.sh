@@ -72,8 +72,8 @@ bench_arch() {
   mv $filebuffer $file
 }
 
-#bench_arch "cpu"
-bench_arch "avx"
+bench_arch "cpu"
+#bench_arch "avx"
 #bench_arch "sse"
 
 
