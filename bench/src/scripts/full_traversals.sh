@@ -2,9 +2,9 @@
 
 #!/bin/bash
 outputdir="../../results/sequential_benchs/"
-outputfile="bench_tipinner_hitspc_10"
+iterations=500
+outputfile="bench_tipinner_hitspc_${iterations}_"
 outputfile="$outputdir$outputfile"
-iterations=300
 dataset_number=3
 srlookupsize=2000000
 file=""
@@ -59,13 +59,13 @@ bench_arch() {
   make clean 
   make 
   bench_dataset 0 0 0 $srlookupsize $iterations $1 "tip pattern mode" 
+  bench_dataset 1 0 0 $srlookupsize $iterations $1 "repeats no update 2000000" 
   bench_dataset 1 1 0 $srlookupsize $iterations $1 "repeats 2000000" 
   cp ../lib/libpll_benoit_tipinner/* ../lib/current 
   make clean 
   make 
-#  bench_dataset 1 1 0 $srlookupsize $iterations $1 "bmorel sites repeats (bclv buffer opt) 2000000" 
-  bench_dataset 1 1 2048 $srlookupsize $iterations $1 "bmorel sites repeats (bclv buffer opt 2) 2000000" 
-#  bench_dataset 1 1 4096 $srlookupsize $iterations $1 "bmorel sites repeats (bclv buffer opt hybrid) 2000000" 
+  bench_dataset 1 1 0 $srlookupsize $iterations $1 "repeats + bclv 2000000" 
+  bench_dataset 1 1 2048 $srlookupsize $iterations $1 "repeats + bclv2 2000000" 
 
   writeln "\\hline"
   writeln "\\end{tabular}"
