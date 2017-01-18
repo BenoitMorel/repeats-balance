@@ -2,8 +2,9 @@
 
 #!/bin/bash
 outputdir="../../results/sequential_benchs/"
-iterations=500
-outputfile="bench_tipinner_hitspc_${iterations}_"
+iterations=100
+outputfile="bench_tomas_vs_benoit_${iterations}_"
+#outputfile="bench_tipinner_hitspc_${iterations}_"
 outputfile="$outputdir$outputfile"
 dataset_number=3
 srlookupsize=2000000
@@ -55,17 +56,19 @@ bench_arch() {
   writeln "\\hline"
   writeln " & seq59 & seq128 & seq404  \\\\"
 
+  cp ../lib/libpll_tomas_dev/* ../lib/current  
+  make clean 
+  make 
+  bench_dataset 0 0 0 $srlookupsize $iterations $1 "tip pattern tomas" 
   cp ../lib/libpll_benoit_dev/* ../lib/current  
   make clean 
   make 
-  bench_dataset 0 0 0 $srlookupsize $iterations $1 "tip pattern mode" 
-  bench_dataset 1 0 0 $srlookupsize $iterations $1 "repeats no update 2000000" 
-  bench_dataset 1 1 0 $srlookupsize $iterations $1 "repeats 2000000" 
-  cp ../lib/libpll_benoit_tipinner/* ../lib/current 
-  make clean 
-  make 
-  bench_dataset 1 1 0 $srlookupsize $iterations $1 "repeats + bclv 2000000" 
-  bench_dataset 1 1 2048 $srlookupsize $iterations $1 "repeats + bclv2 2000000" 
+  bench_dataset 0 0 0 $srlookupsize $iterations $1 "tip pattern benoit" 
+  #cp ../lib/libpll_benoit_tipinner/* ../lib/current 
+  #make clean 
+  #make 
+  #bench_dataset 1 1 0 $srlookupsize $iterations $1 "repeats + bclv 2000000" 
+  #bench_dataset 1 1 2048 $srlookupsize $iterations $1 "repeats + bclv2 2000000" 
 
   writeln "\\hline"
   writeln "\\end{tabular}"
@@ -73,7 +76,7 @@ bench_arch() {
 }
 
 bench_arch "cpu"
-#bench_arch "avx"
-#bench_arch "sse"
+bench_arch "avx"
+bench_arch "sse"
 
 

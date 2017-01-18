@@ -5,6 +5,12 @@
 #include <vector>
 #include "safepll.h"
 
+#ifndef PLL_ATTRIB_SITES_REPEATS // old pll version
+  #define PLL_ATTRIB_SITES_REPEATS 0
+#else
+  #define HAS_REPEATS
+#endif
+
 #define INVALID_ATTRIBUTE ((unsigned int)1)
 
 struct PLLHelper {

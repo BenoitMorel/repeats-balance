@@ -13,9 +13,20 @@
 #include <dirent.h>
 #include <iostream>
 #define RATE_CATS 4
-#ifndef PLL_ATTRIB_SITES_REPEATS // old pll version
-  #define PLL_ATTRIB_SITES_REPEATS 0
+
+  void my_update_partials(pll_partition_t * partition,
+                          const pll_operation_t * operations,
+                          unsigned int ops_count,
+                          unsigned int update_repeats)
+ {
+#ifdef HAS_REPEATS
+  pll_update_partials_top(partition, operations, ops_count, update_repeats);
+#else
+  pll_update_partials(partition, operations, ops_count);
 #endif
+
+ }
+
   static void fatal(const char * format, ...) __attribute__ ((noreturn));
 
   typedef struct
@@ -179,6 +190,7 @@ PLLHelper::PLLHelper(const char * newick,
 
 void PLLHelper::set_srlookup_size(unsigned int size)
 {
+#ifdef HAS_REPEATS
   pll_repeats_t *repeats = partition->repeats;
   if (!repeats) {
     return;
@@ -187,6 +199,7 @@ void PLLHelper::set_srlookup_size(unsigned int size)
   free(repeats->lookup_buffer);
   repeats->lookup_buffer = (unsigned int *)
      calloc(repeats->lookup_buffer_size, sizeof(unsigned int));
+#endif
 }
   
 unsigned int PLLHelper::compute_attribute(bool use_repeats, 
@@ -253,7 +266,7 @@ void PLLHelper::update_operations(int (*cbtrav)(pll_utree_t *), unsigned int &tr
 
 void PLLHelper::update_partials(unsigned int update_repeats)
 {
-  pll_update_partials_top(partition, operations, ops_count, update_repeats);
+  my_update_partials(partition, operations, ops_count, update_repeats);
 }
 
 double PLLHelper::get_likelihood() 
@@ -281,10 +294,12 @@ void PLLHelper::init_tree_stats_rec(pll_utree_t *root, unsigned int depth)
 {
   unsigned int index = root->clv_index;
   depths[index] = depth;
+#ifdef HAS_REPEATS
   if (partition->repeats) {
     srclasses_number[index] = partition->repeats->pernode_max_id[index]; 
     srclasses_number[index] = srclasses_number[index] ? srclasses_number[index] : partition->sites;
   }
+#endif
   if (!root->next) {
     children_number[index] = 0;
     return;
@@ -320,23 +335,24 @@ void PLLHelper::update_partial(pll_operation_t &operation,
 {
   std::vector<pll_operation_t> ops(iterations);
   std::fill(ops.begin(), ops.end(), operation);
-  pll_update_partials_top(partition, &ops[0], iterations, update_repeats);
+  my_update_partials(partition, &ops[0], iterations, update_repeats);
 }
 void PLLHelper::update_partials(std::vector<pll_operation_t> &operations, 
       unsigned int iterations, 
       bool update_repeats)
 {
   for (unsigned int i = 0; i < iterations; ++i) {
-    pll_update_partials_top(partition, &operations[0], operations.size(), update_repeats);
+    my_update_partials(partition, &operations[0], operations.size(), update_repeats);
   }
 }
 
 void PLLHelper::save_svg(const char *file) 
 {
+  /*
   pll_svg_attrib_t *plop = pll_svg_attrib_create();
   pll_utree_export_svg(tree, tip_nodes_count, plop, file);
   pll_svg_attrib_destroy(plop);
-
+*/
 }
   
 void PLLHelper::print_op_stats(pll_operation_t &op) const

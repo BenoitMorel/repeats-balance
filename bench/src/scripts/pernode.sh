@@ -29,13 +29,17 @@ runs[2]="1 1 0  $srlookupsize $iterations"
 libs[2]="../lib/libpll_benoit_dev"
 runname[2]="repeats"
 
-runs[3]="1 1 0 $srlookupsize $iterations"
-libs[3]="../lib/libpll_benoit_tipinner"
-runname[3]="bclv"
+runs[3]="1 1 1024 $srlookupsize $iterations"
+libs[3]="../lib/libpll_benoit_nopersite"
+runname[3]="nopersite"
 
-runs[4]="1 1 2048 $srlookupsize $iterations"
-libs[4]="../lib/libpll_benoit_tipinner"
-runname[4]="bclv 2"
+#runs[3]="1 1 0 $srlookupsize $iterations"
+#libs[3]="../lib/libpll_benoit_tipinner"
+#runname[3]="bclv"
+
+#runs[4]="1 1 2048 $srlookupsize $iterations"
+#libs[4]="../lib/libpll_benoit_tipinner"
+#runname[4]="bclv 2"
 
 #runs[3]="1 1 4096  $srlookupsize $iterations"
 #libs[3]="../lib/libpll_benoit_tipinner"
