@@ -3,7 +3,7 @@
 #!/bin/bash
 outputdir="../../results/sequential_benchs/"
 iterations=100
-outputfile="bench_tomas_vs_benoit_${iterations}_"
+outputfile="bench_repeats_${iterations}_"
 #outputfile="bench_tipinner_hitspc_${iterations}_"
 outputfile="$outputdir$outputfile"
 dataset_number=3
@@ -56,14 +56,15 @@ bench_arch() {
   writeln "\\hline"
   writeln " & seq59 & seq128 & seq404  \\\\"
 
-  cp ../lib/libpll_tomas_dev/* ../lib/current  
-  make clean 
-  make 
-  bench_dataset 0 0 0 $srlookupsize $iterations $1 "tip pattern tomas" 
   cp ../lib/libpll_benoit_dev/* ../lib/current  
   make clean 
   make 
-  bench_dataset 0 0 0 $srlookupsize $iterations $1 "tip pattern benoit" 
+  bench_dataset 0 0 0 $srlookupsize $iterations $1 "tipinner benoit dev" 
+  bench_dataset 1 1 0 $srlookupsize $iterations $1 "repeats benoit dev" 
+  cp ../lib/libpll_benoit_repeats_integration/* ../lib/current  
+  make clean 
+  make 
+  bench_dataset 1 1 0 $srlookupsize $iterations $1 "repeats benoit repeats integration" 
   #cp ../lib/libpll_benoit_tipinner/* ../lib/current 
   #make clean 
   #make 
@@ -75,8 +76,8 @@ bench_arch() {
   mv $filebuffer $file
 }
 
-bench_arch "cpu"
+#bench_arch "cpu"
 bench_arch "avx"
-bench_arch "sse"
+#bench_arch "sse"
 
 

@@ -19,7 +19,7 @@
                           unsigned int ops_count,
                           unsigned int update_repeats)
  {
-#ifdef HAS_REPEATS
+#ifdef pll_update_partials_top
   pll_update_partials_top(partition, operations, ops_count, update_repeats);
 #else
   pll_update_partials(partition, operations, ops_count);
@@ -366,7 +366,7 @@ void PLLHelper::print_op_stats(pll_operation_t &op) const
 
 PLLHelper::~PLLHelper() {
   pll_partition_destroy(partition);
-  pll_utree_destroy(tree);
+  //pll_utree_destroy(tree);
   free(travbuffer);
   free(branch_lengths);
   free(operations);
