@@ -19,12 +19,7 @@
                           unsigned int ops_count,
                           unsigned int update_repeats)
  {
-#ifdef pll_update_partials_top
-  pll_update_partials_top(partition, operations, ops_count, update_repeats);
-#else
-  pll_update_partials(partition, operations, ops_count);
-#endif
-
+    pll_update_partials(partition, operations, ops_count);
  }
 
   static void fatal(const char * format, ...) __attribute__ ((noreturn));
@@ -186,6 +181,9 @@ PLLHelper::PLLHelper(const char * newick,
   operations = (pll_operation_t *)malloc(inner_nodes_count *
       sizeof(pll_operation_t));
 
+  sumtable = (double *)pll_aligned_alloc(
+      partition->sites * partition->rate_cats * partition->states_padded *
+      sizeof(double), partition->alignment);
 }
 
 void PLLHelper::set_srlookup_size(unsigned int size)
@@ -241,6 +239,18 @@ void PLLHelper::update_partials(int (*cbtrav)(pll_utree_t *),
   update_operations(cbtrav, traversal_size);  
   update_partials(update_repeats);
 }
+
+void PLLHelper::update_all_repeats()
+{
+#ifdef HAS_REPEATS
+  for (unsigned int i = 0; i < ops_count; ++i) {
+    pll_update_repeats(partition, &operations[i]);
+  }
+#endif
+}
+
+
+
 void PLLHelper::update_operations(int (*cbtrav)(pll_utree_t *), unsigned int &traversal_size)
 {
   if (!pll_utree_traverse(tree,
@@ -267,6 +277,24 @@ void PLLHelper::update_operations(int (*cbtrav)(pll_utree_t *), unsigned int &tr
 void PLLHelper::update_partials(unsigned int update_repeats)
 {
   my_update_partials(partition, operations, ops_count, update_repeats);
+}
+
+void PLLHelper::get_derivative(double *d_f, double *dd_f) 
+{
+  // todo do not allocate here  
+  pll_update_sumtable(partition,
+                      tree->clv_index,
+                      tree->back->clv_index,
+                      params_indices, 
+                      sumtable);
+  pll_compute_likelihood_derivatives(partition,
+                                     PLL_SCALE_BUFFER_NONE,
+                                     PLL_SCALE_BUFFER_NONE,
+                                     42.0,
+                                     params_indices,
+                                     sumtable,
+                                     d_f, dd_f);
+
 }
 
 double PLLHelper::get_likelihood() 
@@ -346,14 +374,6 @@ void PLLHelper::update_partials(std::vector<pll_operation_t> &operations,
   }
 }
 
-void PLLHelper::save_svg(const char *file) 
-{
-  /*
-  pll_svg_attrib_t *plop = pll_svg_attrib_create();
-  pll_utree_export_svg(tree, tip_nodes_count, plop, file);
-  pll_svg_attrib_destroy(plop);
-*/
-}
   
 void PLLHelper::print_op_stats(pll_operation_t &op) const
 {
@@ -367,6 +387,7 @@ void PLLHelper::print_op_stats(pll_operation_t &op) const
 PLLHelper::~PLLHelper() {
   pll_partition_destroy(partition);
   //pll_utree_destroy(tree);
+  pll_aligned_free(sumtable);
   free(travbuffer);
   free(branch_lengths);
   free(operations);

@@ -11,6 +11,10 @@ int main(int argc, char *params[])
   }
   if (!strcmp(params[1], "full_traversal")) {
     full_traversal(argc - 2, params + 2);
+  } else if (!strcmp(params[1], "derivatives")) {
+    derivatives(argc - 2, params + 2);
+  } else if (!strcmp(params[1], "update_repeats")) {
+    update_repeats(argc - 2, params + 2);
   } else if (!strcmp(params[1], "pernode")) {
     pernode(argc - 2, params + 2);
   } else {

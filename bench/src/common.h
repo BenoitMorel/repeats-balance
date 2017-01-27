@@ -25,6 +25,7 @@ struct PLLHelper {
   void update_partials(int (*cbtrav)(pll_utree_t *), 
       unsigned int update_repeats, 
       unsigned int &traversal_size);
+  void update_all_repeats();
   void update_partials(unsigned int update_repeats); 
   void update_partial(pll_operation_t &operation, 
       unsigned int iterations = 1, 
@@ -33,7 +34,7 @@ struct PLLHelper {
   
   void update_operations(int (*cbtrav)(pll_utree_t *), unsigned int &traversal_size);
   double get_likelihood();
-  void save_svg(const char* file);
+  void get_derivative(double *d_f, double *dd_f); 
 
   // call update_all_partials at least once before
   void init_tree_stats();
@@ -54,7 +55,7 @@ struct PLLHelper {
   unsigned int matrix_count;
   pll_utree_t ** travbuffer;
   pll_operation_t * operations;
-
+  double * sumtable;
   // these values are indexed by the clv index
   std::vector<unsigned int> srclasses_number;
   std::vector<unsigned int> children_number;
@@ -82,6 +83,8 @@ private:
 
 
 void full_traversal(int argc, char *params[]);
+void update_repeats(int argc, char *params[]);
+void derivatives(int argc, char *params[]);
 void partitioned_full_traversal(int argc, char *params[]);
 void pernode(int argc, char *params[]);
 

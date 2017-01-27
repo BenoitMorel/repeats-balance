@@ -3,8 +3,8 @@
 
 iterations=2000
 
-#arch[0]="cpu"
-arch[1]="avx"
+arch[0]="avx"
+#arch[1]="cpu"
 #arch[2]="sse"
 
 srlookupsize=2000000
@@ -14,36 +14,21 @@ dataset[0]="../../data/404/unrooted.newick ../../data/404/404.phy"
 #outputtex="../../results/pernode/140.tex"
 #dataset[0]="../../data/140/unrooted.newick ../../data/140/140.phy"
 
-#outputtex="../../results/pernode/59_mypc.tex"
+#outputtex="../../results/pernode/59avx_$iterations.tex"
 #dataset[0]="../../data/59/unrooted.newick ../../data/59/59.phy"
 
 runs[0]="0 0 0  $srlookupsize $iterations"
 libs[0]="../lib/libpll_benoit_dev"
-runname[0]="tippattern"
+runname[0]="tippat"
 
-runs[1]="1 0 0  $srlookupsize $iterations"
-libs[1]="../lib/libpll_benoit_dev"
-runname[1]="repeats no update"
+
+runs[1]="1 1 0  $srlookupsize $iterations"
+libs[1]="../lib/libpll_benoit_repeats_integration"
+runname[1]="SR opt"
 
 runs[2]="1 1 0  $srlookupsize $iterations"
-libs[2]="../lib/libpll_benoit_dev"
-runname[2]="repeats"
-
-runs[3]="1 1 1024 $srlookupsize $iterations"
-libs[3]="../lib/libpll_benoit_nopersite"
-runname[3]="nopersite"
-
-#runs[3]="1 1 0 $srlookupsize $iterations"
-#libs[3]="../lib/libpll_benoit_tipinner"
-#runname[3]="bclv"
-
-#runs[4]="1 1 2048 $srlookupsize $iterations"
-#libs[4]="../lib/libpll_benoit_tipinner"
-#runname[4]="bclv 2"
-
-#runs[3]="1 1 4096  $srlookupsize $iterations"
-#libs[3]="../lib/libpll_benoit_tipinner"
-#runname[3]="hybrid"
+libs[2]="../lib/libpll_benoit_ri_optims"
+runname[2]="SR opt2"
 
 
 
