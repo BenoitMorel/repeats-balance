@@ -5,7 +5,7 @@ LDFLAGS= $(DBG) -L../lib/current -I../lib/current
 OBJDIR=obj
 
 EXEC=main
-OBJ= $(addprefix $(OBJDIR)/,common.o derivatives.o full_traversal.o update_repeats.o pernode.o main.o)
+OBJ= $(addprefix $(OBJDIR)/,common.o derivatives.o sumtables.o full_traversal.o update_repeats.o pernode.o main.o)
 
 
 all: dir $(EXEC) 

@@ -279,12 +279,26 @@ void PLLHelper::update_partials(unsigned int update_repeats)
   my_update_partials(partition, operations, ops_count, update_repeats);
 }
 
-void PLLHelper::get_derivative(double *d_f, double *dd_f) 
+
+void PLLHelper::update_sumtables() 
 {
-  // todo do not allocate here  
   pll_update_sumtable(partition,
                       tree->clv_index,
                       tree->back->clv_index,
+                      PLL_SCALE_BUFFER_NONE,
+                      PLL_SCALE_BUFFER_NONE,
+                      params_indices, 
+                      sumtable);
+}
+  
+  
+void PLLHelper::get_derivative(double *d_f, double *dd_f) 
+{
+    pll_update_sumtable(partition,
+                      tree->clv_index,
+                      tree->back->clv_index,
+                      PLL_SCALE_BUFFER_NONE,
+                      PLL_SCALE_BUFFER_NONE,
                       params_indices, 
                       sumtable);
   pll_compute_likelihood_derivatives(partition,

@@ -13,6 +13,8 @@ int main(int argc, char *params[])
     full_traversal(argc - 2, params + 2);
   } else if (!strcmp(params[1], "derivatives")) {
     derivatives(argc - 2, params + 2);
+  } else if (!strcmp(params[1], "sumtables")) {
+    sumtables(argc - 2, params + 2);
   } else if (!strcmp(params[1], "update_repeats")) {
     update_repeats(argc - 2, params + 2);
   } else if (!strcmp(params[1], "pernode")) {

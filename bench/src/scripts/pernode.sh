@@ -8,28 +8,23 @@ arch[0]="avx"
 #arch[2]="sse"
 
 srlookupsize=2000000
-outputtex="../../results/pernode/404avx_$iterations.tex"
-dataset[0]="../../data/404/unrooted.newick ../../data/404/404.phy"
+#outputtex="../../results/pernode/404avx_$iterations.tex"
+#dataset[0]="../../data/404/unrooted.newick ../../data/404/404.phy 4"
 
-#outputtex="../../results/pernode/140.tex"
-#dataset[0]="../../data/140/unrooted.newick ../../data/140/140.phy"
+outputtex="../../results/pernode/140.tex"
+dataset[0]="../../data/140/unrooted.newick ../../data/140/140.phy 20"
 
 #outputtex="../../results/pernode/59avx_$iterations.tex"
-#dataset[0]="../../data/59/unrooted.newick ../../data/59/59.phy"
+#dataset[0]="../../data/59/unrooted.newick ../../data/59/59.phy 4"
 
 runs[0]="0 0 0  $srlookupsize $iterations"
-libs[0]="../lib/libpll_benoit_dev"
+libs[0]="../lib/libpll_benoit_rioptims/"
 runname[0]="tippat"
 
 
 runs[1]="1 1 0  $srlookupsize $iterations"
-libs[1]="../lib/libpll_benoit_repeats_integration"
-runname[1]="SR opt"
-
-runs[2]="1 1 0  $srlookupsize $iterations"
-libs[2]="../lib/libpll_benoit_ri_optims"
-runname[2]="SR opt2"
-
+libs[1]="../lib/libpll_benoit_rioptims/"
+runname[1]="SR  bclv"
 
 
 #runs[2]="0 0 0 $srlookupsize $iterations"
@@ -37,7 +32,7 @@ runname[2]="SR opt2"
 #runname[2]="tip pat"
 
 export LD_LIBRARY_PATH=../lib/current/
-cp ../lib/libpll_benoit_dev/* ../lib/current/
+cp ${libs[0]} ../lib/current/
 make clean
 make
 

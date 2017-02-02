@@ -7,16 +7,17 @@
  */
 void full_traversal(int argc, char *params[])
 {
-  if (argc != 8) {
+  if (argc != 9) {
     std::cerr << "Error : syntax is" << std::endl;
     std::cerr 
-      << "newick sequence use_repeats update_repeats additional_attr repeats_lookup_size iterations arch" 
+      << "newick sequence states use_repeats update_repeats additional_attr repeats_lookup_size iterations arch" 
       << std::endl;
     return ;
   }
   unsigned int i = 0;
   const char *newick = params[i++];
   const char *seq = params[i++];
+  unsigned int states = atoi(params[i++]);
   unsigned int use_repeats = atoi(params[i++]);
   unsigned int update_repeats = atoi(params[i++]);
   unsigned int additional_attr = atoi(params[i++]);
@@ -29,7 +30,7 @@ void full_traversal(int argc, char *params[])
   if (INVALID_ATTRIBUTE == attribute) {
     return;
   }
-  PLLHelper helper(newick, seq, attribute); 
+  PLLHelper helper(newick, seq, attribute, states); 
   std::cout << "srlookup" << std::endl;
   helper.set_srlookup_size(repeats_lookup_size);
   std::cout << "update all" << std::endl;

@@ -34,6 +34,7 @@ struct PLLHelper {
   
   void update_operations(int (*cbtrav)(pll_utree_t *), unsigned int &traversal_size);
   double get_likelihood();
+  void update_sumtables(); 
   void get_derivative(double *d_f, double *dd_f); 
 
   // call update_all_partials at least once before
@@ -85,6 +86,7 @@ private:
 void full_traversal(int argc, char *params[]);
 void update_repeats(int argc, char *params[]);
 void derivatives(int argc, char *params[]);
+void sumtables(int argc, char *params[]);
 void partitioned_full_traversal(int argc, char *params[]);
 void pernode(int argc, char *params[]);
 

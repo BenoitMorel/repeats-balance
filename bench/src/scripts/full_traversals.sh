@@ -6,7 +6,7 @@ iterations=100
 outputfile="bench_repeats_${iterations}_"
 #outputfile="bench_tipinner_hitspc_${iterations}_"
 outputfile="$outputdir$outputfile"
-dataset_number=3
+dataset_number=4
 srlookupsize=2000000
 file=""
 filebuffer=buffer.txt
@@ -22,8 +22,8 @@ writeln() {
 }
 
 launch() {
-  echo "./main full_traversal $1 $2 $3 $4 $5 $6 $7 $8"
-  ./main full_traversal $1 $2 $3 $4 $5 $6 $7 $8 > temp
+  echo "./main full_traversal $1 $2 $3 $4 $5 $6 $7 $8 $9"
+  ./main full_traversal $1 $2 $3 $4 $5 $6 $7 $8 $9 > temp
   cat temp | grep ms | tr -d '\n'   >> $filebuffer
   
 }
@@ -33,11 +33,13 @@ bench_dataset() {
   echo $7
   write "$7"
   write " & " 
-  launch ../../data/59/unrooted.newick ../../data/59/59.phy  $1 $2 $3 $4 $5 $6
+  launch ../../data/59/unrooted.newick ../../data/59/59.phy 4 $1 $2 $3 $4 $5 $6
   write " & " 
-  launch ../../data/128/unrooted.newick ../../data/128/128.phy  $1 $2 $3 $4 $5 $6
+  launch ../../data/128/unrooted.newick ../../data/128/128.phy 4  $1 $2 $3 $4 $5 $6
   write " & " 
-  launch ../../data/404/unrooted.newick ../../data/404/404.phy  $1 $2 $3 $4 $5 $6
+  launch ../../data/404/unrooted.newick ../../data/404/404.phy 4 $1 $2 $3 $4 $5 $6
+  write " & " 
+  launch ../../data/404/unrooted.newick ../../data/404/404.phy 20 $1 $2 $3 $4 $5 $6
   writeln "\\\\"
 }
 
@@ -54,22 +56,14 @@ bench_arch() {
   writeln "}"
 
   writeln "\\hline"
-  writeln " & seq59 & seq128 & seq404  \\\\"
+  writeln " & seq59 & seq128 & seq404 & seq140 \\\\"
 
-  cp ../lib/libpll_benoit_dev/* ../lib/current  
+  cp ../lib/libpll_benoit_rioptims/* ../lib/current  
   make clean 
   make 
-  bench_dataset 0 0 0 $srlookupsize $iterations $1 "tip pattern" 
+  bench_dataset 0 0 0 $srlookupsize $iterations $1 "tipinner" 
+  bench_dataset 1 1 0 $srlookupsize $iterations $1 "repeats" 
   
-  cp ../lib/libpll_benoit_repeats_integration/* ../lib/current  
-  make clean 
-  make 
-  bench_dataset 1 1 0 $srlookupsize $iterations $1 "ri inte" 
-  
-  cp ../lib/libpll_benoit_ri_optims/* ../lib/current  
-  make clean 
-  make 
-  bench_dataset 1 1 0 $srlookupsize $iterations $1 "ri optims" 
   
   writeln "\\hline"
   writeln "\\end{tabular}"
