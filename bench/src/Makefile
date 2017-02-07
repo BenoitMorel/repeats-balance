@@ -1,5 +1,5 @@
 CC=g++
-DBG=  -O3 -g  
+DBG=  -O3 -g  -pg 
 CFLAGS=  $(DBG) -W -Wall -ansi -pedantic -I../lib/current
 LDFLAGS= $(DBG) -L../lib/current -I../lib/current
 OBJDIR=obj
@@ -15,7 +15,7 @@ dir:
 
 
 main: $(OBJ) 
-	$(CC) $(LDFLAGS) -o $@  $^ -lpll
+	$(CC) $(LDFLAGS) -o $@  $^ -lpll -lcudart 
 
 $(OBJDIR)/%.o : %.cpp
 	$(CC) $(CFLAGS) -o $@ -c $<

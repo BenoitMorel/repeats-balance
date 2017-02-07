@@ -42,6 +42,8 @@ struct PLLHelper {
   // prints : op_left_children_number, op_right_children_number, op_depth
   void print_op_stats(pll_operation_t &op) const;
 
+  void disable_update_operations() {do_opdate_operations = false;}
+
   // class members
   pll_utree_t * tree;
   pll_partition_t *partition;
@@ -61,7 +63,7 @@ struct PLLHelper {
   std::vector<unsigned int> srclasses_number;
   std::vector<unsigned int> children_number;
   std::vector<unsigned int> depths;
-
+  bool do_opdate_operations;
 
 
 private:

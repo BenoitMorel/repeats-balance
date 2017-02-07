@@ -85,7 +85,7 @@ PLLHelper::PLLHelper(const char * newick,
     unsigned int attribute,
     unsigned int states)
 {
-
+  do_opdate_operations = true;
   unsigned int i;
   unsigned int sequence_count;
   bool isdna = (states == 4);
@@ -146,7 +146,10 @@ PLLHelper::PLLHelper(const char * newick,
       RATE_CATS,
       inner_nodes_count,
       attribute);
-
+  if (!partition)
+  {
+    fatal("failed to create partition");
+  }
   double frequencies[4] = { 0.17, 0.19, 0.25, 0.39 };
   double subst_params[6] = {1,1,1,1,1,1};
   double rate_cats[4] = {0};
@@ -236,7 +239,8 @@ void PLLHelper::update_partials(int (*cbtrav)(pll_utree_t *),
     unsigned int update_repeats, 
     unsigned int &traversal_size)
 {
-  update_operations(cbtrav, traversal_size);  
+  if (do_opdate_operations)
+    update_operations(cbtrav, traversal_size);  
   update_partials(update_repeats);
 }
 

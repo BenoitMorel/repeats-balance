@@ -2,8 +2,8 @@
 
 #!/bin/bash
 outputdir="../../results/sequential_benchs/"
-iterations=100
-outputfile="bench_repeats_${iterations}_"
+iterations=20
+outputfile="cuda_${iterations}_"
 #outputfile="bench_tipinner_hitspc_${iterations}_"
 outputfile="$outputdir$outputfile"
 dataset_number=4
@@ -39,7 +39,7 @@ bench_dataset() {
   write " & " 
   launch ../../data/404/unrooted.newick ../../data/404/404.phy 4 $1 $2 $3 $4 $5 $6
   write " & " 
-  launch ../../data/404/unrooted.newick ../../data/404/404.phy 20 $1 $2 $3 $4 $5 $6
+  launch ../../data/140/unrooted.newick ../../data/140/140_big.phy 20 $1 $2 $3 $4 $5 $6
   writeln "\\\\"
 }
 
@@ -58,11 +58,18 @@ bench_arch() {
   writeln "\\hline"
   writeln " & seq59 & seq128 & seq404 & seq140 \\\\"
 
-  cp ../lib/libpll_benoit_rioptims/* ../lib/current  
+  cp ../lib/libpll_benoit_ri_optims/* ../lib/current  
   make clean 
   make 
-  bench_dataset 0 0 0 $srlookupsize $iterations $1 "tipinner" 
-  bench_dataset 1 1 0 $srlookupsize $iterations $1 "repeats" 
+  bench_dataset 0 0 0 $srlookupsize $iterations $1 "tip pattern" 
+  #cp ../lib/libpll_benoit_cuda/* ../lib/current  
+  #make clean 
+  #make 
+  #bench_dataset 0 0 0 $srlookupsize $iterations $1 "cuda" 
+  cp ../lib/libpll_benoit_cuda_nocopy/* ../lib/current  
+  make clean 
+  make 
+  bench_dataset 0 0 0 $srlookupsize $iterations $1 "cuda" 
   
   
   writeln "\\hline"
