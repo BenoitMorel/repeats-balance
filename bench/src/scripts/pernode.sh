@@ -8,11 +8,11 @@ arch[0]="avx"
 #arch[2]="sse"
 
 srlookupsize=2000000
-#outputtex="../../results/pernode/404avx_$iterations.tex"
-#dataset[0]="../../data/404/unrooted.newick ../../data/404/404.phy 4"
+outputtex="../../results/pernode/404avx_$iterations.tex"
+dataset[0]="../../data/404/unrooted.newick ../../data/404/404.phy 4"
 
-outputtex="../../results/pernode/140.tex"
-dataset[0]="../../data/140/unrooted.newick ../../data/140/140.phy 20"
+#outputtex="../../results/pernode/140.tex"
+#dataset[0]="../../data/140/unrooted.newick ../../data/140/140.phy 20"
 
 #outputtex="../../results/pernode/59avx_$iterations.tex"
 #dataset[0]="../../data/59/unrooted.newick ../../data/59/59.phy 4"

@@ -91,5 +91,6 @@ void derivatives(int argc, char *params[]);
 void sumtables(int argc, char *params[]);
 void partitioned_full_traversal(int argc, char *params[]);
 void pernode(int argc, char *params[]);
+void calibrate_test(int argc, char *params[]);
 
 #endif
