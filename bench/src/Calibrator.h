@@ -8,6 +8,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <algorithm> 
 
 namespace CA {
 
@@ -50,6 +51,7 @@ class Calibrator {
     const std::vector<char> &states,
     unsigned int left_sites,
     unsigned int right_sites,
+    unsigned int lookup_size,
     unsigned int attribute,
     pll_operation_t &root_op)
   {
@@ -67,6 +69,11 @@ class Calibrator {
     std::vector<unsigned int> matrix_indices(branches.size());
     std::vector<double> subst_params(sites, 1.0);
     unsigned int params_indices[4] = {0,0,0,0};
+    std::vector<unsigned int> shuffle;
+    for (unsigned int i = 0; i < sites; ++i) {
+      shuffle.push_back(i);
+    }
+    std::random_shuffle(shuffle.begin(), shuffle.end());
     for (unsigned int b = 0; b < branches.size(); ++b) {
       branches[b] = double(rand()) / double(RAND_MAX);
       matrix_indices[b] = b;
@@ -74,6 +81,10 @@ class Calibrator {
     std::vector<double> freq(states.size(), 1.0/double(states.size()));
     partition = pll_partition_create(tips, tips - 1, states.size(), 
         sites, 1, branches.size(), rates, tips - 1, attribute);
+
+    if (partition->repeats) {
+      pll_resize_repeats_lookup(partition, lookup_size);
+    }
 
     pll_set_frequencies(partition, 0, &freq[0]);
     pll_set_subst_params(partition, 0, &subst_params[0]);
@@ -87,7 +98,9 @@ class Calibrator {
     c[1] = states[1];
     for (unsigned int t = 0; t < left_tips; ++t) {
       for (unsigned int s = 0; s < sites; ++s) {
-        tips_chars[s] = c[(((s % left_sites) & (1 << t)) != 0)];
+        // column s should represent s%left_sites in
+        // binary notation (with 0<->c[0] and 1<->c[1])
+        tips_chars[shuffle[s]] = c[(((s % left_sites) & (1 << t)) != 0)];
       }
       pll_set_tip_states(partition, t, pll_map_nt, &tips_chars[0]);
     }
@@ -96,7 +109,7 @@ class Calibrator {
     c[1] = states[3];
     for (unsigned int t = 0; t < right_tips; ++t) {
       for (unsigned int s = 0; s < sites; ++s) {
-        tips_chars[s] = c[((((s < right_sites ? s : 0)) & (1 << t)) != 0)];
+        tips_chars[shuffle[s]] = c[((((s < right_sites ? s : 0)) & (1 << t)) != 0)];
       }
       pll_set_tip_states(partition, t + left_tips, pll_map_nt, &tips_chars[0]);
     }

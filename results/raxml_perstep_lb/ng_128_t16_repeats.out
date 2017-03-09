@@ -1,0 +1,531 @@
+
+RAxML-NG pre-release, build: 2017.01.17 (c) 2017 The Exelixis Lab http://exelixis-lab.org
+
+!!! WARNING: This is an EXPERIMENTAL code which should NEVER be used for production runs!
+!!! Please check out the official release (available Q1 2017): https://github.com/amkozlov/raxml-ng
+
+RAxML-NG was called as follows:
+
+../src/raxml-ng-static --seed=42 --msa ../../repeats-balance/data/128/128.phy --simd AVX --threads 16 --repeats 
+
+Analysis options:
+  run mode: Tree search
+  random seed: 42
+  tip-inner: OFF
+  repeats: ON
+  pattern compression: ON
+  fast spr radius: AUTO
+  spr subtree cutoff: 1.000
+  SIMD kernels: AVX
+  parallelization: PTHREADS (16 threads)
+
+0ms [0:00:00 0.000000000000000] Loading alignment from file: ../../repeats-balance/data/128/128.phy
+156ms [0:00:00 0.000000000000000] Taxa: 128, sites: 29198
+2ms [0:00:00 0.000000000000000] Checking the alignment...
+
+WARNING: Duplicate sequences found: 2
+WARNING: Sequences Elephas_Prob1 and Elephas_Prob6 are exactly identical!
+WARNING: Sequences Tupaia_Scand1 and Tupaia_Scand2 are exactly identical!
+
+WARNING: Fully undetermined columns found: 49
+
+Reduced alignment (with gap-only sequences and columns removed) was printed to:
+/home/morelbt/github/raxml-ng/test/128.phy.reduced
+
+98ms [0:00:00 0.000000000000000] Generating a random starting tree with 128 taxa
+
+Partition 0: noname
+Model: GTR+G
+Alignment sites / patterns: 29149 / 19436
+Gaps: 32.37 %
+Invariant sites: 34.05 %
+
+P0 T0, range: 1-1214, patterns: 1214
+
+P0 T7, range: 8499-9712, patterns: 1214
+
+P0 T8, range: 9713-10926, patterns: 1214
+
+P0 T12, range: 14569-15782, patterns: 1214
+
+P0 T5, range: 6071-7284, patterns: 1214
+
+P0 T6, range: 7285-8498, patterns: 1214
+
+P0 T9, range: 10927-12140, patterns: 1214
+
+P0 T15, range: 18211-19436, patterns: 1226
+
+P0 T13, range: 15783-16996, patterns: 1214
+
+P0 T2, range: 2429-3642, patterns: 1214
+
+P0 T3, range: 3643-4856, patterns: 1214
+
+P0 T10, range: 12141-13354, patterns: 1214
+
+P0 T1, range: 1215-2428, patterns: 1214
+
+P0 T11, range: 13355-14568, patterns: 1214
+
+P0 T4, range: 4857-6070, patterns: 1214
+
+P0 T14, range: 16997-18210, patterns: 1214
+
+1ms [0:00:00 0.000000000000000] ML tree search started.
+32ms [0:00:00 -1377979.216042242944241] Initial branch length optimization
+reinit stats 16
+    (thread 0: tagwait: 84 ms tagcpu: 331 ms
+    (thread 1: tagwait: 96 ms tagcpu: 319 ms
+    (thread 2: tagwait: 94 ms tagcpu: 321 ms
+    (thread 3: tagwait: 91 ms tagcpu: 323 ms
+    (thread 4: tagwait: 92 ms tagcpu: 323 ms
+    (thread 5: tagwait: 82 ms tagcpu: 332 ms
+    (thread 6: tagwait: 85 ms tagcpu: 329 ms
+    (thread 7: tagwait: 32 ms tagcpu: 381 ms
+    (thread 8: tagwait: 84 ms tagcpu: 330 ms
+    (thread 9: tagwait: 83 ms tagcpu: 332 ms
+    (thread 10: tagwait: 94 ms tagcpu: 321 ms
+    (thread 11: tagwait: 93 ms tagcpu: 321 ms
+    (thread 12: tagwait: 85 ms tagcpu: 329 ms
+    (thread 13: tagwait: 97 ms tagcpu: 318 ms
+    (thread 14: tagwait: 88 ms tagcpu: 326 ms
+    (thread 15: tagwait: 17 ms tagcpu: 396 ms
+    wait_time_ms  (0, 84) (1, 96) (2, 94) (3, 91) (4, 92) (5, 82) (6, 85) (7, 32) (8, 84) (9, 83) (10, 94) (11, 93) (12, 85) (13, 97) (14, 88) (15, 17)
+    cpu_time_ms  (0, 331) (1, 319) (2, 321) (3, 323) (4, 323) (5, 332) (6, 329) (7, 381) (8, 330) (9, 332) (10, 321) (11, 321) (12, 329) (13, 318) (14, 326) (15, 396)
+reinit stats 16
+421ms [0:00:00 -1253344.341535015730187] Model parameter optimization (eps = 10.0)
+    (thread 0: tagwait: 3029 ms tagcpu: 16625 ms
+    (thread 1: tagwait: 2735 ms tagcpu: 16924 ms
+    (thread 2: tagwait: 722 ms tagcpu: 18935 ms
+    (thread 3: tagwait: 1061 ms tagcpu: 18598 ms
+    (thread 4: tagwait: 1419 ms tagcpu: 18240 ms
+    (thread 5: tagwait: 2084 ms tagcpu: 17575 ms
+    (thread 6: tagwait: 1390 ms tagcpu: 18269 ms
+    (thread 7: tagwait: 1680 ms tagcpu: 17979 ms
+    (thread 8: tagwait: 2847 ms tagcpu: 16812 ms
+    (thread 9: tagwait: 2907 ms tagcpu: 16752 ms
+    (thread 10: tagwait: 3991 ms tagcpu: 15668 ms
+    (thread 11: tagwait: 699 ms tagcpu: 18959 ms
+    (thread 12: tagwait: 3331 ms tagcpu: 16327 ms
+    (thread 13: tagwait: 4388 ms tagcpu: 15271 ms
+    (thread 14: tagwait: 4301 ms tagcpu: 15356 ms
+    (thread 15: tagwait: 4586 ms tagcpu: 15072 ms
+    wait_time_ms  (0, 3029) (1, 2735) (2, 722) (3, 1061) (4, 1419) (5, 2084) (6, 1390) (7, 1680) (8, 2847) (9, 2907) (10, 3991) (11, 699) (12, 3331) (13, 4388) (14, 4301) (15, 4586)
+    cpu_time_ms  (0, 16625) (1, 16924) (2, 18935) (3, 18598) (4, 18240) (5, 17575) (6, 18269) (7, 17979) (8, 16812) (9, 16752) (10, 15668) (11, 18959) (12, 16327) (13, 15271) (14, 15356) (15, 15072)
+0ms [0:00:20 -1163660.397520795930177] AUTODETECT spr round 1 (radius: 5)
+reinit stats 16
+    (thread 0: tagwait: 305 ms tagcpu: 2613 ms
+    (thread 1: tagwait: 295 ms tagcpu: 2627 ms
+    (thread 2: tagwait: 91 ms tagcpu: 2830 ms
+    (thread 3: tagwait: 133 ms tagcpu: 2788 ms
+    (thread 4: tagwait: 173 ms tagcpu: 2748 ms
+    (thread 5: tagwait: 236 ms tagcpu: 2685 ms
+    (thread 6: tagwait: 168 ms tagcpu: 2753 ms
+    (thread 7: tagwait: 199 ms tagcpu: 2722 ms
+    (thread 8: tagwait: 292 ms tagcpu: 2629 ms
+    (thread 9: tagwait: 302 ms tagcpu: 2620 ms
+    (thread 10: tagwait: 387 ms tagcpu: 2534 ms
+    (thread 11: tagwait: 107 ms tagcpu: 2814 ms
+    (thread 12: tagwait: 343 ms tagcpu: 2578 ms
+    (thread 13: tagwait: 416 ms tagcpu: 2506 ms
+    (thread 14: tagwait: 435 ms tagcpu: 2486 ms
+    (thread 15: tagwait: 417 ms tagcpu: 2505 ms
+    wait_time_ms  (0, 305) (1, 295) (2, 91) (3, 133) (4, 173) (5, 236) (6, 168) (7, 199) (8, 292) (9, 302) (10, 387) (11, 107) (12, 343) (13, 416) (14, 435) (15, 417)
+    cpu_time_ms  (0, 2613) (1, 2627) (2, 2830) (3, 2788) (4, 2748) (5, 2685) (6, 2753) (7, 2722) (8, 2629) (9, 2620) (10, 2534) (11, 2814) (12, 2578) (13, 2506) (14, 2486) (15, 2505)
+0ms [0:00:23 -959271.694267511251383] AUTODETECT spr round 2 (radius: 10)
+reinit stats 16
+    (thread 0: tagwait: 561 ms tagcpu: 5066 ms
+    (thread 1: tagwait: 447 ms tagcpu: 5180 ms
+    (thread 2: tagwait: 246 ms tagcpu: 5380 ms
+    (thread 3: tagwait: 296 ms tagcpu: 5331 ms
+    (thread 4: tagwait: 357 ms tagcpu: 5269 ms
+    (thread 5: tagwait: 441 ms tagcpu: 5185 ms
+    (thread 6: tagwait: 371 ms tagcpu: 5255 ms
+    (thread 7: tagwait: 385 ms tagcpu: 5242 ms
+    (thread 8: tagwait: 527 ms tagcpu: 5100 ms
+    (thread 9: tagwait: 438 ms tagcpu: 5189 ms
+    (thread 10: tagwait: 634 ms tagcpu: 4993 ms
+    (thread 11: tagwait: 276 ms tagcpu: 5350 ms
+    (thread 12: tagwait: 586 ms tagcpu: 5040 ms
+    (thread 13: tagwait: 668 ms tagcpu: 4959 ms
+    (thread 14: tagwait: 779 ms tagcpu: 4847 ms
+    (thread 15: tagwait: 643 ms tagcpu: 4984 ms
+    wait_time_ms  (0, 561) (1, 447) (2, 246) (3, 296) (4, 357) (5, 441) (6, 371) (7, 385) (8, 527) (9, 438) (10, 634) (11, 276) (12, 586) (13, 668) (14, 779) (15, 643)
+    cpu_time_ms  (0, 5066) (1, 5180) (2, 5380) (3, 5331) (4, 5269) (5, 5185) (6, 5255) (7, 5242) (8, 5100) (9, 5189) (10, 4993) (11, 5350) (12, 5040) (13, 4959) (14, 4847) (15, 4984)
+0ms [0:00:29 -856887.558313000248745] AUTODETECT spr round 3 (radius: 15)
+reinit stats 16
+    (thread 0: tagwait: 623 ms tagcpu: 6540 ms
+    (thread 1: tagwait: 531 ms tagcpu: 6631 ms
+    (thread 2: tagwait: 180 ms tagcpu: 6982 ms
+    (thread 3: tagwait: 236 ms tagcpu: 6927 ms
+    (thread 4: tagwait: 287 ms tagcpu: 6876 ms
+    (thread 5: tagwait: 399 ms tagcpu: 6764 ms
+    (thread 6: tagwait: 341 ms tagcpu: 6821 ms
+    (thread 7: tagwait: 329 ms tagcpu: 6834 ms
+    (thread 8: tagwait: 589 ms tagcpu: 6573 ms
+    (thread 9: tagwait: 607 ms tagcpu: 6555 ms
+    (thread 10: tagwait: 713 ms tagcpu: 6450 ms
+    (thread 11: tagwait: 233 ms tagcpu: 6929 ms
+    (thread 12: tagwait: 641 ms tagcpu: 6521 ms
+    (thread 13: tagwait: 798 ms tagcpu: 6364 ms
+    (thread 14: tagwait: 928 ms tagcpu: 6234 ms
+    (thread 15: tagwait: 811 ms tagcpu: 6349 ms
+    wait_time_ms  (0, 623) (1, 531) (2, 180) (3, 236) (4, 287) (5, 399) (6, 341) (7, 329) (8, 589) (9, 607) (10, 713) (11, 233) (12, 641) (13, 798) (14, 928) (15, 811)
+    cpu_time_ms  (0, 6540) (1, 6631) (2, 6982) (3, 6927) (4, 6876) (5, 6764) (6, 6821) (7, 6834) (8, 6573) (9, 6555) (10, 6450) (11, 6929) (12, 6521) (13, 6364) (14, 6234) (15, 6349)
+0ms [0:00:36 -855504.514891995699145] AUTODETECT spr round 4 (radius: 20)
+reinit stats 16
+    (thread 0: tagwait: 438 ms tagcpu: 4193 ms
+    (thread 1: tagwait: 355 ms tagcpu: 4276 ms
+    (thread 2: tagwait: 96 ms tagcpu: 4534 ms
+    (thread 3: tagwait: 147 ms tagcpu: 4484 ms
+    (thread 4: tagwait: 198 ms tagcpu: 4433 ms
+    (thread 5: tagwait: 271 ms tagcpu: 4360 ms
+    (thread 6: tagwait: 230 ms tagcpu: 4400 ms
+    (thread 7: tagwait: 204 ms tagcpu: 4426 ms
+    (thread 8: tagwait: 389 ms tagcpu: 4242 ms
+    (thread 9: tagwait: 400 ms tagcpu: 4231 ms
+    (thread 10: tagwait: 505 ms tagcpu: 4126 ms
+    (thread 11: tagwait: 147 ms tagcpu: 4484 ms
+    (thread 12: tagwait: 432 ms tagcpu: 4199 ms
+    (thread 13: tagwait: 556 ms tagcpu: 4075 ms
+    (thread 14: tagwait: 658 ms tagcpu: 3973 ms
+    (thread 15: tagwait: 579 ms tagcpu: 4052 ms
+    wait_time_ms  (0, 438) (1, 355) (2, 96) (3, 147) (4, 198) (5, 271) (6, 230) (7, 204) (8, 389) (9, 400) (10, 505) (11, 147) (12, 432) (13, 556) (14, 658) (15, 579)
+    cpu_time_ms  (0, 4193) (1, 4276) (2, 4534) (3, 4484) (4, 4433) (5, 4360) (6, 4400) (7, 4426) (8, 4242) (9, 4231) (10, 4126) (11, 4484) (12, 4199) (13, 4075) (14, 3973) (15, 4052)
+0ms [0:00:40 -855504.447816154570319] SPR radius for FAST iterations: 15 (autodetect)
+3ms [0:00:40 -855504.447816154570319] Model parameter optimization (eps = 3.0)
+reinit stats 16
+    (thread 0: tagwait: 2742 ms tagcpu: 10163 ms
+    (thread 1: tagwait: 2188 ms tagcpu: 10715 ms
+    (thread 2: tagwait: 323 ms tagcpu: 12583 ms
+    (thread 3: tagwait: 875 ms tagcpu: 12028 ms
+    (thread 4: tagwait: 1288 ms tagcpu: 11615 ms
+    (thread 5: tagwait: 1715 ms tagcpu: 11191 ms
+    (thread 6: tagwait: 1082 ms tagcpu: 11821 ms
+    (thread 7: tagwait: 1479 ms tagcpu: 11424 ms
+    (thread 8: tagwait: 2294 ms tagcpu: 10612 ms
+    (thread 9: tagwait: 2370 ms tagcpu: 10535 ms
+    (thread 10: tagwait: 3092 ms tagcpu: 9814 ms
+    (thread 11: tagwait: 541 ms tagcpu: 12362 ms
+    (thread 12: tagwait: 2831 ms tagcpu: 10075 ms
+    (thread 13: tagwait: 3479 ms tagcpu: 9425 ms
+    (thread 14: tagwait: 3821 ms tagcpu: 9077 ms
+    (thread 15: tagwait: 3635 ms tagcpu: 9272 ms
+    wait_time_ms  (0, 2742) (1, 2188) (2, 323) (3, 875) (4, 1288) (5, 1715) (6, 1082) (7, 1479) (8, 2294) (9, 2370) (10, 3092) (11, 541) (12, 2831) (13, 3479) (14, 3821) (15, 3635)
+    cpu_time_ms  (0, 10163) (1, 10715) (2, 12583) (3, 12028) (4, 11615) (5, 11191) (6, 11821) (7, 11424) (8, 10612) (9, 10535) (10, 9814) (11, 12362) (12, 10075) (13, 9425) (14, 9077) (15, 9272)
+0ms [0:00:53 -853183.737468799343333] FAST spr round 1 (radius: 15)
+reinit stats 16
+    (thread 0: tagwait: 799 ms tagcpu: 6632 ms
+    (thread 1: tagwait: 778 ms tagcpu: 6653 ms
+    (thread 2: tagwait: 537 ms tagcpu: 6894 ms
+    (thread 3: tagwait: 535 ms tagcpu: 6896 ms
+    (thread 4: tagwait: 496 ms tagcpu: 6935 ms
+    (thread 5: tagwait: 645 ms tagcpu: 6787 ms
+    (thread 6: tagwait: 617 ms tagcpu: 6814 ms
+    (thread 7: tagwait: 607 ms tagcpu: 6825 ms
+    (thread 8: tagwait: 745 ms tagcpu: 6686 ms
+    (thread 9: tagwait: 632 ms tagcpu: 6799 ms
+    (thread 10: tagwait: 855 ms tagcpu: 6576 ms
+    (thread 11: tagwait: 544 ms tagcpu: 6884 ms
+    (thread 12: tagwait: 795 ms tagcpu: 6636 ms
+    (thread 13: tagwait: 941 ms tagcpu: 6491 ms
+    (thread 14: tagwait: 986 ms tagcpu: 6445 ms
+    (thread 15: tagwait: 856 ms tagcpu: 6576 ms
+    wait_time_ms  (0, 799) (1, 778) (2, 537) (3, 535) (4, 496) (5, 645) (6, 617) (7, 607) (8, 745) (9, 632) (10, 855) (11, 544) (12, 795) (13, 941) (14, 986) (15, 856)
+    cpu_time_ms  (0, 6632) (1, 6653) (2, 6894) (3, 6896) (4, 6935) (5, 6787) (6, 6814) (7, 6825) (8, 6686) (9, 6799) (10, 6576) (11, 6884) (12, 6636) (13, 6491) (14, 6445) (15, 6576)
+0ms [0:01:01 -824387.698799778707325] FAST spr round 2 (radius: 15)
+reinit stats 16
+    (thread 0: tagwait: 415 ms tagcpu: 3602 ms
+    (thread 1: tagwait: 395 ms tagcpu: 3622 ms
+    (thread 2: tagwait: 188 ms tagcpu: 3828 ms
+    (thread 3: tagwait: 218 ms tagcpu: 3799 ms
+    (thread 4: tagwait: 269 ms tagcpu: 3748 ms
+    (thread 5: tagwait: 320 ms tagcpu: 3697 ms
+    (thread 6: tagwait: 256 ms tagcpu: 3761 ms
+    (thread 7: tagwait: 293 ms tagcpu: 3724 ms
+    (thread 8: tagwait: 398 ms tagcpu: 3620 ms
+    (thread 9: tagwait: 413 ms tagcpu: 3604 ms
+    (thread 10: tagwait: 473 ms tagcpu: 3544 ms
+    (thread 11: tagwait: 221 ms tagcpu: 3795 ms
+    (thread 12: tagwait: 443 ms tagcpu: 3574 ms
+    (thread 13: tagwait: 519 ms tagcpu: 3498 ms
+    (thread 14: tagwait: 557 ms tagcpu: 3460 ms
+    (thread 15: tagwait: 500 ms tagcpu: 3518 ms
+    wait_time_ms  (0, 415) (1, 395) (2, 188) (3, 218) (4, 269) (5, 320) (6, 256) (7, 293) (8, 398) (9, 413) (10, 473) (11, 221) (12, 443) (13, 519) (14, 557) (15, 500)
+    cpu_time_ms  (0, 3602) (1, 3622) (2, 3828) (3, 3799) (4, 3748) (5, 3697) (6, 3761) (7, 3724) (8, 3620) (9, 3604) (10, 3544) (11, 3795) (12, 3574) (13, 3498) (14, 3460) (15, 3518)
+0ms [0:01:05 -823947.319937642896548] FAST spr round 3 (radius: 15)
+reinit stats 16
+    (thread 0: tagwait: 523 ms tagcpu: 3290 ms
+    (thread 1: tagwait: 401 ms tagcpu: 3412 ms
+    (thread 2: tagwait: 290 ms tagcpu: 3523 ms
+    (thread 3: tagwait: 319 ms tagcpu: 3494 ms
+    (thread 4: tagwait: 371 ms tagcpu: 3442 ms
+    (thread 5: tagwait: 433 ms tagcpu: 3380 ms
+    (thread 6: tagwait: 220 ms tagcpu: 3593 ms
+    (thread 7: tagwait: 369 ms tagcpu: 3444 ms
+    (thread 8: tagwait: 505 ms tagcpu: 3308 ms
+    (thread 9: tagwait: 513 ms tagcpu: 3300 ms
+    (thread 10: tagwait: 577 ms tagcpu: 3236 ms
+    (thread 11: tagwait: 331 ms tagcpu: 3481 ms
+    (thread 12: tagwait: 550 ms tagcpu: 3262 ms
+    (thread 13: tagwait: 617 ms tagcpu: 3196 ms
+    (thread 14: tagwait: 662 ms tagcpu: 3151 ms
+    (thread 15: tagwait: 604 ms tagcpu: 3209 ms
+    wait_time_ms  (0, 523) (1, 401) (2, 290) (3, 319) (4, 371) (5, 433) (6, 220) (7, 369) (8, 505) (9, 513) (10, 577) (11, 331) (12, 550) (13, 617) (14, 662) (15, 604)
+    cpu_time_ms  (0, 3290) (1, 3412) (2, 3523) (3, 3494) (4, 3442) (5, 3380) (6, 3593) (7, 3444) (8, 3308) (9, 3300) (10, 3236) (11, 3481) (12, 3262) (13, 3196) (14, 3151) (15, 3209)
+0ms [0:01:09 -823917.797329687047750] FAST spr round 4 (radius: 15)
+reinit stats 16
+    (thread 0: tagwait: 396 ms tagcpu: 3348 ms
+    (thread 1: tagwait: 368 ms tagcpu: 3376 ms
+    (thread 2: tagwait: 160 ms tagcpu: 3583 ms
+    (thread 3: tagwait: 192 ms tagcpu: 3551 ms
+    (thread 4: tagwait: 239 ms tagcpu: 3505 ms
+    (thread 5: tagwait: 298 ms tagcpu: 3445 ms
+    (thread 6: tagwait: 234 ms tagcpu: 3510 ms
+    (thread 7: tagwait: 269 ms tagcpu: 3475 ms
+    (thread 8: tagwait: 374 ms tagcpu: 3370 ms
+    (thread 9: tagwait: 393 ms tagcpu: 3350 ms
+    (thread 10: tagwait: 450 ms tagcpu: 3294 ms
+    (thread 11: tagwait: 199 ms tagcpu: 3545 ms
+    (thread 12: tagwait: 419 ms tagcpu: 3321 ms
+    (thread 13: tagwait: 491 ms tagcpu: 3253 ms
+    (thread 14: tagwait: 532 ms tagcpu: 3212 ms
+    (thread 15: tagwait: 482 ms tagcpu: 3262 ms
+    wait_time_ms  (0, 396) (1, 368) (2, 160) (3, 192) (4, 239) (5, 298) (6, 234) (7, 269) (8, 374) (9, 393) (10, 450) (11, 199) (12, 419) (13, 491) (14, 532) (15, 482)
+    cpu_time_ms  (0, 3348) (1, 3376) (2, 3583) (3, 3551) (4, 3505) (5, 3445) (6, 3510) (7, 3475) (8, 3370) (9, 3350) (10, 3294) (11, 3545) (12, 3321) (13, 3253) (14, 3212) (15, 3262)
+0ms [0:01:12 -823910.178056768840179] FAST spr round 5 (radius: 15)
+reinit stats 16
+    (thread 0: tagwait: 390 ms tagcpu: 3321 ms
+    (thread 1: tagwait: 360 ms tagcpu: 3351 ms
+    (thread 2: tagwait: 150 ms tagcpu: 3561 ms
+    (thread 3: tagwait: 188 ms tagcpu: 3524 ms
+    (thread 4: tagwait: 243 ms tagcpu: 3468 ms
+    (thread 5: tagwait: 293 ms tagcpu: 3418 ms
+    (thread 6: tagwait: 231 ms tagcpu: 3480 ms
+    (thread 7: tagwait: 266 ms tagcpu: 3445 ms
+    (thread 8: tagwait: 365 ms tagcpu: 3346 ms
+    (thread 9: tagwait: 384 ms tagcpu: 3328 ms
+    (thread 10: tagwait: 449 ms tagcpu: 3263 ms
+    (thread 11: tagwait: 197 ms tagcpu: 3514 ms
+    (thread 12: tagwait: 425 ms tagcpu: 3286 ms
+    (thread 13: tagwait: 486 ms tagcpu: 3226 ms
+    (thread 14: tagwait: 525 ms tagcpu: 3187 ms
+    (thread 15: tagwait: 476 ms tagcpu: 3236 ms
+    wait_time_ms  (0, 390) (1, 360) (2, 150) (3, 188) (4, 243) (5, 293) (6, 231) (7, 266) (8, 365) (9, 384) (10, 449) (11, 197) (12, 425) (13, 486) (14, 525) (15, 476)
+    cpu_time_ms  (0, 3321) (1, 3351) (2, 3561) (3, 3524) (4, 3468) (5, 3418) (6, 3480) (7, 3445) (8, 3346) (9, 3328) (10, 3263) (11, 3514) (12, 3286) (13, 3226) (14, 3187) (15, 3236)
+0ms [0:01:16 -823904.261194608872756] FAST spr round 6 (radius: 15)
+reinit stats 16
+    (thread 0: tagwait: 381 ms tagcpu: 3333 ms
+    (thread 1: tagwait: 355 ms tagcpu: 3360 ms
+    (thread 2: tagwait: 151 ms tagcpu: 3564 ms
+    (thread 3: tagwait: 180 ms tagcpu: 3534 ms
+    (thread 4: tagwait: 235 ms tagcpu: 3480 ms
+    (thread 5: tagwait: 288 ms tagcpu: 3427 ms
+    (thread 6: tagwait: 224 ms tagcpu: 3490 ms
+    (thread 7: tagwait: 258 ms tagcpu: 3457 ms
+    (thread 8: tagwait: 365 ms tagcpu: 3349 ms
+    (thread 9: tagwait: 380 ms tagcpu: 3335 ms
+    (thread 10: tagwait: 442 ms tagcpu: 3273 ms
+    (thread 11: tagwait: 188 ms tagcpu: 3527 ms
+    (thread 12: tagwait: 416 ms tagcpu: 3298 ms
+    (thread 13: tagwait: 479 ms tagcpu: 3235 ms
+    (thread 14: tagwait: 515 ms tagcpu: 3200 ms
+    (thread 15: tagwait: 469 ms tagcpu: 3246 ms
+    wait_time_ms  (0, 381) (1, 355) (2, 151) (3, 180) (4, 235) (5, 288) (6, 224) (7, 258) (8, 365) (9, 380) (10, 442) (11, 188) (12, 416) (13, 479) (14, 515) (15, 469)
+    cpu_time_ms  (0, 3333) (1, 3360) (2, 3564) (3, 3534) (4, 3480) (5, 3427) (6, 3490) (7, 3457) (8, 3349) (9, 3335) (10, 3273) (11, 3527) (12, 3298) (13, 3235) (14, 3200) (15, 3246)
+0ms [0:01:20 -823900.322714371955954] FAST spr round 7 (radius: 15)
+reinit stats 16
+    (thread 0: tagwait: 383 ms tagcpu: 3351 ms
+    (thread 1: tagwait: 367 ms tagcpu: 3366 ms
+    (thread 2: tagwait: 150 ms tagcpu: 3582 ms
+    (thread 3: tagwait: 190 ms tagcpu: 3543 ms
+    (thread 4: tagwait: 238 ms tagcpu: 3495 ms
+    (thread 5: tagwait: 294 ms tagcpu: 3439 ms
+    (thread 6: tagwait: 229 ms tagcpu: 3504 ms
+    (thread 7: tagwait: 267 ms tagcpu: 3466 ms
+    (thread 8: tagwait: 369 ms tagcpu: 3364 ms
+    (thread 9: tagwait: 385 ms tagcpu: 3348 ms
+    (thread 10: tagwait: 454 ms tagcpu: 3278 ms
+    (thread 11: tagwait: 194 ms tagcpu: 3539 ms
+    (thread 12: tagwait: 415 ms tagcpu: 3316 ms
+    (thread 13: tagwait: 486 ms tagcpu: 3248 ms
+    (thread 14: tagwait: 521 ms tagcpu: 3212 ms
+    (thread 15: tagwait: 469 ms tagcpu: 3265 ms
+    wait_time_ms  (0, 383) (1, 367) (2, 150) (3, 190) (4, 238) (5, 294) (6, 229) (7, 267) (8, 369) (9, 385) (10, 454) (11, 194) (12, 415) (13, 486) (14, 521) (15, 469)
+    cpu_time_ms  (0, 3351) (1, 3366) (2, 3582) (3, 3543) (4, 3495) (5, 3439) (6, 3504) (7, 3466) (8, 3364) (9, 3348) (10, 3278) (11, 3539) (12, 3316) (13, 3248) (14, 3212) (15, 3265)
+reinit stats 16
+3735ms [0:01:23 -823900.322455952758901] Model parameter optimization (eps = 1.0)
+    (thread 0: tagwait: 762 ms tagcpu: 2798 ms
+    (thread 1: tagwait: 670 ms tagcpu: 2892 ms
+    (thread 2: tagwait: 85 ms tagcpu: 3478 ms
+    (thread 3: tagwait: 222 ms tagcpu: 3340 ms
+    (thread 4: tagwait: 338 ms tagcpu: 3224 ms
+    (thread 5: tagwait: 499 ms tagcpu: 3064 ms
+    (thread 6: tagwait: 293 ms tagcpu: 3269 ms
+    (thread 7: tagwait: 431 ms tagcpu: 3132 ms
+    (thread 8: tagwait: 656 ms tagcpu: 2906 ms
+    (thread 9: tagwait: 716 ms tagcpu: 2846 ms
+    (thread 10: tagwait: 910 ms tagcpu: 2652 ms
+    (thread 11: tagwait: 199 ms tagcpu: 3363 ms
+    (thread 12: tagwait: 806 ms tagcpu: 2756 ms
+    (thread 13: tagwait: 982 ms tagcpu: 2580 ms
+    (thread 14: tagwait: 1048 ms tagcpu: 2514 ms
+    (thread 15: tagwait: 1006 ms tagcpu: 2557 ms
+    wait_time_ms  (0, 762) (1, 670) (2, 85) (3, 222) (4, 338) (5, 499) (6, 293) (7, 431) (8, 656) (9, 716) (10, 910) (11, 199) (12, 806) (13, 982) (14, 1048) (15, 1006)
+    cpu_time_ms  (0, 2798) (1, 2892) (2, 3478) (3, 3340) (4, 3224) (5, 3064) (6, 3269) (7, 3132) (8, 2906) (9, 2846) (10, 2652) (11, 3363) (12, 2756) (13, 2580) (14, 2514) (15, 2557)
+0ms [0:01:27 -823836.477546733105555] SLOW spr round 1 (radius: 5)
+reinit stats 16
+    (thread 0: tagwait: 1386 ms tagcpu: 15126 ms
+    (thread 1: tagwait: 1378 ms tagcpu: 15134 ms
+    (thread 2: tagwait: 1031 ms tagcpu: 15480 ms
+    (thread 3: tagwait: 1020 ms tagcpu: 15492 ms
+    (thread 4: tagwait: 1101 ms tagcpu: 15410 ms
+    (thread 5: tagwait: 1173 ms tagcpu: 15338 ms
+    (thread 6: tagwait: 1139 ms tagcpu: 15372 ms
+    (thread 7: tagwait: 1142 ms tagcpu: 15368 ms
+    (thread 8: tagwait: 1380 ms tagcpu: 15128 ms
+    (thread 9: tagwait: 1349 ms tagcpu: 15162 ms
+    (thread 10: tagwait: 1509 ms tagcpu: 15002 ms
+    (thread 11: tagwait: 1108 ms tagcpu: 15404 ms
+    (thread 12: tagwait: 1446 ms tagcpu: 15065 ms
+    (thread 13: tagwait: 1565 ms tagcpu: 14947 ms
+    (thread 14: tagwait: 1585 ms tagcpu: 14926 ms
+    (thread 15: tagwait: 1291 ms tagcpu: 15221 ms
+    wait_time_ms  (0, 1386) (1, 1378) (2, 1031) (3, 1020) (4, 1101) (5, 1173) (6, 1139) (7, 1142) (8, 1380) (9, 1349) (10, 1509) (11, 1108) (12, 1446) (13, 1565) (14, 1585) (15, 1291)
+    cpu_time_ms  (0, 15126) (1, 15134) (2, 15480) (3, 15492) (4, 15410) (5, 15338) (6, 15372) (7, 15368) (8, 15128) (9, 15162) (10, 15002) (11, 15404) (12, 15065) (13, 14947) (14, 14926) (15, 15221)
+0ms [0:01:44 -823836.312186956289224] SLOW spr round 2 (radius: 5)
+reinit stats 16
+    (thread 0: tagwait: 1282 ms tagcpu: 14082 ms
+    (thread 1: tagwait: 1290 ms tagcpu: 14075 ms
+    (thread 2: tagwait: 928 ms tagcpu: 14437 ms
+    (thread 3: tagwait: 916 ms tagcpu: 14449 ms
+    (thread 4: tagwait: 1039 ms tagcpu: 14325 ms
+    (thread 5: tagwait: 1086 ms tagcpu: 14279 ms
+    (thread 6: tagwait: 1038 ms tagcpu: 14326 ms
+    (thread 7: tagwait: 1048 ms tagcpu: 14316 ms
+    (thread 8: tagwait: 1301 ms tagcpu: 14065 ms
+    (thread 9: tagwait: 1258 ms tagcpu: 14106 ms
+    (thread 10: tagwait: 1390 ms tagcpu: 13975 ms
+    (thread 11: tagwait: 1000 ms tagcpu: 14365 ms
+    (thread 12: tagwait: 1336 ms tagcpu: 14029 ms
+    (thread 13: tagwait: 1441 ms tagcpu: 13924 ms
+    (thread 14: tagwait: 1470 ms tagcpu: 13894 ms
+    (thread 15: tagwait: 1218 ms tagcpu: 14148 ms
+    wait_time_ms  (0, 1282) (1, 1290) (2, 928) (3, 916) (4, 1039) (5, 1086) (6, 1038) (7, 1048) (8, 1301) (9, 1258) (10, 1390) (11, 1000) (12, 1336) (13, 1441) (14, 1470) (15, 1218)
+    cpu_time_ms  (0, 14082) (1, 14075) (2, 14437) (3, 14449) (4, 14325) (5, 14279) (6, 14326) (7, 14316) (8, 14065) (9, 14106) (10, 13975) (11, 14365) (12, 14029) (13, 13924) (14, 13894) (15, 14148)
+0ms [0:01:59 -823836.309216647059657] SLOW spr round 3 (radius: 10)
+reinit stats 16
+    (thread 0: tagwait: 1221 ms tagcpu: 12960 ms
+    (thread 1: tagwait: 1248 ms tagcpu: 12933 ms
+    (thread 2: tagwait: 944 ms tagcpu: 13237 ms
+    (thread 3: tagwait: 896 ms tagcpu: 13285 ms
+    (thread 4: tagwait: 1016 ms tagcpu: 13162 ms
+    (thread 5: tagwait: 1057 ms tagcpu: 13124 ms
+    (thread 6: tagwait: 1067 ms tagcpu: 13107 ms
+    (thread 7: tagwait: 957 ms tagcpu: 13222 ms
+    (thread 8: tagwait: 1246 ms tagcpu: 12935 ms
+    (thread 9: tagwait: 1194 ms tagcpu: 12987 ms
+    (thread 10: tagwait: 1251 ms tagcpu: 12930 ms
+    (thread 11: tagwait: 973 ms tagcpu: 13208 ms
+    (thread 12: tagwait: 1274 ms tagcpu: 12907 ms
+    (thread 13: tagwait: 1345 ms tagcpu: 12837 ms
+    (thread 14: tagwait: 1387 ms tagcpu: 12794 ms
+    (thread 15: tagwait: 1150 ms tagcpu: 13032 ms
+    wait_time_ms  (0, 1221) (1, 1248) (2, 944) (3, 896) (4, 1016) (5, 1057) (6, 1067) (7, 957) (8, 1246) (9, 1194) (10, 1251) (11, 973) (12, 1274) (13, 1345) (14, 1387) (15, 1150)
+    cpu_time_ms  (0, 12960) (1, 12933) (2, 13237) (3, 13285) (4, 13162) (5, 13124) (6, 13107) (7, 13222) (8, 12935) (9, 12987) (10, 12930) (11, 13208) (12, 12907) (13, 12837) (14, 12794) (15, 13032)
+0ms [0:02:13 -823836.309030756587163] SLOW spr round 4 (radius: 15)
+reinit stats 16
+    (thread 0: tagwait: 2060 ms tagcpu: 26186 ms
+    (thread 1: tagwait: 2113 ms tagcpu: 26135 ms
+    (thread 2: tagwait: 1770 ms tagcpu: 26478 ms
+    (thread 3: tagwait: 1599 ms tagcpu: 26645 ms
+    (thread 4: tagwait: 1756 ms tagcpu: 26491 ms
+    (thread 5: tagwait: 1782 ms tagcpu: 26465 ms
+    (thread 6: tagwait: 1965 ms tagcpu: 26281 ms
+    (thread 7: tagwait: 1791 ms tagcpu: 26450 ms
+    (thread 8: tagwait: 2094 ms tagcpu: 26154 ms
+    (thread 9: tagwait: 1960 ms tagcpu: 26279 ms
+    (thread 10: tagwait: 2137 ms tagcpu: 26111 ms
+    (thread 11: tagwait: 1829 ms tagcpu: 26419 ms
+    (thread 12: tagwait: 2057 ms tagcpu: 26188 ms
+    (thread 13: tagwait: 2226 ms tagcpu: 26022 ms
+    (thread 14: tagwait: 2207 ms tagcpu: 26040 ms
+    (thread 15: tagwait: 1706 ms tagcpu: 26542 ms
+    wait_time_ms  (0, 2060) (1, 2113) (2, 1770) (3, 1599) (4, 1756) (5, 1782) (6, 1965) (7, 1791) (8, 2094) (9, 1960) (10, 2137) (11, 1829) (12, 2057) (13, 2226) (14, 2207) (15, 1706)
+    cpu_time_ms  (0, 26186) (1, 26135) (2, 26478) (3, 26645) (4, 26491) (5, 26465) (6, 26281) (7, 26450) (8, 26154) (9, 26279) (10, 26111) (11, 26419) (12, 26188) (13, 26022) (14, 26040) (15, 26542)
+0ms [0:02:41 -823836.309018952539191] SLOW spr round 5 (radius: 20)
+reinit stats 16
+    (thread 0: tagwait: 902 ms tagcpu: 11254 ms
+    (thread 1: tagwait: 928 ms tagcpu: 11228 ms
+    (thread 2: tagwait: 733 ms tagcpu: 11423 ms
+    (thread 3: tagwait: 723 ms tagcpu: 11433 ms
+    (thread 4: tagwait: 738 ms tagcpu: 11418 ms
+    (thread 5: tagwait: 801 ms tagcpu: 11354 ms
+    (thread 6: tagwait: 840 ms tagcpu: 11316 ms
+    (thread 7: tagwait: 773 ms tagcpu: 11381 ms
+    (thread 8: tagwait: 948 ms tagcpu: 11209 ms
+    (thread 9: tagwait: 920 ms tagcpu: 11236 ms
+    (thread 10: tagwait: 975 ms tagcpu: 11182 ms
+    (thread 11: tagwait: 776 ms tagcpu: 11380 ms
+    (thread 12: tagwait: 919 ms tagcpu: 11237 ms
+    (thread 13: tagwait: 1018 ms tagcpu: 11138 ms
+    (thread 14: tagwait: 1020 ms tagcpu: 11136 ms
+    (thread 15: tagwait: 825 ms tagcpu: 11332 ms
+    wait_time_ms  (0, 902) (1, 928) (2, 733) (3, 723) (4, 738) (5, 801) (6, 840) (7, 773) (8, 948) (9, 920) (10, 975) (11, 776) (12, 919) (13, 1018) (14, 1020) (15, 825)
+    cpu_time_ms  (0, 11254) (1, 11228) (2, 11423) (3, 11433) (4, 11418) (5, 11354) (6, 11316) (7, 11381) (8, 11209) (9, 11236) (10, 11182) (11, 11380) (12, 11237) (13, 11138) (14, 11136) (15, 11332)
+0ms [0:02:53 -823836.309018190717325] SLOW spr round 6 (radius: 25)
+reinit stats 16
+    (thread 0: tagwait: 435 ms tagcpu: 4402 ms
+    (thread 1: tagwait: 436 ms tagcpu: 4402 ms
+    (thread 2: tagwait: 264 ms tagcpu: 4573 ms
+    (thread 3: tagwait: 295 ms tagcpu: 4543 ms
+    (thread 4: tagwait: 329 ms tagcpu: 4508 ms
+    (thread 5: tagwait: 371 ms tagcpu: 4467 ms
+    (thread 6: tagwait: 349 ms tagcpu: 4488 ms
+    (thread 7: tagwait: 354 ms tagcpu: 4482 ms
+    (thread 8: tagwait: 457 ms tagcpu: 4380 ms
+    (thread 9: tagwait: 456 ms tagcpu: 4381 ms
+    (thread 10: tagwait: 512 ms tagcpu: 4326 ms
+    (thread 11: tagwait: 286 ms tagcpu: 4552 ms
+    (thread 12: tagwait: 454 ms tagcpu: 4383 ms
+    (thread 13: tagwait: 528 ms tagcpu: 4309 ms
+    (thread 14: tagwait: 546 ms tagcpu: 4291 ms
+    (thread 15: tagwait: 469 ms tagcpu: 4369 ms
+    wait_time_ms  (0, 435) (1, 436) (2, 264) (3, 295) (4, 329) (5, 371) (6, 349) (7, 354) (8, 457) (9, 456) (10, 512) (11, 286) (12, 454) (13, 528) (14, 546) (15, 469)
+    cpu_time_ms  (0, 4402) (1, 4402) (2, 4573) (3, 4543) (4, 4508) (5, 4467) (6, 4488) (7, 4482) (8, 4380) (9, 4381) (10, 4326) (11, 4552) (12, 4383) (13, 4309) (14, 4291) (15, 4369)
+0ms [0:02:58 -823836.309018147061579] Model parameter optimization (eps = 0.100000)
+reinit stats 16
+    (thread 0: tagwait: 116 ms tagcpu: 577 ms
+    (thread 1: tagwait: 105 ms tagcpu: 587 ms
+    (thread 2: tagwait: 7 ms tagcpu: 685 ms
+    (thread 3: tagwait: 34 ms tagcpu: 658 ms
+    (thread 4: tagwait: 57 ms tagcpu: 635 ms
+    (thread 5: tagwait: 76 ms tagcpu: 617 ms
+    (thread 6: tagwait: 42 ms tagcpu: 650 ms
+    (thread 7: tagwait: 64 ms tagcpu: 628 ms
+    (thread 8: tagwait: 116 ms tagcpu: 576 ms
+    (thread 9: tagwait: 120 ms tagcpu: 572 ms
+    (thread 10: tagwait: 153 ms tagcpu: 540 ms
+    (thread 11: tagwait: 27 ms tagcpu: 665 ms
+    (thread 12: tagwait: 116 ms tagcpu: 576 ms
+    (thread 13: tagwait: 162 ms tagcpu: 530 ms
+    (thread 14: tagwait: 165 ms tagcpu: 527 ms
+    (thread 15: tagwait: 165 ms tagcpu: 528 ms
+    wait_time_ms  (0, 116) (1, 105) (2, 7) (3, 34) (4, 57) (5, 76) (6, 42) (7, 64) (8, 116) (9, 120) (10, 153) (11, 27) (12, 116) (13, 162) (14, 165) (15, 165)
+    cpu_time_ms  (0, 577) (1, 587) (2, 685) (3, 658) (4, 635) (5, 617) (6, 650) (7, 628) (8, 576) (9, 572) (10, 540) (11, 665) (12, 576) (13, 530) (14, 527) (15, 528)
+
+Model parameters:
+   Branch lengths (ML): linked
+   Rate heterogeneity: GAMMA (4 cats),  alpha: 0.374401 (ML),  weights&rates: (0.250000,0.013201) (0.250000,0.162391) (0.250000,0.702024) (0.250000,3.122384) 
+   Base frequencies (ML): 0.358812 0.309097 0.067282 0.264809 
+   Substitution rates (ML): 0.297193 4.519889 0.304153 0.607413 2.308602 1.000000 
+
+
+Final LogLikelihood: -823835.953236
+
+Elapsed time: 179.496 seconds
+
+Final tree saved to: /home/morelbt/github/raxml-ng/test/128.phy.raxml.bestTree
+Execution log saved to: /home/morelbt/github/raxml-ng/test/128.phy.raxml.log
+
