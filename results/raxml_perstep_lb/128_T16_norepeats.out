@@ -1,0 +1,613 @@
+RAxML-NG v. 0.1alpha (c) 2017 The Exelixis Lab
+
+WARNING: This is an EXPERIMENTAL version of RAxML which has not been released yet!
+
+RAxML-NG was called as follows:
+
+./raxml-ng-mpi --seed=42 --msa data/128/128.phy --model data/128/128.part --simd AVX --threads 16 --repeats off
+
+Analysis options:
+  run mode: Tree search
+  start tree: random
+  random seed: 42
+  tip-inner: ON
+  repeats: OFF
+  pattern compression: ON
+  fast spr radius: AUTO
+  spr subtree cutoff: 1.000000
+  branch lengths: ML estimate (linked)
+  SIMD kernels: AVX
+  parallelization: PTHREADS (16 threads)
+
+Reading alignment from file: data/128/128.phy
+Loaded alignment with 128 taxa and 29198 sites
+
+Alignment comprises 34 partitions and 19853 patterns
+
+Partition 0: 12S_rRNA
+Model: GTR+F+G4
+Alignment sites / patterns: 860 / 571
+Gaps: 2.92 %
+Invariant sites: 30.81 %
+
+Partition 1: 16S_rRNA
+Model: GTR+F+G4
+Alignment sites / patterns: 1275 / 809
+Gaps: 2.73 %
+Invariant sites: 38.20 %
+
+Partition 2: ATP6
+Model: GTR+F+G4
+Alignment sites / patterns: 681 / 498
+Gaps: 6.26 %
+Invariant sites: 26.58 %
+
+Partition 3: ATP8
+Model: GTR+F+G4
+Alignment sites / patterns: 213 / 190
+Gaps: 10.75 %
+Invariant sites: 10.80 %
+
+Partition 4: COX1
+Model: GTR+F+G4
+Alignment sites / patterns: 1557 / 815
+Gaps: 5.38 %
+Invariant sites: 47.21 %
+
+Partition 5: COX2
+Model: GTR+F+G4
+Alignment sites / patterns: 708 / 467
+Gaps: 3.35 %
+Invariant sites: 34.60 %
+
+Partition 6: COX3
+Model: GTR+F+G4
+Alignment sites / patterns: 804 / 484
+Gaps: 2.38 %
+Invariant sites: 40.17 %
+
+Partition 7: Cytb
+Model: GTR+F+G4
+Alignment sites / patterns: 1149 / 770
+Gaps: 0.81 %
+Invariant sites: 32.99 %
+
+Partition 8: ND1
+Model: GTR+F+G4
+Alignment sites / patterns: 963 / 669
+Gaps: 0.66 %
+Invariant sites: 30.84 %
+
+Partition 9: ND2
+Model: GTR+F+G4
+Alignment sites / patterns: 1050 / 865
+Gaps: 0.60 %
+Invariant sites: 17.62 %
+
+Partition 10: ND3
+Model: GTR+F+G4
+Alignment sites / patterns: 349 / 265
+Gaps: 0.82 %
+Invariant sites: 26.65 %
+
+Partition 11: ND4
+Model: GTR+F+G4
+Alignment sites / patterns: 1378 / 1016
+Gaps: 0.02 %
+Invariant sites: 25.83 %
+
+Partition 12: ND4L
+Model: GTR+F+G4
+Alignment sites / patterns: 297 / 234
+Gaps: 0.00 %
+Invariant sites: 22.56 %
+
+Partition 13: ND5
+Model: GTR+F+G4
+Alignment sites / patterns: 1836 / 1393
+Gaps: 1.04 %
+Invariant sites: 23.58 %
+
+Partition 14: ND6
+Model: GTR+F+G4
+Alignment sites / patterns: 555 / 467
+Gaps: 8.83 %
+Invariant sites: 17.48 %
+
+Partition 15: tRNAs
+Model: GTR+F+G4
+Alignment sites / patterns: 1341 / 940
+Gaps: 2.11 %
+Invariant sites: 31.25 %
+
+Partition 16: BRCA1
+Model: GTR+F+G4
+Alignment sites / patterns: 2934 / 2706
+Gaps: 57.12 %
+Invariant sites: 12.03 %
+
+Partition 17: APOB
+Model: GTR+F+G4
+Alignment sites / patterns: 1335 / 1092
+Gaps: 64.66 %
+Invariant sites: 22.25 %
+
+Partition 18: IRBP
+Model: GTR+F+G4
+Alignment sites / patterns: 1233 / 931
+Gaps: 50.45 %
+Invariant sites: 27.98 %
+
+Partition 19: ADRB2
+Model: GTR+F+G4
+Alignment sites / patterns: 833 / 408
+Gaps: 65.85 %
+Invariant sites: 55.82 %
+
+Partition 20: APP
+Model: GTR+F+G4
+Alignment sites / patterns: 717 / 474
+Gaps: 67.89 %
+Invariant sites: 38.21 %
+
+Partition 21: ATP7A
+Model: GTR+F+G4
+Alignment sites / patterns: 684 / 457
+Gaps: 63.15 %
+Invariant sites: 33.63 %
+
+Partition 22: BDNF
+Model: GTR+F+G4
+Alignment sites / patterns: 582 / 230
+Gaps: 65.51 %
+Invariant sites: 63.75 %
+
+Partition 23: CNR1
+Model: GTR+F+G4
+Alignment sites / patterns: 993 / 383
+Gaps: 67.96 %
+Invariant sites: 62.03 %
+
+Partition 24: EDG1
+Model: GTR+F+G4
+Alignment sites / patterns: 978 / 463
+Gaps: 67.00 %
+Invariant sites: 56.54 %
+
+Partition 25: RAG1
+Model: GTR+F+G4
+Alignment sites / patterns: 975 / 436
+Gaps: 71.62 %
+Invariant sites: 60.21 %
+
+Partition 26: RAG2
+Model: GTR+F+G4
+Alignment sites / patterns: 444 / 239
+Gaps: 70.54 %
+Invariant sites: 47.52 %
+
+Partition 27: TYR
+Model: GTR+F+G4
+Alignment sites / patterns: 426 / 251
+Gaps: 68.08 %
+Invariant sites: 42.72 %
+
+Partition 28: ADORA3
+Model: GTR+F+G4
+Alignment sites / patterns: 330 / 215
+Gaps: 68.08 %
+Invariant sites: 35.15 %
+
+Partition 29: BMI
+Model: GTR+F+G4
+Alignment sites / patterns: 340 / 149
+Gaps: 74.17 %
+Invariant sites: 63.82 %
+
+Partition 30: CREM
+Model: GTR+F+G4
+Alignment sites / patterns: 468 / 322
+Gaps: 71.74 %
+Invariant sites: 38.46 %
+
+Partition 31: PLCB4
+Model: GTR+F+G4
+Alignment sites / patterns: 373 / 347
+Gaps: 71.40 %
+Invariant sites: 17.69 %
+
+Partition 32: PNOC
+Model: GTR+F+G4
+Alignment sites / patterns: 333 / 223
+Gaps: 74.09 %
+Invariant sites: 41.44 %
+
+Partition 33: ZFX
+Model: GTR+F+G4
+Alignment sites / patterns: 204 / 74
+Gaps: 70.02 %
+Invariant sites: 67.65 %
+
+
+Generating a random starting tree with 128 taxa
+
+Data distribution:
+thread#	part#	start	length
+0	33	0	74
+0	24	0	463
+0	16	2003	703
+
+1	29	0	149
+1	14	0	467
+1	16	1379	624
+
+2	3	0	190
+2	5	0	467
+2	16	796	583
+
+3	28	0	215
+3	20	0	474
+3	16	244	552
+
+4	32	0	223
+4	6	0	484
+4	13	1103	290
+4	16	0	244
+
+5	22	0	230
+5	2	0	498
+5	13	590	513
+
+6	12	0	234
+6	0	0	571
+6	11	571	436
+
+7	26	0	239
+7	8	0	669
+7	18	520	333
+
+8	27	0	251
+8	7	0	770
+8	18	300	220
+
+9	10	0	265
+9	1	0	809
+9	18	133	167
+
+10	30	0	322
+10	4	0	815
+10	18	29	104
+
+11	31	0	347
+11	9	0	865
+11	18	0	29
+
+12	23	0	383
+12	17	824	268
+12	13	0	590
+
+13	19	0	408
+13	11	1007	9
+13	17	0	824
+
+14	25	0	436
+14	15	706	234
+14	11	0	571
+
+15	21	0	457
+15	18	853	78
+15	15	0	706
+
+
+Initial LogLikelihood: -1373296.66
+[00:00:00 -1373296.662597] Initial branch length optimization
+    busy_ratio: -nan
+    stats_step: initial_blo
+    wait_time_ms  (0, 0) (1, 0) (2, 0) (3, 0) (4, 0) (5, 0) (6, 0) (7, 0) (8, 0) (9, 0) (10, 0) (11, 0) (12, 0) (13, 0) (14, 0) (15, 0)
+    cpu_time_ms  (0, 0) (1, 0) (2, 0) (3, 0) (4, 0) (5, 0) (6, 0) (7, 0) (8, 0) (9, 0) (10, 0) (11, 0) (12, 0) (13, 0) (14, 0) (15, 0)
+[00:00:01 -1250344.958146] Model parameter optimization (eps = 10.000000)
+    busy_ratio: 0.893761
+    stats_step: model_param1
+    wait_time_ms  (0, 5695) (1, 6317) (2, 5439) (3, 6187) (4, 1079) (5, 5979) (6, 5205) (7, 5806) (8, 5033) (9, 5041) (10, 5105) (11, 5804) (12, 3171) (13, 3378) (14, 5030) (15, 6075)
+    cpu_time_ms  (0, 41570) (1, 40953) (2, 41831) (3, 41083) (4, 46190) (5, 41290) (6, 42064) (7, 41452) (8, 42237) (9, 42229) (10, 42164) (11, 41466) (12, 44099) (13, 43892) (14, 42240) (15, 41195)
+[00:00:48 -1158203.940260] AUTODETECT spr round 1 (radius: 5)
+    busy_ratio: 0.949995
+    stats_step: autodetect_spr
+    wait_time_ms  (0, 352) (1, 341) (2, 312) (3, 317) (4, 42) (5, 311) (6, 275) (7, 317) (8, 264) (9, 319) (10, 275) (11, 313) (12, 310) (13, 284) (14, 273) (15, 322)
+    cpu_time_ms  (0, 5435) (1, 5451) (2, 5480) (3, 5475) (4, 5749) (5, 5480) (6, 5517) (7, 5474) (8, 5527) (9, 5472) (10, 5516) (11, 5479) (12, 5481) (13, 5507) (14, 5518) (15, 5470)
+[00:00:54 -975867.028956] AUTODETECT spr round 2 (radius: 10)
+    busy_ratio: 0.943302
+    stats_step: autodetect_spr
+    wait_time_ms  (0, 579) (1, 598) (2, 593) (3, 522) (4, 189) (5, 554) (6, 541) (7, 415) (8, 527) (9, 570) (10, 451) (11, 616) (12, 551) (13, 545) (14, 515) (15, 525)
+    cpu_time_ms  (0, 8564) (1, 8548) (2, 8553) (3, 8625) (4, 8957) (5, 8593) (6, 8605) (7, 8732) (8, 8620) (9, 8576) (10, 8696) (11, 8531) (12, 8596) (13, 8602) (14, 8631) (15, 8622)
+[00:01:03 -858666.263642] AUTODETECT spr round 3 (radius: 15)
+    busy_ratio: 0.955607
+    stats_step: autodetect_spr
+    wait_time_ms  (0, 645) (1, 636) (2, 648) (3, 515) (4, 113) (5, 522) (6, 553) (7, 559) (8, 517) (9, 604) (10, 592) (11, 692) (12, 567) (13, 672) (14, 543) (15, 598)
+    cpu_time_ms  (0, 11999) (1, 12012) (2, 12000) (3, 12132) (4, 12535) (5, 12126) (6, 12094) (7, 12088) (8, 12131) (9, 12043) (10, 12055) (11, 11955) (12, 12081) (13, 11976) (14, 12105) (15, 12049)
+[00:01:15 -849955.081173] AUTODETECT spr round 4 (radius: 20)
+    busy_ratio: 0.954514
+    stats_step: autodetect_spr
+    wait_time_ms  (0, 454) (1, 457) (2, 487) (3, 379) (4, 86) (5, 400) (6, 436) (7, 422) (8, 442) (9, 452) (10, 431) (11, 507) (12, 418) (13, 473) (14, 406) (15, 418)
+    cpu_time_ms  (0, 8717) (1, 8718) (2, 8688) (3, 8796) (4, 9088) (5, 8775) (6, 8739) (7, 8753) (8, 8733) (9, 8723) (10, 8743) (11, 8668) (12, 8757) (13, 8702) (14, 8769) (15, 8757)
+[00:01:25 -849955.060862] SPR radius for FAST iterations: 15 (autodetect)
+    busy_ratio: -nan
+    stats_step: fast_spr
+    wait_time_ms  (0, 0) (1, 0) (2, 0) (3, 0) (4, 0) (5, 0) (6, 0) (7, 0) (8, 0) (9, 0) (10, 0) (11, 0) (12, 0) (13, 0) (14, 0) (15, 0)
+    cpu_time_ms  (0, 0) (1, 0) (2, 0) (3, 0) (4, 0) (5, 0) (6, 0) (7, 0) (8, 0) (9, 0) (10, 0) (11, 0) (12, 0) (13, 0) (14, 0) (15, 0)
+[00:01:25 -849955.060862] Model parameter optimization (eps = 3.000000)
+    busy_ratio: 0.844530
+    stats_step: model_param2
+    wait_time_ms  (0, 3627) (1, 3557) (2, 3204) (3, 742) (4, 2152) (5, 3465) (6, 3144) (7, 3523) (8, 3149) (9, 3454) (10, 3124) (11, 3376) (12, 3487) (13, 3240) (14, 1029) (15, 3442)
+    cpu_time_ms  (0, 15554) (1, 15628) (2, 15981) (3, 18438) (4, 17032) (5, 15719) (6, 16041) (7, 15661) (8, 16035) (9, 15731) (10, 16061) (11, 15808) (12, 15697) (13, 15944) (14, 18156) (15, 15742)
+[00:01:44 -846987.349753] FAST spr round 1 (radius: 15)
+    busy_ratio: 0.929467
+    stats_step: fast_spr
+    wait_time_ms  (0, 925) (1, 1004) (2, 828) (3, 966) (4, 211) (5, 994) (6, 701) (7, 988) (8, 689) (9, 999) (10, 620) (11, 936) (12, 967) (13, 642) (14, 666) (15, 1006)
+    cpu_time_ms  (0, 10724) (1, 10648) (2, 10825) (3, 10686) (4, 11441) (5, 10658) (6, 10952) (7, 10664) (8, 10963) (9, 10653) (10, 11033) (11, 10716) (12, 10686) (13, 11011) (14, 10986) (15, 10647)
+[00:01:55 -815470.150458] FAST spr round 2 (radius: 15)
+    busy_ratio: 0.923848
+    stats_step: fast_spr
+    wait_time_ms  (0, 668) (1, 624) (2, 638) (3, 699) (4, 212) (5, 714) (6, 574) (7, 722) (8, 565) (9, 721) (10, 528) (11, 691) (12, 703) (13, 527) (14, 478) (15, 694)
+    cpu_time_ms  (0, 7343) (1, 7390) (2, 7377) (3, 7316) (4, 7802) (5, 7301) (6, 7441) (7, 7293) (8, 7450) (9, 7293) (10, 7487) (11, 7324) (12, 7312) (13, 7487) (14, 7537) (15, 7320)
+[00:02:03 -814967.969893] FAST spr round 3 (radius: 15)
+    busy_ratio: 0.911787
+    stats_step: fast_spr
+    wait_time_ms  (0, 823) (1, 806) (2, 643) (3, 770) (4, 324) (5, 786) (6, 672) (7, 815) (8, 657) (9, 797) (10, 563) (11, 765) (12, 787) (13, 648) (14, 562) (15, 717)
+    cpu_time_ms  (0, 7067) (1, 7087) (2, 7251) (3, 7123) (4, 7569) (5, 7108) (6, 7222) (7, 7079) (8, 7237) (9, 7097) (10, 7331) (11, 7129) (12, 7106) (13, 7245) (14, 7332) (15, 7176)
+[00:02:11 -814901.251117] FAST spr round 4 (radius: 15)
+    busy_ratio: 0.937538
+    stats_step: fast_spr
+    wait_time_ms  (0, 592) (1, 572) (2, 508) (3, 546) (4, 94) (5, 556) (6, 439) (7, 558) (8, 425) (9, 569) (10, 402) (11, 545) (12, 555) (13, 393) (14, 407) (15, 551)
+    cpu_time_ms  (0, 7128) (1, 7152) (2, 7215) (3, 7177) (4, 7629) (5, 7167) (6, 7284) (7, 7166) (8, 7298) (9, 7154) (10, 7321) (11, 7179) (12, 7168) (13, 7330) (14, 7316) (15, 7172)
+[00:02:19 -814878.621930] FAST spr round 5 (radius: 15)
+    busy_ratio: 0.936620
+    stats_step: fast_spr
+    wait_time_ms  (0, 588) (1, 589) (2, 510) (3, 555) (4, 99) (5, 563) (6, 443) (7, 588) (8, 438) (9, 576) (10, 413) (11, 554) (12, 565) (13, 426) (14, 421) (15, 569)
+    cpu_time_ms  (0, 7204) (1, 7206) (2, 7285) (3, 7240) (4, 7696) (5, 7233) (6, 7352) (7, 7208) (8, 7357) (9, 7220) (10, 7383) (11, 7242) (12, 7231) (13, 7370) (14, 7375) (15, 7227)
+[00:02:27 -814868.828063] FAST spr round 6 (radius: 15)
+    busy_ratio: 0.936216
+    stats_step: fast_spr
+    wait_time_ms  (0, 622) (1, 609) (2, 539) (3, 585) (4, 102) (5, 594) (6, 466) (7, 594) (8, 449) (9, 599) (10, 428) (11, 577) (12, 575) (13, 432) (14, 439) (15, 589)
+    cpu_time_ms  (0, 7415) (1, 7432) (2, 7502) (3, 7456) (4, 7939) (5, 7447) (6, 7576) (7, 7447) (8, 7592) (9, 7442) (10, 7613) (11, 7464) (12, 7466) (13, 7609) (14, 7602) (15, 7451)
+[00:02:35 -814822.834329] FAST spr round 7 (radius: 15)
+    busy_ratio: 0.935989
+    stats_step: fast_spr
+    wait_time_ms  (0, 614) (1, 598) (2, 521) (3, 562) (4, 94) (5, 564) (6, 447) (7, 581) (8, 440) (9, 586) (10, 422) (11, 555) (12, 561) (13, 439) (14, 428) (15, 582)
+    cpu_time_ms  (0, 7196) (1, 7215) (2, 7292) (3, 7251) (4, 7719) (5, 7249) (6, 7366) (7, 7232) (8, 7373) (9, 7227) (10, 7391) (11, 7258) (12, 7252) (13, 7374) (14, 7385) (15, 7231)
+[00:02:43 -814814.720661] FAST spr round 8 (radius: 15)
+    busy_ratio: 0.934457
+    stats_step: fast_spr
+    wait_time_ms  (0, 618) (1, 605) (2, 539) (3, 578) (4, 116) (5, 574) (6, 461) (7, 585) (8, 448) (9, 594) (10, 439) (11, 564) (12, 574) (13, 441) (14, 407) (15, 586)
+    cpu_time_ms  (0, 7138) (1, 7154) (2, 7220) (3, 7182) (4, 7643) (5, 7186) (6, 7298) (7, 7174) (8, 7311) (9, 7166) (10, 7320) (11, 7196) (12, 7185) (13, 7319) (14, 7353) (15, 7173)
+[00:02:50 -814811.779392] FAST spr round 9 (radius: 15)
+    busy_ratio: 0.936545
+    stats_step: fast_spr
+    wait_time_ms  (0, 596) (1, 588) (2, 513) (3, 545) (4, 93) (5, 552) (6, 440) (7, 568) (8, 434) (9, 576) (10, 416) (11, 556) (12, 555) (13, 429) (14, 428) (15, 563)
+    cpu_time_ms  (0, 7141) (1, 7153) (2, 7228) (3, 7196) (4, 7647) (5, 7189) (6, 7301) (7, 7173) (8, 7307) (9, 7165) (10, 7325) (11, 7185) (12, 7186) (13, 7312) (14, 7313) (15, 7178)
+[00:02:58 -814809.199933] FAST spr round 10 (radius: 15)
+    busy_ratio: 0.936431
+    stats_step: fast_spr
+    wait_time_ms  (0, 600) (1, 598) (2, 519) (3, 556) (4, 102) (5, 576) (6, 444) (7, 566) (8, 452) (9, 581) (10, 414) (11, 545) (12, 563) (13, 424) (14, 423) (15, 569)
+    cpu_time_ms  (0, 7201) (1, 7207) (2, 7286) (3, 7249) (4, 7702) (5, 7229) (6, 7360) (7, 7239) (8, 7353) (9, 7223) (10, 7391) (11, 7260) (12, 7242) (13, 7381) (14, 7381) (15, 7236)
+[00:03:06 -814809.199876] Model parameter optimization (eps = 1.000000)
+    busy_ratio: 0.938101
+    stats_step: model_param3
+    wait_time_ms  (0, 822) (1, 612) (2, 559) (3, 558) (4, 21) (5, 554) (6, 543) (7, 613) (8, 559) (9, 560) (10, 537) (11, 521) (12, 576) (13, 564) (14, 532) (15, 544)
+    cpu_time_ms  (0, 7942) (1, 8155) (2, 8208) (3, 8209) (4, 8746) (5, 8213) (6, 8224) (7, 8154) (8, 8208) (9, 8207) (10, 8230) (11, 8246) (12, 8191) (13, 8203) (14, 8235) (15, 8223)
+[00:03:15 -814750.108900] SLOW spr round 1 (radius: 5)
+    busy_ratio: 0.917810
+    stats_step: slow_spr
+    wait_time_ms  (0, 2317) (1, 2442) (2, 2093) (3, 2326) (4, 849) (5, 2521) (6, 1676) (7, 2224) (8, 1463) (9, 2377) (10, 1247) (11, 2407) (12, 2342) (13, 1589) (14, 1523) (15, 2499)
+    cpu_time_ms  (0, 21938) (1, 21816) (2, 22165) (3, 21933) (4, 23409) (5, 21737) (6, 22582) (7, 22034) (8, 22795) (9, 21881) (10, 23011) (11, 21851) (12, 21917) (13, 22669) (14, 22735) (15, 21759)
+[00:03:39 -814749.978259] SLOW spr round 2 (radius: 5)
+    busy_ratio: 0.926476
+    stats_step: slow_spr
+    wait_time_ms  (0, 1879) (1, 2145) (2, 1758) (3, 1997) (4, 606) (5, 2001) (6, 1358) (7, 1808) (8, 1294) (9, 2024) (10, 1169) (11, 2009) (12, 1913) (13, 1283) (14, 1170) (15, 2144)
+    cpu_time_ms  (0, 20698) (1, 20436) (2, 20823) (3, 20584) (4, 21974) (5, 20580) (6, 21223) (7, 20773) (8, 21287) (9, 20556) (10, 21412) (11, 20572) (12, 20668) (13, 21298) (14, 21411) (15, 20437)
+[00:04:02 -814749.977398] SLOW spr round 3 (radius: 10)
+    busy_ratio: 0.926581
+    stats_step: slow_spr
+    wait_time_ms  (0, 1691) (1, 1959) (2, 1559) (3, 1774) (4, 555) (5, 1998) (6, 1266) (7, 1792) (8, 1195) (9, 1906) (10, 1066) (11, 1880) (12, 1823) (13, 1162) (14, 1104) (15, 1999)
+    cpu_time_ms  (0, 19363) (1, 19099) (2, 19499) (3, 19284) (4, 20503) (5, 19060) (6, 19791) (7, 19266) (8, 19863) (9, 19152) (10, 19992) (11, 19178) (12, 19235) (13, 19896) (14, 19954) (15, 19058)
+[00:04:23 -814749.977373] SLOW spr round 4 (radius: 15)
+    busy_ratio: 0.928077
+    stats_step: slow_spr
+    wait_time_ms  (0, 3808) (1, 2753) (2, 3510) (3, 2437) (4, 1876) (5, 2623) (6, 3171) (7, 2325) (8, 2996) (9, 2558) (10, 2705) (11, 2436) (12, 2370) (13, 2691) (14, 2858) (15, 2355)
+    cpu_time_ms  (0, 33969) (1, 35029) (2, 34272) (3, 35345) (4, 35905) (5, 35159) (6, 34611) (7, 35457) (8, 34786) (9, 35224) (10, 35076) (11, 35346) (12, 35412) (13, 35091) (14, 34923) (15, 35427)
+[00:05:00 -814749.977373] SLOW spr round 5 (radius: 20)
+    busy_ratio: 0.927053
+    stats_step: slow_spr
+    wait_time_ms  (0, 2119) (1, 1185) (2, 1908) (3, 1010) (4, 1120) (5, 1041) (6, 1833) (7, 1003) (8, 1698) (9, 1022) (10, 1542) (11, 914) (12, 914) (13, 1564) (14, 1659) (15, 854)
+    cpu_time_ms  (0, 16205) (1, 17143) (2, 16420) (3, 17318) (4, 17208) (5, 17287) (6, 16496) (7, 17325) (8, 16630) (9, 17306) (10, 16786) (11, 17414) (12, 17414) (13, 16764) (14, 16670) (15, 17475)
+[00:05:19 -814749.977372] SLOW spr round 6 (radius: 25)
+    busy_ratio: 0.934832
+    stats_step: slow_spr
+    wait_time_ms  (0, 922) (1, 491) (2, 809) (3, 415) (4, 352) (5, 429) (6, 758) (7, 419) (8, 756) (9, 448) (10, 662) (11, 394) (12, 377) (13, 659) (14, 751) (15, 357)
+    cpu_time_ms  (0, 7712) (1, 8146) (2, 7829) (3, 8223) (4, 8285) (5, 8208) (6, 7880) (7, 8218) (8, 7882) (9, 8190) (10, 7976) (11, 8243) (12, 8260) (13, 7979) (14, 7887) (15, 8281)
+[00:05:27 -814749.977372] Model parameter optimization (eps = 0.100000)
+    busy_ratio: 0.949715
+    stats_step: model_param4
+    wait_time_ms  (0, 371) (1, 191) (2, 269) (3, 161) (4, 17) (5, 152) (6, 255) (7, 189) (8, 245) (9, 164) (10, 246) (11, 145) (12, 151) (13, 258) (14, 246) (15, 147)
+    cpu_time_ms  (0, 3622) (1, 3805) (2, 3728) (3, 3836) (4, 3980) (5, 3845) (6, 3742) (7, 3807) (8, 3752) (9, 3833) (10, 3751) (11, 3851) (12, 3846) (13, 3739) (14, 3751) (15, 3849)
+
+Optimized model parameters:
+
+   Partition 0: 12S_rRNA
+   Rate heterogeneity: GAMMA (4 cats),  alpha: 0.471 (ML),  weights&rates: (0.250,0.028) (0.250,0.233) (0.250,0.798) (0.250,2.941) 
+   Base frequencies (empirical): 0.346 0.233 0.196 0.225 
+   Substitution rates (ML): 3.385 10.957 3.756 0.805 28.702 1.000 
+
+   Partition 1: 16S_rRNA
+   Rate heterogeneity: GAMMA (4 cats),  alpha: 0.415 (ML),  weights&rates: (0.250,0.019) (0.250,0.193) (0.250,0.747) (0.250,3.041) 
+   Base frequencies (empirical): 0.353 0.203 0.199 0.245 
+   Substitution rates (ML): 4.587 7.792 3.514 0.384 23.582 1.000 
+
+   Partition 2: ATP6
+   Rate heterogeneity: GAMMA (4 cats),  alpha: 0.391 (ML),  weights&rates: (0.250,0.015) (0.250,0.175) (0.250,0.721) (0.250,3.089) 
+   Base frequencies (empirical): 0.312 0.290 0.110 0.288 
+   Substitution rates (ML): 2.389 12.677 2.474 0.961 15.171 1.000 
+
+   Partition 3: ATP8
+   Rate heterogeneity: GAMMA (4 cats),  alpha: 0.506 (ML),  weights&rates: (0.250,0.035) (0.250,0.256) (0.250,0.825) (0.250,2.885) 
+   Base frequencies (empirical): 0.385 0.276 0.067 0.271 
+   Substitution rates (ML): 0.757 5.013 0.707 0.714 3.624 1.000 
+
+   Partition 4: COX1
+   Rate heterogeneity: GAMMA (4 cats),  alpha: 0.314 (ML),  weights&rates: (0.250,0.007) (0.250,0.116) (0.250,0.619) (0.250,3.259) 
+   Base frequencies (empirical): 0.277 0.253 0.168 0.302 
+   Substitution rates (ML): 3.797 14.481 4.172 0.819 30.232 1.000 
+
+   Partition 5: COX2
+   Rate heterogeneity: GAMMA (4 cats),  alpha: 0.331 (ML),  weights&rates: (0.250,0.008) (0.250,0.128) (0.250,0.644) (0.250,3.220) 
+   Base frequencies (empirical): 0.328 0.257 0.139 0.277 
+   Substitution rates (ML): 2.221 11.511 3.004 0.760 19.682 1.000 
+
+   Partition 6: COX3
+   Rate heterogeneity: GAMMA (4 cats),  alpha: 0.329 (ML),  weights&rates: (0.250,0.008) (0.250,0.127) (0.250,0.642) (0.250,3.223) 
+   Base frequencies (empirical): 0.278 0.279 0.148 0.295 
+   Substitution rates (ML): 4.005 10.848 4.084 0.650 23.591 1.000 
+
+   Partition 7: Cytb
+   Rate heterogeneity: GAMMA (4 cats),  alpha: 0.422 (ML),  weights&rates: (0.250,0.020) (0.250,0.198) (0.250,0.754) (0.250,3.029) 
+   Base frequencies (empirical): 0.301 0.297 0.128 0.275 
+   Substitution rates (ML): 2.991 7.496 1.852 0.533 14.556 1.000 
+
+   Partition 8: ND1
+   Rate heterogeneity: GAMMA (4 cats),  alpha: 0.463 (ML),  weights&rates: (0.250,0.027) (0.250,0.227) (0.250,0.791) (0.250,2.955) 
+   Base frequencies (empirical): 0.310 0.294 0.119 0.277 
+   Substitution rates (ML): 2.731 7.907 1.500 0.437 13.267 1.000 
+
+   Partition 9: ND2
+   Rate heterogeneity: GAMMA (4 cats),  alpha: 0.530 (ML),  weights&rates: (0.250,0.039) (0.250,0.271) (0.250,0.841) (0.250,2.850) 
+   Base frequencies (empirical): 0.355 0.289 0.088 0.268 
+   Substitution rates (ML): 1.404 4.001 0.726 0.346 5.160 1.000 
+
+   Partition 10: ND3
+   Rate heterogeneity: GAMMA (4 cats),  alpha: 0.443 (ML),  weights&rates: (0.250,0.023) (0.250,0.213) (0.250,0.774) (0.250,2.990) 
+   Base frequencies (empirical): 0.311 0.275 0.118 0.297 
+   Substitution rates (ML): 2.019 7.923 1.792 0.392 10.183 1.000 
+
+   Partition 11: ND4
+   Rate heterogeneity: GAMMA (4 cats),  alpha: 0.435 (ML),  weights&rates: (0.250,0.022) (0.250,0.207) (0.250,0.766) (0.250,3.004) 
+   Base frequencies (empirical): 0.322 0.287 0.106 0.285 
+   Substitution rates (ML): 2.924 10.204 2.201 0.794 13.709 1.000 
+
+   Partition 12: ND4L
+   Rate heterogeneity: GAMMA (4 cats),  alpha: 0.494 (ML),  weights&rates: (0.250,0.032) (0.250,0.248) (0.250,0.816) (0.250,2.903) 
+   Base frequencies (empirical): 0.296 0.262 0.120 0.322 
+   Substitution rates (ML): 1.752 5.866 1.161 0.225 7.848 1.000 
+
+   Partition 13: ND5
+   Rate heterogeneity: GAMMA (4 cats),  alpha: 0.478 (ML),  weights&rates: (0.250,0.029) (0.250,0.237) (0.250,0.803) (0.250,2.930) 
+   Base frequencies (empirical): 0.326 0.287 0.107 0.280 
+   Substitution rates (ML): 2.432 7.720 1.892 0.635 11.054 1.000 
+
+   Partition 14: ND6
+   Rate heterogeneity: GAMMA (4 cats),  alpha: 0.489 (ML),  weights&rates: (0.250,0.031) (0.250,0.244) (0.250,0.812) (0.250,2.912) 
+   Base frequencies (empirical): 0.202 0.078 0.302 0.417 
+   Substitution rates (ML): 1.197 9.358 1.777 1.384 8.468 1.000 
+
+   Partition 15: tRNAs
+   Rate heterogeneity: GAMMA (4 cats),  alpha: 0.445 (ML),  weights&rates: (0.250,0.024) (0.250,0.215) (0.250,0.776) (0.250,2.986) 
+   Base frequencies (empirical): 0.326 0.170 0.202 0.302 
+   Substitution rates (ML): 1.751 14.003 1.940 0.477 19.226 1.000 
+
+   Partition 16: BRCA1
+   Rate heterogeneity: GAMMA (4 cats),  alpha: 0.947 (ML),  weights&rates: (0.250,0.126) (0.250,0.460) (0.250,0.991) (0.250,2.423) 
+   Base frequencies (empirical): 0.368 0.183 0.216 0.234 
+   Substitution rates (ML): 1.137 4.025 0.671 1.372 5.166 1.000 
+
+   Partition 17: APOB
+   Rate heterogeneity: GAMMA (4 cats),  alpha: 0.603 (ML),  weights&rates: (0.250,0.054) (0.250,0.314) (0.250,0.883) (0.250,2.749) 
+   Base frequencies (empirical): 0.317 0.227 0.176 0.280 
+   Substitution rates (ML): 1.190 4.961 0.648 1.289 4.607 1.000 
+
+   Partition 18: IRBP
+   Rate heterogeneity: GAMMA (4 cats),  alpha: 0.506 (ML),  weights&rates: (0.250,0.034) (0.250,0.256) (0.250,0.825) (0.250,2.885) 
+   Base frequencies (empirical): 0.190 0.311 0.314 0.184 
+   Substitution rates (ML): 1.536 5.532 1.163 0.880 5.754 1.000 
+
+   Partition 19: ADRB2
+   Rate heterogeneity: GAMMA (4 cats),  alpha: 0.236 (ML),  weights&rates: (0.250,0.002) (0.250,0.057) (0.250,0.472) (0.250,3.470) 
+   Base frequencies (empirical): 0.209 0.290 0.244 0.257 
+   Substitution rates (ML): 1.343 6.862 0.807 1.483 7.643 1.000 
+
+   Partition 20: APP
+   Rate heterogeneity: GAMMA (4 cats),  alpha: 0.352 (ML),  weights&rates: (0.250,0.010) (0.250,0.145) (0.250,0.673) (0.250,3.171) 
+   Base frequencies (empirical): 0.273 0.198 0.176 0.354 
+   Substitution rates (ML): 1.642 3.234 0.362 1.037 3.411 1.000 
+
+   Partition 21: ATP7A
+   Rate heterogeneity: GAMMA (4 cats),  alpha: 0.391 (ML),  weights&rates: (0.250,0.015) (0.250,0.175) (0.250,0.721) (0.250,3.088) 
+   Base frequencies (empirical): 0.337 0.207 0.194 0.262 
+   Substitution rates (ML): 1.009 4.739 0.545 0.878 4.122 1.000 
+
+   Partition 22: BDNF
+   Rate heterogeneity: GAMMA (4 cats),  alpha: 0.210 (ML),  weights&rates: (0.250,0.001) (0.250,0.040) (0.250,0.409) (0.250,3.551) 
+   Base frequencies (empirical): 0.260 0.247 0.300 0.193 
+   Substitution rates (ML): 1.362 3.539 0.369 0.970 7.768 1.000 
+
+   Partition 23: CNR1
+   Rate heterogeneity: GAMMA (4 cats),  alpha: 0.218 (ML),  weights&rates: (0.250,0.001) (0.250,0.045) (0.250,0.429) (0.250,3.526) 
+   Base frequencies (empirical): 0.214 0.283 0.254 0.250 
+   Substitution rates (ML): 2.546 8.376 0.756 2.429 20.643 1.000 
+
+   Partition 24: EDG1
+   Rate heterogeneity: GAMMA (4 cats),  alpha: 0.238 (ML),  weights&rates: (0.250,0.002) (0.250,0.058) (0.250,0.476) (0.250,3.464) 
+   Base frequencies (empirical): 0.200 0.318 0.235 0.246 
+   Substitution rates (ML): 1.498 7.518 0.529 3.256 10.101 1.000 
+
+   Partition 25: RAG1
+   Rate heterogeneity: GAMMA (4 cats),  alpha: 0.209 (ML),  weights&rates: (0.250,0.001) (0.250,0.039) (0.250,0.406) (0.250,3.554) 
+   Base frequencies (empirical): 0.264 0.234 0.274 0.228 
+   Substitution rates (ML): 4.040 6.385 0.676 2.402 45.305 1.000 
+
+   Partition 26: RAG2
+   Rate heterogeneity: GAMMA (4 cats),  alpha: 0.272 (ML),  weights&rates: (0.250,0.003) (0.250,0.083) (0.250,0.546) (0.250,3.368) 
+   Base frequencies (empirical): 0.268 0.209 0.224 0.298 
+   Substitution rates (ML): 1.448 9.663 1.149 1.217 8.575 1.000 
+
+   Partition 27: TYR
+   Rate heterogeneity: GAMMA (4 cats),  alpha: 0.337 (ML),  weights&rates: (0.250,0.009) (0.250,0.133) (0.250,0.652) (0.250,3.206) 
+   Base frequencies (empirical): 0.258 0.238 0.227 0.276 
+   Substitution rates (ML): 2.268 7.807 1.008 1.425 9.068 1.000 
+
+   Partition 28: ADORA3
+   Rate heterogeneity: GAMMA (4 cats),  alpha: 0.448 (ML),  weights&rates: (0.250,0.024) (0.250,0.217) (0.250,0.778) (0.250,2.981) 
+   Base frequencies (empirical): 0.205 0.254 0.197 0.344 
+   Substitution rates (ML): 1.734 10.058 0.732 2.108 4.549 1.000 
+
+   Partition 29: BMI
+   Rate heterogeneity: GAMMA (4 cats),  alpha: 0.146 (ML),  weights&rates: (0.250,0.000) (0.250,0.010) (0.250,0.231) (0.250,3.759) 
+   Base frequencies (empirical): 0.288 0.167 0.158 0.387 
+   Substitution rates (ML): 1.179 8.629 0.481 1.998 4.376 1.000 
+
+   Partition 30: CREM
+   Rate heterogeneity: GAMMA (4 cats),  alpha: 0.402 (ML),  weights&rates: (0.250,0.017) (0.250,0.183) (0.250,0.733) (0.250,3.067) 
+   Base frequencies (empirical): 0.271 0.185 0.246 0.299 
+   Substitution rates (ML): 1.732 2.926 0.295 1.743 4.053 1.000 
+
+   Partition 31: PLCB4
+   Rate heterogeneity: GAMMA (4 cats),  alpha: 0.952 (ML),  weights&rates: (0.250,0.127) (0.250,0.462) (0.250,0.992) (0.250,2.419) 
+   Base frequencies (empirical): 0.350 0.231 0.164 0.255 
+   Substitution rates (ML): 0.852 2.577 0.355 0.818 2.230 1.000 
+
+   Partition 32: PNOC
+   Rate heterogeneity: GAMMA (4 cats),  alpha: 0.429 (ML),  weights&rates: (0.250,0.021) (0.250,0.203) (0.250,0.761) (0.250,3.015) 
+   Base frequencies (empirical): 0.235 0.294 0.317 0.154 
+   Substitution rates (ML): 1.467 3.611 0.843 0.624 5.320 1.000 
+
+   Partition 33: ZFX
+   Rate heterogeneity: GAMMA (4 cats),  alpha: 0.176 (ML),  weights&rates: (0.250,0.000) (0.250,0.021) (0.250,0.317) (0.250,3.662) 
+   Base frequencies (empirical): 0.359 0.218 0.209 0.214 
+   Substitution rates (ML): 7.007 39.108 6.684 4.808 47.345 1.000 
+
+Final LogLikelihood: -814749.372015
+
+Elapsed time: 331.826 seconds
+
+Final tree saved to: /home/morelbt/github/raxml-ng-1/bin/data/128/128.phy.raxml.bestTree
+
+Execution log saved to: /home/morelbt/github/raxml-ng-1/bin/data/128/128.phy.raxml.log
+
