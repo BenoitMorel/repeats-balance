@@ -20,6 +20,8 @@ int main(int argc, char *params[])
     pernode(argc - 2, params + 2);
   } else if (!strcmp(params[1], "calibrate_test")) {
     calibrate_test(argc - 2, params + 2);
+  } else if (!strcmp(params[1], "numerics")) {
+    numerics(argc - 2, params + 2);
   } else {
     std::cerr << "Error unkown parameter " << params[1] << std::endl;
   }

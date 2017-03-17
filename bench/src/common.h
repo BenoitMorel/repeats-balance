@@ -14,7 +14,7 @@
 #define INVALID_ATTRIBUTE ((unsigned int)1)
 
 struct PLLHelper {
-  static unsigned int compute_attribute(bool use_repeats, 
+  static unsigned int compute_attribute(unsigned int use_repeats, 
                                         unsigned int additional_attr, 
                                         const char *arch);
   PLLHelper(const char *newick, const char *seq, unsigned int attribute, unsigned int states = 4); 
@@ -43,6 +43,8 @@ struct PLLHelper {
   void print_op_stats(pll_operation_t &op) const;
 
   void disable_update_operations() {do_opdate_operations = false;}
+
+  void generate_random_model();
 
   // class members
   pll_utree_t * tree;
@@ -92,5 +94,6 @@ void sumtables(int argc, char *params[]);
 void partitioned_full_traversal(int argc, char *params[]);
 void pernode(int argc, char *params[]);
 void calibrate_test(int argc, char *params[]);
+void numerics(int argc, char *params[]);
 
 #endif

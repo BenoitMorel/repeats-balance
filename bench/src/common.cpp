@@ -189,6 +189,23 @@ PLLHelper::PLLHelper(const char * newick,
       sizeof(double), partition->alignment);
 }
 
+double rand_double()
+{
+  return ((double) rand() / (RAND_MAX)); 
+}
+
+void PLLHelper::generate_random_model()
+{
+  double frequencies[4] = { rand_double(), rand_double(), rand_double(), rand_double() };
+  double subst_params[6] = {rand_double(), rand_double(), rand_double(), rand_double(), rand_double(), rand_double()};
+  double rate_cats[4] = {0};
+  pll_compute_gamma_cats(1, 4, rate_cats);
+  pll_set_frequencies(partition, 0, frequencies);
+  pll_set_subst_params(partition, 0, subst_params);
+  pll_set_category_rates(partition, rate_cats);
+
+}
+
 void PLLHelper::set_srlookup_size(unsigned int size)
 {
 #ifdef HAS_REPEATS
@@ -203,7 +220,7 @@ void PLLHelper::set_srlookup_size(unsigned int size)
 #endif
 }
   
-unsigned int PLLHelper::compute_attribute(bool use_repeats, 
+unsigned int PLLHelper::compute_attribute(unsigned int use_repeats, 
                                           unsigned int additional_attr,
                                           const char *arch)
 {
@@ -220,9 +237,9 @@ unsigned int PLLHelper::compute_attribute(bool use_repeats,
     std::cerr << "Error : unknown architecture " << arch << std::endl;
     return INVALID_ATTRIBUTE;
   }
-  if (use_repeats) {
+  if (use_repeats == 1) {
     attribute |= PLL_ATTRIB_SITES_REPEATS;
-  } else {
+  } else if(use_repeats == 0) {
     attribute |= PLL_ATTRIB_PATTERN_TIP;
   }
   attribute |= additional_attr;
@@ -305,6 +322,10 @@ void PLLHelper::get_derivative(double *d_f, double *dd_f)
                       PLL_SCALE_BUFFER_NONE,
                       params_indices, 
                       sumtable);
+  for (unsigned int i = 0; i < partition->sites; ++i) {
+    std::cerr << sumtable[i] << " ";
+  }
+  std::cerr << std::endl;
   pll_compute_likelihood_derivatives(partition,
                                      PLL_SCALE_BUFFER_NONE,
                                      PLL_SCALE_BUFFER_NONE,
