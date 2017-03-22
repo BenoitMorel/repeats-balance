@@ -206,6 +206,16 @@ void PLLHelper::generate_random_model()
 
 }
 
+double PLLHelper::get_repeats_rates() const
+{
+  pll_repeats_t *repeats = partition->repeats;
+  double res = 0;
+  for (unsigned int i = 0; i < partition->tips + partition->clv_buffers; ++i) {
+    res += double(repeats->pernode_max_id[i]) / double(partition->sites);
+  }
+  return res / (partition->tips + partition->clv_buffers);
+}
+
 void PLLHelper::set_srlookup_size(unsigned int size)
 {
 #ifdef HAS_REPEATS

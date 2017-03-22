@@ -46,6 +46,8 @@ struct PLLHelper {
 
   void generate_random_model();
 
+  double get_repeats_rates() const;
+
   // class members
   pll_utree_t * tree;
   pll_partition_t *partition;
@@ -95,5 +97,6 @@ void partitioned_full_traversal(int argc, char *params[]);
 void pernode(int argc, char *params[]);
 void calibrate_test(int argc, char *params[]);
 void numerics(int argc, char *params[]);
+void repeats_rates(int argc, char *params[]);
 
 #endif
