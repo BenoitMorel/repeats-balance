@@ -2,9 +2,7 @@
 #include <vector>
 
 #include <iostream>
-#include "Eigen/Dense"
 using namespace std;
-using namespace Eigen;
 
 
 void compute_lamdas(unsigned int partitions,
@@ -69,7 +67,46 @@ void compute_lamdas(unsigned int partitions,
 }
 
 
+void evaluate_costs(unsigned int partitions, 
+    unsigned int cores,
+    const std::vector< std::vector<unsigned int> > &M,
+    const std::vector<double> &lambda,
+    double alpha,
+    std::vector<double> &costs)
+{
+  costs = std::vector<double> (cores, 0);
+  for (unsigned int p = 0; p < partitions; ++p) {
+    for (unsigned int c = 0; c < cores; ++c) {
+      costs[c] += (M[c][p] != 0) * alpha + M[c][p] * lambda[p];
+    }
+  }
+  std::cout << "new costs : ";
+  for (unsigned int c = 0; c < cores; ++c) {
+    std::cout << costs[c] << ", ";
+  }
+  std::cout << std::endl;
 
+}
+
+unsigned int get_min(const std::vector<double> &costs, std::vector< std::vector<unsigned int> > &M, unsigned int p) {
+  unsigned int min = 0;
+  for (unsigned int c = 0; c < costs.size(); ++c) {
+    if (M[c][p] && costs[min] > costs[c]) {
+      min = c;
+    }
+  }
+  return min;
+}
+
+unsigned int get_max(const std::vector<double> &costs) {
+  unsigned int max = 0;
+  for (unsigned int c = 0; c < costs.size(); ++c) {
+    if (costs[max] < costs[c]) {
+      max = c;
+    }
+  }
+  return max;
+}
 
 int main()
 {
@@ -116,4 +153,25 @@ int main()
     std::cout << lambdas[p] << ", ";
   }
   std::cout << std::endl;
+
+
+  evaluate_costs(partitions, cores, M, lambdas, alpha, costs);
+  unsigned int worst_core = get_max(costs);
+  // find a partition to reduce (or several)
+  for (unsigned int p = 0; p < partitions; ++p) {
+    if (M[worst_core][p]) {
+      // find the min core that shares this partition
+      unsigned int best_core = get_min(costs, M, p);
+      // exchange
+      unsigned int sites = std::min((unsigned int)10, M[worst_core][p]);
+      std::cout << "Exchanging " << sites << " sites between core " << worst_core << " and "
+        << best_core << " for partition " << p << std::endl;
+      M[worst_core][p] -= sites;
+      M[best_core][p] += sites;
+    }
+  }
+  evaluate_costs(partitions, cores, M, lambdas, alpha, costs);
+  
+
+
 }
