@@ -2,7 +2,6 @@
 #include <vector>
 
 #include <iostream>
-using namespace std;
 
 
 void compute_lamdas(unsigned int partitions,
@@ -80,22 +79,27 @@ void evaluate_costs(unsigned int partitions,
       costs[c] += (M[c][p] != 0) * alpha + M[c][p] * lambda[p];
     }
   }
-  std::cout << "new costs : ";
-  for (unsigned int c = 0; c < cores; ++c) {
+
+}
+  
+void print_costs(const std::vector<double> &costs) {
+  std::cout << "Costs : ";
+  for (unsigned int c = 0; c < costs.size(); ++c) {
     std::cout << costs[c] << ", ";
   }
   std::cout << std::endl;
-
 }
 
 unsigned int get_min(const std::vector<double> &costs, std::vector< std::vector<unsigned int> > &M, unsigned int p) {
   unsigned int min = 0;
+  bool assigned = false;
   for (unsigned int c = 0; c < costs.size(); ++c) {
-    if (M[c][p] && costs[min] > costs[c]) {
+    if (M[c][p] && (!assigned || costs[min] > costs[c])) {
       min = c;
+      assigned = true;
     }
   }
-  return min;
+  return assigned ? min : (unsigned int)-1;
 }
 
 unsigned int get_max(const std::vector<double> &costs) {
@@ -106,6 +110,29 @@ unsigned int get_max(const std::vector<double> &costs) {
     }
   }
   return max;
+}
+
+
+void print_code_M(const std::vector< std::vector<unsigned int> > &M) 
+{
+  for (unsigned int i = 0; i < M.size(); ++i) {
+    for (unsigned int j = 0; j < M[i].size(); ++j) {
+      if (M[i][j]) {
+        std::cout << "M[" << i << "][" << j << "] = " <<M[i][j] << ";";
+        std::cout << std::endl;
+      }
+    }
+  }
+}
+
+void print_M(const std::vector< std::vector<unsigned int> > &M) 
+{
+  for (unsigned int i = 0; i < M.size(); ++i) {
+    for (unsigned int j = 0; j < M[i].size(); ++j) {
+      std::cout << M[i][j] << " ";
+    }
+    std::cout << std::endl;
+  }
 }
 
 int main()
@@ -143,35 +170,46 @@ int main()
   M[15][1] = 144;
   M[15][7] = 321;
 
+  print_M(M);
+
   double mycosts[] = {4990, 4733, 4955, 4463, 4220, 3802, 4286, 4581, 4401, 4831, 4245, 4687, 4227, 4821, 5429, 4685};
   std::vector<double> costs;
   costs.assign(mycosts, mycosts + cores);
   std::vector<double> lambdas;
   double alpha;
   compute_lamdas(partitions, cores, M, costs, alpha, lambdas);
+  std::cout << "lambdas: ";
   for (unsigned int p = 0; p < partitions; ++p) {
     std::cout << lambdas[p] << ", ";
   }
   std::cout << std::endl;
-
-
+  std::cout << "alpha :"  << alpha << std::endl;
   evaluate_costs(partitions, cores, M, lambdas, alpha, costs);
-  unsigned int worst_core = get_max(costs);
-  // find a partition to reduce (or several)
-  for (unsigned int p = 0; p < partitions; ++p) {
-    if (M[worst_core][p]) {
-      // find the min core that shares this partition
-      unsigned int best_core = get_min(costs, M, p);
-      // exchange
-      unsigned int sites = std::min((unsigned int)10, M[worst_core][p]);
-      std::cout << "Exchanging " << sites << " sites between core " << worst_core << " and "
-        << best_core << " for partition " << p << std::endl;
-      M[worst_core][p] -= sites;
-      M[best_core][p] += sites;
+  unsigned int worst_core;
+  double worst_cost;
+  for (unsigned int i = 0; i < 1000; ++i) {
+    worst_core = get_max(costs);
+    worst_cost = costs[worst_core];
+    std::cout << "WORST COST : " << worst_cost << std::endl;
+    // find a partition to reduce (or several)
+    for (unsigned int p = 0; p < partitions; ++p) {
+      if (M[worst_core][p]) {
+        // find the min core that shares this partition
+        unsigned int best_core = get_min(costs, M, p);
+        if (best_core != (unsigned int)-1) {
+          unsigned int sites = std::min((unsigned int)1, M[worst_core][p]);
+          //std::cout << "Exchanging " << sites 
+          //<< " sites between core " << worst_core << " and "
+          //<< best_core << " for partition " << p << std::endl;
+          M[worst_core][p] -= sites;
+          M[best_core][p] += sites;
+        }
+      }
     }
-  }
-  evaluate_costs(partitions, cores, M, lambdas, alpha, costs);
-  
-
-
+    evaluate_costs(partitions, cores, M, lambdas, alpha, costs);
+    print_costs(costs);
+  } 
+  print_code_M(M);
+  std::cout << "WORST COST : " << costs[get_max(costs)] << std::endl;
+  print_costs(costs);
 }
