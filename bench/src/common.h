@@ -98,5 +98,6 @@ void pernode(int argc, char *params[]);
 void calibrate_test(int argc, char *params[]);
 void numerics(int argc, char *params[]);
 void repeats_rates(int argc, char *params[]);
+void export_repeats(int argc, char *params[]);
 
 #endif
