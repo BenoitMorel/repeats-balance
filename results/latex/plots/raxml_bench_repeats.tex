@@ -21,6 +21,9 @@
 \title{Raxml repeats benchmarks}
 \maketitle
 
+
+\section{Execution time}
+
 \noindent We run raxml for each dataset with and without the repeats option, and compare the execution times.\\
 
 
@@ -51,6 +54,21 @@ Raxml commands used:
 \end{tabular}\newline
 \newline
 
+
+\section{Load balancing}
+
+
+\begin{tabular}{|l|c|c|c|c|c|c|}
+\hline dataset                    & taxas & sites    & partitions & type  & busy ratio repeats & busy ratio tipinner\\
+\hline 404                        & 404   &  7444    & 11         & DNA  & 1  & 1  \\
+\hline 1kite\_science2013         & 144   &  371434  & 50         & DNA  & 1  & 1  \\
+\hline 1kite\_hyme                & 174   &  2248590 & 4116       & DNA  & 1 & 1  \\
+\hline Antl\_1\_1\_nt             & 40    &  522173  & 658        & DNA  & 1 & 1   \\
+\hline Antl\_1\_1\_aa             & 40    &  762438  & 659        & prot & 1 & 1  \\
+\hline para\_1\_nt                & 193   &  1514275 & 3714       & DNA  & 1  & 1  \\
+\hline 
+\end{tabular}\newline
+\newline
 
 
 %para\_1\_aa ne passe pas en memoire
