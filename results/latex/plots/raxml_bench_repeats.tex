@@ -1,0 +1,58 @@
+ 
+\documentclass[a4paper]{article}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{import}
+\usepackage[font=scriptsize,labelfont=bf]{caption}
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily}
+\begin{document}
+
+
+\newcommand*{\figuretitle}[1]{%
+    {\centering%   <--------  will only affect the title because of the grouping (by the
+    \textbf{#1}%              braces before \centering and behind \medskip). If you remove
+    \par\medskip}%            these braces the whole body of a {figure} env will be centered.
+}
+
+
+\title{Raxml repeats benchmarks}
+\maketitle
+
+\noindent We run raxml for each dataset with and without the repeats option, and compare the execution times.\\
+
+
+\noindent Speedup is calculated as follow :  
+$$ speedup = \frac{time_{tipinner}}{time_{repeats}}$$
+
+When we don't indicate times, the cluster cancelled the jobs before the end (after 24h). We then compare the speedup at the last reached step. \newline
+
+Raxml commands used:
+\lstset{language=sh}
+\begin{lstlisting}
+  $  ./raxml-ng-mpi --seed=42 --msa data.phy --model data.part
+   --simd AVX --threads 16  --redo --repeats on
+  $  ./raxml-ng-mpi --seed=42 --msa data.phy --model data.part
+   --simd AVX --threads 16  --redo
+\end{lstlisting}
+
+
+\begin{tabular}{|l|c|c|c|c|c|c|c|}
+\hline dataset                    & taxas & sites    & partitions & type & $time_{repeats}$ & $time_{tipinner}$ & speedup\\
+\hline 404                        & 404   &  7444    & 11         & DNA  & 766s             &  1131s            & 1.47  \\
+\hline 1kite\_science2013         & 144   &  371434  & 50         & DNA  & 11400s           &  20414s           & 1.8  \\
+\hline 1kite\_hyme                & 174   &  2248590 & 4116       & DNA  & cancelled        &  cancelled        & 1.53 \\
+\hline Antl\_1\_1\_nt             & 40    &  522173  & 658        & DNA  & 1402s            &  2293s            & 1.63  \\
+\hline Antl\_1\_1\_aa             & 40    &  762438  & 659        & prot & 10161s           & 14500s            & 1.4 \\
+\hline para\_1\_nt                & 193   &  1514275 & 3714       & DNA  & cancelled        &  cancelled        & 1.81  \\
+\hline 
+\end{tabular}\newline
+\newline
+
+
+
+%para\_1\_aa ne passe pas en memoire
+
+\end{document}
