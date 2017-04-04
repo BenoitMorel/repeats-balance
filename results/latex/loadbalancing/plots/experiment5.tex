@@ -1,0 +1,31 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{import}
+\usepackage[font=small,labelfont=bf]{caption}
+
+\begin{document}
+
+
+ 
+\begin{figure}
+\caption*{Sequences 59, 10 cpus, 30 random trees. The lower bound for a given tree is the sum of the weights of all unsplit partitions divided by the number of cpus.}
+\subimport{../experiment5/}{59_10cpus.tex}
+\end{figure}
+
+ 
+\begin{figure}
+\caption*{Sequences 128, 10 cpus, 30 random trees. The lower bound for a given tree is the sum of the weights of all unsplit partitions divided by the number of cpus.}
+\subimport{../experiment5/}{128_10cpus.tex}
+\end{figure}
+
+ 
+\begin{figure}
+\caption*{Sequences 404, 10 cpus, 30 random trees. The lower bound for a given tree is the sum of the weights of all unsplit partitions divided by the number of cpus.}
+\subimport{../experiment5/}{404_10cpus.tex}
+\end{figure}
+
+
+
+
+\end{document}

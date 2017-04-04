@@ -1,0 +1,226 @@
+
+RAxML-NG v. 0.1.0 BETA released on 18.03.2017 by The Exelixis Lab.
+Authors: Alexey Kozlov, Alexandros Stamatakis, Diego Darriba, Tomas Flouri, Benoit Morel.
+Latest version: https://github.com/amkozlov/raxml-ng
+Questions/problems/suggestions? Please visit: https://groups.google.com/forum/#!forum/raxml
+
+WARNING: This is a BETA release, please use at your own risk!
+
+RAxML-NG was called as follows:
+
+./raxml-ng-mpi --seed=42 --msa /home/morelbt/github/raxml-ng/bin/results/404_repeats_T16/404.phy --model /home/morelbt/github/raxml-ng/bin/results/404_repeats_T16/404.part --simd AVX --threads 16 --repeats on --tree /home/morelbt/github/raxml-ng/bin/results/404_repeats_T16/unrooted.newick --redo
+
+Analysis options:
+  run mode: ML tree search
+  start tree(s): user
+  random seed: 42
+  tip-inner: OFF
+  repeats: ON
+  pattern compression: ON
+  fast spr radius: AUTO
+  spr subtree cutoff: 1.000000
+  branch lengths: ML estimate (linked)
+  SIMD kernels: AVX
+  parallelization: PTHREADS (16 threads)
+
+WARNING: Running in REDO mode: existing checkpoints are ignored, and all result files will be overwritten!
+
+[00:00:00] Reading alignment from file: /home/morelbt/github/raxml-ng/bin/results/404_repeats_T16/404.phy
+[00:00:00] Loaded alignment with 404 taxa and 13158 sites
+
+WARNING: Fully undetermined sequences found: 12872768
+
+NOTE: Reduced alignment (with gap-only sequences and columns removed) was printed to:
+/home/morelbt/github/raxml-ng/bin/results/404_repeats_T16/404.phy.raxml.reduced.phy
+
+NOTE: The corresponding reduced partition file was printed to:
+/home/morelbt/github/raxml-ng/bin/results/404_repeats_T16/404.phy.raxml.reduced.partition
+
+Alignment comprises 11 partitions and 7444 patterns
+
+Partition 0: PARTITION_0
+Model: GTR+F+G4
+Alignment sites / patterns: 2161 / 1454
+Gaps: 66.23 %
+Invariant sites: 43.41 %
+
+Partition 1: PARTITION_1
+Model: GTR+F+G4
+Alignment sites / patterns: 802 / 660
+Gaps: 84.88 %
+Invariant sites: 39.15 %
+
+Partition 2: PARTITION_2
+Model: GTR+F+G4
+Alignment sites / patterns: 1646 / 1291
+Gaps: 76.95 %
+Invariant sites: 41.92 %
+
+Partition 3: PARTITION_3
+Model: GTR+F+G4
+Alignment sites / patterns: 588 / 109
+Gaps: 90.84 %
+Invariant sites: 80.61 %
+
+Partition 4: PARTITION_4
+Model: GTR+F+G4
+Alignment sites / patterns: 852 / 339
+Gaps: 96.47 %
+Invariant sites: 65.02 %
+
+Partition 5: PARTITION_5
+Model: GTR+F+G4
+Alignment sites / patterns: 828 / 718
+Gaps: 72.68 %
+Invariant sites: 22.71 %
+
+Partition 6: PARTITION_6
+Model: GTR+F+G4
+Alignment sites / patterns: 1437 / 725
+Gaps: 66.87 %
+Invariant sites: 62.00 %
+
+Partition 7: PARTITION_7
+Model: GTR+F+G4
+Alignment sites / patterns: 1218 / 700
+Gaps: 83.79 %
+Invariant sites: 47.04 %
+
+Partition 8: PARTITION_8
+Model: GTR+F+G4
+Alignment sites / patterns: 1020 / 99
+Gaps: 94.06 %
+Invariant sites: 86.67 %
+
+Partition 9: PARTITION_9
+Model: GTR+F+G4
+Alignment sites / patterns: 1025 / 431
+Gaps: 95.35 %
+Invariant sites: 62.63 %
+
+Partition 10: PARTITION_10
+Model: GTR+F+G4
+Alignment sites / patterns: 1581 / 918
+Gaps: 71.48 %
+Invariant sites: 40.10 %
+
+
+[00:00:01] Loading user starting tree(s) from: /home/morelbt/github/raxml-ng/bin/results/404_repeats_T16/unrooted.newick
+thread#	part#	start	length
+0	0	0	357
+0	1	0	99
+
+1	1	99	26
+1	10	0	424
+
+2	6	0	102
+2	7	0	348
+
+3	7	348	352
+3	8	0	99
+
+4	6	102	485
+
+5	2	0	492
+
+6	1	125	500
+
+7	1	625	35
+7	9	0	431
+
+8	0	357	501
+
+9	0	858	92
+9	4	0	339
+
+10	2	492	492
+
+11	2	984	307
+11	6	587	138
+
+12	10	424	494
+
+13	5	0	391
+
+14	0	950	500
+
+15	3	0	109
+15	5	391	327
+
+
+[00:00:01] Data distribution: partitions/thread: 1-2, patterns/thread: 456-139928785350122
+
+Starting ML tree search with 1 distinct starting trees
+
+[00:00:01 -198453.296698] Initial branch length optimization
+    busy_ratio: 0.950561
+    stats_step: initial_blo
+    wait_time_ms  (0, 135) (1, 82) (2, 50) (3, 113) (4, 84) (5, 126) (6, 81) (7, 84) (8, 91) (9, 111) (10, 94) (11, 111) (12, 98) (13, 198) (14, 92) (15, 111)
+    cpu_time_ms  (0, 948) (1, 2094) (2, 2116) (3, 2056) (4, 2089) (5, 2052) (6, 2091) (7, 2091) (8, 2081) (9, 2062) (10, 2080) (11, 2088) (12, 2074) (13, 2009) (14, 2082) (15, 2060)
+[00:00:02 -162369.242432] Model parameter optimization (eps = 10.000000)
+    busy_ratio: 0.768156
+    stats_step: modelopt1
+    wait_time_ms  (0, 1269) (1, 1277) (2, 660) (3, 1289) (4, 1090) (5, 2400) (6, 1515) (7, 1265) (8, 1184) (9, 1257) (10, 1126) (11, 1332) (12, 2158) (13, 2456) (14, 2167) (15, 1066)
+    cpu_time_ms  (0, 5052) (1, 5058) (2, 5680) (3, 5052) (4, 5251) (5, 3941) (6, 4826) (7, 5075) (8, 5157) (9, 5084) (10, 5215) (11, 5008) (12, 4183) (13, 3884) (14, 4174) (15, 5274)
+[00:00:08 -155513.723428] AUTODETECT spr round 1 (radius: 5)
+    busy_ratio: 0.863065
+    stats_step: autodetect_spr
+    wait_time_ms  (0, 551) (1, 1009) (2, 571) (3, 906) (4, 1461) (5, 1860) (6, 1414) (7, 1017) (8, 1210) (9, 900) (10, 1268) (11, 925) (12, 1494) (13, 2272) (14, 1419) (15, 551)
+    cpu_time_ms  (0, 8033) (1, 7585) (2, 8026) (3, 7692) (4, 7136) (5, 6737) (6, 7183) (7, 7580) (8, 7387) (9, 7698) (10, 7330) (11, 7673) (12, 7104) (13, 6326) (14, 7179) (15, 8046)
+[00:00:17 -155214.925327] AUTODETECT spr round 2 (radius: 10)
+    busy_ratio: 0.865323
+    stats_step: autodetect_spr
+    wait_time_ms  (0, 1061) (1, 1299) (2, 1636) (3, 1060) (4, 2623) (5, 2590) (6, 2463) (7, 1176) (8, 1877) (9, 1317) (10, 2469) (11, 1115) (12, 2765) (13, 3343) (14, 2625) (15, 675)
+    cpu_time_ms  (0, 12893) (1, 12671) (2, 12334) (3, 12909) (4, 11346) (5, 11377) (6, 11507) (7, 12794) (8, 12092) (9, 12650) (10, 11500) (11, 12855) (12, 11205) (13, 10626) (14, 11343) (15, 13295)
+[00:00:31 -155205.171487] AUTODETECT spr round 3 (radius: 15)
+    busy_ratio: 0.877543
+    stats_step: autodetect_spr
+    wait_time_ms  (0, 1120) (1, 1758) (2, 1309) (3, 1378) (4, 3416) (5, 3259) (6, 3356) (7, 1631) (8, 3270) (9, 1423) (10, 3268) (11, 1359) (12, 3694) (13, 4845) (14, 3531) (15, 1267)
+    cpu_time_ms  (0, 19224) (1, 18602) (2, 19047) (3, 18984) (4, 16945) (5, 17098) (6, 17005) (7, 18731) (8, 17091) (9, 18939) (10, 17093) (11, 19002) (12, 16667) (13, 15514) (14, 16830) (15, 19093)
+[00:00:51 -155205.126437] SPR radius for FAST iterations: 10 (autodetect)
+[00:00:51 -155205.126437] Model parameter optimization (eps = 3.000000)
+    busy_ratio: 0.776064
+    stats_step: modelopt2
+    wait_time_ms  (0, 416) (1, 375) (2, 374) (3, 283) (4, 770) (5, 667) (6, 742) (7, 421) (8, 740) (9, 391) (10, 693) (11, 296) (12, 742) (13, 663) (14, 799) (15, 209)
+    cpu_time_ms  (0, 1966) (1, 2022) (2, 2023) (3, 2114) (4, 1628) (5, 1731) (6, 1655) (7, 1976) (8, 1657) (9, 2006) (10, 1705) (11, 2101) (12, 1656) (13, 1734) (14, 1599) (15, 2189)
+[00:00:54 -155201.449955] FAST spr round 1 (radius: 10)
+    busy_ratio: 0.861229
+    stats_step: spr_FAST_1
+    wait_time_ms  (0, 1811) (1, 1195) (2, 1398) (3, 1007) (4, 2804) (5, 2372) (6, 2860) (7, 1355) (8, 2809) (9, 1370) (10, 2686) (11, 951) (12, 2753) (13, 3355) (14, 2857) (15, 598)
+    cpu_time_ms  (0, 12669) (1, 13304) (2, 13102) (3, 13494) (4, 11696) (5, 12128) (6, 11640) (7, 13146) (8, 11690) (9, 13130) (10, 11814) (11, 13547) (12, 11747) (13, 11145) (14, 11643) (15, 13903)
+[00:01:08 -155178.685665] FAST spr round 2 (radius: 10)
+    busy_ratio: 0.854895
+    stats_step: spr_FAST_1
+    wait_time_ms  (0, 1319) (1, 1019) (2, 1055) (3, 983) (4, 2190) (5, 2009) (6, 2426) (7, 1224) (8, 2010) (9, 1212) (10, 2166) (11, 678) (12, 2429) (13, 2579) (14, 2242) (15, 286)
+    cpu_time_ms  (0, 9803) (1, 10110) (2, 10076) (3, 10147) (4, 8940) (5, 9121) (6, 8704) (7, 9906) (8, 9120) (9, 9918) (10, 8963) (11, 10453) (12, 8699) (13, 8551) (14, 8887) (15, 10844)
+[00:01:19 -155175.144649] FAST spr round 3 (radius: 10)
+    busy_ratio: 0.852409
+    stats_step: spr_FAST_1
+    wait_time_ms  (0, 1081) (1, 859) (2, 709) (3, 887) (4, 1933) (5, 1851) (6, 2020) (7, 949) (8, 1723) (9, 783) (10, 1768) (11, 518) (12, 2118) (13, 2059) (14, 1981) (15, 208)
+    cpu_time_ms  (0, 7998) (1, 8230) (2, 8379) (3, 8202) (4, 7155) (5, 7237) (6, 7068) (7, 8140) (8, 7365) (9, 8306) (10, 7319) (11, 8571) (12, 6968) (13, 7027) (14, 7107) (15, 8881)
+[00:01:29 -155174.730558] FAST spr round 4 (radius: 10)
+    busy_ratio: 0.843319
+    stats_step: spr_FAST_1
+    wait_time_ms  (0, 993) (1, 901) (2, 784) (3, 863) (4, 1974) (5, 1770) (6, 2038) (7, 1018) (8, 1631) (9, 795) (10, 1879) (11, 543) (12, 2069) (13, 2088) (14, 1886) (15, 148)
+    cpu_time_ms  (0, 7532) (1, 7633) (2, 7750) (3, 7671) (4, 6559) (5, 6763) (6, 6495) (7, 7515) (8, 6902) (9, 7739) (10, 6654) (11, 7991) (12, 6462) (13, 6446) (14, 6647) (15, 8386)
+[00:01:37 -155174.702079] Model parameter optimization (eps = 1.000000)
+    busy_ratio: 0.766742
+    stats_step: modelopt3
+    wait_time_ms  (0, 153) (1, 152) (2, 156) (3, 133) (4, 270) (5, 250) (6, 279) (7, 167) (8, 264) (9, 139) (10, 259) (11, 114) (12, 298) (13, 259) (14, 292) (15, 68)
+    cpu_time_ms  (0, 715) (1, 721) (2, 717) (3, 740) (4, 603) (5, 623) (6, 594) (7, 705) (8, 609) (9, 734) (10, 614) (11, 759) (12, 575) (13, 614) (14, 580) (15, 805)
+[00:01:38 -155174.534645] SLOW spr round 1 (radius: 5)
+    busy_ratio: 0.855207
+    stats_step: spr_SLOW_2
+    wait_time_ms  (0, 4581) (1, 2600) (2, 3695) (3, 2347) (4, 5155) (5, 3659) (6, 4921) (7, 2343) (8, 4438) (9, 2799) (10, 4898) (11, 2257) (12, 5145) (13, 5924) (14, 4647) (15, 1955)
+    cpu_time_ms  (0, 21897) (1, 23895) (2, 22799) (3, 24148) (4, 21338) (5, 22835) (6, 21572) (7, 24152) (8, 22056) (9, 23696) (10, 21596) (11, 24238) (12, 21344) (13, 20570) (14, 21847) (15, 24540)
+[00:02:05 -155155.312562] SLOW spr round 2 (radius: 5)
+    busy_ratio: 0.854548
+    stats_step: spr_SLOW_2
+    wait_time_ms  (0, 4122) (1, 2173) (2, 3352) (3, 2156) (4, 4716) (5, 3401) (6, 4612) (7, 2183) (8, 4118) (9, 2574) (10, 4532) (11, 2045) (12, 4735) (13, 5675) (14, 4354) (15, 1827)
+    cpu_time_ms  (0, 20185) (1, 22144) (2, 20965) (3, 22161) (4, 19601) (5, 20916) (6, 19704) (7, 22134) (8, 20198) (9, 21743) (10, 19785) (11, 22272) (12, 19576) (13, 18641) (14, 19962) (15, 22490)
+[00:02:29 -155152.608895] SLOW spr round 3 (radius: 5)
+    busy_ratio: 0.845192
+    stats_step: spr_SLOW_2
+    wait_time_ms  (0, 4313) (1, 2463) (2, 3377) (3, 1936) (4, 4688) (5, 3483) (6, 4502) (7, 2217) (8, 4058) (9, 2638) (10, 4235) (11, 2099) (12, 4644) (13, 5229) (14, 4296) (15, 1849)
+    cpu_time_ms  (0, 18304) (1, 20163) (2, 19249) (3, 20690) (4, 17937) (5, 19142) (6, 18123) (7, 20409) (8, 18568) (9, 19988) (10, 18391) (11, 20527) (12, 17976) (13, 17396) (14, 18329) (15, 20778)
+[00:02:52 -155152.229624] SLOW spr round 4 (radius: 5)

@@ -1,0 +1,40 @@
+\begin{minipage}{0.49\textwidth}
+\begin{tikzpicture}[scale=0.75]
+  \begin{axis}[ybar interval, ymax=1447,ymin=0, minor y tick num = 3
+, xlabel={CPU}, ylabel={Allocated sites}]
+    \addplot coordinates { (0,1315) (1,1315) (2,1316) (3,1316) (4,1316) (5,1316) (6,1316) (7,1316) (8,1316) (9,1316) (10, 658) };
+  \end{axis}
+\end{tikzpicture}
+\caption*{Sites repartition with Kassian}
+\end{minipage}
+\begin{minipage}{0.49\textwidth}
+\begin{tikzpicture}[scale=0.75]
+  \begin{axis}[ybar interval, ymax=118.527,ymin=0, minor y tick num = 3
+, xlabel={CPU}, ylabel={PLF-Cost}]
+    \addplot coordinates { (0,60.6998) (1,73.7965) (2,107.752) (3,31.6303) (4,17.3102) (5,32) (6,56.2258) (7,74.1563) (8,83.4888) (9,59.3027) (10, 53.8759) };
+\draw [olive, dashed] ({rel axis cs:0,0}|-{axis cs:0,107.752}) -- ({rel axis cs:1,0}|-{axis cs:10,107.752}) node [pos=0.5, below] {Worst PLF\_cost with Kassian};
+\draw [red, dashed] ({rel axis cs:0,0}|-{axis cs:0,54.3985}) -- ({rel axis cs:1,0}|-{axis cs:10,54.3985}) node [pos=0.5, below] {Lower bound};
+  \end{axis}
+\end{tikzpicture}
+\caption*{PLF\_cost repartition with Kassian}
+\end{minipage}
+\begin{minipage}{0.49\textwidth}
+\begin{tikzpicture}[scale=0.75]
+  \begin{axis}[ybar interval, ymax=2445,ymin=0, minor y tick num = 3
+, xlabel={CPU}, ylabel={Allocated sites}]
+    \addplot coordinates { (0,1735) (1,1920) (2,1579) (3,2223) (4,1320) (5,832) (6,858) (7,674) (8,765) (9,1252) (10, 1111) };
+  \end{axis}
+\end{tikzpicture}
+\caption*{Sites repartition with Weighted}
+\end{minipage}
+\begin{minipage}{0.49\textwidth}
+\begin{tikzpicture}[scale=0.75]
+  \begin{axis}[ybar interval, ymax=118.527,ymin=0, minor y tick num = 3
+, xlabel={CPU}, ylabel={PLF-Cost}]
+    \addplot coordinates { (0,59) (1,57.9876) (2,57.1787) (3,56.0124) (4,53.4789) (5,53.0347) (6,68.4963) (7,70.8586) (8,64.206) (9,57.5037) (10, 53.8759) };
+\draw [olive, dashed] ({rel axis cs:0,0}|-{axis cs:0,107.752}) -- ({rel axis cs:1,0}|-{axis cs:10,107.752}) node [pos=0.5, below] {Worst PLF\_cost with Kassian};
+\draw [red, dashed] ({rel axis cs:0,0}|-{axis cs:0,54.3985}) -- ({rel axis cs:1,0}|-{axis cs:10,54.3985}) node [pos=0.5, below] {Lower bound};
+  \end{axis}
+\end{tikzpicture}
+\caption*{PLF\_cost repartition with Kassian}
+\end{minipage}

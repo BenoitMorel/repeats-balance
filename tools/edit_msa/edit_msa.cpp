@@ -17,7 +17,7 @@ void generate_partition(const char *input_phy,
   for (unsigned int i = 0; i < partitions_number; ++i) {
     partitions << "DNA, p" << i << " =";
     partitions << last_offset + 1 << "-";
-    last_offset = ((i + 1)  * sites + ) / (partitions_number);
+    last_offset = ((i + 1)  * sites) / (partitions_number);
     partitions << last_offset;
     if (i != partitions_number - 1) {
       partitions << std::endl;
@@ -37,7 +37,10 @@ void resize_phy(const char *input_phy,
 
 
 int main() {
-  generate_partition("59.phy", 5, "plop.part");
+  generate_partition("../../data/404/404.phy", 30, "/home/morelbt/github/raxml-ng/bin/data/404/404_30.part");
+  generate_partition("../../data/404/404.phy", 15, "/home/morelbt/github/raxml-ng/bin/data/404/404_15.part");
+  generate_partition("../../data/404/404.phy", 20, "/home/morelbt/github/raxml-ng/bin/data/404/404_20.part");
+  generate_partition("../../data/404/404.phy", 40, "/home/morelbt/github/raxml-ng/bin/data/404/404_40part");
   
 
   return 1;

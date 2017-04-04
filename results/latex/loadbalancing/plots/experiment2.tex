@@ -1,0 +1,45 @@
+ 
+\documentclass[12pt,a4paper]{article}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{import}
+\usepackage[font=small,labelfont=bf]{caption}
+
+\begin{document}
+
+\begin{figure}
+\caption*{Sequences 59, 10 cpus, with the starting tree from treechar}
+\subimport{../experiment2/}{59_10cpus_seed12345_top0.tex}
+\end{figure}
+ 
+\begin{figure}
+\caption*{Sequences 59, 10 cpus, with the tree 79 from treechar}
+\subimport{../experiment2/}{59_10cpus_seed12345_top79.tex}
+\end{figure}
+
+
+\begin{figure}
+\caption*{Sequences 128, 10 cpus, with the starting tree from treechar}
+\subimport{../experiment2/}{128_10cpus_first.tex}
+\end{figure}
+
+\begin{figure}
+\caption*{Sequences 128, 10 cpus, with the tree 86894 from treechar}
+\subimport{../experiment2/}{128_10cpus_tree86894.tex}
+\end{figure}
+
+ 
+\begin{figure}
+\caption*{Sequences 404, 10 cpus, with the first tree from treechar}
+\subimport{../experiment2/}{404_10cpus_first.tex}
+\end{figure}
+
+ 
+\begin{figure}
+\caption*{Sequences 404, 10 cpus, with the tree 98240 from treechar}
+\subimport{../experiment2/}{404_10cpus_98240.tex}
+\end{figure}
+
+
+
+\end{document}

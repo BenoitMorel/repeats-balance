@@ -1,0 +1,21 @@
+***************
+*Experiment 1:*
+***************
+- Sample n random trees and compute an average PLF cost for each site of each partition
+- From this vector, compute an assignment with several algorithms:
+  - naive: cyclic assignment of full partitions among cpus, without any sorting
+  - kassian: kassian's algo with divisible partitions. Sites should be perfectly distributed
+  - kassian weighted : same algorithm, but try to distribute the weights among the cpus
+- Create a new random tree, and print the assignments results :
+  - print the sites distribution among the cpus
+  - print the weights distribution among the cpus
+  - print the partitions distribution among the cpus
+
+***************
+*Conclusions :*
+***************
+- the naive algorithm is very bad (captain obvious!)
+- the kassian algorithm distributes the sites and the partitions very well, but not the weights.
+- the weighted algorithm distributes the partitions very well and the weights better than kassian. It's still not perfect, because the splits introduce changes in the PLF-costs, and the algorithm ignores that. 
+
+The improvment depends on the inputs parameters. We see more improvment with a lot of cpus and with the 404 dataset
