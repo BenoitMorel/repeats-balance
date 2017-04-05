@@ -32,10 +32,13 @@ $$ speedup = \frac{time_{tipinner}}{time_{repeats}}$$
 
 When we don't indicate times, the cluster cancelled the jobs before the end (after 24h). We then compare the speedup at the last reached step. \newline
 
-Raxml commands used:
+Raxml commands used (repeats, repeats with jemalloc, tipinner):
 \lstset{language=sh}
 \begin{lstlisting}
   $  ./raxml-ng-mpi --seed=42 --msa data.phy --model data.part
+   --simd AVX --threads 16  --redo --repeats on
+  $  LD_PRELOAD=/home/morelbt/github/raxml-ng/bin/libjemalloc.so
+  ./raxml-ng-mpi --seed=42 --msa data.phy --model data.part
    --simd AVX --threads 16  --redo --repeats on
   $  ./raxml-ng-mpi --seed=42 --msa data.phy --model data.part
    --simd AVX --threads 16  --redo
@@ -55,6 +58,19 @@ Raxml commands used:
 \newline
 
 
+\begin{tabular}{|l|c|c|c|c|c|c|c|}
+\hline dataset                    & taxas & sites    & partitions & type & $time_{rep jem}$ & $time_{tipinner}$ & speedup\\
+\hline 404                        & 404   &  7444    & 11         & DNA  & 598s      &  1131s            & 1.89 \\
+\hline 1kite\_science2013         & 144   &  371434  & 50         & DNA  & 9588s     &  20414s           & 2.12 \\
+\hline 1kite\_hyme                & 174   &  2248590 & 4116       & DNA  & ?         &  cancelled        & ? \\
+\hline Antl\_1\_1\_nt             & 40    &  522173  & 658        & DNA  & 1302      &  2293s            & 1.76 \\
+\hline Antl\_1\_1\_aa             & 40    &  762438  & 659        & prot & 10301     &  14500s           & 1.4 \\
+\hline para\_1\_nt                & 193   &  1514275 & 3714       & DNA  & ?         &  cancelled        & ? \\
+\hline 
+\end{tabular}\newline
+\newline
+
+
 \section{Load balancing}
 
 We define
@@ -62,12 +78,14 @@ $$busy\ ratio = (1 - \frac{waiting\ time\ in\ reduce\ operations}{elapsed\ time}
 
 It directly gives the speedup we coudl get from a perfect load balancing.
 
-\begin{tabular}{|l|c|c|c|c|c|c|}
-\hline dataset                    & taxas & sites    & partitions & type  & busy ratio repeats & busy ratio tipinner\\
-\hline 1kite\_science2013         & 144   &  371434  & 50         & DNA  & 83\% & 83\%  \\
-\hline 1kite\_hyme                & 174   &  2248590 & 4116       & DNA  & 93\% & 92\%  \\
-\hline Antl\_1\_1\_aa             & 40    &  762438  & 659        & prot & 96\% & 89\%  \\
-\hline para\_1\_nt                & 193   &  1514275 & 3714       & DNA  & 92\%  & 90\%  \\
+\begin{tabular}{|l|c|c|c|c|c|c|c|}
+\hline dataset                    & taxas & sites    & parts & type  & $ratio_{repeats}$ & $ratio_{jemrepeats}$ & $ratio_{tipinner}$\\
+\hline 404                        & 404   &  7444    & 11    & DNA  & 86\%     & 85\%   & 86\%  \\
+\hline 1kite\_science             & 144   &  371434  & 50    & DNA  & 83\%     & 92\%    & 83\%  \\
+\hline 1kite\_hyme                & 174   &  2248590 & 4116  & DNA  & 93\%     & ?\%    & 92\%  \\
+\hline Antl\_1\_1\_nt             & 40    &  522173  & 658   & DNA  & ?\%      & 96\%    & ?\%  \\
+\hline Antl\_1\_1\_aa             & 40    &  762438  & 659   & prot & 96\%     & 93\%    & 89\%  \\
+\hline para\_1\_nt                & 193   &  1514275 & 3714  & DNA  & 92\%     & ?\%    & 90\%  \\
 \hline 
 \end{tabular}\newline
 \newline
