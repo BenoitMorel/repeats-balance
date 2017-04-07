@@ -44,17 +44,66 @@ Raxml commands used (repeats, repeats with jemalloc, tipinner):
 \end{lstlisting}
 
 
-\begin{tabular}{|l|c|c|c|c|c|c|c|c|}
+\begin{tabular}{|l|l|l|l|c|c|l|l|c|}
 \hline dataset                    & taxas & sites    & partitions & type & threads & $time_{reps}$ & $time_{ti}$ & speedup\\
 \hline 404                        & 404   &  7444    & 11         & DNA  & 16 & 457s     &  755s     & 1.65  \\
-\hline 1kite\_science             & 144   &  371434  & 50         & DNA  & 16 & 9351     &  13311    & 1.42  \\
+\hline 1kite\_science             & 144   &  371434  & 50         & DNA  & 16 & 9351s    &  13311s   & 1.42  \\
 \hline 1kite\_hyme                & 174   &  2248590 & 4116       & DNA  & 64 & 21663s   &  29971s   & 1.38 \\
 \hline Antl\_1\_1\_nt             & 40    &  522173  & 658        & DNA  & 16 & 1254s    &  1668s    & 1.3  \\
-\hline Antl\_1\_1\_aa             & 40    &  762438  & 659        & prot & 32 & 4966     &  6080     & 1.2\\
+\hline Antl\_1\_1\_aa             & 40    &  762438  & 659        & prot & 32 & 4966s    &  6080s    & 1.2\\
 \hline para\_1\_nt                & 193   &  1514275 & 3714       & DNA  & 64 & diverged &  diverged & 1.35  \\
 \hline 
 \end{tabular}\newline
 \newline
+
+
+\section{Scalability and load balancing}
+
+\begin{itemize}
+\item "speedup" is the speedup between tipinner and repeats.
+\item "rep" is repeats
+\item "time lost" is the time lost because of bad load balancing
+\end{itemize}
+
+1kyte\_hyme
+
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline threads & sites/thread & seq time & seq time rep & time lost & time lost rep & speedup \\
+\hline
+\end{tabular} \newline
+
+
+404
+
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline threads & sites/thread & seq time & seq time rep & time lost & time lost rep & speedup \\
+\hline 4 & 1861 & 7816s & 5100s & 2.37\% & 2.83\% & 1.53 \\
+\hline 8 & 930 & 11608s & 6472s & 5.14\% & 4.43\% & 1.79 \\
+\hline 16 & 465 & 12016s & 7392s & 5.73\% & 6.49\% & 1.62 \\
+\hline
+\end{tabular} \newline
+
+
+antl\_1\_1\_nt2
+
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline threads & sites/thread & seq time & seq time rep & time lost & time lost rep & speedup \\
+\hline 16 & 32635 & 26416s & 20080s & 0.43\% & 0.90\% & 1.31 \\
+\hline 64 & 8158 & 25280s & 18816s & 1.31\% & 1.65\% & 1.34 \\
+\hline 256 & 2039 & 31488s & 26112s & 3.32\% & 4.89\% & 1.20 \\
+\hline
+\end{tabular} \newline
+
+
+kyte
+
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline threads & sites/thread & seq time & seq time rep & time lost & time lost rep & speedup \\
+\hline 16 & 23214 & 213408s & 148688s & 1.21\% & 2.03\% & 1.43 \\
+\hline 64 & 5803 & 168192s & 119616s & 2.00\% & 8.08\% & 1.40 \\
+\hline
+\end{tabular} \newline
+
 
 
 \section{Load balancing}
