@@ -32,6 +32,8 @@ $$ speedup = \frac{time_{tipinner}}{time_{repeats}}$$
 
 When we don't indicate times, the cluster cancelled the jobs before the end (after 24h). We then compare the speedup at the last reached step. \newline
 
+When we write "diverged", the runs diverged. In this case we write the speedup at the last common step.
+
 Raxml commands used (repeats, repeats with jemalloc, tipinner):
 \lstset{language=sh}
 \begin{lstlisting}
@@ -42,14 +44,14 @@ Raxml commands used (repeats, repeats with jemalloc, tipinner):
 \end{lstlisting}
 
 
-\begin{tabular}{|l|c|c|c|c|c|c|c|}
-\hline dataset                    & taxas & sites    & partitions & type & $time_{repeats}$ & $time_{tipinner}$ & speedup\\
-\hline 404                        & 404   &  7444    & 11         & DNA  & 457s     &  755s     & 1.65  \\
-\hline 1kite\_science2013         & 144   &  371434  & 50         & DNA  & ?        &  ?        & ?  \\
-\hline 1kite\_hyme                & 174   &  2248590 & 4116       & DNA  & ?        &  ?        & ? \\
-\hline Antl\_1\_1\_nt             & 40    &  522173  & 658        & DNA  & 1254s    &  1668s    & 1.3  \\
-\hline Antl\_1\_1\_aa             & 40    &  762438  & 659        & prot & ?        &  ?        & ?\\
-\hline para\_1\_nt                & 193   &  1514275 & 3714       & DNA  & ?       &  ?        & ?  \\
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|}
+\hline dataset                    & taxas & sites    & partitions & type & threads & $time_{reps}$ & $time_{ti}$ & speedup\\
+\hline 404                        & 404   &  7444    & 11         & DNA  & 16 & 457s     &  755s     & 1.65  \\
+\hline 1kite\_science             & 144   &  371434  & 50         & DNA  & 16 & 9351     &  13311    & 1.42  \\
+\hline 1kite\_hyme                & 174   &  2248590 & 4116       & DNA  & 64 & 21663s   &  29971s   & 1.38 \\
+\hline Antl\_1\_1\_nt             & 40    &  522173  & 658        & DNA  & 16 & 1254s    &  1668s    & 1.3  \\
+\hline Antl\_1\_1\_aa             & 40    &  762438  & 659        & prot & 32 & 4966     &  6080     & 1.2\\
+\hline para\_1\_nt                & 193   &  1514275 & 3714       & DNA  & 64 & diverged &  diverged & 1.35  \\
 \hline 
 \end{tabular}\newline
 \newline
