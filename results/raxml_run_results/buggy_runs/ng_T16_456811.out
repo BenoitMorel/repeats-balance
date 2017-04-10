@@ -1,0 +1,382 @@
+rm: cannot remove ‘scalability_results/kyte/kyte_repeats_T256_mpi_jem’: No such file or directory
+
+RAxML-NG v. 0.1.0 BETA released on 18.03.2017 by The Exelixis Lab.
+Authors: Alexey Kozlov, Alexandros Stamatakis, Diego Darriba, Tomas Flouri, Benoit Morel.
+Latest version: https://github.com/amkozlov/raxml-ng
+Questions/problems/suggestions? Please visit: https://groups.google.com/forum/#!forum/raxml
+
+WARNING: This is a BETA release, please use at your own risk!
+
+RAxML-NG was called as follows:
+
+./raxml-ng-mpi --search --seed=42 --msa data/kyte/kyte.phy --model data/kyte/kyte.part --simd AVX --threads 1 --repeats on --prefix scalability_results/kyte/kyte_repeats_T256_mpi_jem/kyte
+
+Analysis options:
+  run mode: ML tree search
+  start tree(s): random
+  random seed: 42
+  tip-inner: OFF
+  repeats: ON
+  pattern compression: ON
+  fast spr radius: AUTO
+  spr subtree cutoff: 1.000000
+  branch lengths: ML estimate (linked)
+  SIMD kernels: AVX
+  parallelization: MPI (256 ranks)
+
+[00:00:05] Reading alignment from file: data/kyte/kyte.phy
+[00:00:20] Loaded alignment with 144 taxa and 413459 sites
+
+WARNING: Fully undetermined columns found: 25
+
+NOTE: Reduced alignment (with gap-only sequences and columns removed) was printed to:
+/home/morelbt/github/raxml-ng/bin/scalability_results/kyte/kyte_repeats_T256_mpi_jem/kyte.raxml.reduced.phy
+
+NOTE: The corresponding reduced partition file was printed to:
+/home/morelbt/github/raxml-ng/bin/scalability_results/kyte/kyte_repeats_T256_mpi_jem/kyte.raxml.reduced.partition
+
+Alignment comprises 50 partitions and 371434 patterns
+
+Partition 0: Partition0
+Model: GTR+F+G4
+Alignment sites / patterns: 4948 / 4948
+Gaps: 39.14 %
+Invariant sites: 0.00 %
+
+Partition 1: Partition1
+Model: GTR+F+G4
+Alignment sites / patterns: 170859 / 128909
+Gaps: 31.25 %
+Invariant sites: 60.63 %
+
+Partition 2: Partition2
+Model: GTR+F+G4
+Alignment sites / patterns: 2266 / 2266
+Gaps: 19.40 %
+Invariant sites: 0.00 %
+
+Partition 3: Partition3
+Model: GTR+F+G4
+Alignment sites / patterns: 31854 / 31795
+Gaps: 34.47 %
+Invariant sites: 0.00 %
+
+Partition 4: Partition4
+Model: GTR+F+G4
+Alignment sites / patterns: 3219 / 3219
+Gaps: 31.81 %
+Invariant sites: 0.00 %
+
+Partition 5: Partition5
+Model: GTR+F+G4
+Alignment sites / patterns: 5297 / 5297
+Gaps: 39.98 %
+Invariant sites: 0.00 %
+
+Partition 6: Partition6
+Model: GTR+F+G4
+Alignment sites / patterns: 12857 / 12854
+Gaps: 36.29 %
+Invariant sites: 0.00 %
+
+Partition 7: Partition7
+Model: GTR+F+G4
+Alignment sites / patterns: 4651 / 4651
+Gaps: 36.82 %
+Invariant sites: 0.00 %
+
+Partition 8: Partition8
+Model: GTR+F+G4
+Alignment sites / patterns: 4711 / 4711
+Gaps: 26.37 %
+Invariant sites: 0.00 %
+
+Partition 9: Partition9
+Model: GTR+F+G4
+Alignment sites / patterns: 5197 / 5197
+Gaps: 40.58 %
+Invariant sites: 0.00 %
+
+Partition 10: Partition10
+Model: GTR+F+G4
+Alignment sites / patterns: 243 / 243
+Gaps: 13.40 %
+Invariant sites: 0.00 %
+
+Partition 11: Partition11
+Model: GTR+F+G4
+Alignment sites / patterns: 3580 / 3580
+Gaps: 22.99 %
+Invariant sites: 0.00 %
+
+Partition 12: Partition12
+Model: GTR+F+G4
+Alignment sites / patterns: 20753 / 20746
+Gaps: 34.51 %
+Invariant sites: 0.00 %
+
+Partition 13: Partition13
+Model: GTR+F+G4
+Alignment sites / patterns: 9161 / 9160
+Gaps: 32.22 %
+Invariant sites: 0.00 %
+
+Partition 14: Partition14
+Model: GTR+F+G4
+Alignment sites / patterns: 722 / 722
+Gaps: 17.15 %
+Invariant sites: 0.00 %
+
+Partition 15: Partition15
+Model: GTR+F+G4
+Alignment sites / patterns: 14853 / 14849
+Gaps: 34.30 %
+Invariant sites: 0.00 %
+
+Partition 16: Partition16
+Model: GTR+F+G4
+Alignment sites / patterns: 5373 / 5373
+Gaps: 40.18 %
+Invariant sites: 0.00 %
+
+Partition 17: Partition17
+Model: GTR+F+G4
+Alignment sites / patterns: 5744 / 5744
+Gaps: 28.46 %
+Invariant sites: 0.00 %
+
+Partition 18: Partition18
+Model: GTR+F+G4
+Alignment sites / patterns: 4668 / 4668
+Gaps: 39.90 %
+Invariant sites: 0.00 %
+
+Partition 19: Partition19
+Model: GTR+F+G4
+Alignment sites / patterns: 1988 / 1988
+Gaps: 21.47 %
+Invariant sites: 0.00 %
+
+Partition 20: Partition20
+Model: GTR+F+G4
+Alignment sites / patterns: 2236 / 2236
+Gaps: 30.54 %
+Invariant sites: 0.00 %
+
+Partition 21: Partition21
+Model: GTR+F+G4
+Alignment sites / patterns: 3831 / 3831
+Gaps: 40.29 %
+Invariant sites: 0.00 %
+
+Partition 22: Partition22
+Model: GTR+F+G4
+Alignment sites / patterns: 5677 / 5677
+Gaps: 34.40 %
+Invariant sites: 0.00 %
+
+Partition 23: Partition23
+Model: GTR+F+G4
+Alignment sites / patterns: 8284 / 8284
+Gaps: 35.05 %
+Invariant sites: 0.00 %
+
+Partition 24: Partition24
+Model: GTR+F+G4
+Alignment sites / patterns: 11756 / 11755
+Gaps: 33.60 %
+Invariant sites: 0.00 %
+
+Partition 25: Partition25
+Model: GTR+F+G4
+Alignment sites / patterns: 4910 / 4910
+Gaps: 38.41 %
+Invariant sites: 0.00 %
+
+Partition 26: Partition26
+Model: GTR+F+G4
+Alignment sites / patterns: 2786 / 2786
+Gaps: 24.70 %
+Invariant sites: 0.00 %
+
+Partition 27: Partition27
+Model: GTR+F+G4
+Alignment sites / patterns: 346 / 346
+Gaps: 17.36 %
+Invariant sites: 0.00 %
+
+Partition 28: Partition28
+Model: GTR+F+G4
+Alignment sites / patterns: 4395 / 4395
+Gaps: 36.16 %
+Invariant sites: 0.00 %
+
+Partition 29: Partition29
+Model: GTR+F+G4
+Alignment sites / patterns: 1373 / 1373
+Gaps: 17.88 %
+Invariant sites: 0.00 %
+
+Partition 30: Partition30
+Model: GTR+F+G4
+Alignment sites / patterns: 2532 / 2532
+Gaps: 28.89 %
+Invariant sites: 0.00 %
+
+Partition 31: Partition31
+Model: GTR+F+G4
+Alignment sites / patterns: 7408 / 7408
+Gaps: 30.38 %
+Invariant sites: 0.00 %
+
+Partition 32: Partition32
+Model: GTR+F+G4
+Alignment sites / patterns: 5242 / 5242
+Gaps: 39.43 %
+Invariant sites: 0.00 %
+
+Partition 33: Partition33
+Model: GTR+F+G4
+Alignment sites / patterns: 2739 / 2739
+Gaps: 22.99 %
+Invariant sites: 0.00 %
+
+Partition 34: Partition34
+Model: GTR+F+G4
+Alignment sites / patterns: 300 / 300
+Gaps: 15.53 %
+Invariant sites: 0.00 %
+
+Partition 35: Partition35
+Model: GTR+F+G4
+Alignment sites / patterns: 3869 / 3869
+Gaps: 32.56 %
+Invariant sites: 0.00 %
+
+Partition 36: Partition36
+Model: GTR+F+G4
+Alignment sites / patterns: 3833 / 3833
+Gaps: 34.29 %
+Invariant sites: 0.00 %
+
+Partition 37: Partition37
+Model: GTR+F+G4
+Alignment sites / patterns: 4849 / 4849
+Gaps: 29.99 %
+Invariant sites: 0.00 %
+
+Partition 38: Partition38
+Model: GTR+F+G4
+Alignment sites / patterns: 3779 / 3779
+Gaps: 27.23 %
+Invariant sites: 0.00 %
+
+Partition 39: Partition39
+Model: GTR+F+G4
+Alignment sites / patterns: 3590 / 3590
+Gaps: 24.72 %
+Invariant sites: 0.00 %
+
+Partition 40: Partition40
+Model: GTR+F+G4
+Alignment sites / patterns: 1714 / 1714
+Gaps: 18.11 %
+Invariant sites: 0.00 %
+
+Partition 41: Partition41
+Model: GTR+F+G4
+Alignment sites / patterns: 1992 / 1992
+Gaps: 26.20 %
+Invariant sites: 0.00 %
+
+Partition 42: Partition42
+Model: GTR+F+G4
+Alignment sites / patterns: 2850 / 2850
+Gaps: 31.44 %
+Invariant sites: 0.00 %
+
+Partition 43: Partition43
+Model: GTR+F+G4
+Alignment sites / patterns: 1866 / 1866
+Gaps: 18.62 %
+Invariant sites: 0.00 %
+
+Partition 44: Partition44
+Model: GTR+F+G4
+Alignment sites / patterns: 3685 / 3685
+Gaps: 33.86 %
+Invariant sites: 0.00 %
+
+Partition 45: Partition45
+Model: GTR+F+G4
+Alignment sites / patterns: 928 / 928
+Gaps: 17.40 %
+Invariant sites: 0.00 %
+
+Partition 46: Partition46
+Model: GTR+F+G4
+Alignment sites / patterns: 2628 / 2628
+Gaps: 20.88 %
+Invariant sites: 0.00 %
+
+Partition 47: Partition47
+Model: GTR+F+G4
+Alignment sites / patterns: 320 / 320
+Gaps: 15.63 %
+Invariant sites: 0.00 %
+
+Partition 48: Partition48
+Model: GTR+F+G4
+Alignment sites / patterns: 77 / 77
+Gaps: 10.28 %
+Invariant sites: 0.00 %
+
+Partition 49: Partition49
+Model: GTR+F+G4
+Alignment sites / patterns: 720 / 720
+Gaps: 18.18 %
+Invariant sites: 0.00 %
+
+
+[00:00:38] Generating random starting tree(s) with 144 taxa
+[00:00:38] Data distribution: partitions/thread: 1-2, patterns/thread: 1450-1451
+
+Starting ML tree search with 1 distinct starting trees
+
+[00:00:41 -19336809.647580] Initial branch length optimization
+    average unavoidable wait 0.008857
+    average busy_ratio: 0.977249
+    average possible speedup 1.389344%
+    stats_step: initial_blo
+    wait_time_ms  (0, 601) (1, 605) (2, 597) (3, 603) (4, 598) (5, 600) (6, 593) (7, 600) (8, 598) (9, 640) (10, 619) (11, 612) (12, 611) (13, 615) (14, 613) (15, 615) (16, 613) (17, 621) (18, 616) (19, 264) (20, 613) (21, 616) (22, 613) (23, 620) (24, 611) (25, 615) (26, 613) (27, 619) (28, 618) (29, 263) (30, 616) (31, 617) (32, 616) (33, 618) (34, 620) (35, 612) (36, 615) (37, 613) (38, 613) (39, 615) (40, 616) (41, 613) (42, 618) (43, 616) (44, 618) (45, 614) (46, 619) (47, 618) (48, 612) (49, 614) (50, 615) (51, 612) (52, 615) (53, 616) (54, 614) (55, 614) (56, 616) (57, 616) (58, 612) (59, 618) (60, 615) (61, 613) (62, 612) (63, 615) (64, 616) (65, 620) (66, 619) (67, 617) (68, 622) (69, 628) (70, 624) (71, 628) (72, 631) (73, 636) (74, 625) (75, 621) (76, 616) (77, 619) (78, 622) (79, 625) (80, 618) (81, 621) (82, 621) (83, 622) (84, 617) (85, 623) (86, 616) (87, 617) (88, 613) (89, 616) (90, 615) (91, 621) (92, 615) (93, 623) (94, 622) (95, 624) (96, 628) (97, 614) (98, 623) (99, 620) (100, 624) (101, 625) (102, 628) (103, 626) (104, 625) (105, 620) (106, 625) (107, 623) (108, 625) (109, 620) (110, 629) (111, 624) (112, 619) (113, 614) (114, 618) (115, 616) (116, 617) (117, 617) (118, 622) (119, 606) (120, 610) (121, 615) (122, 619) (123, 615) (124, 613) (125, 615) (126, 616) (127, 616) (128, 265) (129, 620) (130, 623) (131, 624) (132, 621) (133, 624) (134, 612) (135, 616) (136, 620) (137, 617) (138, 621) (139, 618) (140, 264) (141, 616) (142, 622) (143, 618) (144, 607) (145, 620) (146, 620) (147, 621) (148, 616) (149, 621) (150, 619) (151, 623) (152, 625) (153, 606) (154, 614) (155, 617) (156, 615) (157, 616) (158, 616) (159, 616) (160, 614) (161, 624) (162, 608) (163, 288) (164, 613) (165, 540) (166, 613) (167, 366) (168, 617) (169, 642) (170, 620) (171, 291) (172, 616) (173, 624) (174, 610) (175, 286) (176, 612) (177, 608) (178, 596) (179, 608) (180, 611) (181, 611) (182, 597) (183, 616) (184, 617) (185, 614) (186, 601) (187, 616) (188, 616) (189, 601) (190, 613) (191, 610) (192, 611) (193, 596) (194, 611) (195, 614) (196, 612) (197, 603) (198, 616) (199, 613) (200, 601) (201, 615) (202, 614) (203, 613) (204, 599) (205, 616) (206, 611) (207, 594) (208, 612) (209, 615) (210, 598) (211, 254) (212, 610) (213, 615) (214, 600) (215, 624) (216, 609) (217, 233) (218, 612) (219, 615) (220, 594) (221, 617) (222, 610) (223, 599) (224, 615) (225, 610) (226, 599) (227, 608) (228, 598) (229, 618) (230, 620) (231, 596) (232, 610) (233, 604) (234, 596) (235, 608) (236, 591) (237, 607) (238, 609) (239, 594) (240, 606) (241, 592) (242, 610) (243, 590) (244, 612) (245, 596) (246, 610) (247, 589) (248, 590) (249, 592) (250, 590) (251, 589) (252, 599) (253, 589) (254, 593) (255, 591)
+    cpu_time_ms  (0, 21681) (1, 21965) (2, 21895) (3, 21753) (4, 21978) (5, 21787) (6, 21951) (7, 22323) (8, 21854) (9, 23991) (10, 22049) (11, 22287) (12, 21840) (13, 21876) (14, 21950) (15, 24454) (16, 26056) (17, 25949) (18, 26116) (19, 26318) (20, 26090) (21, 25988) (22, 26382) (23, 25935) (24, 26164) (25, 25932) (26, 26029) (27, 25975) (28, 26141) (29, 26300) (30, 26602) (31, 25998) (32, 28338) (33, 26300) (34, 26378) (35, 26289) (36, 26473) (37, 26228) (38, 26654) (39, 26280) (40, 26810) (41, 26302) (42, 26451) (43, 26233) (44, 26389) (45, 26235) (46, 26447) (47, 26335) (48, 25732) (49, 26130) (50, 25979) (51, 25746) (52, 25903) (53, 25753) (54, 25676) (55, 25691) (56, 25677) (57, 25653) (58, 25684) (59, 25643) (60, 25666) (61, 25616) (62, 26079) (63, 25667) (64, 26296) (65, 26438) (66, 26134) (67, 26400) (68, 26099) (69, 26486) (70, 26122) (71, 26559) (72, 26140) (73, 26539) (74, 26092) (75, 25996) (76, 26199) (77, 26241) (78, 26100) (79, 26032) (80, 25929) (81, 26023) (82, 25969) (83, 25947) (84, 25963) (85, 25887) (86, 25943) (87, 25934) (88, 26016) (89, 25988) (90, 25968) (91, 26062) (92, 26427) (93, 25867) (94, 25914) (95, 26053) (96, 26310) (97, 25702) (98, 25738) (99, 25805) (100, 25827) (101, 25677) (102, 25730) (103, 25710) (104, 25743) (105, 25757) (106, 26117) (107, 25667) (108, 25940) (109, 25740) (110, 25751) (111, 25747) (112, 26345) (113, 26144) (114, 26603) (115, 26184) (116, 26324) (117, 26196) (118, 26637) (119, 26198) (120, 26368) (121, 26159) (122, 26271) (123, 26171) (124, 26252) (125, 26207) (126, 26926) (127, 26161) (128, 25897) (129, 25468) (130, 25411) (131, 25493) (132, 25399) (133, 25474) (134, 25500) (135, 25330) (136, 25907) (137, 25442) (138, 25411) (139, 25291) (140, 25729) (141, 25471) (142, 25619) (143, 25277) (144, 25987) (145, 26213) (146, 25964) (147, 26011) (148, 25995) (149, 25923) (150, 26012) (151, 25956) (152, 26291) (153, 25937) (154, 26077) (155, 26014) (156, 25975) (157, 26088) (158, 26129) (159, 26006) (160, 25969) (161, 25751) (162, 25876) (163, 26124) (164, 25817) (165, 26084) (166, 25948) (167, 26131) (168, 26037) (169, 25714) (170, 25807) (171, 26153) (172, 25785) (173, 25756) (174, 26027) (175, 26068) (176, 26229) (177, 26263) (178, 26145) (179, 26120) (180, 26141) (181, 26165) (182, 26691) (183, 26156) (184, 26213) (185, 26097) (186, 26224) (187, 26289) (188, 26238) (189, 26203) (190, 26222) (191, 26217) (192, 25873) (193, 25385) (194, 25706) (195, 25475) (196, 25403) (197, 25355) (198, 25389) (199, 25508) (200, 25478) (201, 25361) (202, 25414) (203, 25506) (204, 25407) (205, 25379) (206, 25601) (207, 25377) (208, 25874) (209, 25769) (210, 25900) (211, 26206) (212, 25799) (213, 25808) (214, 26088) (215, 26352) (216, 25861) (217, 26235) (218, 25811) (219, 25742) (220, 25844) (221, 25754) (222, 25959) (223, 25761) (224, 28003) (225, 26711) (226, 26923) (227, 26665) (228, 28186) (229, 26683) (230, 26958) (231, 26613) (232, 27250) (233, 26683) (234, 26718) (235, 26698) (236, 26893) (237, 26655) (238, 26921) (239, 26624) (240, 25916) (241, 25602) (242, 26181) (243, 25621) (244, 25837) (245, 25641) (246, 25633) (247, 25629) (248, 25950) (249, 25656) (250, 25638) (251, 25594) (252, 25647) (253, 25632) (254, 25662) (255, 25558)
+[00:00:42 -17421853.942040] Model parameter optimization (eps = 10.000000)
+    average unavoidable wait 0.060345
+    average busy_ratio: 0.812564
+    average possible speedup 12.709142%
+    stats_step: modelopt1
+    wait_time_ms  (0, 6525) (1, 6946) (2, 5972) (3, 6880) (4, 5879) (5, 6636) (6, 5554) (7, 6693) (8, 6258) (9, 18086) (10, 14578) (11, 13365) (12, 12093) (13, 12497) (14, 11772) (15, 13750) (16, 13008) (17, 13040) (18, 13523) (19, 14071) (20, 14382) (21, 14510) (22, 14398) (23, 14223) (24, 14224) (25, 14126) (26, 14353) (27, 14644) (28, 14590) (29, 14687) (30, 14387) (31, 14608) (32, 14525) (33, 14767) (34, 13752) (35, 12748) (36, 13185) (37, 12526) (38, 13132) (39, 13401) (40, 13479) (41, 12667) (42, 12815) (43, 12756) (44, 12537) (45, 13022) (46, 13238) (47, 13902) (48, 13685) (49, 13538) (50, 13930) (51, 13862) (52, 13763) (53, 13196) (54, 13741) (55, 13817) (56, 14897) (57, 13816) (58, 14124) (59, 14990) (60, 14505) (61, 13654) (62, 14242) (63, 14880) (64, 14793) (65, 15397) (66, 15058) (67, 15205) (68, 15586) (69, 16117) (70, 15884) (71, 16144) (72, 16570) (73, 16987) (74, 14100) (75, 14040) (76, 14748) (77, 14766) (78, 15907) (79, 16179) (80, 14326) (81, 13590) (82, 14328) (83, 14431) (84, 15220) (85, 16036) (86, 14124) (87, 13603) (88, 14476) (89, 14499) (90, 14896) (91, 14708) (92, 14969) (93, 15904) (94, 15484) (95, 15964) (96, 16237) (97, 13209) (98, 9743) (99, 9181) (100, 9346) (101, 10185) (102, 10359) (103, 9853) (104, 9735) (105, 9371) (106, 9723) (107, 10066) (108, 10041) (109, 9548) (110, 10590) (111, 9821) (112, 10371) (113, 9085) (114, 10201) (115, 8642) (116, 9709) (117, 9256) (118, 10171) (119, 8655) (120, 8229) (121, 8055) (122, 9028) (123, 7978) (124, 8310) (125, 8289) (126, 8630) (127, 8331) (128, 7863) (129, 8533) (130, 7209) (131, 9218) (132, 7323) (133, 9780) (134, 6053) (135, 7453) (136, 6688) (137, 7587) (138, 6676) (139, 7945) (140, 7334) (141, 7404) (142, 7105) (143, 7785) (144, 7163) (145, 8677) (146, 8071) (147, 8773) (148, 7972) (149, 9258) (150, 8398) (151, 9012) (152, 9063) (153, 6808) (154, 6911) (155, 7475) (156, 6539) (157, 7598) (158, 6715) (159, 7499) (160, 6645) (161, 6158) (162, 6379) (163, 6500) (164, 6444) (165, 6334) (166, 6239) (167, 6337) (168, 7655) (169, 8570) (170, 8083) (171, 7485) (172, 7776) (173, 6103) (174, 5994) (175, 6086) (176, 6054) (177, 5099) (178, 4710) (179, 5049) (180, 5648) (181, 5023) (182, 5156) (183, 6354) (184, 7370) (185, 6056) (186, 5741) (187, 6514) (188, 6785) (189, 4944) (190, 6619) (191, 5754) (192, 6061) (193, 5318) (194, 6224) (195, 6858) (196, 6204) (197, 5794) (198, 6810) (199, 7539) (200, 5340) (201, 6479) (202, 6276) (203, 6190) (204, 5101) (205, 6485) (206, 5894) (207, 4797) (208, 6093) (209, 5612) (210, 4602) (211, 4721) (212, 5821) (213, 5708) (214, 5906) (215, 8061) (216, 7906) (217, 4173) (218, 6183) (219, 5942) (220, 4656) (221, 6126) (222, 5920) (223, 4761) (224, 6757) (225, 6750) (226, 4947) (227, 5460) (228, 4618) (229, 8163) (230, 8302) (231, 4866) (232, 5919) (233, 5240) (234, 4387) (235, 5385) (236, 4003) (237, 5272) (238, 5391) (239, 3965) (240, 4923) (241, 3532) (242, 5379) (243, 4002) (244, 6204) (245, 4298) (246, 5183) (247, 3229) (248, 3435) (249, 3540) (250, 3667) (251, 3462) (252, 4754) (253, 2984) (254, 3982) (255, 3020)
+    cpu_time_ms  (0, 20420) (1, 20004) (2, 20979) (3, 20071) (4, 21072) (5, 20314) (6, 21397) (7, 20257) (8, 20693) (9, 8864) (10, 12365) (11, 13586) (12, 14857) (13, 14454) (14, 15178) (15, 13201) (16, 13942) (17, 13910) (18, 13428) (19, 12880) (20, 12569) (21, 12441) (22, 12546) (23, 12728) (24, 12727) (25, 12825) (26, 12598) (27, 12307) (28, 12360) (29, 12264) (30, 12563) (31, 12343) (32, 12426) (33, 12184) (34, 13198) (35, 14203) (36, 13765) (37, 14424) (38, 13818) (39, 13550) (40, 13465) (41, 14284) (42, 14136) (43, 14194) (44, 14414) (45, 13928) (46, 13713) (47, 13049) (48, 13264) (49, 13412) (50, 13019) (51, 13089) (52, 13181) (53, 13755) (54, 13209) (55, 13133) (56, 12053) (57, 13134) (58, 12826) (59, 11961) (60, 12445) (61, 13297) (62, 12708) (63, 12071) (64, 12157) (65, 11554) (66, 11893) (67, 11746) (68, 11364) (69, 10833) (70, 11066) (71, 10807) (72, 10380) (73, 9963) (74, 12845) (75, 12911) (76, 12203) (77, 12185) (78, 11044) (79, 10772) (80, 12625) (81, 13360) (82, 12621) (83, 12520) (84, 11722) (85, 10915) (86, 12827) (87, 13348) (88, 12474) (89, 12452) (90, 12055) (91, 12243) (92, 11982) (93, 11046) (94, 11466) (95, 10987) (96, 10714) (97, 13742) (98, 17208) (99, 17770) (100, 17595) (101, 16766) (102, 16592) (103, 17097) (104, 17215) (105, 17580) (106, 17228) (107, 16884) (108, 16909) (109, 17403) (110, 16360) (111, 17129) (112, 16387) (113, 17673) (114, 16557) (115, 18117) (116, 17049) (117, 17502) (118, 16586) (119, 18104) (120, 18529) (121, 18703) (122, 17730) (123, 18780) (124, 18448) (125, 18469) (126, 18119) (127, 18427) (128, 19087) (129, 18417) (130, 19742) (131, 17733) (132, 19620) (133, 17171) (134, 20898) (135, 19498) (136, 20262) (137, 19364) (138, 20274) (139, 19006) (140, 19617) (141, 19546) (142, 19846) (143, 19163) (144, 19788) (145, 18274) (146, 18880) (147, 18177) (148, 18972) (149, 17693) (150, 18552) (151, 17938) (152, 17888) (153, 20142) (154, 20040) (155, 19476) (156, 20412) (157, 19353) (158, 20236) (159, 19452) (160, 20305) (161, 20793) (162, 20571) (163, 20451) (164, 20506) (165, 20617) (166, 20712) (167, 20614) (168, 19296) (169, 18381) (170, 18861) (171, 19465) (172, 19174) (173, 20848) (174, 20957) (175, 20865) (176, 20897) (177, 21852) (178, 22241) (179, 21902) (180, 21295) (181, 21928) (182, 21794) (183, 20597) (184, 19581) (185, 20894) (186, 21210) (187, 20436) (188, 20165) (189, 22007) (190, 20329) (191, 21197) (192, 20889) (193, 21631) (194, 20723) (195, 20093) (196, 20747) (197, 21157) (198, 20141) (199, 19411) (200, 21611) (201, 20471) (202, 20675) (203, 20760) (204, 21850) (205, 20466) (206, 21057) (207, 22154) (208, 20858) (209, 21339) (210, 22341) (211, 22229) (212, 21130) (213, 21243) (214, 21045) (215, 18890) (216, 19044) (217, 22778) (218, 20768) (219, 21009) (220, 22291) (221, 20825) (222, 21031) (223, 22190) (224, 20193) (225, 20200) (226, 22002) (227, 21491) (228, 22326) (229, 18788) (230, 18648) (231, 22084) (232, 21032) (233, 21710) (234, 22564) (235, 21565) (236, 22947) (237, 21679) (238, 21559) (239, 22985) (240, 22028) (241, 23419) (242, 21572) (243, 22949) (244, 20742) (245, 22653) (246, 21768) (247, 23722) (248, 23516) (249, 23410) (250, 23284) (251, 23489) (252, 22195) (253, 23966) (254, 22969) (255, 23931)
+[00:01:09 -16654035.064857] AUTODETECT spr round 1 (radius: 5)
+[haswell-117:22589] *** Process received signal ***
+[haswell-117:22589] Signal: Segmentation fault (11)
+[haswell-117:22589] Signal code: Address not mapped (1)
+[haswell-117:22589] Failing at address: (nil)
+[haswell-117:22589] [ 0] /lib64/libpthread.so.0(+0xf100)[0x7f055ff95100]
+[haswell-117:22589] [ 1] ./raxml-ng-mpi(pll_core_update_partial_repeats_avx+0x739)[0x5594b9]
+[haswell-117:22589] [ 2] ./raxml-ng-mpi[0x534059]
+[haswell-117:22589] [ 3] ./raxml-ng-mpi(pll_update_partials+0x11f)[0x53467f]
+[haswell-117:22589] [ 4] ./raxml-ng-mpi(pllmod_treeinfo_compute_loglh+0x144)[0x523a04]
+[haswell-117:22589] [ 5] ./raxml-ng-mpi[0x50832c]
+[haswell-117:22589] [ 6] ./raxml-ng-mpi(pllmod_algo_spr_round+0xc0d)[0x509b1d]
+[haswell-117:22589] [ 7] ./raxml-ng-mpi(_ZN8TreeInfo9spr_roundER16spr_round_params+0xaa)[0x500f4e]
+[haswell-117:22589] [ 8] ./raxml-ng-mpi(_ZN9Optimizer17optimize_topologyER8TreeInfoR17CheckpointManager+0x530)[0x4ff0e8]
+[haswell-117:22589] [ 9] ./raxml-ng-mpi(_Z11thread_mainRK13RaxmlInstanceR17CheckpointManager+0x2e9)[0x4f2b96]
+[haswell-117:22589] [10] ./raxml-ng-mpi(_Z11master_mainR13RaxmlInstanceR17CheckpointManager+0x1cb)[0x4f34ce]
+[haswell-117:22589] [11] ./raxml-ng-mpi(main+0x331)[0x4f38a8]
+[haswell-117:22589] [12] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f055fbe5b15]
+[haswell-117:22589] [13] ./raxml-ng-mpi[0x4a88dd]
+[haswell-117:22589] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 252 with PID 0 on node haswell-117 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
