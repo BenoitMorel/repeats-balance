@@ -61,16 +61,21 @@ Raxml commands used (repeats, repeats with jemalloc, tipinner):
 
 \begin{itemize}
 \item "speedup" is the speedup between tipinner and repeats.
-\item "rep" is repeats
-\item "time lost" is the time lost because of bad load balancing
+\item "rep" means repeats
+\item "time lost" is the time lost because of bad load balancing. 
+\item "seq time" is the sequential time: the total elapsed time mutliplied with the number of threads.
 \end{itemize}
+
 
 1kyte\_hyme
 
 \begin{tabular}{|c|c|c|c|c|c|c|c|}
 \hline threads & sites/thread & seq time & seq time rep & time lost & time lost rep & speedup \\
+\hline 64 & 35134 & 1964352s & 1478400s & 1.94\% & 6.40\% & 1.32 \\
+\hline 128 & 17567 & 2039168s & 1492096s & 0.75\% & 1.50\% & 1.36 \\
 \hline
-\end{tabular} \newline
+\end{tabular}
+\newline
 
 
 404
@@ -81,7 +86,8 @@ Raxml commands used (repeats, repeats with jemalloc, tipinner):
 \hline 8 & 930 & 11608s & 6472s & 5.14\% & 4.43\% & 1.79 \\
 \hline 16 & 465 & 12016s & 7392s & 5.73\% & 6.49\% & 1.62 \\
 \hline
-\end{tabular} \newline
+\end{tabular}
+\newline
 
 
 antl\_1\_1\_nt2
@@ -92,7 +98,8 @@ antl\_1\_1\_nt2
 \hline 64 & 8158 & 25280s & 18816s & 1.31\% & 1.65\% & 1.34 \\
 \hline 256 & 2039 & 31488s & 26112s & 3.32\% & 4.89\% & 1.20 \\
 \hline
-\end{tabular} \newline
+\end{tabular}
+\newline
 
 
 kyte
@@ -101,8 +108,13 @@ kyte
 \hline threads & sites/thread & seq time & seq time rep & time lost & time lost rep & speedup \\
 \hline 16 & 23214 & 213408s & 148688s & 1.21\% & 2.03\% & 1.43 \\
 \hline 64 & 5803 & 168192s & 119616s & 2.00\% & 8.08\% & 1.40 \\
+\hline 128 & 2901 & 135040s & 105984s & 3.33\% & 10.7\% & 1.27 \\
+\hline 256 & 1450 & 183552s & 133120s & 4.19\% & 10.1\% & 1.37 \\
+\hline 512 & 725 & mooore & moooore & ? & ? & ?\\
 \hline
-\end{tabular} \newline
+\end{tabular}
+\newline
+
 
 
 
