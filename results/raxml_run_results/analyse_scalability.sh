@@ -55,7 +55,7 @@ analyse_data()
   done 
   echo "\\hline"
   echo "\\end{tabular}"
-  echo ""
+  echo "\\newline"
   echo ""
 }
 

@@ -58,26 +58,6 @@ Raxml commands used (repeats, repeats with jemalloc, tipinner):
 
 
 \section{Scalability and load balancing}
-
-\begin{itemize}
-\item "speedup" is the speedup between tipinner and repeats.
-\item "rep" means repeats
-\item "time lost" is the time lost because of bad load balancing. 
-\item "seq time" is the sequential time: the total elapsed time mutliplied with the number of threads.
-\end{itemize}
-
-
-1kyte\_hyme
-
-\begin{tabular}{|c|c|c|c|c|c|c|c|}
-\hline threads & sites/thread & seq time & seq time rep & time lost & time lost rep & speedup \\
-\hline 64 & 35134 & 1964352s & 1478400s & 1.94\% & 6.40\% & 1.32 \\
-\hline 128 & 17567 & 2039168s & 1492096s & 0.75\% & 1.50\% & 1.36 \\
-\hline
-\end{tabular}
-\newline
-
-
 404
 
 \begin{tabular}{|c|c|c|c|c|c|c|c|}
@@ -89,58 +69,50 @@ Raxml commands used (repeats, repeats with jemalloc, tipinner):
 \end{tabular}
 \newline
 
-
 antl\_1\_1\_nt2
 
 \begin{tabular}{|c|c|c|c|c|c|c|c|}
 \hline threads & sites/thread & seq time & seq time rep & time lost & time lost rep & speedup \\
 \hline 16 & 32635 & 26416s & 20080s & 0.43\% & 0.90\% & 1.31 \\
-\hline 64 & 8158 & 25280s & 18816s & 1.31\% & 1.65\% & 1.34 \\
-\hline 256 & 2039 & 31488s & 26112s & 3.32\% & 4.89\% & 1.20 \\
+\hline 64 & 8158 & 25216s & 19008s & 2.04\% & 2.25\% & 1.32 \\
+\hline 256 & 2039 & 30208s & 1414144s & 4.36\% & 0.06\% & 0.02 \\
+\hline 512 & 1019 & 47104s & 96256s & 5.04\% & 1.54\% & 0.48 \\
 \hline
 \end{tabular}
 \newline
-
 
 kyte
 
 \begin{tabular}{|c|c|c|c|c|c|c|c|}
 \hline threads & sites/thread & seq time & seq time rep & time lost & time lost rep & speedup \\
-\hline 16 & 23214 & 213408s & 148688s & 1.21\% & 2.03\% & 1.43 \\
-\hline 64 & 5803 & 168192s & 119616s & 2.00\% & 8.08\% & 1.40 \\
+\hline 64 & 5803 & 143744s & 105984s & 2.02\% & 8.35\% & 1.35 \\
 \hline 128 & 2901 & 135040s & 105984s & 3.33\% & 10.7\% & 1.27 \\
 \hline 256 & 1450 & 183552s & 133120s & 4.19\% & 10.1\% & 1.37 \\
-\hline 512 & 725 & mooore & moooore & ? & ? & ?\\
 \hline
 \end{tabular}
 \newline
 
+1kyte\_hyme
 
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline threads & sites/thread & seq time & seq time rep & time lost & time lost rep & speedup \\
+\hline 64 & 35134 & 2002880s & 1457920s & 0.78\% & 1.43\% & 1.37 \\
+\hline 128 & 17567 & 2120960s & 1520640s & 1.23\% & 1.47\% & 1.39 \\
+\hline 512 & 4391 & 2563072s & 2049024s & 2.70\% & 2.00\% & 1.25 \\
+\hline
+\end{tabular}
+\newline
 
+para\_1\_nt
 
-\section{Load balancing}
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline threads & sites/thread & seq time & seq time rep & time lost & time lost rep & speedup \\
+\hline 256 & 5915 & 1565184s & 1159424s & 2.21\% & 2.24\% & 1.34 \\
+\hline 512 & 2957 & 1842688s & 1448960s & 2.51\% & 2.50\% & 1.27 \\
+\hline 1024 & 1478 & 2863104s & 2397184s & 3.91\% & 2.28\% & 1.19 \\
+\hline
+\end{tabular}
+\newline
 
-We define
-$$busy\ ratio = (1 - \frac{waiting\ time\ in\ reduce\ operations}{elapsed\ time}) * 100$$
-
-It directly gives the speedup we could get from a perfect load balancing.\newline
-
-I will recompute this table later with mpi.
-
-
-%\begin{tabular}{|l|c|c|c|c|c|c|c|}
-%\hline dataset                    & taxas & sites    & parts & type  & $ratio_{repeats}$ & $ratio_{jemrepeats}$ & $ratio_{tipinner}$\\
-%\hline 404                        & 404   &  7444    & 11    & DNA  & 86\%     & 85\%   & 86\%  \\
-%\hline 1kite\_science             & 144   &  371434  & 50    & DNA  & 83\%     & 92\%    & 83\%  \\
-%\hline 1kite\_hyme                & 174   &  2248590 & 4116  & DNA  & 93\%     & ?\%    & 92\%  \\
-%\hline Antl\_1\_1\_nt             & 40    &  522173  & 658   & DNA  & ?\%      & 96\%    & ?\%  \\
-%\hline Antl\_1\_1\_aa             & 40    &  762438  & 659   & prot & 96\%     & 93\%    & 89\%  \\
-%\hline para\_1\_nt                & 193   &  1514275 & 3714  & DNA  & 92\%     & ?\%    & 90\%  \\
-%\hline 
-%\end{tabular}\newline
-%\newline
-
-
-%para\_1\_aa ne passe pas en memoire
 
 \end{document}
