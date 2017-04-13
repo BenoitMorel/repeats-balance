@@ -6,6 +6,7 @@
 \usepackage[font=scriptsize,labelfont=bf]{caption}
 \usepackage{array}
 \usepackage{amsmath}
+\usepackage{pbox}
 \usepackage{listings}
 \lstset{basicstyle=\ttfamily}
 \begin{document}
@@ -22,97 +23,197 @@
 \maketitle
 
 
-\section{Execution time}
+\section{Experiments context}
 
-\noindent We run raxml for each dataset with and without the repeats option, and compare the execution times.\\
+\noindent We computed the following results using Haswell cluster, with raxml-ng (branch dev, commit 2615802f67d51c9d3ea2d08c570d42b30d4f2a28, + some code modification to use repeats). 
 
-
-\noindent Speedup is calculated as follow :  
-$$ speedup = \frac{time_{tipinner}}{time_{repeats}}$$
-
-When we don't indicate times, the cluster cancelled the jobs before the end (after 24h). We then compare the speedup at the last reached step. \newline
-
-When we write "diverged", the runs diverged. In this case we write the speedup at the last common step.
-
-Raxml commands used (repeats, repeats with jemalloc, tipinner):
+We run raxml-ng with the following arguments:
 \lstset{language=sh}
 \begin{lstlisting}
-  $ LD_PRELOAD=libjemalloc.so mpirun ./raxml-ng-mpi --seed=42 --msa data.phy --model data.part
+  $ LD_PRELOAD=libjemalloc.so mpirun ./raxml-ng-mpi --seed=43 
+   --msa data.phy --model data.part
    --simd AVX --threads 1  --search --repeats on
-  $ LD_PRELOAD=libjemalloc.so mpirun ./raxml-ng-mpi --seed=42 --msa data.phy --model data.part
+  $ LD_PRELOAD=libjemalloc.so mpirun ./raxml-ng-mpi --seed=43
+   --msa data.phy --model data.part
    --simd AVX --threads 1  --search 
 \end{lstlisting}
 
+We used the following datasets (sites is the number of unique sites after pattern compression):
 
 \begin{tabular}{|l|l|l|l|c|c|l|l|c|}
-\hline dataset                    & taxas & sites    & partitions & type & threads & $time_{reps}$ & $time_{ti}$ & speedup\\
-\hline 404                        & 404   &  7444    & 11         & DNA  & 16 & 457s     &  755s     & 1.65  \\
-\hline 1kite\_science             & 144   &  371434  & 50         & DNA  & 16 & 9351s    &  13311s   & 1.42  \\
-\hline 1kite\_hyme                & 174   &  2248590 & 4116       & DNA  & 64 & 21663s   &  29971s   & 1.38 \\
-\hline Antl\_1\_1\_nt             & 40    &  522173  & 658        & DNA  & 16 & 1254s    &  1668s    & 1.3  \\
-\hline Antl\_1\_1\_aa             & 40    &  762438  & 659        & prot & 32 & 4966s    &  6080s    & 1.2\\
-\hline para\_1\_nt                & 193   &  1514275 & 3714       & DNA  & 64 & diverged &  diverged & 1.35  \\
+\hline dataset                    & taxas & sites    & partitions & type\\
+\hline 404                        & 404   &  7444    & 11         & DNA   \\
+\hline 1kite\_science             & 144   &  371434  & 50         & DNA   \\
+\hline 1kite\_hyme                & 174   &  2248590 & 4116       & DNA  \\
+\hline Antl\_1\_1\_nt             & 40    &  522173  & 658        & DNA  \\
+%\hline Antl\_1\_1\_aa             & 40    &  762438  & 659        & prot\
+\hline para\_1\_nt                & 193   &  1514275 & 3714       & DNA   \\
+\hline sativa\_in				  & 973   &  2477    & 1          & DNA \\
 \hline 
 \end{tabular}\newline
 \newline
 
 
-\section{Scalability and load balancing}
+\section{Execution time, scalability and repeats speedups}
+
+
+\begin{itemize}
+\item time indicates the elapsed time of the whole run
+\item time*threads is the same quantity mutliplied by the number of threads
+\item speedup is the ratio between time repeats and time
+\end{itemize}
+
+
+1kyte\_hyme
+
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline threads & sites/thread & time & time repeats & time*threads & time*threads repeats & speedup \\
+\hline 64 & 35134 & 31295s & 22780s & 2002880s & 1457920s & 1.37 \\
+\hline 128 & 17567 & 16570s & 11880s & 2120960s & 1520640s & 1.39 \\
+\hline 256 & 8783 & 9067s & 6669s & 2321152s & 1707264s & 1.35 \\
+\hline 512 & 4391 & 5006s & 4002s & 2563072s & 2049024s & 1.25 \\
+\hline
+\end{tabular}
+\newline
+
 404
 
-\begin{tabular}{|c|c|c|c|c|c|c|c|}
-\hline threads & sites/thread & seq time & seq time rep & time lost & time lost rep & speedup \\
-\hline 4 & 1861 & 7816s & 5100s & 2.37\% & 2.83\% & 1.53 \\
-\hline 8 & 930 & 11608s & 6472s & 5.14\% & 4.43\% & 1.79 \\
-\hline 16 & 465 & 12016s & 7392s & 5.73\% & 6.49\% & 1.62 \\
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline threads & sites/thread & time & time repeats & time*threads & time*threads repeats & speedup \\
+\hline 1 & 7444 & 5760s & 3910s & 5760s & 3910s & 1.47 \\
+\hline 2 & 3722 & 2718s & 2049s & 5436s & 4098s & 1.32 \\
+\hline 4 & 1861 & 1883s & 1208s & 7532s & 4832s & 1.55 \\
+\hline 8 & 930 & 1234s & 693s & 9872s & 5544s & 1.78 \\
+\hline 16 & 465 & 732s & 443s & 11712s & 7088s & 1.65 \\
 \hline
 \end{tabular}
 \newline
 
 antl\_1\_1\_nt2
 
-\begin{tabular}{|c|c|c|c|c|c|c|c|}
-\hline threads & sites/thread & seq time & seq time rep & time lost & time lost rep & speedup \\
-\hline 16 & 32635 & 26416s & 20080s & 0.43\% & 0.90\% & 1.31 \\
-\hline 64 & 8158 & 25216s & 19008s & 2.04\% & 2.25\% & 1.32 \\
-\hline 256 & 2039 & 30208s & 1414144s & 4.36\% & 0.06\% & 0.02 \\
-\hline 512 & 1019 & 47104s & 96256s & 5.04\% & 1.54\% & 0.48 \\
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline threads & sites/thread & time & time repeats & time*threads & time*threads repeats & speedup \\
+\hline 16 & 32635 & 1651s & 1255s & 26416s & 20080s & 1.31 \\
+\hline 64 & 8158 & 394s & 297s & 25216s & 19008s & 1.32 \\
+\hline 256 & 2039 & 118s & 5524s & 30208s & 1414144s & .02 \\
+\hline 512 & 1019 & 92s & 188s & 47104s & 96256s & .48 \\
 \hline
 \end{tabular}
 \newline
 
 kyte
 
-\begin{tabular}{|c|c|c|c|c|c|c|c|}
-\hline threads & sites/thread & seq time & seq time rep & time lost & time lost rep & speedup \\
-\hline 64 & 5803 & 143744s & 105984s & 2.02\% & 8.35\% & 1.35 \\
-\hline 128 & 2901 & 135040s & 105984s & 3.33\% & 10.7\% & 1.27 \\
-\hline 256 & 1450 & 183552s & 133120s & 4.19\% & 10.1\% & 1.37 \\
-\hline
-\end{tabular}
-\newline
-
-1kyte\_hyme
-
-\begin{tabular}{|c|c|c|c|c|c|c|c|}
-\hline threads & sites/thread & seq time & seq time rep & time lost & time lost rep & speedup \\
-\hline 64 & 35134 & 2002880s & 1457920s & 0.78\% & 1.43\% & 1.37 \\
-\hline 128 & 17567 & 2120960s & 1520640s & 1.23\% & 1.47\% & 1.39 \\
-\hline 512 & 4391 & 2563072s & 2049024s & 2.70\% & 2.00\% & 1.25 \\
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline threads & sites/thread & time & time repeats & time*threads & time*threads repeats & speedup \\
+\hline 64 & 5803 & 2246s & 1656s & 143744s & 105984s & 1.35 \\
+\hline 128 & 2901 & 1055s & 828s & 135040s & 105984s & 1.27 \\
+\hline 256 & 1450 & 717s & 520s & 183552s & 133120s & 1.37 \\
 \hline
 \end{tabular}
 \newline
 
 para\_1\_nt
 
-\begin{tabular}{|c|c|c|c|c|c|c|c|}
-\hline threads & sites/thread & seq time & seq time rep & time lost & time lost rep & speedup \\
-\hline 256 & 5915 & 1565184s & 1159424s & 2.21\% & 2.24\% & 1.34 \\
-\hline 512 & 2957 & 1842688s & 1448960s & 2.51\% & 2.50\% & 1.27 \\
-\hline 1024 & 1478 & 2863104s & 2397184s & 3.91\% & 2.28\% & 1.19 \\
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline threads & sites/thread & time & time repeats & time*threads & time*threads repeats & speedup \\
+\hline 128 & 11830 & 12601s & 9096s & 1612928s & 1164288s & 1.38 \\
+\hline 256 & 5915 & 6114s & 4529s & 1565184s & 1159424s & 1.34 \\
+\hline 512 & 2957 & 3599s & 2830s & 1842688s & 1448960s & 1.27 \\
+\hline 1024 & 1478 & 2796s & 2341s & 2863104s & 2397184s & 1.19 \\
 \hline
 \end{tabular}
 \newline
+
+sativa
+
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline threads & sites/thread & time & time repeats & time*threads & time*threads repeats & speedup \\
+\hline 2 & 1238 & 6919s & 4455s & 13838s & 8910s & 1.55 \\
+\hline 4 & 619 & 4624s & 2856s & 18496s & 11424s & 1.61 \\
+\hline
+\end{tabular}
+\newline
+
+
+
+\section{Load balancing and time spent in reduce}
+
+\begin{itemize}
+\item bad LB indicates the percentage of the time we lose because of bad load balancing. It can be seen as the time we could save with an optimal load balancing.
+\item reduce indicates the percentage of the time we spend in the reduction operation 
+\item the sum of bad LB and reduce is the total time we lose because of parallelisation
+\end{itemize}
+
+1kyte\_hyme
+
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline threads & sites/thread & bad LB & bad LB repeats & reduce & reduce repeats \\
+\hline 64 & 35134 & 0.78\% & 1.43\% & 1.62\% & 2.39\% \\
+\hline 128 & 17567 & 1.23\% & 1.47\% & 3.58\% & 5.06\% \\
+\hline 256 & 8783 & 4.37\% & 1.87\% & 8.13\% & 11.5\% \\
+\hline 512 & 4391 & 2.70\% & 2.00\% & 16.6\% & 21.2\% \\
+\hline
+\end{tabular}
+\newline
+
+404
+
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline threads & sites/thread & bad LB & bad LB repeats & reduce & reduce repeats \\
+\hline 1 & 7444 & -nan\% & -nan\% & 0\%\% & 0\%\% \\
+\hline 2 & 3722 & 0.27\% & 0.34\% & .714\% & 1.46\% \\
+\hline 4 & 1861 & 2.13\% & 2.89\% & 2.36\% & 3.01\% \\
+\hline 8 & 930 & 4.31\% & 4.60\% & 3.69\% & 5.01\% \\
+\hline 16 & 465 & 6.49\% & 7.43\% & 6.71\% & 10.0\% \\
+\hline
+\end{tabular}
+\newline
+
+antl\_1\_1\_nt2
+
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline threads & sites/thread & bad LB & bad LB repeats & reduce & reduce repeats \\
+\hline 16 & 32635 & 0.43\% & 0.90\% & 1.04\% & 1.38\% \\
+\hline 64 & 8158 & 2.04\% & 2.25\% & 4.30\% & 6.10\% \\
+\hline 256 & 2039 & 4.36\% & 0.06\% & 13.5\% & 98.4\% \\
+\hline 512 & 1019 & 5.04\% & 1.54\% & 27.1\% & 70.1\% \\
+\hline
+\end{tabular}
+\newline
+
+kyte
+
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline threads & sites/thread & bad LB & bad LB repeats & reduce & reduce repeats \\
+\hline 64 & 5803 & 2.02\% & 8.35\% & 6.87\% & 9.41\% \\
+\hline 128 & 2901 & 3.33\% & 10.7\% & 9.44\% & 11.4\% \\
+\hline 256 & 1450 & 4.19\% & 10.1\% & 30.7\% & 26.0\% \\
+\hline
+\end{tabular}
+\newline
+
+para\_1\_nt
+
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline threads & sites/thread & bad LB & bad LB repeats & reduce & reduce repeats \\
+\hline 128 & 11830 & 1.81\% & 1.86\% & 5.70\% & 6.78\% \\
+\hline 256 & 5915 & 2.21\% & 2.24\% & 11.4\% & 16.2\% \\
+\hline 512 & 2957 & 2.51\% & 2.50\% & 23.9\% & 29.4\% \\
+\hline 1024 & 1478 & 3.91\% & 2.28\% & 39.5\% & 45.9\% \\
+\hline
+\end{tabular}
+\newline
+
+sativa
+
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline threads & sites/thread & bad LB & bad LB repeats & reduce & reduce repeats \\
+\hline 2 & 1238 & 0.60\% & 4.97\% & 1.22\% & 2.24\% \\
+\hline 4 & 619 & 2.46\% & 6.08\% & 2.37\% & 4.56\% \\
+\hline
+\end{tabular}
+\newline
+
 
 
 \end{document}
