@@ -1,6 +1,10 @@
 #ifndef _LIBPLLBENCH_COMMON_H
 #define _LIBPLLBENCH_COMMON_H
 
+#include "common/Tree.hpp"
+#include "common/Partition.hpp"
+#include "common/Model.hpp"
+#include "common/LikelihoodEngine.hpp"
 #include <time.h>
 #include <vector>
 #include "safepll.h"

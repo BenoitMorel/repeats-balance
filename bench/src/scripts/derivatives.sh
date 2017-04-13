@@ -1,13 +1,13 @@
 
 
 #!/bin/bash
-outputdir="../../results/derivatives/"
+outputdir="../../results/latex/derivatives/"
 iterations=10000
-outputfile="bench_derivatives_${iterations}_"
-#outputfile="bench_tipinner_hitspc_${iterations}_"
-outputfile="$outputdir$outputfile"
 dataset_number=3
 srlookupsize=2000000
+
+outputfile="bench_derivatives_new_${iterations}_"
+outputfile="$outputdir$outputfile"
 file=""
 filebuffer=buffer.txt
 export LD_LIBRARY_PATH=../lib/current
@@ -30,14 +30,14 @@ launch() {
 
 bench_dataset() {
   writeln "\\hline"
-  echo $7
-  write "$7"
+  echo $6
+  write "$6"
   write " & " 
-  launch ../../data/59/unrooted.newick ../../data/59/59.phy  $1 $2 $3 $4 $5 $6
+  launch ../../data/59/unrooted.newick ../../data/59/59.phy 4  $1 $2 $3 $4 $5
   write " & " 
-  launch ../../data/128/unrooted.newick ../../data/128/128.phy  $1 $2 $3 $4 $5 $6
+  launch ../../data/128/unrooted.newick ../../data/128/128.phy 4  $1 $2 $3 $4 $5
   write " & " 
-  launch ../../data/404/unrooted.newick ../../data/404/404.phy  $1 $2 $3 $4 $5 $6
+  launch ../../data/404/unrooted.newick ../../data/404/404.phy 4  $1 $2 $3 $4 $5
   writeln "\\\\"
 }
 
@@ -56,20 +56,11 @@ bench_arch() {
   writeln "\\hline"
   writeln " & seq59 & seq128 & seq404  \\\\"
 
-  cp ../lib/libpll_tomas_dev/* ../lib/current  
+  cp ../lib/libpll_repeats/* ../lib/current  
   make clean 
   make 
-  bench_dataset 0 0 0 $srlookupsize $iterations $1 "tipinner tomas dev" 
-  cp ../lib/libpll_benoit_dev/* ../lib/current  
-  make clean 
-  make 
-  bench_dataset 0 0 0 $srlookupsize $iterations $1 "tipinner benoit dev" 
-  bench_dataset 1 1 0 $srlookupsize $iterations $1 "repeats benoit dev" 
-  cp ../lib/libpll_benoit_repeats_integration/* ../lib/current  
-  make clean 
-  make 
-  bench_dataset 1 1 0 $srlookupsize $iterations $1 "repeats benoit repeats integration" 
-  #bench_dataset 1 1 2048 $srlookupsize $iterations $1 "repeats + bclv2 2000000" 
+  bench_dataset 0 0 $srlookupsize $iterations $1 "tipinner benoit" 
+  bench_dataset 1 0 $srlookupsize $iterations $1 "repeats benoit" 
 
   writeln "\\hline"
   writeln "\\end{tabular}"

@@ -332,10 +332,6 @@ void PLLHelper::get_derivative(double *d_f, double *dd_f)
                       PLL_SCALE_BUFFER_NONE,
                       params_indices, 
                       sumtable);
-  for (unsigned int i = 0; i < partition->sites; ++i) {
-    std::cerr << sumtable[i] << " ";
-  }
-  std::cerr << std::endl;
   pll_compute_likelihood_derivatives(partition,
                                      PLL_SCALE_BUFFER_NONE,
                                      PLL_SCALE_BUFFER_NONE,

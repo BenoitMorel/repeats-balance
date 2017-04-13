@@ -2,8 +2,8 @@
 
 #!/bin/bash
 outputdir="../../results/sequential_benchs/"
-iterations=20
-outputfile="cuda_${iterations}_"
+iterations=300
+outputfile="repeats_${iterations}_"
 #outputfile="bench_tipinner_hitspc_${iterations}_"
 outputfile="$outputdir$outputfile"
 dataset_number=4
@@ -22,24 +22,24 @@ writeln() {
 }
 
 launch() {
-  echo "./main full_traversal $1 $2 $3 $4 $5 $6 $7 $8 $9"
-  ./main full_traversal $1 $2 $3 $4 $5 $6 $7 $8 $9 > temp
+  echo "./main full_traversal $1 $2 $3 $4 $5 $6 $7 $8"
+  ./main full_traversal $1 $2 $3 $4 $5 $6 $7 $8 > temp
   cat temp | grep ms | tr -d '\n'   >> $filebuffer
   
 }
 
 bench_dataset() {
   writeln "\\hline"
-  echo $7
-  write "$7"
+  echo $6
+  write "$6"
   write " & " 
-  launch ../../data/59/unrooted.newick ../../data/59/59.phy 4 $1 $2 $3 $4 $5 $6
+  launch ../../data/59/unrooted.newick ../../data/59/59.phy 4 $1 $2 $3 $4 $5 
   write " & " 
-  launch ../../data/128/unrooted.newick ../../data/128/128.phy 4  $1 $2 $3 $4 $5 $6
+  launch ../../data/128/unrooted.newick ../../data/128/128.phy 4  $1 $2 $3 $4 $5 
   write " & " 
-  launch ../../data/404/unrooted.newick ../../data/404/404.phy 4 $1 $2 $3 $4 $5 $6
+  launch ../../data/404/unrooted.newick ../../data/404/404.phy 4 $1 $2 $3 $4 $5 
   write " & " 
-  launch ../../data/140/unrooted.newick ../../data/140/140_big.phy 20 $1 $2 $3 $4 $5 $6
+  launch ../../data/140/unrooted.newick ../../data/140/140_big.phy 20 $1 $2 $3 $4 $5
   writeln "\\\\"
 }
 
@@ -58,18 +58,11 @@ bench_arch() {
   writeln "\\hline"
   writeln " & seq59 & seq128 & seq404 & seq140 \\\\"
 
-  cp ../lib/libpll_benoit_ri_optims/* ../lib/current  
+  cp ../lib/libpll_benoit_repeats/* ../lib/current  
   make clean 
   make 
-  bench_dataset 0 0 0 $srlookupsize $iterations $1 "tip pattern" 
-  #cp ../lib/libpll_benoit_cuda/* ../lib/current  
-  #make clean 
-  #make 
-  #bench_dataset 0 0 0 $srlookupsize $iterations $1 "cuda" 
-  cp ../lib/libpll_benoit_cuda_nocopy/* ../lib/current  
-  make clean 
-  make 
-  bench_dataset 0 0 0 $srlookupsize $iterations $1 "cuda" 
+  bench_dataset 0 0 $srlookupsize $iterations $1 "tip pattern" 
+  bench_dataset 1 0 $srlookupsize $iterations $1 "repeats" 
   
   
   writeln "\\hline"
