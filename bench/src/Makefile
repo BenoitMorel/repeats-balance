@@ -5,13 +5,13 @@ LDFLAGS= $(DBG) -std=gnu++11 -L../lib/current -I../lib/current
 OBJDIR=obj
 
 EXEC=main
-OBJ= $(addprefix $(OBJDIR)/,common.o derivatives.o sumtables.o full_traversal.o update_repeats.o pernode.o main.o calibrate_test.o numerics.o repeats_rates.o export_repeats.o common/Tree.o common/Partition.o common/Model.o common/LikelihoodEngine.o)
+OBJ= $(addprefix $(OBJDIR)/,common.o derivatives.o sumtables.o full_traversal.o pernode.o main.o calibrate_test.o repeats_rates.o export_repeats.o common/Tree.o common/Partition.o common/Model.o common/LikelihoodEngine.o depreciated/PLLHelper.o)
 
 
 all: dir $(EXEC) 
 
 dir:
-	mkdir -p obj && mkdir -p obj/common
+	mkdir -p obj && mkdir -p obj/common obj/depreciated
 
 
 main: $(OBJ) 

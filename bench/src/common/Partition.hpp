@@ -30,6 +30,7 @@ public:
 
   void compute_derivatives(double *d_f, double *dd_f); 
 
+  pll_partition_t *get_partition() {return partition;}
 
 public:
   static unsigned int compute_attribute(unsigned int use_repeats, 

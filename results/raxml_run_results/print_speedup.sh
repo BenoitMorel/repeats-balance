@@ -1,20 +1,44 @@
 
-
-
 print_escaped()
 {
   echo $1 | sed 's/_/\\_/g'
 }
 
+
+test()
+{
+  echo $1 | sed 's/a/b/g'
+}
+
+
+retrieve_info_from_file()
+{
+  cat $1 | awk '{if (NR!=1) {print}}' | sed 's|NONE/sequential|MPI (1 ranks)|g' | grep $2 | awk -v x=$3 '{print $x}' 
+}
+
+remove_parenthesis()
+{
+  cat $1 | sed 's/(//'
+}
+
+float_to_int()
+{
+  cat $1 | sed 's/\..*//'
+}
+
+get_elapsed_line()
+{
+  cat $1 | awk '{if (NR!=1) {print}}' | grep "Elapsed time:"
+}
+
 analyse_run() 
 {
-
   filename=$1
   repeatsfilename=$(echo $filename | sed 's/tipinner/repeats/')
   tipinnerfilename=$(echo $filename | sed 's/repeats/tipinner/')
 
-  repeatsfinished=$(cat $repeatsfilename | awk '{if (NR!=1) {print}}' | grep "Elapsed time:")
-  tipinnerfinished=$(cat $tipinnerfilename | awk '{if (NR!=1) {print}}' | grep "Elapsed time:")
+  repeatsfinished=$(get_elapsed_line $repeatsfilename)
+  tipinnerfinished=$(get_elapsed_line $tipinnerfilename)
   if [[ -z "${repeatsfinished// }" ]] 
   then
     return
@@ -25,10 +49,10 @@ analyse_run()
   fi
 
 
-  threads=$(cat $filename | awk '{if (NR!=1) {print}}' | sed 's|NONE/sequential|MPI (1 ranks)|g' | grep "parallelization: MPI (" | awk '{print $3}' | sed 's/(//')
-  sites=$(cat $filename | awk '{if (NR!=1) {print}}' | grep "Alignment comprises " | awk '{print $6}')
-  elapsed_ti=$(cat $tipinnerfilename | awk '{if (NR!=1) {print}}' | grep "Elapsed time:" | awk '{print $3}' | sed 's/\..*//')
-  elapsed_rep=$(cat $repeatsfilename | awk '{if (NR!=1) {print}}' | grep "Elapsed time:" | awk '{print $3}' | sed 's/\..*//')
+  threads=$(retrieve_info_from_file  $filename "parallelization" 3 | remove_parenthesis)
+  sites=$(retrieve_info_from_file  $filename "comprises" 6)
+  elapsed_ti=$(retrieve_info_from_file  $tipinnerfilename "Elapsed" 3 | float_to_int)
+  elapsed_rep=$(retrieve_info_from_file  $repeatsfilename "Elapsed" 3 | float_to_int)
 
   sites_per_thread=$(($sites / $threads))
   elapsed_ti_per_thread=$(($elapsed_ti * $threads))
@@ -60,3 +84,5 @@ dir=${1%/}
 for datadir in `ls $dir`; do
   analyse_data  $dir $datadir
 done
+
+
