@@ -19,7 +19,7 @@ void sumtables(int argc, char *params[])
   const char *seq = params[i++];
   unsigned int states = atoi(params[i++]);
   unsigned int use_repeats = atoi(params[i++]);
-  unsigned int update_repeats = atoi(params[i++]);
+  i++;
   unsigned int additional_attr = atoi(params[i++]);
   unsigned int repeats_lookup_size = atoi(params[i++]);
   unsigned int iterations = atoi(params[i++]);

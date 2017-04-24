@@ -1,5 +1,6 @@
 #!/bin/bash
 
+source scripts/common.sh
 
 iterations=2000
 
@@ -8,31 +9,30 @@ arch[0]="avx"
 #arch[2]="sse"
 
 srlookupsize=2000000
-outputtex="../../results/pernode/404avx_$iterations.tex"
-dataset[0]="../../data/404/unrooted.newick ../../data/404/404.phy 4"
+outputtex="$path_results/pernode/404avx_$iterations.tex"
+dataset[0]="$path_data/404/unrooted.newick $path_data/404/404.phy 4"
 
-#outputtex="../../results/pernode/140.tex"
-#dataset[0]="../../data/140/unrooted.newick ../../data/140/140.phy 20"
+#outputtex="$path_results/pernode/140.tex"
+#dataset[0]="$path_data/140/unrooted.newick $path_data/140/140.phy 20"
 
-#outputtex="../../results/pernode/59avx_$iterations.tex"
-#dataset[0]="../../data/59/unrooted.newick ../../data/59/59.phy 4"
+#outputtex="$path_results/pernode/59avx_$iterations.tex"
+#dataset[0]="$path_data/59/unrooted.newick $path_data/59/59.phy 4"
 
 runs[0]="0 0 0  $srlookupsize $iterations"
-libs[0]="../lib/libpll_benoit_rioptims/"
+libs[0]="$path_lib/libpll_benoit_rioptims/"
 runname[0]="tippat"
 
 
 runs[1]="1 1 0  $srlookupsize $iterations"
-libs[1]="../lib/libpll_benoit_rioptims/"
+libs[1]="$path_lib/libpll_benoit_rioptims/"
 runname[1]="SR  bclv"
 
 
 #runs[2]="0 0 0 $srlookupsize $iterations"
-#libs[2]="../lib/libpll_benoit_dev"
+#libs[2]="$path_lib/libpll_benoit_dev"
 #runname[2]="tip pat"
 
-export LD_LIBRARY_PATH=../lib/current/
-cp ${libs[0]} ../lib/current/
+cp ${libs[0]} $path_lib/current/
 make clean
 make
 
@@ -69,7 +69,7 @@ for a in "${!arch[@]}"; do
   echo $mycommand 
   $mycommand > $temp
   for i in "${!runs[@]}"; do
-    cp ${libs[$i]}/* ../lib/current/
+    cp ${libs[$i]}/* $path_lib/current/
     make clean
     make
     temp="temp"$i

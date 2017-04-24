@@ -11,30 +11,29 @@ nodes[0]=132
 
 srlookupsize=2000000
 
-#outputtex="../../results/singlenodes/59.tex"
-#dataset[0]="../../data/59/unrooted.newick ../../data/59/59.phy"
+#outputtex="$path_results/singlenodes/59.tex"
+#dataset[0]="$path_data/59/unrooted.newick $path_data/59/59.phy"
 
-outputtex="../../results/singlenodes/140.tex"
-dataset[0]="../../data/140/unrooted.newick ../../data/140/140.phy"
+outputtex="$path_results/singlenodes/140.tex"
+dataset[0]="$path_data/140/unrooted.newick $path_data/140/140.phy"
 
-#outputtex="../../results/singlenodes/404.tex"
-#dataset[0]="../../data/404/unrooted.newick ../../data/404/404.phy"
+#outputtex="$path_results/singlenodes/404.tex"
+#dataset[0]="$path_data/404/unrooted.newick $path_data/404/404.phy"
 
 
 runs[0]="1 1  $srlookupsize $iterations"
-libs[0]="../lib/libpll_benoit_dev"
+libs[0]="$path_lib/libpll_benoit_dev"
 runname[0]="repeats"
 
 runs[1]="1 0  $srlookupsize $iterations"
-libs[1]="../lib/libpll_benoit_tipinner"
+libs[1]="$path_lib/libpll_benoit_tipinner"
 runname[1]="tipinner opt"
 
 #runs[2]="0 0  $srlookupsize $iterations"
-#libs[2]="../lib/libpll_benoit_dev"
+#libs[2]="$path_lib/libpll_benoit_dev"
 #runname[2]="tip pattern"
 
-export LD_LIBRARY_PATH=../lib/current/
-cp ../lib/libpll_benoit_dev/* ../lib/current/
+cp $path_lib/libpll_benoit_dev/* $path_lib/current/
 make clean 
 make
 
@@ -73,7 +72,7 @@ for a in "${!arch[@]}"; do
     $mycommand >> $temp
   done
   for i in "${!runs[@]}"; do
-    cp ${libs[$i]}/* ../lib/current/
+    cp ${libs[$i]}/* $path_lib/current/
     make clean
     make
     temp="temp"$i

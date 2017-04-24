@@ -1,16 +1,15 @@
 
 
 #!/bin/bash
-outputdir="../../results/sequential_benchs/"
-iterations=300
-outputfile="repeats_${iterations}_"
+outputdir="$path_results/sumtables/"
+iterations=10000
+outputfile="bench_sumtables_${iterations}_"
 #outputfile="bench_tipinner_hitspc_${iterations}_"
 outputfile="$outputdir$outputfile"
 dataset_number=4
 srlookupsize=2000000
 file=""
 filebuffer=buffer.txt
-export LD_LIBRARY_PATH=../lib/current
 
 echo $outputfile
 
@@ -22,24 +21,24 @@ writeln() {
 }
 
 launch() {
-  echo "./main full_traversal $1 $2 $3 $4 $5 $6 $7 $8"
-  ./main full_traversal $1 $2 $3 $4 $5 $6 $7 $8 > temp
+  echo "./main sumtables $1 $2 $3 $4 $5 $6 $7 $8 $9"
+  ./main sumtables $1 $2 $3 $4 $5 $6 $7 $8 $9 > temp
   cat temp | grep ms | tr -d '\n'   >> $filebuffer
   
 }
 
 bench_dataset() {
   writeln "\\hline"
-  echo $6
-  write "$6"
+  echo $7
+  write "$7"
   write " & " 
-  launch ../../data/59/unrooted.newick ../../data/59/59.phy 4 $1 $2 $3 $4 $5 
+  launch $path_data/59/unrooted.newick $path_data/59/59.phy 4  $1 $2 $3 $4 $5 $6
   write " & " 
-  launch ../../data/128/unrooted.newick ../../data/128/128.phy 4  $1 $2 $3 $4 $5 
+  launch $path_data/128/unrooted.newick $path_data/128/128.phy 4  $1 $2 $3 $4 $5 $6
   write " & " 
-  launch ../../data/404/unrooted.newick ../../data/404/404.phy 4 $1 $2 $3 $4 $5 
+  launch $path_data/404/unrooted.newick $path_data/404/404.phy 4  $1 $2 $3 $4 $5 $6
   write " & " 
-  launch ../../data/140/unrooted.newick ../../data/140/140_big.phy 20 $1 $2 $3 $4 $5
+  launch $path_data/140/unrooted.newick $path_data/140/140.phy 20  $1 $2 $3 $4 $5 $6
   writeln "\\\\"
 }
 
@@ -56,15 +55,14 @@ bench_arch() {
   writeln "}"
 
   writeln "\\hline"
-  writeln " & seq59 & seq128 & seq404 & seq140 \\\\"
+  writeln " & seq59 & seq128 & seq404 & seq140  \\\\"
 
-  cp ../lib/libpll_benoit_repeats/* ../lib/current  
+  cp $path_lib/libpll_benoit_rioptims/* $path_lib/current  
   make clean 
   make 
-  bench_dataset 0 0 $srlookupsize $iterations $1 "tip pattern" 
-  bench_dataset 1 0 $srlookupsize $iterations $1 "repeats" 
-  
-  
+  bench_dataset 0 0 0 $srlookupsize $iterations $1 "tipinner" 
+  bench_dataset 1 1 0 $srlookupsize $iterations $1 "repeats" 
+
   writeln "\\hline"
   writeln "\\end{tabular}"
   mv $filebuffer $file

@@ -16,8 +16,6 @@ int main(int argc, char *params[])
     sumtables(argc - 2, params + 2);
   } else if (!strcmp(params[1], "pernode")) {
     pernode(argc - 2, params + 2);
-  } else if (!strcmp(params[1], "calibrate_test")) {
-    calibrate_test(argc - 2, params + 2);
   } else if (!strcmp(params[1], "repeats_rates")) {
     repeats_rates(argc - 2, params + 2);
   } else if (!strcmp(params[1], "export_repeats")) {

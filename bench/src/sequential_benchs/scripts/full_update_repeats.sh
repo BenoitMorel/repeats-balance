@@ -1,7 +1,8 @@
-
-
 #!/bin/bash
-outputdir="../../results/update_repeats/"
+
+source scripts/common.sh
+
+outputdir="$path_results/update_repeats/"
 iterations=10
 outputfile="bench_repeats_${iterations}_"
 #outputfile="bench_tipinner_hitspc_${iterations}_"
@@ -10,7 +11,6 @@ dataset_number=3
 srlookupsize=2000000
 file=""
 filebuffer=buffer.txt
-export LD_LIBRARY_PATH=../lib/current
 
 echo $outputfile
 
@@ -33,11 +33,11 @@ bench_dataset() {
   echo $7
   write "$7"
   write " & " 
-  launch ../../data/59/unrooted.newick ../../data/59/59.phy  $1 $2 $3 $4 $5 $6
+  launch $path_data/59/unrooted.newick $path_data/59/59.phy  $1 $2 $3 $4 $5 $6
   write " & " 
-  launch ../../data/128/unrooted.newick ../../data/128/128.phy  $1 $2 $3 $4 $5 $6
+  launch $path_data/128/unrooted.newick $path_data/128/128.phy  $1 $2 $3 $4 $5 $6
   write " & " 
-  launch ../../data/404/unrooted.newick ../../data/404/404.phy  $1 $2 $3 $4 $5 $6
+  launch $path_data/404/unrooted.newick $path_data/404/404.phy  $1 $2 $3 $4 $5 $6
   writeln "\\\\"
 }
 
@@ -56,27 +56,27 @@ bench_arch() {
   writeln "\\hline"
   writeln " & seq59 & seq128 & seq404  \\\\"
 
-  cp ../lib/libpll_benoit_dev/* ../lib/current  
+  cp $path_lib/libpll_benoit_dev/* $path_lib/current  
   make clean 
   make 
   bench_dataset 1 1 0 $srlookupsize $iterations $1 "repeats benoit dev" 
-  cp ../lib/libpll_benoit_repeats_integration/* ../lib/current  
+  cp $path_lib/libpll_benoit_repeats_integration/* $path_lib/current  
   make clean 
   make 
   bench_dataset 1 1 0 $srlookupsize $iterations $1 "ri inte" 
-  cp ../lib/libpll_benoit_ri_optims/* ../lib/current  
+  cp $path_lib/libpll_benoit_ri_optims/* $path_lib/current  
   make clean 
   make 
   bench_dataset 1 1 0 $srlookupsize $iterations $1 "ri optims" 
-  cp ../lib/libpll_benoit_ri_optims2/* ../lib/current  
+  cp $path_lib/libpll_benoit_ri_optims2/* $path_lib/current  
   make clean 
   make 
   bench_dataset 1 1 0 $srlookupsize $iterations $1 "ri optims2" 
-  cp ../lib/libpll_benoit_ri_optims2/* ../lib/current  
+  cp $path_lib/libpll_benoit_ri_optims2/* $path_lib/current  
   make clean 
   make 
   bench_dataset 1 1 0 $srlookupsize $iterations $1 "ri optims3" 
-  #cp ../lib/libpll_benoit_tipinner/* ../lib/current 
+  #cp $path_lib/libpll_benoit_tipinner/* $path_lib/current 
   #make clean 
   #make 
   #bench_dataset 1 1 0 $srlookupsize $iterations $1 "repeats + bclv 2000000" 

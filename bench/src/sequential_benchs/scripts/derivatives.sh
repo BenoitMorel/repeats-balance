@@ -1,7 +1,9 @@
-
-
 #!/bin/bash
-outputdir="../../results/latex/derivatives/"
+
+source scripts/common.sh
+
+
+outputdir="$path_results/latex/derivatives/"
 iterations=10000
 dataset_number=3
 srlookupsize=2000000
@@ -10,7 +12,6 @@ outputfile="bench_derivatives_new_${iterations}_"
 outputfile="$outputdir$outputfile"
 file=""
 filebuffer=buffer.txt
-export LD_LIBRARY_PATH=../lib/current
 
 echo $outputfile
 
@@ -33,11 +34,11 @@ bench_dataset() {
   echo $6
   write "$6"
   write " & " 
-  launch ../../data/59/unrooted.newick ../../data/59/59.phy 4  $1 $2 $3 $4 $5
+  launch $path_data/59/unrooted.newick $path_data/59/59.phy 4  $1 $2 $3 $4 $5
   write " & " 
-  launch ../../data/128/unrooted.newick ../../data/128/128.phy 4  $1 $2 $3 $4 $5
+  launch $path_data/128/unrooted.newick $path_data/128/128.phy 4  $1 $2 $3 $4 $5
   write " & " 
-  launch ../../data/404/unrooted.newick ../../data/404/404.phy 4  $1 $2 $3 $4 $5
+  launch $path_data/404/unrooted.newick $path_data/404/404.phy 4  $1 $2 $3 $4 $5
   writeln "\\\\"
 }
 
@@ -56,7 +57,7 @@ bench_arch() {
   writeln "\\hline"
   writeln " & seq59 & seq128 & seq404  \\\\"
 
-  cp ../lib/libpll_repeats/* ../lib/current  
+  cp $path_lib/libpll_repeats/* $path_lib/current  
   make clean 
   make 
   bench_dataset 0 0 $srlookupsize $iterations $1 "tipinner benoit" 

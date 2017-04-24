@@ -3,7 +3,7 @@
 
 #include <limits>
 #include "Model.hpp"
-#include "../safepll.h"
+#include "safepll.h"
 #include "Tree.hpp"
 
 class Partition {

@@ -1,13 +1,12 @@
 #ifndef _LIBPLLBENCH_COMMON_H
 #define _LIBPLLBENCH_COMMON_H
 
-#include "common/Tree.hpp"
-#include "common/Partition.hpp"
-#include "common/Model.hpp"
-#include "common/LikelihoodEngine.hpp"
+#include "../common/Tree.hpp"
+#include "../common/Partition.hpp"
+#include "../common/Model.hpp"
+#include "../common/LikelihoodEngine.hpp"
 #include <time.h>
 #include <vector>
-#include "safepll.h"
 #include "depreciated/PLLHelper.hpp"
 
 #ifndef PLL_ATTRIB_SITES_REPEATS // old pll version
@@ -30,13 +29,10 @@ private:
 
 
 void full_traversal(int argc, char *params[]);
-void update_repeats(int argc, char *params[]);
 void derivatives(int argc, char *params[]);
 void sumtables(int argc, char *params[]);
 void partitioned_full_traversal(int argc, char *params[]);
 void pernode(int argc, char *params[]);
-void calibrate_test(int argc, char *params[]);
-void numerics(int argc, char *params[]);
 void repeats_rates(int argc, char *params[]);
 void export_repeats(int argc, char *params[]);
 

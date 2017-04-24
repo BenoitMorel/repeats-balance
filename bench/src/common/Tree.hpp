@@ -1,7 +1,7 @@
 #ifndef _TREE_
 #define _TREE_
 
-#include "../safepll.h"
+#include "safepll.h"
 #include <vector>
 
 class Tree {

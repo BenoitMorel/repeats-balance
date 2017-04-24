@@ -1,5 +1,5 @@
 #include "Model.hpp"
-#include "../safepll.h"
+#include "safepll.h"
 
 
 Model::Model(unsigned int states, unsigned int rate_cats)

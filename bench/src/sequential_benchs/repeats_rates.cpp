@@ -18,7 +18,6 @@ void repeats_rates(int argc, char *params[])
   const char *newick = params[i++];
   const char *seqdir = params[i++];
   unsigned int part_number = atoi(params[i++]);
-  unsigned int states = atoi(params[i++]);
 
   char seq[1000];
   for(unsigned int i = 0; i < part_number; ++i) {
