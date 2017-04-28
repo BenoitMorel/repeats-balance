@@ -2,8 +2,13 @@
 #include <iostream>
 
 
+
 Tree::Tree(const char *newick_file)
 {
+  if (!newick_file) {
+    std::cerr << "Tree::Tree null newick file" << std::endl;
+    return;
+  }
   unsigned int tips_number = 0;
   pll_utree = pll_utree_parse_newick(newick_file, &tips_number);
   if (!pll_utree) {

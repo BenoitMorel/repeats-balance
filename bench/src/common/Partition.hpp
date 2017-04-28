@@ -10,11 +10,17 @@ class Partition {
 public:
 
   Partition(const char *phy_file, 
-      Tree &tree,
-      unsigned int attribute_flag, 
-      unsigned int states_number,
-      unsigned int rate_categories_number = 4,
-      unsigned int repeats_lookup_size = 0);
+    unsigned int attribute_flag, 
+    unsigned int states_number,
+    unsigned int rate_categories_number,
+    unsigned int repeats_lookup_size);
+  
+  Partition(const char *phy_file, 
+    Tree &tree,
+    unsigned int attribute_flag, 
+    unsigned int states_number,
+    unsigned int rate_categories_number,
+    unsigned int repeats_lookup_size);
   
   virtual ~Partition();
 
@@ -40,6 +46,13 @@ public:
   static const unsigned int INVALID_ATTRIBUTE;
 
 private:
+  void init_partition(pll_msa_t *msa, 
+    const std::vector<unsigned int> &tip_indices,
+    unsigned int attribute_flag, 
+    unsigned int states_number,
+    unsigned int rate_categories_number = 4,
+    unsigned int repeats_lookup_size = 0);
+  
   bool is_repeats_on() const {return partition->attributes & PLL_ATTRIB_SITES_REPEATS;}
   void set_lookup_size(unsigned int size);
 

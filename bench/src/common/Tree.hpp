@@ -7,7 +7,7 @@
 class Tree {
 public:
   Tree(const char *newick_file);
-  
+
   virtual ~Tree();
 
   unsigned int get_tips_number() const {return tips_number;} 
@@ -31,7 +31,6 @@ public:
 private:
   static void set_missing_branch_length_recursive(pll_utree_t * tree, double length);
   static void set_missing_branch_length(pll_utree_t * tree, double length);
-
 private:
   pll_utree_t * pll_utree;
   std::vector<double> branch_lengths;

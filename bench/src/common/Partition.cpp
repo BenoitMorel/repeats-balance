@@ -4,6 +4,23 @@
 
 const unsigned int  Partition::INVALID_ATTRIBUTE = std::numeric_limits<unsigned int>::max();
 
+
+
+Partition::Partition(const char *phy_file, 
+  unsigned int attribute_flag, 
+  unsigned int states_number,
+  unsigned int rate_categories_number,
+  unsigned int repeats_lookup_size)
+{
+  unsigned int tips_number = 0;
+  pll_msa_t * msa = pll_phylip_parse_msa(phy_file, &tips_number);
+  std::vector<unsigned int> tip_indices;
+  init_partition(msa, tip_indices, attribute_flag, states_number,
+    rate_categories_number, repeats_lookup_size);
+  pll_msa_destroy(msa);
+}
+
+
 Partition::Partition(const char *phy_file, 
   Tree &tree,
   unsigned int attribute_flag, 
@@ -11,28 +28,10 @@ Partition::Partition(const char *phy_file,
   unsigned int rate_categories_number,
   unsigned int repeats_lookup_size)
 {
-  is_dna = (states_number == 4);
-
   unsigned int tips_number = 0;
   pll_msa_t * msa = pll_phylip_parse_msa(phy_file, &tips_number);
+  std::vector<unsigned int> tip_indices;
 
-  unsigned int * weight = pll_compress_site_patterns(msa->sequence,
-      is_dna ? pll_map_nt : pll_map_aa,
-      tips_number,
-      &(msa->length));
-
-  partition = pll_partition_create(tips_number,
-      tips_number - 2,
-      states_number,
-      (unsigned int)(msa->length),
-      1,
-      2 * tips_number - 1,
-      rate_categories_number,
-      tips_number - 2,
-      attribute_flag);
-  
-  pll_set_pattern_weights(partition, weight);
- 
   pll_utree_t *pll_utree = tree.get_pll_tree();
   pll_utree_t ** tips_buffer = (pll_utree_t  **)calloc(tips_number,
       sizeof(pll_utree_t *));
@@ -59,9 +58,44 @@ Partition::Partition(const char *phy_file,
       fprintf(stderr, "Sequence with header %s does not appear in the tree\n", msa->label[i]);
     }
     unsigned int tip_clv_index = *((unsigned int *)(found->data));
-    pll_set_tip_states(partition, tip_clv_index, 
-        is_dna ? pll_map_nt : pll_map_aa,
-        msa->sequence[i]);
+    tip_indices.push_back(tip_clv_index);
+  }
+  init_partition(msa, tip_indices, attribute_flag, states_number,
+    rate_categories_number, repeats_lookup_size);
+  pll_msa_destroy(msa);
+}
+
+void Partition::init_partition(pll_msa_t *msa, 
+  const std::vector<unsigned int> &tip_indices,
+  unsigned int attribute_flag, 
+  unsigned int states_number,
+  unsigned int rate_categories_number,
+  unsigned int repeats_lookup_size)
+{
+  is_dna = (states_number == 4);
+
+  unsigned int tips_number = msa->count;
+
+  unsigned int * weight = pll_compress_site_patterns(msa->sequence,
+      is_dna ? pll_map_nt : pll_map_aa,
+      tips_number,
+      &(msa->length));
+
+  partition = pll_partition_create(tips_number,
+      tips_number - 2,
+      states_number,
+      (unsigned int)(msa->length),
+      1,
+      2 * tips_number - 1,
+      rate_categories_number,
+      tips_number - 2,
+      attribute_flag);
+  
+  pll_set_pattern_weights(partition, weight);
+  for (unsigned int i = 0; i < tip_indices.size(); ++i) {
+    pll_set_tip_states(partition, tip_indices.size() ? tip_indices[i] : i, 
+      is_dna ? pll_map_nt : pll_map_aa,
+      msa->sequence[i]);
   }
 
   if (is_repeats_on() && repeats_lookup_size) {
@@ -77,7 +111,6 @@ Partition::Partition(const char *phy_file,
       sizeof(double), partition->alignment);
   
   free(weight);
-  pll_msa_destroy(msa);
 }
 
 Partition::~Partition()

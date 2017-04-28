@@ -2,9 +2,9 @@
 
 source scripts/common.sh
 
-outputdir="$path_results/sequential_plops/"
-iterations=300
-outputfile="repeats__${iterations}_"
+outputdir="$path_results/sequential_benchs/"
+iterations=500
+outputfile="repeats_${iterations}_"
 #outputfile="plop_tipinner_hitspc_${iterations}_"
 outputfile="$outputdir$outputfile"
 dataset_number=4
@@ -68,6 +68,7 @@ plop_arch() {
   writeln "\\hline"
   writeln "\\end{tabular}"
   mv $filebuffer $file
+  echo "result in $file"
 }
 
 #plop_arch "cpu"
