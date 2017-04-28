@@ -54,22 +54,20 @@ void export_repeats(int argc, char *params[])
 
   char seq[1000];
   char output_file[1000];
-  Tree tree(newick);
   unsigned int states = 4;
   unsigned int repeats_lookup_size = 2000000;
   for(unsigned int i = 0; i < part_number; ++i) {
     sprintf(seq, "%sPARTITION_%d.phy", seqdir, i);
-    Partition partition(seq, tree, PLL_ATTRIB_SITES_REPEATS | PLL_ATTRIB_ARCH_AVX, states, 4, repeats_lookup_size);
-    LikelihoodEngine engine(tree, partition); 
+    LikelihoodEngine engine(newick, seq, PLL_ATTRIB_SITES_REPEATS | PLL_ATTRIB_ARCH_AVX, states, 4, repeats_lookup_size);
     engine.update_operations();
     engine.update_matrices();
     engine.update_partials();
     if (i == 0) {
       sprintf(output_file, "%s/operations.txt", output_dir);
-      export_operations(tree.get_operations(), tree.get_operations_number(), output_file);
+      export_operations(engine.get_tree().get_operations(), engine.get_tree().get_operations_number(), output_file);
     }
     sprintf(output_file, "%s/repeats_p%d.txt", output_dir, i);
-    export_repeats_partition(partition.get_partition(), output_file); 
+    export_repeats_partition(engine.get_partitions()[0]->get_partition(), output_file); 
   }
 }
 

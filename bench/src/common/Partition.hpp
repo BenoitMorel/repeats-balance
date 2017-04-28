@@ -5,17 +5,20 @@
 #include "Model.hpp"
 #include "safepll.h"
 #include "Tree.hpp"
+#include "PartitionIntervals.hpp"
 
 class Partition {
 public:
 
   Partition(const char *phy_file, 
+    Tree &tree,
     unsigned int attribute_flag, 
     unsigned int states_number,
     unsigned int rate_categories_number,
     unsigned int repeats_lookup_size);
   
-  Partition(const char *phy_file, 
+  Partition(const pll_msa_t *msa, 
+    const PartitionIntervals &partition_intervals,
     Tree &tree,
     unsigned int attribute_flag, 
     unsigned int states_number,
@@ -54,7 +57,14 @@ private:
     unsigned int repeats_lookup_size = 0);
   
   bool is_repeats_on() const {return partition->attributes & PLL_ATTRIB_SITES_REPEATS;}
+  
   void set_lookup_size(unsigned int size);
+  
+  static pll_msa_t *create_sub_msa(const pll_msa_t *msa, const PartitionIntervals &intervals); 
+
+  static void fill_tip_indices(const pll_msa_t * msa,
+    pll_utree_t *pll_utree,
+    std::vector<unsigned int> &tip_indices);
 
 private:
   pll_partition_t *partition;

@@ -6,20 +6,6 @@ const unsigned int  Partition::INVALID_ATTRIBUTE = std::numeric_limits<unsigned 
 
 
 
-Partition::Partition(const char *phy_file, 
-  unsigned int attribute_flag, 
-  unsigned int states_number,
-  unsigned int rate_categories_number,
-  unsigned int repeats_lookup_size)
-{
-  unsigned int tips_number = 0;
-  pll_msa_t * msa = pll_phylip_parse_msa(phy_file, &tips_number);
-  std::vector<unsigned int> tip_indices;
-  init_partition(msa, tip_indices, attribute_flag, states_number,
-    rate_categories_number, repeats_lookup_size);
-  pll_msa_destroy(msa);
-}
-
 
 Partition::Partition(const char *phy_file, 
   Tree &tree,
@@ -31,39 +17,30 @@ Partition::Partition(const char *phy_file,
   unsigned int tips_number = 0;
   pll_msa_t * msa = pll_phylip_parse_msa(phy_file, &tips_number);
   std::vector<unsigned int> tip_indices;
-
   pll_utree_t *pll_utree = tree.get_pll_tree();
-  pll_utree_t ** tips_buffer = (pll_utree_t  **)calloc(tips_number,
-      sizeof(pll_utree_t *));
-  pll_utree_query_tipnodes(pll_utree, tips_buffer);
-  hcreate(tips_number);
-  unsigned int * tips_clv_indices = (unsigned int *)malloc(tips_number *
-      sizeof(unsigned int));
-  for (unsigned int i = 0; i < tips_number; ++i)
-  {
-    tips_clv_indices[i] = tips_buffer[i]->clv_index;
-    ENTRY entry;
-    entry.key = tips_buffer[i]->label;
-    entry.data = (void *)(tips_clv_indices + i);
-    hsearch(entry, ENTER);
-  }
-  for (unsigned int i = 0; i < tips_number; ++i)
-  {
-    ENTRY query;
-    query.key = msa->label[i];
-    query.key = msa->label[i];
-    ENTRY * found = NULL;
-    found = hsearch(query,ENTER);
-    if (!found) {
-      fprintf(stderr, "Sequence with header %s does not appear in the tree\n", msa->label[i]);
-    }
-    unsigned int tip_clv_index = *((unsigned int *)(found->data));
-    tip_indices.push_back(tip_clv_index);
-  }
+  fill_tip_indices(msa, pll_utree, tip_indices);  
   init_partition(msa, tip_indices, attribute_flag, states_number,
     rate_categories_number, repeats_lookup_size);
   pll_msa_destroy(msa);
 }
+  
+Partition::Partition(const pll_msa_t *msa, 
+  const PartitionIntervals &partition_intervals,
+  Tree &tree,
+  unsigned int attribute_flag, 
+  unsigned int states_number,
+  unsigned int rate_categories_number,
+  unsigned int repeats_lookup_size)
+{
+  std::vector<unsigned int> tip_indices;
+  pll_utree_t *pll_utree = tree.get_pll_tree();
+  fill_tip_indices(msa, pll_utree, tip_indices);  
+  pll_msa_t *sub_msa = create_sub_msa(msa, partition_intervals); 
+  init_partition(sub_msa, tip_indices, attribute_flag, states_number,
+    rate_categories_number, repeats_lookup_size);
+  pll_msa_destroy(sub_msa);
+}
+  
 
 void Partition::init_partition(pll_msa_t *msa, 
   const std::vector<unsigned int> &tip_indices,
@@ -208,6 +185,71 @@ void Partition::compute_derivatives(double *d_f, double *dd_f)
                                      sumtable_buffer,
                                      d_f, dd_f);
 
+}
+
+pll_msa_t * Partition::create_sub_msa(const pll_msa_t *msa, const PartitionIntervals &intervals) 
+{
+  // usee malloc because pll_msa_destroy uses free
+  pll_msa_t *submsa = (pll_msa_t *)malloc(sizeof(pll_msa_t));  
+  submsa->count = msa->count;
+  submsa->length = intervals.get_total_intervals_size();
+  submsa->sequence = (char **)calloc(submsa->count, sizeof(char *));
+  submsa->label = (char **)calloc(submsa->count, sizeof(char *));
+  for (int seqidx = 0; seqidx < submsa->count; ++seqidx) {
+    // copy label
+    if (msa->label) {
+      unsigned int label_length = strlen(msa->label[seqidx]) + 1;
+      submsa->label[seqidx] = (char *)malloc(label_length * sizeof(char));
+      memcpy(submsa->label[seqidx], msa->label[seqidx], label_length); 
+    }
+    // create subsequence
+    if (msa->sequence) {
+      unsigned int submsa_sequence_offset = 0;
+      submsa->sequence[seqidx] = (char *)malloc(submsa->length * sizeof(char));
+      for (unsigned int intidx = 0; intidx < intervals.get_intervals_number(); ++intidx) {
+        memcpy(submsa->sequence[seqidx] + submsa_sequence_offset, 
+            msa->sequence[seqidx] + intervals.get_start(intidx),
+            intervals.get_size(intidx) * sizeof(char));
+        submsa_sequence_offset += intervals.get_size(intidx);
+      }
+    }
+  }
+  return submsa;
+}
+
+void Partition::fill_tip_indices(const pll_msa_t * msa,
+    pll_utree_t *pll_utree,
+    std::vector<unsigned int> &tip_indices)
+{
+  tip_indices.clear();
+  unsigned int tips_number = msa->count;
+  pll_utree_t ** tips_buffer = (pll_utree_t  **)calloc(tips_number,
+      sizeof(pll_utree_t *));
+  pll_utree_query_tipnodes(pll_utree, tips_buffer);
+  hcreate(tips_number);
+  unsigned int * indices_buffer = (unsigned int *)malloc(tips_number * sizeof(unsigned int));
+  for (unsigned int i = 0; i < tips_number; ++i)
+  {
+    indices_buffer[i] = tips_buffer[i]->clv_index;
+    ENTRY entry;
+    entry.key = tips_buffer[i]->label;
+    entry.data = (void *)(indices_buffer + i);
+    hsearch(entry, ENTER);
+  }
+  for (unsigned int i = 0; i < tips_number; ++i)
+  {
+    ENTRY query;
+    query.key = msa->label[i];
+    query.key = msa->label[i];
+    ENTRY * found = NULL;
+    found = hsearch(query,ENTER);
+    if (!found) {
+      fprintf(stderr, "Sequence with header %s does not appear in the tree\n", msa->label[i]);
+    }
+    unsigned int tip_clv_index = *((unsigned int *)(found->data));
+    tip_indices.push_back(tip_clv_index);
+  }
+  hdestroy();
 }
 
 
