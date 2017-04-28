@@ -42,6 +42,9 @@ LikelihoodEngine::LikelihoodEngine(const char *newick_file,
     PartitionIntervals::parse(part_file, partition_intervals);
     unsigned int tips_number = 0;
     pll_msa_t * msa = pll_phylip_parse_msa(phy_file, &tips_number);
+    if (!msa) {
+      std::cout << "Cannot parse msa " << phy_file << std::endl;
+    }
     for (unsigned int i = 0; i < partition_intervals.size(); ++i) {
       partitions.push_back(new Partition(msa,
           partition_intervals[i],

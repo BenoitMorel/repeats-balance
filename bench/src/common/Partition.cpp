@@ -32,13 +32,17 @@ Partition::Partition(const pll_msa_t *msa,
   unsigned int rate_categories_number,
   unsigned int repeats_lookup_size)
 {
+  std::cout << "create partition with interval " << partition_intervals << std::endl;
   std::vector<unsigned int> tip_indices;
   pll_utree_t *pll_utree = tree.get_pll_tree();
   fill_tip_indices(msa, pll_utree, tip_indices);  
-  pll_msa_t *sub_msa = create_sub_msa(msa, partition_intervals); 
+  pll_msa_t *sub_msa = create_sub_msa(msa, partition_intervals);
+  if (!sub_msa) {
+    std::cerr << "Failed creating submsa for partition interval " << partition_intervals << std::endl;
+  }
   init_partition(sub_msa, tip_indices, attribute_flag, states_number,
     rate_categories_number, repeats_lookup_size);
-  pll_msa_destroy(sub_msa);
+  //pll_msa_destroy(sub_msa);
 }
   
 
@@ -92,7 +96,7 @@ void Partition::init_partition(pll_msa_t *msa,
 
 Partition::~Partition()
 {
-  pll_partition_destroy(partition);
+  //pll_partition_destroy(partition);
   pll_aligned_free(sumtable_buffer);
 }
 
@@ -190,6 +194,9 @@ void Partition::compute_derivatives(double *d_f, double *dd_f)
 pll_msa_t * Partition::create_sub_msa(const pll_msa_t *msa, const PartitionIntervals &intervals) 
 {
   // usee malloc because pll_msa_destroy uses free
+  if (!msa || !msa->sequence) {
+    std::cerr << "[Error] No msa sequence" << std::endl;
+  }
   pll_msa_t *submsa = (pll_msa_t *)malloc(sizeof(pll_msa_t));  
   submsa->count = msa->count;
   submsa->length = intervals.get_total_intervals_size();
@@ -203,16 +210,20 @@ pll_msa_t * Partition::create_sub_msa(const pll_msa_t *msa, const PartitionInter
       memcpy(submsa->label[seqidx], msa->label[seqidx], label_length); 
     }
     // create subsequence
-    if (msa->sequence) {
-      unsigned int submsa_sequence_offset = 0;
-      submsa->sequence[seqidx] = (char *)malloc(submsa->length * sizeof(char));
-      for (unsigned int intidx = 0; intidx < intervals.get_intervals_number(); ++intidx) {
-        memcpy(submsa->sequence[seqidx] + submsa_sequence_offset, 
-            msa->sequence[seqidx] + intervals.get_start(intidx),
-            intervals.get_size(intidx) * sizeof(char));
-        submsa_sequence_offset += intervals.get_size(intidx);
-      }
+    if (!msa->sequence[seqidx]) {
+      std::cerr << "[Error] Missing sequence " << seqidx << " in create_sub_msa " << std::endl;
+      return 0;
     }
+
+    unsigned int submsa_sequence_offset = 0;
+    submsa->sequence[seqidx] = (char *)malloc(submsa->length * sizeof(char));
+    for (unsigned int intidx = 0; intidx < intervals.get_intervals_number(); ++intidx) {
+      memcpy(submsa->sequence[seqidx] + submsa_sequence_offset, 
+          msa->sequence[seqidx] + intervals.get_start(intidx),
+          intervals.get_size(intidx) * sizeof(char));
+      submsa_sequence_offset += intervals.get_size(intidx);
+    }
+  
   }
   return submsa;
 }
