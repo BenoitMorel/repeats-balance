@@ -6,5 +6,6 @@
 #include "Tree.hpp"
 #include "Partition.hpp"
 #include "PartitionIntervals.hpp"
+#include "LoadBalancer.hpp"
 #include "Timer.hpp"
 #endif

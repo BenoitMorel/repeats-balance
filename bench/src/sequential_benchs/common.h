@@ -21,5 +21,6 @@ void partitioned_full_traversal(int argc, char *params[]);
 void pernode(int argc, char *params[]);
 void repeats_rates(int argc, char *params[]);
 void export_repeats(int argc, char *params[]);
+void kassian_lb_partials(int argc, char *params[]);
 
 #endif

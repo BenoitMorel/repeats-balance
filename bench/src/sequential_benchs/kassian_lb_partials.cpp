@@ -1,0 +1,52 @@
+#include <iostream>
+#include "common.h"
+
+
+void treat_core(LikelihoodEngine &engine) 
+{
+  engine.update_partials();
+}
+
+void kassian_lb_partials(int argc, char *params[])
+{
+  if (argc != 8) {
+    std::cerr << "Error : syntax is" << std::endl;
+    std::cerr 
+      << "newick sequence partitions states use_repeats repeats_lookup_size iterations cores" 
+      << std::endl;
+    return ;
+  }
+  unsigned int i = 0;
+  const char *newick = params[i++];
+  const char *seq = params[i++];
+  const char *partition_file = params[i++];
+  unsigned int states = atoi(params[i++]);
+  unsigned int use_repeats = atoi(params[i++]);
+  unsigned int repeats_lookup_size = atoi(params[i++]);
+  unsigned int iterations = atoi(params[i++]);
+  unsigned int cores = atoi(params[i++]);
+
+  
+  
+  std::vector<PartitionIntervals> initial_partitionning;
+  PartitionIntervals::parse(partition_file, initial_partitionning);
+  LoadBalancer balancer;
+  std::vector<CoreAssignment> assignments;
+  balancer.kassian_load_balance(cores, initial_partitionning, assignments);
+  unsigned int attribute = Partition::compute_attribute(use_repeats, 
+		  0, 
+		  "avx"); 
+
+  for (unsigned int core = 0; core < assignments.size(); ++core) {
+    LikelihoodEngine engine(newick, seq, assignments[core], attribute, states, 4, repeats_lookup_size);
+    engine.update_operations();
+    engine.update_matrices();
+    Timer timer;
+    for (unsigned int i = 0; i < iterations; ++i) {
+      treat_core(engine);
+    }
+    std::cout << timer.get_time() << "ms" << std::endl;
+  }
+
+
+}

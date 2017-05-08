@@ -27,8 +27,6 @@ LikelihoodEngine::LikelihoodEngine(const char *newick_file,
         repeats_lookup_size));
 }
 
-
-
 LikelihoodEngine::LikelihoodEngine(const char *newick_file,
     const char *phy_file,
     const char *part_file,
@@ -63,6 +61,32 @@ LikelihoodEngine::LikelihoodEngine(const char *newick_file,
           rate_categories_number,
           repeats_lookup_size));
   }
+}
+
+LikelihoodEngine::LikelihoodEngine(const char *newick_file,
+    const char *phy_file,
+    const CoreAssignment &assignment,
+    unsigned int attribute_flag, 
+    unsigned int states_number,
+    unsigned int rate_categories_number,
+    unsigned int repeats_lookup_size): tree(newick_file)
+{
+  const std::vector<PartitionIntervals> &partition_intervals = assignment.get_assignments();
+  unsigned int tips_number = 0;
+  pll_msa_t * msa = pll_phylip_parse_msa(phy_file, &tips_number);
+  if (!msa) {
+    std::cout << "Cannot parse msa " << phy_file << std::endl;
+  }
+  for (unsigned int i = 0; i < partition_intervals.size(); ++i) {
+    partitions.push_back(new Partition(msa,
+        partition_intervals[i],
+        tree,
+        attribute_flag,
+        states_number,
+        rate_categories_number,
+        repeats_lookup_size));
+  }
+  pll_msa_destroy(msa);
 }
 
 

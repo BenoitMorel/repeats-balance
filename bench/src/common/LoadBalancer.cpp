@@ -7,6 +7,9 @@ void LoadBalancer::kassian_load_balance(unsigned int _cores_number,
       std::vector<CoreAssignment> &assignments)
 {
   cores_number = _cores_number;
+  for (unsigned int i = 0; i < cores_number; ++i) {
+    assignments.push_back(CoreAssignment(i));
+  }
   current_part = 0; 
   current_core = 0;
 
@@ -26,7 +29,7 @@ bool LoadBalancer::can_fill_first_core(std::stack<CoreAssignment*> *stack)
   double predicted_weight = stack->top()->get_core_weight() 
     + partition->get_partition_weight()
     - double(curr_part_ass_sites) * partition->get_persite_weight();
-  return predicted_weight < limit_weight_percore;
+  return predicted_weight >= limit_weight_percore;
 }
 
 void LoadBalancer::fill_first_core(std::stack<CoreAssignment *> *stack)
@@ -36,7 +39,7 @@ void LoadBalancer::fill_first_core(std::stack<CoreAssignment *> *stack)
   const PartitionIntervals *partition = sorted_partitions[current_part];
   double weight_to_assign = limit_weight_percore - core->get_core_weight();
   unsigned int sites_to_assign = weight_to_assign / 
-    partition->get_partition_weight();
+    partition->get_persite_weight();
   unsigned int available_sites = partition->get_total_intervals_size() - curr_part_ass_sites;
   // in case we exceed the available number of sites
   sites_to_assign = std::min(sites_to_assign, available_sites);
@@ -56,7 +59,7 @@ void LoadBalancer::assign_remaining_part()
   qhigh->push(core);
   const PartitionIntervals *partition = sorted_partitions[current_part];
   PartitionIntervals partition_to_assign(partition->get_partition_id(),
-      partition->get_partition_weight());
+      partition->get_persite_weight());
   unsigned int sites_to_assign = partition->get_total_intervals_size() - curr_part_ass_sites;
   partition->assign_intervals_to(partition_to_assign,
       curr_part_ass_sites,
@@ -82,6 +85,7 @@ void LoadBalancer::kassian_second_step(std::vector<CoreAssignment> &assignments)
     } else if (can_fill_first_core(qlow)) {
       fill_first_core(qlow);
     } else {
+
       assign_remaining_part();
     }
 
@@ -91,6 +95,7 @@ void LoadBalancer::kassian_second_step(std::vector<CoreAssignment> &assignments)
     if (curr_part_ass_sites >= 
         sorted_partitions[current_part]->get_total_intervals_size()) {
       curr_part_ass_sites = 0;
+      current_part++;
     } 
   }
 }
@@ -114,6 +119,7 @@ void LoadBalancer::compute_limit_weight()
   for (unsigned int i = 0; i < sorted_partitions.size(); ++i) {
     limit_weight_percore += sorted_partitions[i]->get_partition_weight() / double(cores_number);
   }   
+  std::cout << "limit weight: " << limit_weight_percore << std::endl;
 }
 
 // Assign partitions in a cyclic manner to cores until one is too big 

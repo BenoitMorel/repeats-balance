@@ -152,6 +152,7 @@ void Partition::update_matrices(const Tree &tree)
 
 void Partition::update_partials(const Tree &tree)
 {
+  std::cout << "update partials operations(" << tree.get_operations_number() << ") sites(" << partition->sites << ")" << std::endl;
   pll_update_partials(partition, tree.get_operations(), tree.get_operations_number()); 
 }
 

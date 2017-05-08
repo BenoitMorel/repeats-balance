@@ -1,6 +1,7 @@
 
 #include "common.h"
 #include <iostream>
+
 int main(int argc, char *params[])
 {
   
@@ -20,6 +21,8 @@ int main(int argc, char *params[])
     repeats_rates(argc - 2, params + 2);
   } else if (!strcmp(params[1], "export_repeats")) {
     export_repeats(argc - 2, params + 2);
+  } else if (!strcmp(params[1], "kassian_lb_partials")) {
+    kassian_lb_partials(argc - 2, params + 2);
   } else {
     std::cerr << "Error unkown parameter " << params[1] << std::endl;
   }

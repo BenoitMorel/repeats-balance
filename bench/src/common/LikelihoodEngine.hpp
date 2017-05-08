@@ -3,6 +3,7 @@
 
 #include "Tree.hpp"
 #include "Partition.hpp"
+#include "CoreAssignment.hpp"
 
 class LikelihoodEngine {
 public:
@@ -17,6 +18,15 @@ public:
   LikelihoodEngine(const char *newick_file,
     const char *phy_file,
     const char *part_file,
+    unsigned int attribute_flag, 
+    unsigned int states_number,
+    unsigned int rate_categories_number,
+    unsigned int repeats_lookup_size);
+
+
+  LikelihoodEngine(const char *newick_file,
+    const char *phy_file,
+    const CoreAssignment &assignment,
     unsigned int attribute_flag, 
     unsigned int states_number,
     unsigned int rate_categories_number,
