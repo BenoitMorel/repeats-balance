@@ -1,11 +1,7 @@
 #ifndef _LIBPLLBENCH_COMMON_H
 #define _LIBPLLBENCH_COMMON_H
 
-#include "../common/Tree.hpp"
-#include "../common/Partition.hpp"
-#include "../common/Model.hpp"
-#include "../common/LikelihoodEngine.hpp"
-#include <time.h>
+#include "../common/repeatsbalance.hpp"
 #include <vector>
 #include "depreciated/PLLHelper.hpp"
 
@@ -16,16 +12,6 @@
 #endif
 
 #define INVALID_ATTRIBUTE ((unsigned int)1)
-
-class Timer {
-public:
-  Timer();
-  // ms
-  long get_time();
-
-private:
-  timespec start;
-};
 
 
 void full_traversal(int argc, char *params[]);

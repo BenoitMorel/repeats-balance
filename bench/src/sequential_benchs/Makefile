@@ -7,7 +7,7 @@ LDFLAGS= $(DBG) -std=gnu++11 -L$(libpllpath) -I$(libpllpath) -L../common
 OBJDIR=obj
 
 EXEC=main
-OBJ= $(addprefix $(OBJDIR)/,common.o derivatives.o sumtables.o full_traversal.o pernode.o main.o repeats_rates.o export_repeats.o  depreciated/PLLHelper.o)
+OBJ= $(addprefix $(OBJDIR)/, derivatives.o sumtables.o full_traversal.o pernode.o main.o repeats_rates.o export_repeats.o  depreciated/PLLHelper.o)
 
 
 all: dir $(EXEC) 

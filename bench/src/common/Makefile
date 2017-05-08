@@ -4,7 +4,7 @@ CFLAGS=$(DBG) -fPIC -W -Wall -ansi -pedantic -I../../lib/current
 LDFLAGS=$(DBG) -L../../lib/current -I../../lib/current
 OBJDIR=obj
 EXEC=librepeatsbalance.so
-OBJ= $(addprefix $(OBJDIR)/, Model.o Partition.o Tree.o LikelihoodEngine.o PartitionIntervals.o LoadBalancer.o)
+OBJ= $(addprefix $(OBJDIR)/, Model.o Partition.o Tree.o LikelihoodEngine.o PartitionIntervals.o LoadBalancer.o Timer.o)
 
 
 all: dir $(EXEC) 

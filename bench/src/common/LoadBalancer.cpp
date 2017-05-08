@@ -98,7 +98,7 @@ void LoadBalancer::kassian_second_step(std::vector<CoreAssignment> &assignments)
 bool compare_partitions(const PartitionIntervals* a, 
     const PartitionIntervals* b) { return (*a < *b); }
 
-void compute_sorted_partitions(const std::vector<PartitionIntervals> &partitions,
+void LoadBalancer::compute_sorted_partitions(const std::vector<PartitionIntervals> &partitions,
     std::vector<const PartitionIntervals *> &sorted_partitions)
 {
   for (unsigned int i = 0; i < partitions.size(); ++i) {
