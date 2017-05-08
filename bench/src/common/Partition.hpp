@@ -17,7 +17,8 @@ public:
     unsigned int rate_categories_number,
     unsigned int repeats_lookup_size);
   
-  Partition(const pll_msa_t *msa, 
+  Partition(const pll_msa_t *compressed_msa,
+    unsigned int *weights,
     const PartitionIntervals &partition_intervals,
     Tree &tree,
     unsigned int attribute_flag, 
@@ -41,6 +42,10 @@ public:
 
   pll_partition_t *get_partition() {return partition;}
 
+  // only counts patterns in internal nodes
+  double get_unique_repeats_pattern_ratio() const;
+
+  unsigned int get_sites_number() const {return partition->sites;}
 public:
   static unsigned int compute_attribute(unsigned int use_repeats, 
                                         unsigned int additional_attr, 
@@ -49,7 +54,8 @@ public:
   static const unsigned int INVALID_ATTRIBUTE;
 
 private:
-  void init_partition(pll_msa_t *msa, 
+  void init_partition(pll_msa_t *compressed_msa,
+    const unsigned int *rates,
     const std::vector<unsigned int> &tip_indices,
     unsigned int attribute_flag, 
     unsigned int states_number,
@@ -60,7 +66,8 @@ private:
   
   void set_lookup_size(unsigned int size);
   
-  static pll_msa_t *create_sub_msa(const pll_msa_t *msa, const PartitionIntervals &intervals); 
+  static void create_sub_msa(const pll_msa_t *msa, const unsigned int *weights, const PartitionIntervals &intervals,
+      pll_msa_t *&submsa, unsigned int *&subweights); 
 
   static void fill_tip_indices(const pll_msa_t * msa,
     pll_utree_t *pll_utree,

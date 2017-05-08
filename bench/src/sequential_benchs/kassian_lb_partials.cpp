@@ -2,6 +2,20 @@
 #include "common.h"
 
 
+double get_unique_pattern_ratio(LikelihoodEngine &engine)
+{
+  double total_patterns = 0;
+  double total_sites = 0;
+  std::vector<Partition*> &partitions = engine.get_partitions();
+  for (unsigned int p = 0; p < partitions.size(); ++p) {
+    
+    Partition *partition = partitions[p];
+    total_sites += partition->get_sites_number();
+    total_patterns += partition->get_unique_repeats_pattern_ratio() * double(partition->get_sites_number());
+  }
+  return total_patterns / total_sites;
+}
+
 void treat_core(LikelihoodEngine &engine) 
 {
   engine.update_partials();
@@ -45,6 +59,7 @@ void kassian_lb_partials(int argc, char *params[])
     for (unsigned int i = 0; i < iterations; ++i) {
       treat_core(engine);
     }
+    std::cout << "Pattern ratio: " << get_unique_pattern_ratio(engine) << std::endl;
     std::cout << timer.get_time() << "ms" << std::endl;
   }
 

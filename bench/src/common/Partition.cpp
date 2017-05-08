@@ -16,15 +16,20 @@ Partition::Partition(const char *phy_file,
 {
   unsigned int tips_number = 0;
   pll_msa_t * msa = pll_phylip_parse_msa(phy_file, &tips_number);
+  unsigned int * weights = pll_compress_site_patterns(msa->sequence,
+    (states_number == 4) ? pll_map_nt : pll_map_aa,
+    tips_number,
+    &(msa->length));
   std::vector<unsigned int> tip_indices;
   pll_utree_t *pll_utree = tree.get_pll_tree();
   fill_tip_indices(msa, pll_utree, tip_indices);  
-  init_partition(msa, tip_indices, attribute_flag, states_number,
+  init_partition(msa, weights, tip_indices, attribute_flag, states_number,
     rate_categories_number, repeats_lookup_size);
   pll_msa_destroy(msa);
 }
   
-Partition::Partition(const pll_msa_t *msa, 
+Partition::Partition(const pll_msa_t *compressed_msa, 
+  unsigned int *weights,
   const PartitionIntervals &partition_intervals,
   Tree &tree,
   unsigned int attribute_flag, 
@@ -35,18 +40,22 @@ Partition::Partition(const pll_msa_t *msa,
   std::cout << "create partition with interval " << partition_intervals << std::endl;
   std::vector<unsigned int> tip_indices;
   pll_utree_t *pll_utree = tree.get_pll_tree();
-  fill_tip_indices(msa, pll_utree, tip_indices);  
-  pll_msa_t *sub_msa = create_sub_msa(msa, partition_intervals);
-  if (!sub_msa) {
+  fill_tip_indices(compressed_msa, pll_utree, tip_indices);  
+  pll_msa_t *submsa;
+  unsigned int *subweights;
+  create_sub_msa(compressed_msa, weights, partition_intervals, submsa, subweights);
+  if (!submsa) {
     std::cerr << "Failed creating submsa for partition interval " << partition_intervals << std::endl;
   }
-  init_partition(sub_msa, tip_indices, attribute_flag, states_number,
+  init_partition(submsa, subweights, tip_indices, attribute_flag, states_number,
     rate_categories_number, repeats_lookup_size);
+  // TODO destroy msa and submsa and weights 
   //pll_msa_destroy(sub_msa);
 }
   
 
-void Partition::init_partition(pll_msa_t *msa, 
+void Partition::init_partition(pll_msa_t *compressed_msa, 
+  const unsigned int *weights,
   const std::vector<unsigned int> &tip_indices,
   unsigned int attribute_flag, 
   unsigned int states_number,
@@ -55,28 +64,23 @@ void Partition::init_partition(pll_msa_t *msa,
 {
   is_dna = (states_number == 4);
 
-  unsigned int tips_number = msa->count;
-
-  unsigned int * weight = pll_compress_site_patterns(msa->sequence,
-      is_dna ? pll_map_nt : pll_map_aa,
-      tips_number,
-      &(msa->length));
+  unsigned int tips_number = compressed_msa->count;
 
   partition = pll_partition_create(tips_number,
       tips_number - 2,
       states_number,
-      (unsigned int)(msa->length),
+      (unsigned int)(compressed_msa->length),
       1,
       2 * tips_number - 1,
       rate_categories_number,
       tips_number - 2,
       attribute_flag);
   
-  pll_set_pattern_weights(partition, weight);
+  pll_set_pattern_weights(partition, weights);
   for (unsigned int i = 0; i < tip_indices.size(); ++i) {
     pll_set_tip_states(partition, tip_indices.size() ? tip_indices[i] : i, 
       is_dna ? pll_map_nt : pll_map_aa,
-      msa->sequence[i]);
+      compressed_msa->sequence[i]);
   }
 
   if (is_repeats_on() && repeats_lookup_size) {
@@ -90,8 +94,6 @@ void Partition::init_partition(pll_msa_t *msa,
   sumtable_buffer = (double *)pll_aligned_alloc(
       partition->sites * partition->rate_cats * partition->states_padded *
       sizeof(double), partition->alignment);
-  
-  free(weight);
 }
 
 Partition::~Partition()
@@ -152,7 +154,6 @@ void Partition::update_matrices(const Tree &tree)
 
 void Partition::update_partials(const Tree &tree)
 {
-  std::cout << "update partials operations(" << tree.get_operations_number() << ") sites(" << partition->sites << ")" << std::endl;
   pll_update_partials(partition, tree.get_operations(), tree.get_operations_number()); 
 }
 
@@ -192,17 +193,24 @@ void Partition::compute_derivatives(double *d_f, double *dd_f)
 
 }
 
-pll_msa_t * Partition::create_sub_msa(const pll_msa_t *msa, const PartitionIntervals &intervals) 
+void Partition::create_sub_msa(const pll_msa_t *msa, const unsigned int *weights, const PartitionIntervals &intervals, 
+      pll_msa_t *&submsa, unsigned int *&subweights) 
 {
+  submsa = 0;
+  subweights = 0;
   // usee malloc because pll_msa_destroy uses free
   if (!msa || !msa->sequence) {
     std::cerr << "[Error] No msa sequence" << std::endl;
+    return;
   }
-  pll_msa_t *submsa = (pll_msa_t *)malloc(sizeof(pll_msa_t));  
+  submsa = (pll_msa_t *)malloc(sizeof(pll_msa_t));  
   submsa->count = msa->count;
   submsa->length = intervals.get_total_intervals_size();
   submsa->sequence = (char **)calloc(submsa->count, sizeof(char *));
   submsa->label = (char **)calloc(submsa->count, sizeof(char *));
+  if (weights) {
+    subweights = (unsigned int*)calloc(submsa->length, sizeof(unsigned int));
+  }
   for (int seqidx = 0; seqidx < submsa->count; ++seqidx) {
     // copy label
     if (msa->label) {
@@ -213,7 +221,7 @@ pll_msa_t * Partition::create_sub_msa(const pll_msa_t *msa, const PartitionInter
     // create subsequence
     if (!msa->sequence[seqidx]) {
       std::cerr << "[Error] Missing sequence " << seqidx << " in create_sub_msa " << std::endl;
-      return 0;
+      return ;
     }
 
     unsigned int submsa_sequence_offset = 0;
@@ -222,11 +230,15 @@ pll_msa_t * Partition::create_sub_msa(const pll_msa_t *msa, const PartitionInter
       memcpy(submsa->sequence[seqidx] + submsa_sequence_offset, 
           msa->sequence[seqidx] + intervals.get_start(intidx),
           intervals.get_size(intidx) * sizeof(char));
+      // also copy rates 
+      if (!seqidx && weights) {
+        memcpy(subweights + submsa_sequence_offset,
+            weights + intervals.get_start(intidx),
+            intervals.get_size(intidx) * sizeof(unsigned int));
+      }
       submsa_sequence_offset += intervals.get_size(intidx);
     }
-  
   }
-  return submsa;
 }
 
 void Partition::fill_tip_indices(const pll_msa_t * msa,
@@ -265,4 +277,17 @@ void Partition::fill_tip_indices(const pll_msa_t * msa,
 }
 
 
+double Partition::get_unique_repeats_pattern_ratio() const
+{
+  if (!partition->repeats) {
+    return 1.0;
+  }
+  unsigned int total_patterns = 0;
+  for (unsigned int node = partition->tips; node < partition->tips + partition->clv_buffers; ++node) {
+    unsigned int node_patterns = partition->repeats->pernode_max_id[node];
+    node_patterns = node_patterns ? node_patterns : partition->sites;
+    total_patterns += node_patterns;
+  }
+  return double(total_patterns) / double(partition->sites * partition->clv_buffers);
+}
 

@@ -17,7 +17,8 @@ LikelihoodEngine::LikelihoodEngine(const char *newick_file,
     unsigned int attribute_flag, 
     unsigned int states_number,
     unsigned int rate_categories_number,
-    unsigned int repeats_lookup_size): tree(newick_file)
+    unsigned int repeats_lookup_size): 
+  tree(newick_file)
 {
   partitions.push_back(new Partition(phy_file,
         tree,
@@ -33,18 +34,24 @@ LikelihoodEngine::LikelihoodEngine(const char *newick_file,
     unsigned int attribute_flag, 
     unsigned int states_number,
     unsigned int rate_categories_number,
-    unsigned int repeats_lookup_size): tree(newick_file)
+    unsigned int repeats_lookup_size): 
+  tree(newick_file)
 {
   if (part_file) {
     std::vector<PartitionIntervals> partition_intervals;
     PartitionIntervals::parse(part_file, partition_intervals);
     unsigned int tips_number = 0;
     pll_msa_t * msa = pll_phylip_parse_msa(phy_file, &tips_number);
+    unsigned int * weights = pll_compress_site_patterns(msa->sequence,
+      (states_number == 4) ? pll_map_nt : pll_map_aa,
+      tips_number,
+      &(msa->length));
     if (!msa) {
       std::cout << "Cannot parse msa " << phy_file << std::endl;
     }
     for (unsigned int i = 0; i < partition_intervals.size(); ++i) {
       partitions.push_back(new Partition(msa,
+          weights,
           partition_intervals[i],
           tree,
           attribute_flag,
@@ -77,8 +84,13 @@ LikelihoodEngine::LikelihoodEngine(const char *newick_file,
   if (!msa) {
     std::cout << "Cannot parse msa " << phy_file << std::endl;
   }
+  unsigned int * weights = pll_compress_site_patterns(msa->sequence,
+    (states_number == 4) ? pll_map_nt : pll_map_aa,
+    tips_number,
+    &(msa->length));
   for (unsigned int i = 0; i < partition_intervals.size(); ++i) {
     partitions.push_back(new Partition(msa,
+        weights,
         partition_intervals[i],
         tree,
         attribute_flag,
