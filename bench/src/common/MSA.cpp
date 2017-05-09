@@ -43,7 +43,7 @@ MSA::MSA(const MSA *original_msa, const PartitionIntervals &intervals, unsigned 
     }
 
     unsigned int msa_sequence_offset = 0;
-    msa->sequence[seqidx] = (char *)malloc(msa->length * sizeof(char));
+    msa->sequence[seqidx] = (char *)calloc((msa->length + 1), sizeof(char));
     for (unsigned int intidx = 0; intidx < intervals.get_intervals_number(); ++intidx) {
       memcpy(msa->sequence[seqidx] + msa_sequence_offset, 
           full_msa->sequence[seqidx] + intervals.get_start(intidx),

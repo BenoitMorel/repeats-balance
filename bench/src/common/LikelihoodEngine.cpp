@@ -18,10 +18,10 @@ LikelihoodEngine::LikelihoodEngine(const char *newick_file,
     unsigned int states_number,
     unsigned int rate_categories_number,
     unsigned int repeats_lookup_size): 
-  tree(newick_file)
+  tree(new Tree(newick_file))
 {
   partitions.push_back(new Partition(phy_file,
-        tree,
+        *tree,
         attribute_flag,
         states_number,
         rate_categories_number,
@@ -35,7 +35,7 @@ LikelihoodEngine::LikelihoodEngine(const char *newick_file,
     unsigned int states_number,
     unsigned int rate_categories_number,
     unsigned int repeats_lookup_size): 
-  tree(newick_file)
+  tree(new Tree(newick_file))
 {
   if (part_file) {
     std::vector<PartitionIntervals> partition_intervals;
@@ -45,7 +45,7 @@ LikelihoodEngine::LikelihoodEngine(const char *newick_file,
       MSA submsa(&msa, partition_intervals[i], i);
       submsa.compress();
       partitions.push_back(new Partition(&submsa,
-          tree,
+          *tree,
           attribute_flag,
           states_number,
           rate_categories_number,
@@ -53,7 +53,7 @@ LikelihoodEngine::LikelihoodEngine(const char *newick_file,
     }
   } else {
     partitions.push_back(new Partition(phy_file,
-          tree,
+          *tree,
           attribute_flag,
           states_number,
           rate_categories_number,
@@ -61,20 +61,21 @@ LikelihoodEngine::LikelihoodEngine(const char *newick_file,
   }
 }
 
-LikelihoodEngine::LikelihoodEngine(const char *newick_file,
+LikelihoodEngine::LikelihoodEngine(Tree *tree,
     const std::vector<MSA *> &msas,
     const CoreAssignment &assignment,
     unsigned int attribute_flag, 
     unsigned int states_number,
     unsigned int rate_categories_number,
-    unsigned int repeats_lookup_size): tree(newick_file)
+    unsigned int repeats_lookup_size): 
+  tree(tree)
 {
   const std::vector<PartitionIntervals> &partition_intervals = assignment.get_assignments();
   for (unsigned int i = 0; i < partition_intervals.size(); ++i) {
     const PartitionIntervals &intervals = partition_intervals[i];
     partitions.push_back(new Partition(msas[intervals.get_partition_id()],
         intervals,
-        tree,
+        *tree,
         attribute_flag,
         states_number,
         rate_categories_number,
@@ -94,20 +95,20 @@ LikelihoodEngine::~LikelihoodEngine()
 
 void LikelihoodEngine::update_operations()
 {
-  tree.update_operations(traverser_full);
+  tree->update_operations(traverser_full);
 }
   
 void LikelihoodEngine::update_matrices()
 {
   for (unsigned int i = 0; i < partitions.size(); ++i) {
-    partitions[i]->update_matrices(tree);
+    partitions[i]->update_matrices(*tree);
   }
 }
   
 void LikelihoodEngine::update_partials(bool update_repeats)
 {
   for (unsigned int i = 0; i < partitions.size(); ++i) {
-    partitions[i]->update_partials(tree, update_repeats);
+    partitions[i]->update_partials(*tree, update_repeats);
   }
 }
 
@@ -115,7 +116,7 @@ double LikelihoodEngine::compute_likelihood()
 {
   double ll = 0;
   for (unsigned int i = 0; i < partitions.size(); ++i) {
-    ll += partitions[i]->compute_likelihood(tree);
+    ll += partitions[i]->compute_likelihood(*tree);
   }
   return ll;
 }
@@ -123,7 +124,7 @@ double LikelihoodEngine::compute_likelihood()
 void LikelihoodEngine::update_sumtable()
 {
   for (unsigned int i = 0; i < partitions.size(); ++i) {
-    partitions[i]->update_sumtable(tree);
+    partitions[i]->update_sumtable(*tree);
   }
 }
 

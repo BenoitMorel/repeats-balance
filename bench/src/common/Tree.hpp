@@ -3,11 +3,12 @@
 
 #include "safepll.h"
 #include <vector>
+#include "MSA.hpp"
 
 class Tree {
 public:
   Tree(const char *newick_file);
-
+  Tree(unsigned int tips, const char * const* names); 
   virtual ~Tree();
 
   unsigned int get_tips_number() const {return tips_number;} 
@@ -28,7 +29,11 @@ public:
   
   unsigned int get_operations_number() const {return operations.size();}
 
+  // update_operations must be called after that
+  void randomize_pll_utree(const MSA *msa);
 private:
+  void init();
+  pll_utree_t *create_random(unsigned int taxa_count, const char * const* names);
   static void set_missing_branch_length_recursive(pll_utree_t * tree, double length);
   static void set_missing_branch_length(pll_utree_t * tree, double length);
 private:

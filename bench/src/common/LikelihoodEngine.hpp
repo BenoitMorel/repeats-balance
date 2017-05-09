@@ -24,7 +24,7 @@ public:
     unsigned int repeats_lookup_size);
 
 
-  LikelihoodEngine(const char *newick_file,
+  LikelihoodEngine(Tree *tree,
     const std::vector<MSA *> &msas,
     const CoreAssignment &assignment,
     unsigned int attribute_flag, 
@@ -47,13 +47,13 @@ public:
 
   void compute_derivatives(double *d_f, double *dd_f); 
 
-  Tree &get_tree() {return tree;}
+  Tree &get_tree() {return *tree;}
 
   std::vector<Partition*> &get_partitions() {return partitions;}
 
 private:
 
-  Tree tree;
+  Tree *tree;
   std::vector<Partition*> partitions;
 
 };

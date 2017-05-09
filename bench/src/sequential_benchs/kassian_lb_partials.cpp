@@ -1,6 +1,6 @@
 #include <iostream>
 #include "common.h"
-
+#include <time.h>
 
 double get_unique_pattern_ratio(LikelihoodEngine &engine)
 {
@@ -38,8 +38,10 @@ void kassian_lb_partials(int argc, char *params[])
   unsigned int iterations = atoi(params[i++]);
   unsigned int cores = atoi(params[i++]);
 
-  
+  srand(time(NULL)); 
+  Tree tree(newick);
   MSA full_msa(seq, states_number); 
+  tree.randomize_pll_utree(&full_msa);
   std::vector<PartitionIntervals> initial_partitionning;
   PartitionIntervals::parse(partition_file, initial_partitionning);
   std::vector<MSA *> msas;
@@ -54,10 +56,10 @@ void kassian_lb_partials(int argc, char *params[])
   balancer.kassian_load_balance(cores, weighted_msas, assignments);
   unsigned int attribute = Partition::compute_attribute(use_repeats, 
 		  0, 
-		  "avx"); 
+		  "avx");
 
   for (unsigned int core = 0; core < assignments.size(); ++core) {
-    LikelihoodEngine engine(newick, msas, assignments[core], attribute, states_number, 4, repeats_lookup_size);
+    LikelihoodEngine engine(&tree, msas, assignments[core], attribute, states_number, 4, repeats_lookup_size);
     engine.update_operations();
     engine.update_matrices();
     engine.update_partials();
