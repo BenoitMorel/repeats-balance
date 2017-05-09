@@ -17,17 +17,13 @@ double get_unique_pattern_ratio(LikelihoodEngine &engine)
   return total_patterns / total_sites;
 }
 
-void treat_core(LikelihoodEngine &engine) 
-{
-  engine.update_partials();
-}
 
 void kassian_lb_partials(int argc, char *params[])
 {
-  if (argc != 8) {
+  if (argc != 9) {
     std::cerr << "Error : syntax is" << std::endl;
     std::cerr 
-      << "newick sequence partitions states use_repeats repeats_lookup_size iterations cores" 
+      << "newick sequence partitions states use_repeats update_repeats repeats_lookup_size iterations cores" 
       << std::endl;
     return ;
   }
@@ -37,6 +33,7 @@ void kassian_lb_partials(int argc, char *params[])
   const char *partition_file = params[i++];
   unsigned int states_number = atoi(params[i++]);
   unsigned int use_repeats = atoi(params[i++]);
+  unsigned int update_repeats = atoi(params[i++]);
   unsigned int repeats_lookup_size = atoi(params[i++]);
   unsigned int iterations = atoi(params[i++]);
   unsigned int cores = atoi(params[i++]);
@@ -63,12 +60,13 @@ void kassian_lb_partials(int argc, char *params[])
     LikelihoodEngine engine(newick, msas, assignments[core], attribute, states_number, 4, repeats_lookup_size);
     engine.update_operations();
     engine.update_matrices();
+    engine.update_partials();
     Timer timer;
     for (unsigned int i = 0; i < iterations; ++i) {
-      treat_core(engine);
+      engine.update_partials(update_repeats);
     }
     std::cout << "Pattern ratio: " << get_unique_pattern_ratio(engine) << std::endl;
-    std::cout << timer.get_time() << "ms" << std::endl;
+    std::cout << timer.get_time() << " ms" << std::endl;
   }
 
 

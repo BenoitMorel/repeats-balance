@@ -152,9 +152,9 @@ void Partition::update_matrices(const Tree &tree)
     tree.get_matrix_count());
 }
 
-void Partition::update_partials(const Tree &tree)
+void Partition::update_partials(const Tree &tree, bool update_repeats)
 {
-  pll_update_partials(partition, tree.get_operations(), tree.get_operations_number()); 
+  pll_update_partials_rep(partition, tree.get_operations(), tree.get_operations_number(), update_repeats); 
 }
 
 double Partition::compute_likelihood(const Tree &tree) 

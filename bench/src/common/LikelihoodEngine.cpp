@@ -104,10 +104,10 @@ void LikelihoodEngine::update_matrices()
   }
 }
   
-void LikelihoodEngine::update_partials()
+void LikelihoodEngine::update_partials(bool update_repeats)
 {
   for (unsigned int i = 0; i < partitions.size(); ++i) {
-    partitions[i]->update_partials(tree);
+    partitions[i]->update_partials(tree, update_repeats);
   }
 }
 

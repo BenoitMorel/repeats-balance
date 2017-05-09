@@ -39,7 +39,7 @@ public:
 
   void update_matrices();
 
-  void update_partials();
+  void update_partials(bool update_repeats = true);
 
   double compute_likelihood();
 

@@ -39,7 +39,7 @@ public:
 
   void update_matrices(const Tree &tree);
 
-  void update_partials(const Tree &tree);
+  void update_partials(const Tree &tree, bool update_repeats = true);
 
   double compute_likelihood(const Tree &tree);
 
