@@ -40,26 +40,17 @@ LikelihoodEngine::LikelihoodEngine(const char *newick_file,
   if (part_file) {
     std::vector<PartitionIntervals> partition_intervals;
     PartitionIntervals::parse(part_file, partition_intervals);
-    unsigned int tips_number = 0;
-    pll_msa_t * msa = pll_phylip_parse_msa(phy_file, &tips_number);
-    unsigned int * weights = pll_compress_site_patterns(msa->sequence,
-      (states_number == 4) ? pll_map_nt : pll_map_aa,
-      tips_number,
-      &(msa->length));
-    if (!msa) {
-      std::cout << "Cannot parse msa " << phy_file << std::endl;
-    }
+    MSA msa(phy_file, states_number);
     for (unsigned int i = 0; i < partition_intervals.size(); ++i) {
-      partitions.push_back(new Partition(msa,
-          weights,
-          partition_intervals[i],
+      MSA submsa(&msa, partition_intervals[i], i);
+      submsa.compress();
+      partitions.push_back(new Partition(&submsa,
           tree,
           attribute_flag,
           states_number,
           rate_categories_number,
           repeats_lookup_size));
     }
-    pll_msa_destroy(msa);
   } else {
     partitions.push_back(new Partition(phy_file,
           tree,
@@ -71,7 +62,7 @@ LikelihoodEngine::LikelihoodEngine(const char *newick_file,
 }
 
 LikelihoodEngine::LikelihoodEngine(const char *newick_file,
-    const char *phy_file,
+    const std::vector<MSA *> &msas,
     const CoreAssignment &assignment,
     unsigned int attribute_flag, 
     unsigned int states_number,
@@ -79,26 +70,16 @@ LikelihoodEngine::LikelihoodEngine(const char *newick_file,
     unsigned int repeats_lookup_size): tree(newick_file)
 {
   const std::vector<PartitionIntervals> &partition_intervals = assignment.get_assignments();
-  unsigned int tips_number = 0;
-  pll_msa_t * msa = pll_phylip_parse_msa(phy_file, &tips_number);
-  if (!msa) {
-    std::cout << "Cannot parse msa " << phy_file << std::endl;
-  }
-  unsigned int * weights = pll_compress_site_patterns(msa->sequence,
-    (states_number == 4) ? pll_map_nt : pll_map_aa,
-    tips_number,
-    &(msa->length));
   for (unsigned int i = 0; i < partition_intervals.size(); ++i) {
-    partitions.push_back(new Partition(msa,
-        weights,
-        partition_intervals[i],
+    const PartitionIntervals &intervals = partition_intervals[i];
+    partitions.push_back(new Partition(msas[intervals.get_partition_id()],
+        intervals,
         tree,
         attribute_flag,
         states_number,
         rate_categories_number,
         repeats_lookup_size));
-  }
-  pll_msa_destroy(msa);
+  } 
 }
 
 

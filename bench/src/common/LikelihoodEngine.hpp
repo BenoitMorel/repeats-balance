@@ -25,7 +25,7 @@ public:
 
 
   LikelihoodEngine(const char *newick_file,
-    const char *phy_file,
+    const std::vector<MSA *> &msas,
     const CoreAssignment &assignment,
     unsigned int attribute_flag, 
     unsigned int states_number,

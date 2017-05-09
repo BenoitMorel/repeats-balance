@@ -14,47 +14,47 @@ Partition::Partition(const char *phy_file,
   unsigned int rate_categories_number,
   unsigned int repeats_lookup_size)
 {
-  unsigned int tips_number = 0;
-  pll_msa_t * msa = pll_phylip_parse_msa(phy_file, &tips_number);
-  unsigned int * weights = pll_compress_site_patterns(msa->sequence,
-    (states_number == 4) ? pll_map_nt : pll_map_aa,
-    tips_number,
-    &(msa->length));
+  MSA msa(phy_file, states_number); 
+  msa.compress();
   std::vector<unsigned int> tip_indices;
   pll_utree_t *pll_utree = tree.get_pll_tree();
-  fill_tip_indices(msa, pll_utree, tip_indices);  
-  init_partition(msa, weights, tip_indices, attribute_flag, states_number,
+  fill_tip_indices(msa.get_pll_msa(), pll_utree, tip_indices);  
+  init_partition(msa.get_pll_msa(), msa.get_pattern_weights(), tip_indices, attribute_flag, states_number,
     rate_categories_number, repeats_lookup_size);
-  pll_msa_destroy(msa);
 }
   
-Partition::Partition(const pll_msa_t *compressed_msa, 
-  unsigned int *weights,
-  const PartitionIntervals &partition_intervals,
+Partition::Partition(const MSA *compressed_msa, 
   Tree &tree,
   unsigned int attribute_flag, 
   unsigned int states_number,
   unsigned int rate_categories_number,
   unsigned int repeats_lookup_size)
 {
-  std::cout << "create partition with interval " << partition_intervals << std::endl;
   std::vector<unsigned int> tip_indices;
   pll_utree_t *pll_utree = tree.get_pll_tree();
-  fill_tip_indices(compressed_msa, pll_utree, tip_indices);  
-  pll_msa_t *submsa;
-  unsigned int *subweights;
-  create_sub_msa(compressed_msa, weights, partition_intervals, submsa, subweights);
-  if (!submsa) {
-    std::cerr << "Failed creating submsa for partition interval " << partition_intervals << std::endl;
-  }
-  init_partition(submsa, subweights, tip_indices, attribute_flag, states_number,
+  fill_tip_indices(compressed_msa->get_pll_msa(), pll_utree, tip_indices);  
+  init_partition(compressed_msa->get_pll_msa(), compressed_msa->get_pattern_weights(), tip_indices, attribute_flag, states_number,
     rate_categories_number, repeats_lookup_size);
-  // TODO destroy msa and submsa and weights 
-  //pll_msa_destroy(sub_msa);
+}
+
+Partition::Partition(const MSA *compressed_msa, 
+  const PartitionIntervals &intervals,
+  Tree &tree,
+  unsigned int attribute_flag, 
+  unsigned int states_number,
+  unsigned int rate_categories_number,
+  unsigned int repeats_lookup_size)
+{
+  MSA submsa(compressed_msa, intervals, compressed_msa->get_msa_index());
+  std::vector<unsigned int> tip_indices;
+  pll_utree_t *pll_utree = tree.get_pll_tree();
+  fill_tip_indices(compressed_msa->get_pll_msa(), pll_utree, tip_indices);  
+  init_partition(submsa.get_pll_msa(), submsa.get_pattern_weights(), tip_indices, attribute_flag, states_number,
+    rate_categories_number, repeats_lookup_size);
 }
   
 
-void Partition::init_partition(pll_msa_t *compressed_msa, 
+void Partition::init_partition(const pll_msa_t *compressed_msa, 
   const unsigned int *weights,
   const std::vector<unsigned int> &tip_indices,
   unsigned int attribute_flag, 

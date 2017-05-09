@@ -9,9 +9,9 @@ class MSA {
 
 public:
 
-  MSA(const char *phy_filename);
+  MSA(const char *phy_filename, unsigned int states_number);
 
-  MSA(const MSA *original_msa, const PartitionIntervals &intervals, unsigned int states_number,  unsigned int msa_index);
+  MSA(const MSA *original_msa, const PartitionIntervals &intervals, unsigned int msa_index);
 
   ~MSA();
 
@@ -23,10 +23,15 @@ public:
 
   const unsigned int *get_pattern_weights() const {return weights;}
 
+  unsigned int get_states_number() const {return states_number;}
+
   unsigned int get_msa_index() const {return msa_idx;}
+
+  unsigned int get_length() const {return msa->length;}
 private:
   pll_msa_t *msa;
   unsigned int *weights;
+  unsigned int states_number;
   unsigned int msa_idx;
 };
 

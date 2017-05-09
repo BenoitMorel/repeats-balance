@@ -9,13 +9,16 @@ class CoreAssignment {
 
 public:
   CoreAssignment(unsigned int core_id) : core_id(core_id), weight(0) {}
-  
-  void add_assignment(const PartitionIntervals &partition_interval) {
-    this->weight += partition_interval.get_partition_weight();
-    assignment.push_back(partition_interval);
+
+  void add_assignment(unsigned int msa_id, unsigned int start, unsigned int size, double weight) {
+    this->weight += weight;
+    PartitionIntervals interval(msa_id);
+    interval.add_interval(start, size);
+    assignment.push_back(interval);
   }
 
   unsigned int get_core_id() const {return core_id;}
+  
   double get_core_weight() const {return weight;}
 
   friend std::ostream& operator<< (std::ostream& stream, const CoreAssignment& core_as) {
@@ -32,7 +35,6 @@ private:
   unsigned int core_id;
   std::vector<PartitionIntervals> assignment;
   double weight;
-
 };
 
 

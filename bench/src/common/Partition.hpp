@@ -3,6 +3,7 @@
 
 #include <limits>
 #include "Model.hpp"
+#include "MSA.hpp"
 #include "safepll.h"
 #include "Tree.hpp"
 #include "PartitionIntervals.hpp"
@@ -17,9 +18,15 @@ public:
     unsigned int rate_categories_number,
     unsigned int repeats_lookup_size);
   
-  Partition(const pll_msa_t *compressed_msa,
-    unsigned int *weights,
-    const PartitionIntervals &partition_intervals,
+  Partition(const MSA *compressed_msa,
+    Tree &tree,
+    unsigned int attribute_flag, 
+    unsigned int states_number,
+    unsigned int rate_categories_number,
+    unsigned int repeats_lookup_size);
+  
+  Partition(const MSA *compressed_msa,
+    const PartitionIntervals &intervals,
     Tree &tree,
     unsigned int attribute_flag, 
     unsigned int states_number,
@@ -54,8 +61,8 @@ public:
   static const unsigned int INVALID_ATTRIBUTE;
 
 private:
-  void init_partition(pll_msa_t *compressed_msa,
-    const unsigned int *rates,
+  void init_partition(const pll_msa_t *compressed_msa,
+    const unsigned int *weights,
     const std::vector<unsigned int> &tip_indices,
     unsigned int attribute_flag, 
     unsigned int states_number,
