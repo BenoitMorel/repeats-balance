@@ -41,9 +41,13 @@ void kassian_lb_partials(int argc, char *params[])
   unsigned int cores = atoi(params[i++]);
 
   
-  
+  MSA full_msa(seq); 
   std::vector<PartitionIntervals> initial_partitionning;
   PartitionIntervals::parse(partition_file, initial_partitionning);
+  std::vector<MSA *> msas;
+  for (unsigned int i = 0; i < initial_partitionning.size(); ++i) {
+    msas.push_back(new MSA(&full_msa, initial_partitionning[i], states,  i));
+  }
   LoadBalancer balancer;
   std::vector<CoreAssignment> assignments;
   balancer.kassian_load_balance(cores, initial_partitionning, assignments);

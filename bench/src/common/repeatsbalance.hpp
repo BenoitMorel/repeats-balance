@@ -3,6 +3,7 @@
 
 #include "LikelihoodEngine.hpp"
 #include "Model.hpp"
+#include "MSA.hpp"
 #include "Tree.hpp"
 #include "Partition.hpp"
 #include "PartitionIntervals.hpp"
