@@ -1,6 +1,31 @@
 #include "LoadBalancer.hpp"
 #include <algorithm>
+#include "Tree.hpp"
+#include "Partition.hpp"
+  
 
+
+void LoadBalancer::compute_weighted_msa(const std::vector<MSA *> &input_msas,
+  std::vector<WeightedMSA> &weighted_msa,
+  unsigned int pll_attribute)
+{
+  weighted_msa.resize(input_msas.size());
+  const unsigned int iterations = 10;
+  for (unsigned int i = 0; i < input_msas.size(); ++i) {
+    weighted_msa[i].msa = input_msas[i];
+    weighted_msa[i].persite_weight = 0.0;
+  }
+  for (unsigned int i = 0; i < iterations; ++i) {
+    Tree tree(input_msas[0]);
+    tree.update_operations(Tree::traverser_full);
+    for (unsigned int m = 0; m < input_msas.size(); ++m) {
+      Partition partition(input_msas[m], tree, pll_attribute, input_msas[0]->get_states_number(), 4, 0);
+      partition.update_matrices(tree);
+      partition.update_partials(tree);
+      weighted_msa[m].persite_weight += partition.get_unique_repeats_pattern_ratio();
+    }
+  }
+}
 
 void LoadBalancer::kassian_load_balance(unsigned int _cores_number,
       const std::vector<WeightedMSA> &input_msas,
@@ -37,7 +62,8 @@ void LoadBalancer::compute_limit_weight()
   limit_weight_percore = 0.0;
   for (unsigned int i = 0; i < sorted_partitions.size(); ++i) {
     limit_weight_percore += sorted_partitions[i].get_total_weight() / double(cores_number);
-  }   
+  }  
+  std::cout << "Limit weight " << limit_weight_percore << std::endl;
 }
 
 // Assign partitions in a cyclic manner to cores until one is too big 

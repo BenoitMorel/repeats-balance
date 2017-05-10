@@ -2,6 +2,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include "../common/repeatsbalance.hpp"
+#include <time.h>
 
 void analyse_partitions(int argc, char *params[])
 {
@@ -17,15 +18,15 @@ void analyse_partitions(int argc, char *params[])
   const char *part_filename = params[i++];
   unsigned int states_number = atoi(params[i++]);
 
-
   unsigned int attribute = Partition::compute_attribute(true, 
       0, 
 		  "avx");
 
+  srand(time(0));
   MSA msa(phy_filename, states_number);
   std::vector<PartitionIntervals> partitions_intervals;
   PartitionIntervals::parse(part_filename, partitions_intervals);
-  Tree tree(msa.get_pll_msa()->count, msa.get_pll_msa()->label);
+  Tree tree(&msa);
   tree.update_operations(Tree::traverser_full);
   for (unsigned int i = 0; i < partitions_intervals.size(); ++i) {
     MSA submsa(&msa, partitions_intervals[i], i);

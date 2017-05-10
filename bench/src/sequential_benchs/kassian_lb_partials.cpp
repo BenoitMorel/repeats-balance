@@ -13,17 +13,20 @@ double get_unique_pattern_ratio(LikelihoodEngine &engine)
     total_sites += partition->get_sites_number();
     total_patterns += partition->get_unique_repeats_pattern_ratio() * double(partition->get_sites_number());
   }
+  double res = total_patterns / total_sites;
   std::cout << "total sites " << total_sites << std::endl;
-  return total_patterns / total_sites;
+  std::cout << "ratio " << res << std::endl;
+  std::cout << "Sites * ratio = " << total_patterns << std::endl;
+  return res;
 }
 
 
 void kassian_lb_partials(int argc, char *params[])
 {
-  if (argc != 9) {
+  if (argc != 10) {
     std::cerr << "Error : syntax is" << std::endl;
     std::cerr 
-      << "newick sequence partitions states use_repeats update_repeats repeats_lookup_size iterations cores" 
+      << "newick sequence partitions states use_repeats update_repeats repeats_lookup_size iterations cores randomized" 
       << std::endl;
     return ;
   }
@@ -37,21 +40,30 @@ void kassian_lb_partials(int argc, char *params[])
   unsigned int repeats_lookup_size = atoi(params[i++]);
   unsigned int iterations = atoi(params[i++]);
   unsigned int cores = atoi(params[i++]);
+  unsigned int randomized = atoi(params[i++]);
 
+
+  long worst_time = 0;
   srand(time(NULL)); 
-  Tree tree(newick);
   MSA full_msa(seq, states_number); 
-  tree.randomize_pll_utree(&full_msa);
+  Tree tree(newick);
+  //Tree tree(&full_msa);
   std::vector<PartitionIntervals> initial_partitionning;
   PartitionIntervals::parse(partition_file, initial_partitionning);
   std::vector<MSA *> msas;
   std::vector<WeightedMSA> weighted_msas;
+  LoadBalancer balancer;
   for (unsigned int i = 0; i < initial_partitionning.size(); ++i) {
     msas.push_back(new MSA(&full_msa, initial_partitionning[i], i));
     msas[i]->compress();
-    weighted_msas.push_back(WeightedMSA(msas[i], 1.0));
   }
-  LoadBalancer balancer;
+  if (!randomized) {
+    for (unsigned int i = 0; i < initial_partitionning.size(); ++i) {
+      weighted_msas.push_back(WeightedMSA(msas[i], 1.0));
+    }
+  } else {
+    balancer.compute_weighted_msa(msas, weighted_msas, PLL_ATTRIB_SITES_REPEATS | PLL_ATTRIB_ARCH_AVX);
+  }
   std::vector<CoreAssignment> assignments;
   balancer.kassian_load_balance(cores, weighted_msas, assignments);
   unsigned int attribute = Partition::compute_attribute(use_repeats, 
@@ -67,9 +79,11 @@ void kassian_lb_partials(int argc, char *params[])
     for (unsigned int i = 0; i < iterations; ++i) {
       engine.update_partials(update_repeats);
     }
-    std::cout << "Pattern ratio: " << get_unique_pattern_ratio(engine) << std::endl;
+    get_unique_pattern_ratio(engine);
+    worst_time = std::max(worst_time, timer.get_time());
     std::cout << timer.get_time() << " ms" << std::endl;
   }
 
+  std::cout << "WORST TIME " << worst_time << "ms" <<  std::endl;
 
 }

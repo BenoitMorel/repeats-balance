@@ -193,10 +193,10 @@ pll_utree_t *Tree::create_random(unsigned int taxa_count,
   return (new_tree);
 }
 
-Tree::Tree(unsigned int tips, const char * const* names)
+Tree::Tree(const MSA *msa)
 {
-  pll_utree = create_random(tips, names);
-  tips_number = tips;
+  pll_utree = create_random(msa->get_pll_msa()->count, msa->get_pll_msa()->label);
+  tips_number = msa->get_pll_msa()->count;
   init();
 }
 

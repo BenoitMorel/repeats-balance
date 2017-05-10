@@ -2,7 +2,7 @@
 
 source ../sequential_benchs/scripts/common.sh
 
-data_name=404
+data_name=kyte
 
 states=4
 

@@ -10,6 +10,7 @@ struct WeightedMSA {
   const MSA *msa;
   double persite_weight;
 
+  WeightedMSA(): msa(0), persite_weight(1.0) {}
   WeightedMSA(const MSA *msa, double persite_weight): msa(msa), persite_weight(persite_weight) {}
 
   double get_total_weight() const {return persite_weight * msa->get_length();}
@@ -18,10 +19,15 @@ struct WeightedMSA {
 class LoadBalancer {
 
 public:
+  void compute_weighted_msa(const std::vector<MSA *> &input_msas,
+      std::vector<WeightedMSA> &weighted_msa,
+      unsigned int pll_attribute);
+  
   void kassian_load_balance(unsigned int cores_number,
       const std::vector<WeightedMSA> &input_msas,
       std::vector<CoreAssignment> &assignments);
-  
+
+
 private:
   void compute_sorted_partitions(const std::vector<WeightedMSA> &partitions,
     std::vector<WeightedMSA> &sorted_partitions);
