@@ -2,14 +2,14 @@
 
 source scripts/common.sh
 
-data_name=404
+data_name=kyte
 
 states=4
 lookupsize=0
-cpus=8
-iterations=20
+cpus=50
+iterations=200
 use_repeats=1
-update_repeats=0
+update_repeats=1
 debugger=
 #debugger=valgrind
 #debugger="gdb --args "

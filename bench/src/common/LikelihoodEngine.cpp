@@ -5,13 +5,6 @@
 
 
 
-/* a callback function for performing a full traversal */
-static int traverser_full(pll_utree_t * node)
-{
-  node->data = (void *)~0;
-  return 1;
-}
-
 LikelihoodEngine::LikelihoodEngine(const char *newick_file,
     const char *phy_file,
     unsigned int attribute_flag, 
@@ -95,7 +88,7 @@ LikelihoodEngine::~LikelihoodEngine()
 
 void LikelihoodEngine::update_operations()
 {
-  tree->update_operations(traverser_full);
+  tree->update_operations(Tree::traverser_full);
 }
   
 void LikelihoodEngine::update_matrices()

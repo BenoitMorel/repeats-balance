@@ -31,6 +31,12 @@ public:
 
   // update_operations must be called after that
   void randomize_pll_utree(const MSA *msa);
+
+  static int traverser_full(pll_utree_t * node)
+  {
+    node->data = (void *)~0;
+    return 1;
+  }
 private:
   void init();
   pll_utree_t *create_random(unsigned int taxa_count, const char * const* names);

@@ -196,6 +196,7 @@ pll_utree_t *Tree::create_random(unsigned int taxa_count,
 Tree::Tree(unsigned int tips, const char * const* names)
 {
   pll_utree = create_random(tips, names);
+  tips_number = tips;
   init();
 }
 
