@@ -2,7 +2,7 @@
 
 source ../sequential_benchs/scripts/common.sh
 
-data_name=kyte
+data_name=pierre
 
 states=4
 

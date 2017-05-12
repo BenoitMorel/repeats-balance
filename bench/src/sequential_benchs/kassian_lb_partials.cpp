@@ -45,7 +45,8 @@ void kassian_lb_partials(int argc, char *params[])
 
   long worst_time = 0;
   srand(time(NULL)); 
-  MSA full_msa(seq, states_number); 
+  std::cout << "parse" << std::endl;
+  MSA *full_msa = new MSA(seq, states_number); 
   Tree tree(newick);
   //Tree tree(&full_msa);
   std::vector<PartitionIntervals> initial_partitionning;
@@ -53,10 +54,14 @@ void kassian_lb_partials(int argc, char *params[])
   std::vector<MSA *> msas;
   std::vector<WeightedMSA> weighted_msas;
   LoadBalancer balancer;
+  std::cout << "create submsas" << std::endl;
   for (unsigned int i = 0; i < initial_partitionning.size(); ++i) {
-    msas.push_back(new MSA(&full_msa, initial_partitionning[i], i));
+    msas.push_back(new MSA(full_msa, initial_partitionning[0], i));
     msas[i]->compress();
   }
+  std::cout << "parse" << std::endl;
+  MSA *full_3msa = new MSA(seq, states_number); 
+  delete full_msa;
   if (!randomized) {
     for (unsigned int i = 0; i < initial_partitionning.size(); ++i) {
       weighted_msas.push_back(WeightedMSA(msas[i], 1.0));
@@ -65,11 +70,13 @@ void kassian_lb_partials(int argc, char *params[])
     balancer.compute_weighted_msa(msas, weighted_msas, PLL_ATTRIB_SITES_REPEATS | PLL_ATTRIB_ARCH_AVX);
   }
   std::vector<CoreAssignment> assignments;
+  std::cout << "load balance" << std::endl;
   balancer.kassian_load_balance(cores, weighted_msas, assignments);
   unsigned int attribute = Partition::compute_attribute(use_repeats, 
 		  0, 
 		  "avx");
 
+  std::cout << "GO" << std::endl;
   for (unsigned int core = 0; core < assignments.size(); ++core) {
     LikelihoodEngine engine(&tree, msas, assignments[core], attribute, states_number, 4, repeats_lookup_size);
     engine.update_operations();

@@ -6,7 +6,7 @@ data_name=kyte
 
 states=4
 lookupsize=0
-cpus=100
+cpus=10
 iterations=200
 use_repeats=1
 update_repeats=0
