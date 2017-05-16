@@ -98,7 +98,7 @@ void Partition::init_partition(const pll_msa_t *compressed_msa,
 
 Partition::~Partition()
 {
-  //pll_partition_destroy(partition);
+  pll_partition_destroy(partition);
   pll_aligned_free(sumtable_buffer);
 }
 
@@ -270,6 +270,7 @@ void Partition::fill_tip_indices(const pll_msa_t * msa,
     unsigned int tip_clv_index = *((unsigned int *)(found->data));
     tip_indices.push_back(tip_clv_index);
   }
+  free(indices_buffer);
   hdestroy();
 }
 

@@ -231,7 +231,7 @@ Tree::Tree(const MSA *msa)
 
 Tree::~Tree()
 {
-  pll_utree_destroy(pll_utree, free);
+  pll_utree_destroy(pll_utree, 0);
 }
 
 void Tree::update_operations(int (*traverse)(pll_unode_t *))

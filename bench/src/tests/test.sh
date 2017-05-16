@@ -6,4 +6,4 @@ cd ../common
 make
 cd ../tests
 make
-valgrind ./main
+valgrind   ./main
