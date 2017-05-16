@@ -19,7 +19,9 @@ public:
   
   const pll_utree_t *get_pll_tree() const {return pll_utree;}
 
-  void update_operations(int (*traverse)(pll_utree_t *));
+  const pll_unode_t *get_pll_root() const {return pll_utree->nodes[tips_number + innernodes_number - 1];}
+
+  void update_operations(int (*traverse)(pll_unode_t *));
  
   const double *get_branch_lengths() const {return &branch_lengths[0];}
 
@@ -34,22 +36,17 @@ public:
   // update_operations must be called after that
   void randomize_pll_utree(const MSA *msa);
 
-  static int traverser_full(pll_utree_t * node)
-  {
-    node->data = (void *)~0;
-    return 1;
-  }
+  static int traverser_full(pll_unode_t * node);
+
 private:
   void init();
   pll_utree_t *create_random(unsigned int taxa_count, const char * const* names);
-  static void set_missing_branch_length_recursive(pll_utree_t * tree, double length);
-  static void set_missing_branch_length(pll_utree_t * tree, double length);
 private:
   pll_utree_t * pll_utree;
   std::vector<double> branch_lengths;
   std::vector<unsigned int> matrix_indices;
   std::vector<pll_operation_t> operations;
-  std::vector<pll_utree_t *> traverse_buffer;
+  std::vector<pll_unode_t *> traverse_buffer;
   unsigned int tips_number;
   unsigned int innernodes_number;
   unsigned int nodes_number;

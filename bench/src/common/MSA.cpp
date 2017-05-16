@@ -6,11 +6,15 @@ MSA::MSA(const char *phy_filename, unsigned int states_number):
   states_number(states_number),
   msa_idx(0)
 {
-  unsigned int tips_number = 0;
-  msa = pll_phylip_parse_msa(phy_filename, &tips_number);
-  if (!msa) {
-    std::cerr << "[ERROR] MSA::MSA Cannot read " << phy_filename << std::endl;
+  pll_phylip_t * fd = pll_phylip_open(phy_filename, pll_map_phylip);
+  if (!fd) {
+    std::cerr << "[ERROR] MSA::MSA Cannot open " << phy_filename << std::endl;
   }
+  msa = pll_phylip_parse_interleaved(fd);
+  if (!msa) {
+    std::cerr << "[ERROR] MSA::MSA Cannot parse " << phy_filename << std::endl;
+  }
+  pll_phylip_close(fd);
 }
 
 
@@ -67,6 +71,9 @@ MSA::~MSA()
 
 void MSA::compress()
 {
+  if (!msa) {
+    std::cerr << "[Error] Null MSA in compress" << std::endl;
+  }
   if (is_compressed()) {
     std::cerr << "[Warning] MSA::compress msa is already compressed" << std::endl;
     return;
