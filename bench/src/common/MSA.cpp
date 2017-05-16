@@ -55,7 +55,7 @@ MSA::MSA(const MSA *original_msa, const PartitionIntervals &intervals, unsigned 
       // also copy rates 
       if (original_msa->is_compressed() && !seqidx) {
         memcpy(weights + msa_sequence_offset,
-            original_msa->get_pll_msa() + intervals.get_start(intidx),
+            original_msa->weights + intervals.get_start(intidx),
             intervals.get_size(intidx) * sizeof(unsigned int));
       }
       msa_sequence_offset += intervals.get_size(intidx);

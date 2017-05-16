@@ -10,6 +10,7 @@ double get_unique_pattern_ratio(LikelihoodEngine &engine)
   for (unsigned int p = 0; p < partitions.size(); ++p) {
     
     Partition *partition = partitions[p];
+    std::cout << partition << std::endl;
     total_sites += partition->get_sites_number();
     total_patterns += partition->get_unique_repeats_pattern_ratio() * double(partition->get_sites_number());
   }
@@ -60,8 +61,7 @@ void kassian_lb_partials(int argc, char *params[])
     msas[i]->compress();
   }
   std::cout << "parse" << std::endl;
-  MSA *full_3msa = new MSA(seq, states_number); 
-  delete full_msa;
+  
   if (!randomized) {
     for (unsigned int i = 0; i < initial_partitionning.size(); ++i) {
       weighted_msas.push_back(WeightedMSA(msas[i], 1.0));
