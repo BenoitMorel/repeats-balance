@@ -1,5 +1,23 @@
 #include "mpi_benchs.hpp"
 
+double print_stats(LikelihoodEngine &engine)
+{
+  double total_patterns = 0;
+  double total_sites = 0;
+  std::vector<Partition*> &partitions = engine.get_partitions();
+  for (unsigned int p = 0; p < partitions.size(); ++p) {
+    
+    Partition *partition = partitions[p];
+    total_sites += partition->get_sites_number();
+    total_patterns += partition->get_unique_repeats_pattern_ratio() * double(partition->get_sites_number());
+  }
+  double res = total_patterns / total_sites;
+  std::cout << "  total sites " << total_sites << std::endl;
+  std::cout << "  ratio " << res << std::endl;
+  std::cout << "  Sites * ratio = " << total_patterns << std::endl;
+  return res;
+}
+
 void full_tree_traversal(int argc, char *params[])
 {
   if (argc != 10) {
@@ -21,6 +39,7 @@ void full_tree_traversal(int argc, char *params[])
   unsigned int randomized = atoi(params[i++]);
   unsigned int seed = atoi(params[i++]);
 
+
   MPI_Init(NULL, NULL);
 
   int cores = 0;
@@ -29,10 +48,19 @@ void full_tree_traversal(int argc, char *params[])
   int rank_id = 0;
   MPI_Comm_rank(MPI_COMM_WORLD, &rank_id);
 
+  if (!rank_id) {
+    std::cout << "caption ";
+    std::cout << cores << "cores ";
+    std::cout << (use_repeats ? "repeats " : "tipinner ");
+    std::cout << (update_repeats ? "update " : "noupdate ")  << std::endl;
+    std::cout << (randomized ? "randomized " : "kassian ")  << std::endl;
+  }
+  
+    
   srand(seed); 
   MSA full_msa(seq, states_number); 
-  Tree tree(newick);
-  //Tree tree(&full_msa);
+  //Tree tree(newick);
+  Tree tree(&full_msa);
   std::vector<PartitionIntervals> initial_partitionning;
   PartitionIntervals::parse(partition_file, initial_partitionning);
   std::vector<MSA *> msas;
@@ -55,6 +83,11 @@ void full_tree_traversal(int argc, char *params[])
 		  0, 
 		  "avx");
 
+  if (!rank_id) {
+    for (unsigned int i = 0; i < assignments.size(); ++i) {
+      std::cout << assignments[i] << std::endl;
+    }
+  }
   LikelihoodEngine engine(&tree, msas, assignments[rank_id], attribute, states_number, 4, repeats_lookup_size);
   engine.update_operations();
   engine.update_matrices();
@@ -64,12 +97,7 @@ void full_tree_traversal(int argc, char *params[])
     engine.update_partials(update_repeats);
   }
   int local_time = timer.get_time();
+  print_stats(engine);
   std::cout << rank_id << " " << local_time << "ms" << std::endl;
-  //int global_time;
-  //MPI_Reduce(&local_time, &global_time, 1, MPI_INT, MPI_SUM, 0,
-  //               MPI_COMM_WORLD);
-  
-  
-  // Finalize the MPI environment.
   MPI_Finalize();
 }
