@@ -52,7 +52,7 @@ public:
   std::vector<Partition*> &get_partitions() {return partitions;}
 
 private:
-
+  bool delete_tree;
   Tree *tree;
   std::vector<Partition*> partitions;
 

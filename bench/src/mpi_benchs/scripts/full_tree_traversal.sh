@@ -2,11 +2,11 @@
 
 source ../sequential_benchs/scripts/common.sh
 
-data_name=404
+data_name=kyte
 
 states=4
 lookupsize=0
-cpus=16
+cpus=64
 iterations=100
 use_repeats=0
 update_repeats=1

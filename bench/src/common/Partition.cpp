@@ -98,7 +98,7 @@ void Partition::init_partition(const pll_msa_t *compressed_msa,
 
 Partition::~Partition()
 {
-  //pll_partition_destroy(partition);
+  pll_partition_destroy(partition);
   pll_aligned_free(sumtable_buffer);
 }
 
@@ -159,13 +159,13 @@ void Partition::update_partials(const Tree &tree, bool update_repeats)
 
 double Partition::compute_likelihood(const Tree &tree) 
 {
-  const pll_utree_t *pll_tree = tree.get_pll_tree();
+  const pll_unode_t *pll_root = tree.get_pll_root();
   return pll_compute_edge_loglikelihood(partition,
-      pll_tree->clv_index,
-      pll_tree->scaler_index,
-      pll_tree->back->clv_index,
-      pll_tree->back->scaler_index,
-      pll_tree->pmatrix_index,
+      pll_root->clv_index,
+      pll_root->scaler_index,
+      pll_root->back->clv_index,
+      pll_root->back->scaler_index,
+      pll_root->pmatrix_index,
       &parameters_indices[0],
       NULL);
 }
@@ -173,8 +173,8 @@ double Partition::compute_likelihood(const Tree &tree)
 void Partition::update_sumtable(const Tree &tree)
 {
   pll_update_sumtable(partition,
-                      tree.get_pll_tree()->clv_index,
-                      tree.get_pll_tree()->back->clv_index,
+                      tree.get_pll_root()->clv_index,
+                      tree.get_pll_root()->back->clv_index,
                       PLL_SCALE_BUFFER_NONE,
                       PLL_SCALE_BUFFER_NONE,
                       &parameters_indices[0], 
@@ -247,16 +247,13 @@ void Partition::fill_tip_indices(const pll_msa_t * msa,
 {
   tip_indices.clear();
   unsigned int tips_number = msa->count;
-  pll_utree_t ** tips_buffer = (pll_utree_t  **)calloc(tips_number,
-      sizeof(pll_utree_t *));
-  pll_utree_query_tipnodes(pll_utree, tips_buffer);
   hcreate(tips_number);
   unsigned int * indices_buffer = (unsigned int *)malloc(tips_number * sizeof(unsigned int));
   for (unsigned int i = 0; i < tips_number; ++i)
   {
-    indices_buffer[i] = tips_buffer[i]->clv_index;
+    indices_buffer[i] = pll_utree->nodes[i]->clv_index;
     ENTRY entry;
-    entry.key = tips_buffer[i]->label;
+    entry.key = pll_utree->nodes[i]->label;
     entry.data = (void *)(indices_buffer + i);
     hsearch(entry, ENTER);
   }
@@ -273,6 +270,7 @@ void Partition::fill_tip_indices(const pll_msa_t * msa,
     unsigned int tip_clv_index = *((unsigned int *)(found->data));
     tip_indices.push_back(tip_clv_index);
   }
+  free(indices_buffer);
   hdestroy();
 }
 
