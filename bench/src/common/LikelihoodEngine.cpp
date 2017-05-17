@@ -79,8 +79,7 @@ LikelihoodEngine::LikelihoodEngine(Tree *tree,
         attribute_flag,
         states_number,
         rate_categories_number,
-        repeats_lookup_size,
-        assignment.get_core_id()));
+        repeats_lookup_size));
   } 
 }
 
