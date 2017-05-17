@@ -28,7 +28,7 @@ void derivatives(int argc, char *params[])
   unsigned int attribute = Partition::compute_attribute(use_repeats, 
 		  additional_attr, 
 		  arch); 
-  LikelihoodEngine engine(newick, seq, attribute, states, 4, repeats_lookup_size);
+  LikelihoodEngine engine(newick, seq, 0, attribute, states, 4, repeats_lookup_size);
   
   engine.update_operations();
   engine.update_matrices();

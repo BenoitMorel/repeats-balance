@@ -10,14 +10,7 @@ public:
   
   LikelihoodEngine(const char *newick_file,
     const char *phy_file,
-    unsigned int attribute_flag, 
-    unsigned int states_number,
-    unsigned int rate_categories_number,
-    unsigned int repeats_lookup_size);
-
-  LikelihoodEngine(const char *newick_file,
-    const char *phy_file,
-    const char *part_file,
+    const char *part_file, // can be null for no partition
     unsigned int attribute_flag, 
     unsigned int states_number,
     unsigned int rate_categories_number,
@@ -50,6 +43,8 @@ public:
   Tree &get_tree() {return *tree;}
 
   std::vector<Partition*> &get_partitions() {return partitions;}
+
+  void set_current_tree(Tree *tree);
 
 private:
   bool delete_tree;

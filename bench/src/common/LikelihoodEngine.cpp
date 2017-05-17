@@ -7,24 +7,6 @@
 
 LikelihoodEngine::LikelihoodEngine(const char *newick_file,
     const char *phy_file,
-    unsigned int attribute_flag, 
-    unsigned int states_number,
-    unsigned int rate_categories_number,
-    unsigned int repeats_lookup_size):
-  delete_tree(true)
-{
-  MSA msa(phy_file, states_number);
-  msa.compress();
-  partitions.push_back(new Partition(&msa,
-        attribute_flag,
-        states_number,
-        rate_categories_number,
-        repeats_lookup_size));
-  tree = new Tree(&msa, newick_file);
-}
-
-LikelihoodEngine::LikelihoodEngine(const char *newick_file,
-    const char *phy_file,
     const char *part_file,
     unsigned int attribute_flag, 
     unsigned int states_number,
@@ -138,4 +120,13 @@ void LikelihoodEngine::compute_derivatives(double *d_f, double *dd_f)
   }
 }
 
+void LikelihoodEngine::set_current_tree(Tree *tree)
+{
+  if (delete_tree) {
+    std::cerr << "[Error] LikelihoodEngine::set_current_tree cannot change "
+      << "current tree" << std::endl;
+    return;
+  }
+  this->tree = tree;
+}
 
