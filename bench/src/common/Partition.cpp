@@ -16,10 +16,9 @@ Partition::Partition(const char *phy_file,
 {
   MSA msa(phy_file, states_number); 
   msa.compress();
-  std::vector<unsigned int> tip_indices;
   pll_utree_t *pll_utree = tree.get_pll_tree();
-  fill_tip_indices(msa.get_pll_msa(), pll_utree, tip_indices);  
-  init_partition(msa.get_pll_msa(), msa.get_pattern_weights(), tip_indices, attribute_flag, states_number,
+  fill_tip_indices(msa.get_pll_msa(), pll_utree);  
+  init_partition(msa.get_pll_msa(), msa.get_pattern_weights(), attribute_flag, states_number,
     rate_categories_number, repeats_lookup_size);
 }
   
@@ -30,10 +29,9 @@ Partition::Partition(const MSA *compressed_msa,
   unsigned int rate_categories_number,
   unsigned int repeats_lookup_size)
 {
-  std::vector<unsigned int> tip_indices;
   pll_utree_t *pll_utree = tree.get_pll_tree();
-  fill_tip_indices(compressed_msa->get_pll_msa(), pll_utree, tip_indices);  
-  init_partition(compressed_msa->get_pll_msa(), compressed_msa->get_pattern_weights(), tip_indices, attribute_flag, states_number,
+  fill_tip_indices(compressed_msa->get_pll_msa(), pll_utree);  
+  init_partition(compressed_msa->get_pll_msa(), compressed_msa->get_pattern_weights(),  attribute_flag, states_number,
     rate_categories_number, repeats_lookup_size);
 }
 
@@ -46,17 +44,15 @@ Partition::Partition(const MSA *compressed_msa,
   unsigned int repeats_lookup_size)
 {
   MSA submsa(compressed_msa, intervals, compressed_msa->get_msa_index());
-  std::vector<unsigned int> tip_indices;
   pll_utree_t *pll_utree = tree.get_pll_tree();
-  fill_tip_indices(compressed_msa->get_pll_msa(), pll_utree, tip_indices);  
-  init_partition(submsa.get_pll_msa(), submsa.get_pattern_weights(), tip_indices, attribute_flag, states_number,
+  fill_tip_indices(compressed_msa->get_pll_msa(), pll_utree);  
+  init_partition(submsa.get_pll_msa(), submsa.get_pattern_weights(), attribute_flag, states_number,
     rate_categories_number, repeats_lookup_size);
 }
   
 
 void Partition::init_partition(const pll_msa_t *compressed_msa, 
   const unsigned int *weights,
-  const std::vector<unsigned int> &tip_indices,
   unsigned int attribute_flag, 
   unsigned int states_number,
   unsigned int rate_categories_number,
@@ -77,8 +73,8 @@ void Partition::init_partition(const pll_msa_t *compressed_msa,
       attribute_flag);
   
   pll_set_pattern_weights(partition, weights);
-  for (unsigned int i = 0; i < tip_indices.size(); ++i) {
-    pll_set_tip_states(partition, tip_indices.size() ? tip_indices[i] : i, 
+  for (unsigned int i = 0; i < tips_number; ++i) {
+    pll_set_tip_states(partition, i, 
       is_dna ? pll_map_nt : pll_map_aa,
       compressed_msa->sequence[i]);
   }
@@ -242,33 +238,30 @@ void Partition::create_sub_msa(const pll_msa_t *msa, const unsigned int *weights
 }
 
 void Partition::fill_tip_indices(const pll_msa_t * msa,
-    pll_utree_t *pll_utree,
-    std::vector<unsigned int> &tip_indices)
+    pll_utree_t *pll_utree)
 {
-  tip_indices.clear();
   unsigned int tips_number = msa->count;
   hcreate(tips_number);
   unsigned int * indices_buffer = (unsigned int *)malloc(tips_number * sizeof(unsigned int));
   for (unsigned int i = 0; i < tips_number; ++i)
   {
-    indices_buffer[i] = pll_utree->nodes[i]->clv_index;
+    indices_buffer[i] = i;
     ENTRY entry;
-    entry.key = pll_utree->nodes[i]->label;
+    entry.key = msa->label[i];
     entry.data = (void *)(indices_buffer + i);
     hsearch(entry, ENTER);
   }
   for (unsigned int i = 0; i < tips_number; ++i)
   {
     ENTRY query;
-    query.key = msa->label[i];
-    query.key = msa->label[i];
+    query.key = pll_utree->nodes[i]->label;
     ENTRY * found = NULL;
     found = hsearch(query,ENTER);
     if (!found) {
       fprintf(stderr, "Sequence with header %s does not appear in the tree\n", msa->label[i]);
     }
     unsigned int tip_clv_index = *((unsigned int *)(found->data));
-    tip_indices.push_back(tip_clv_index);
+    pll_utree->nodes[i]->clv_index = tip_clv_index;
   }
   free(indices_buffer);
   hdestroy();

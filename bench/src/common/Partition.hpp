@@ -63,7 +63,6 @@ public:
 private:
   void init_partition(const pll_msa_t *compressed_msa,
     const unsigned int *weights,
-    const std::vector<unsigned int> &tip_indices,
     unsigned int attribute_flag, 
     unsigned int states_number,
     unsigned int rate_categories_number = 4,
@@ -77,8 +76,7 @@ private:
       pll_msa_t *&submsa, unsigned int *&subweights); 
 
   static void fill_tip_indices(const pll_msa_t * msa,
-    pll_utree_t *pll_utree,
-    std::vector<unsigned int> &tip_indices);
+    pll_utree_t *pll_utree);
 
 private:
   pll_partition_t *partition;
