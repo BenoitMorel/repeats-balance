@@ -52,10 +52,12 @@ void full_tree_traversal(int argc, char *params[])
     std::cout << "caption ";
     std::cout << cores << "cores ";
     std::cout << (use_repeats ? "repeats " : "tipinner ");
-    std::cout << (update_repeats ? "update " : "noupdate ")  << std::endl;
+    std::cout << (update_repeats ? "update " : "noupdate ") ;
     std::cout << (randomized ? "randomized " : "kassian ")  << std::endl;
+    std::cout << iterations  << std::endl;
+    std::cout << seed  << std::endl;
   }
-  
+
     
   srand(seed); 
   MSA full_msa(seq, states_number); 
@@ -94,6 +96,8 @@ void full_tree_traversal(int argc, char *params[])
   engine.update_partials();
   Timer timer;
   for (unsigned int i = 0; i < iterations; ++i) {
+    engine.update_operations();
+    engine.update_matrices();
     engine.update_partials(update_repeats);
   }
   int local_time = timer.get_time();
