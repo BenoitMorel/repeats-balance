@@ -5,6 +5,7 @@
 #include "../common/repeatsbalance.hpp"
 
 void full_tree_traversal(int argc, char *params[]);
+void synchronized_ftt(int argc, char *params[]);
 
 
 #endif

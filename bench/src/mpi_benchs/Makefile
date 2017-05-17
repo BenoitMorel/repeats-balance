@@ -7,7 +7,7 @@ LDFLAGS= $(DBG) -std=gnu++11 -L$(libpllpath) -I$(libpllpath) -L../common
 OBJDIR=obj
 
 EXEC=main
-OBJ= $(addprefix $(OBJDIR)/, main.o full_tree_traversal.o)
+OBJ= $(addprefix $(OBJDIR)/, main.o full_tree_traversal.o synchronized_ftt.o)
 
 
 all: dir $(EXEC) 
