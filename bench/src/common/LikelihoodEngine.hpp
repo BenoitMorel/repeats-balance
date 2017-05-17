@@ -16,6 +16,14 @@ public:
     unsigned int rate_categories_number,
     unsigned int repeats_lookup_size);
 
+  LikelihoodEngine(Tree *tree,
+    const MSA *msa,
+    const char *part_file,
+    unsigned int attribute_flag, 
+    unsigned int states_number,
+    unsigned int rate_categories_number,
+    unsigned int repeats_lookup_size); 
+
 
   LikelihoodEngine(Tree *tree,
     const std::vector<MSA *> &msas,

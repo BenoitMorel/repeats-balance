@@ -39,6 +39,29 @@ LikelihoodEngine::LikelihoodEngine(const char *newick_file,
 }
 
 LikelihoodEngine::LikelihoodEngine(Tree *tree,
+    const MSA *msa,
+    const char *part_file,
+    unsigned int attribute_flag, 
+    unsigned int states_number,
+    unsigned int rate_categories_number,
+    unsigned int repeats_lookup_size): 
+  delete_tree(false),
+  tree(tree)
+{
+  std::vector<PartitionIntervals> partition_intervals;
+  PartitionIntervals::parse(part_file, partition_intervals);
+  for (unsigned int i = 0; i < partition_intervals.size(); ++i) {
+    MSA submsa(msa, partition_intervals[i], i);
+    submsa.compress();
+    partitions.push_back(new Partition(&submsa,
+          attribute_flag,
+          states_number,
+          rate_categories_number,
+          repeats_lookup_size));
+    }
+}
+
+LikelihoodEngine::LikelihoodEngine(Tree *tree,
     const std::vector<MSA *> &msas,
     const CoreAssignment &assignment,
     unsigned int attribute_flag, 
