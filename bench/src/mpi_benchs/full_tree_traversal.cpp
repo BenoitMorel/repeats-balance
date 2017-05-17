@@ -31,7 +31,7 @@ void full_tree_traversal(int argc, char *params[])
 
   srand(seed); 
   MSA full_msa(seq, states_number); 
-  Tree tree(newick);
+  Tree tree(&full_msa, newick);
   //Tree tree(&full_msa);
   std::vector<PartitionIntervals> initial_partitionning;
   PartitionIntervals::parse(partition_file, initial_partitionning);

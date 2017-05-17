@@ -1,10 +1,14 @@
 #include "Tree.hpp"
+
 #include <iostream>
+#include <search.h>
+
+#include "MSA.hpp"
 
 #define PLLMOD_TREE_DEFAULT_BRANCH_LENGTH 0.1
 
 
-Tree::Tree(const char *newick_file)
+Tree::Tree(const MSA *msa, const char *newick_file)
 {
   if (!newick_file) {
     std::cerr << "Tree::Tree null newick file" << std::endl;
@@ -15,7 +19,7 @@ Tree::Tree(const char *newick_file)
   if (!pll_utree) {
     std::cerr << "Error: Tree::tree null pll_utree" << std::endl;
   }
-  init();
+  init(msa);
 }
   
 int Tree::traverser_full(pll_unode_t * node)
@@ -45,7 +49,7 @@ static void set_missing_branch_length(pll_utree_t * tree, double length)
   } 
 }
 
-void Tree::init() 
+void Tree::init(const MSA *msa) 
 {
   set_missing_branch_length(pll_utree, 0.000001);
   innernodes_number = tips_number - 2;
@@ -54,6 +58,7 @@ void Tree::init()
   
   branch_lengths.resize(branches_number);
   matrix_indices.resize(branches_number);
+  map_to_labels(msa);
 }
 
 int pllmod_utree_connect_nodes(pll_unode_t * parent,
@@ -226,7 +231,7 @@ Tree::Tree(const MSA *msa)
 {
   pll_utree = create_random(msa->get_pll_msa()->count, msa->get_pll_msa()->label);
   tips_number = msa->get_pll_msa()->count;
-  init();
+  init(msa);
 }
 
 Tree::~Tree()
@@ -266,7 +271,37 @@ void Tree::update_operations(int (*traverse)(pll_unode_t *))
 void Tree::randomize_pll_utree(const MSA *msa) {
   pll_utree_destroy(pll_utree, free);
   pll_utree = create_random(msa->get_pll_msa()->count, msa->get_pll_msa()->label);
-  init();
+  init(msa);
 }
 
+
+void Tree::map_to_labels(const MSA* msa)
+{
+  const pll_msa_t *pll_msa = msa->get_pll_msa();
+  unsigned int tips_number = pll_msa->count;
+  hcreate(tips_number);
+  unsigned int * indices_buffer = (unsigned int *)malloc(tips_number * sizeof(unsigned int));
+  for (unsigned int i = 0; i < tips_number; ++i)
+  {
+    indices_buffer[i] = i;
+    ENTRY entry;
+    entry.key = pll_msa->label[i];
+    entry.data = (void *)(indices_buffer + i);
+    hsearch(entry, ENTER);
+  }
+  for (unsigned int i = 0; i < tips_number; ++i)
+  {
+    ENTRY query;
+    query.key = pll_utree->nodes[i]->label;
+    ENTRY * found = NULL;
+    found = hsearch(query,ENTER);
+    if (!found) {
+      fprintf(stderr, "Sequence with header %s does not appear in the MSA\n", pll_utree->nodes[i]->label);
+    }
+    unsigned int tip_clv_index = *((unsigned int *)(found->data));
+    pll_utree->nodes[i]->clv_index = tip_clv_index;
+  }
+  free(indices_buffer);
+  hdestroy();
+}
 

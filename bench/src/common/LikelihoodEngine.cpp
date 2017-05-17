@@ -11,15 +11,16 @@ LikelihoodEngine::LikelihoodEngine(const char *newick_file,
     unsigned int states_number,
     unsigned int rate_categories_number,
     unsigned int repeats_lookup_size):
-  delete_tree(true),
-  tree(new Tree(newick_file))
+  delete_tree(true)
 {
-  partitions.push_back(new Partition(phy_file,
-        *tree,
+  MSA msa(phy_file, states_number);
+  msa.compress();
+  partitions.push_back(new Partition(&msa,
         attribute_flag,
         states_number,
         rate_categories_number,
         repeats_lookup_size));
+  tree = new Tree(&msa, newick_file);
 }
 
 LikelihoodEngine::LikelihoodEngine(const char *newick_file,
@@ -29,26 +30,25 @@ LikelihoodEngine::LikelihoodEngine(const char *newick_file,
     unsigned int states_number,
     unsigned int rate_categories_number,
     unsigned int repeats_lookup_size): 
-  delete_tree(true),
-  tree(new Tree(newick_file))
+  delete_tree(true)
 {
+  MSA msa(phy_file, states_number);
+  tree = new Tree(&msa, newick_file);
   if (part_file) {
     std::vector<PartitionIntervals> partition_intervals;
     PartitionIntervals::parse(part_file, partition_intervals);
-    MSA msa(phy_file, states_number);
     for (unsigned int i = 0; i < partition_intervals.size(); ++i) {
       MSA submsa(&msa, partition_intervals[i], i);
       submsa.compress();
       partitions.push_back(new Partition(&submsa,
-          *tree,
           attribute_flag,
           states_number,
           rate_categories_number,
           repeats_lookup_size));
     }
   } else {
-    partitions.push_back(new Partition(phy_file,
-          *tree,
+    msa.compress();
+    partitions.push_back(new Partition(&msa,
           attribute_flag,
           states_number,
           rate_categories_number,
@@ -71,7 +71,6 @@ LikelihoodEngine::LikelihoodEngine(Tree *tree,
     const PartitionIntervals &intervals = partition_intervals[i];
     partitions.push_back(new Partition(msas[intervals.get_partition_id()],
         intervals,
-        *tree,
         attribute_flag,
         states_number,
         rate_categories_number,

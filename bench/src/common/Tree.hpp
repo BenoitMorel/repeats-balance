@@ -3,11 +3,12 @@
 
 #include "safepll.h"
 #include <vector>
-#include "MSA.hpp"
+
+class MSA;
 
 class Tree {
 public:
-  Tree(const char *newick_file);
+  Tree(const MSA *msa, const char *newick_file);
 
   // random tree
   Tree(const MSA *msa); 
@@ -39,8 +40,9 @@ public:
   static int traverser_full(pll_unode_t * node);
 
 private:
-  void init();
+  void init(const MSA *msa);
   pll_utree_t *create_random(unsigned int taxa_count, const char * const* names);
+  void map_to_labels(const MSA* msa);
 private:
   pll_utree_t * pll_utree;
   std::vector<double> branch_lengths;

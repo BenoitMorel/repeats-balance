@@ -48,7 +48,7 @@ void kassian_lb_partials(int argc, char *params[])
   srand(time(NULL)); 
   std::cout << "parse" << std::endl;
   MSA *full_msa = new MSA(seq, states_number); 
-  Tree tree(newick);
+  Tree tree(full_msa, newick);
   //Tree tree(&full_msa);
   std::vector<PartitionIntervals> initial_partitionning;
   PartitionIntervals::parse(partition_file, initial_partitionning);

@@ -11,15 +11,7 @@
 class Partition {
 public:
 
-  Partition(const char *phy_file, 
-    Tree &tree,
-    unsigned int attribute_flag, 
-    unsigned int states_number,
-    unsigned int rate_categories_number,
-    unsigned int repeats_lookup_size);
-  
   Partition(const MSA *compressed_msa,
-    Tree &tree,
     unsigned int attribute_flag, 
     unsigned int states_number,
     unsigned int rate_categories_number,
@@ -27,7 +19,6 @@ public:
   
   Partition(const MSA *compressed_msa,
     const PartitionIntervals &intervals,
-    Tree &tree,
     unsigned int attribute_flag, 
     unsigned int states_number,
     unsigned int rate_categories_number,
@@ -74,9 +65,6 @@ private:
   
   static void create_sub_msa(const pll_msa_t *msa, const unsigned int *weights, const PartitionIntervals &intervals,
       pll_msa_t *&submsa, unsigned int *&subweights); 
-
-  static void fill_tip_indices(const pll_msa_t * msa,
-    pll_utree_t *pll_utree);
 
 private:
   pll_partition_t *partition;

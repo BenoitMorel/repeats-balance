@@ -31,3 +31,20 @@
   \end{tikzpicture}
   \caption*{ 16cores repeats update randomized }
 \end{minipage}
+
+\begin{minipage}{0.49\textwidth}
+  \begin{tikzpicture}[scale=0.75]
+    \begin{axis}[ybar interval, ymax=10690,ymin=0, minor y tick num = 3, xlabel={CPU}, ylabel={Elapsed time (ms)}]
+      \addplot coordinates {(1,6661) (2,6760) (3,6996) (4,7164) (5,7629) (6,7952) (7,8149) (8,8842) (9,9077) (10,9177) (11,9338) (12,9428) (13,9988) (14,10029) (15,10309) (16,10690) (17, 0)};
+     \end{axis}
+  \end{tikzpicture}
+  \caption*{ 16cores repeats update kassian }
+\end{minipage}
+\begin{minipage}{0.49\textwidth}
+  \begin{tikzpicture}[scale=0.75]
+    \begin{axis}[ybar interval, ymax=10112,ymin=0, minor y tick num = 3, xlabel={CPU}, ylabel={Elapsed time (ms)}]
+      \addplot coordinates {(1,6797) (2,6825) (3,7200) (4,7591) (5,7789) (6,7976) (7,9105) (8,9285) (9,9574) (10,9638) (11,9680) (12,9748) (13,9895) (14,9886) (15,9898) (16,10112) (17, 0)};
+     \end{axis}
+  \end{tikzpicture}
+  \caption*{ 16cores repeats update randomized }
+\end{minipage}

@@ -1,51 +1,27 @@
 #include "Partition.hpp"
-#include <search.h>
 
 
 const unsigned int  Partition::INVALID_ATTRIBUTE = std::numeric_limits<unsigned int>::max();
 
 
-
-
-Partition::Partition(const char *phy_file, 
-  Tree &tree,
-  unsigned int attribute_flag, 
-  unsigned int states_number,
-  unsigned int rate_categories_number,
-  unsigned int repeats_lookup_size)
-{
-  MSA msa(phy_file, states_number); 
-  msa.compress();
-  pll_utree_t *pll_utree = tree.get_pll_tree();
-  fill_tip_indices(msa.get_pll_msa(), pll_utree);  
-  init_partition(msa.get_pll_msa(), msa.get_pattern_weights(), attribute_flag, states_number,
-    rate_categories_number, repeats_lookup_size);
-}
-  
 Partition::Partition(const MSA *compressed_msa, 
-  Tree &tree,
   unsigned int attribute_flag, 
   unsigned int states_number,
   unsigned int rate_categories_number,
   unsigned int repeats_lookup_size)
 {
-  pll_utree_t *pll_utree = tree.get_pll_tree();
-  fill_tip_indices(compressed_msa->get_pll_msa(), pll_utree);  
   init_partition(compressed_msa->get_pll_msa(), compressed_msa->get_pattern_weights(),  attribute_flag, states_number,
     rate_categories_number, repeats_lookup_size);
 }
 
 Partition::Partition(const MSA *compressed_msa, 
   const PartitionIntervals &intervals,
-  Tree &tree,
   unsigned int attribute_flag, 
   unsigned int states_number,
   unsigned int rate_categories_number,
   unsigned int repeats_lookup_size)
 {
   MSA submsa(compressed_msa, intervals, compressed_msa->get_msa_index());
-  pll_utree_t *pll_utree = tree.get_pll_tree();
-  fill_tip_indices(compressed_msa->get_pll_msa(), pll_utree);  
   init_partition(submsa.get_pll_msa(), submsa.get_pattern_weights(), attribute_flag, states_number,
     rate_categories_number, repeats_lookup_size);
 }
@@ -235,36 +211,6 @@ void Partition::create_sub_msa(const pll_msa_t *msa, const unsigned int *weights
       submsa_sequence_offset += intervals.get_size(intidx);
     }
   }
-}
-
-void Partition::fill_tip_indices(const pll_msa_t * msa,
-    pll_utree_t *pll_utree)
-{
-  unsigned int tips_number = msa->count;
-  hcreate(tips_number);
-  unsigned int * indices_buffer = (unsigned int *)malloc(tips_number * sizeof(unsigned int));
-  for (unsigned int i = 0; i < tips_number; ++i)
-  {
-    indices_buffer[i] = i;
-    ENTRY entry;
-    entry.key = msa->label[i];
-    entry.data = (void *)(indices_buffer + i);
-    hsearch(entry, ENTER);
-  }
-  for (unsigned int i = 0; i < tips_number; ++i)
-  {
-    ENTRY query;
-    query.key = pll_utree->nodes[i]->label;
-    ENTRY * found = NULL;
-    found = hsearch(query,ENTER);
-    if (!found) {
-      fprintf(stderr, "Sequence with header %s does not appear in the tree\n", msa->label[i]);
-    }
-    unsigned int tip_clv_index = *((unsigned int *)(found->data));
-    pll_utree->nodes[i]->clv_index = tip_clv_index;
-  }
-  free(indices_buffer);
-  hdestroy();
 }
 
 
