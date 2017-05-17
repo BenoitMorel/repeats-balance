@@ -14,7 +14,7 @@ dir:
 
 
 $(EXEC): $(OBJ) 
-	$(CC) -shared $(LDFLAGS) -o $@  $^ -lpll -lcudart 
+	$(CC) -shared $(LDFLAGS) -o $@  $^ -lpll 
 
 $(OBJDIR)/%.o : %.cpp
 	$(CC) $(CFLAGS) -o $@ -c $<

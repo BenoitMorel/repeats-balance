@@ -16,7 +16,7 @@ dir:
 	mkdir -p obj 
 
 main: $(OBJ) 
-	$(CC) $(LDFLAGS) -o $@  $^ -lpll -lcudart -lrepeatsbalance
+	$(CC) $(LDFLAGS) -o $@  $^ -lpll -lrepeatsbalance
 
 $(OBJDIR)/%.o : %.cpp
 	$(CC) $(CFLAGS) -o $@ -c $<
