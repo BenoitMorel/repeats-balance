@@ -12,6 +12,8 @@ int main(int argc, char *params[])
   }
   if (!strcmp(params[1], "analyse_partitions")) {
     analyse_partitions(argc - 2, params + 2);
+  } else if (!strcmp(params[1], "generate_partitions")) {
+    generate_partitions(argc - 2, params + 2);
   } else {
     std::cerr << "Error unkown parameter " << params[1] << std::endl;
   }
