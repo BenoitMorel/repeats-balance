@@ -15,15 +15,18 @@ void LoadBalancer::compute_weighted_msa(const std::vector<MSA *> &input_msas,
     weighted_msa[i].msa = input_msas[i];
     weighted_msa[i].persite_weight = 0.0;
   }
+  std::vector<Tree *> trees;
   for (unsigned int i = 0; i < iterations; ++i) {
-    Tree tree(input_msas[0]);
-    tree.update_operations(Tree::traverser_full);
-    for (unsigned int m = 0; m < input_msas.size(); ++m) {
-      Partition partition(input_msas[m], pll_attribute, input_msas[0]->get_states_number(), 4, 0);
-      partition.update_matrices(tree);
-      partition.update_partials(tree);
+    Tree *tree = new Tree(input_msas[0]);
+    tree->update_operations(Tree::traverser_full);
+    trees.push_back(tree);
+  }
+  for (unsigned int m = 0; m < input_msas.size(); ++m) {
+    Partition partition(input_msas[m], pll_attribute, input_msas[0]->get_states_number(), 4, 0); 
+    for (unsigned int t = 0; t < trees.size(); ++t) {
+      partition.update_repeats(*trees[t]);
       weighted_msa[m].persite_weight += partition.get_unique_repeats_pattern_ratio();
-    }
+    }   
   }
 }
 

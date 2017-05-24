@@ -4,7 +4,6 @@
 
 int main(int argc, char *params[])
 {
-  std::cout << "Main " << std::endl;
   if (argc < 2) {
     std::cerr << "Error : missing parameter" << std::endl;
     return 1;

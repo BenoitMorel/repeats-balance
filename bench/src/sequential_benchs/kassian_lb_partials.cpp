@@ -57,20 +57,21 @@ void kassian_lb_partials(int argc, char *params[])
   LoadBalancer balancer;
   std::cout << "create submsas" << std::endl;
   for (unsigned int i = 0; i < initial_partitionning.size(); ++i) {
-    msas.push_back(new MSA(full_msa, initial_partitionning[0], i));
+    msas.push_back(new MSA(full_msa, initial_partitionning[i], i));
     msas[i]->compress();
   }
   std::cout << "parse" << std::endl;
-  
+ 
   if (!randomized) {
     for (unsigned int i = 0; i < initial_partitionning.size(); ++i) {
       weighted_msas.push_back(WeightedMSA(msas[i], 1.0));
     }
   } else {
+  Timer lb_timer;
     balancer.compute_weighted_msa(msas, weighted_msas, PLL_ATTRIB_SITES_REPEATS | PLL_ATTRIB_ARCH_AVX);
+  std::cout << "LB time " << lb_timer.get_time() << "ms" << std::endl;
   }
   std::vector<CoreAssignment> assignments;
-  std::cout << "load balance" << std::endl;
   balancer.kassian_load_balance(cores, weighted_msas, assignments);
   unsigned int attribute = Partition::compute_attribute(use_repeats, 
 		  0, 
