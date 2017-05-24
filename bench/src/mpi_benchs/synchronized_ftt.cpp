@@ -43,6 +43,7 @@ void synchronized_ftt(int argc, char *params[])
   if (!rank_id) {
     std::cout << "caption ";
     std::cout << "data: " << seq << ", ";
+    std::cout << "part: " << partition_file << ", ";
     std::cout << (randomized ? "lb_randomized" : "lb_kassian") << ", ";
     std::cout << (use_repeats ? "use_rep" : "no_use_rep") << ", ";
     std::cout << (update_repeats ? "update_rep" : "no_update_rep") << ", ";
@@ -76,9 +77,7 @@ void synchronized_ftt(int argc, char *params[])
       weighted_msas.push_back(WeightedMSA(msas[i], 1.0));
     }
   } else {
-    std::cerr << rank_id << " before lb " << std::endl;
     balancer.compute_weighted_msa(msas, weighted_msas, PLL_ATTRIB_SITES_REPEATS | PLL_ATTRIB_ARCH_AVX);
-    std::cerr << rank_id << " after lb " << std::endl;
   }
   std::vector<CoreAssignment> assignments;
   balancer.kassian_load_balance(cores, weighted_msas, assignments);

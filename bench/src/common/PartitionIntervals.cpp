@@ -5,7 +5,10 @@
 void PartitionIntervals::parse(const char *part_file, std::vector<PartitionIntervals> &partitionning)
 {
   std::ifstream reader(part_file, std::ifstream::in);
-   
+  if (!reader.is_open()) {
+    std::cerr << "[Error] Cannot open " << part_file << std::endl;
+    return;
+  }
   std::string ignore;
   unsigned int start;
   unsigned int end;

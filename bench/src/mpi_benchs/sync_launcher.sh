@@ -22,7 +22,7 @@ launch()
   use_update_operations=$9
 
   part_suffix=
-  #_50
+  #part_suffix=_1000
 
   use_repeats=1
   seed=42
@@ -46,17 +46,15 @@ launch()
   write "path_data=../../../data/"
 
   mkdir -p results
-  mkdir -p results/$data
-  mkdir -p results/$data/$threads
-  outputfile=results/$data/$threads/ng_${randomized}_${trees_number}_${use_randomized_tree}_${use_barrier}.out
+  mkdir -p results/$data$part_suffix
+  mkdir -p results/$data$part_suffix/$threads
+  outputfile=results/$data$part_suffix/$threads/ng_${randomized}_${trees_number}_${use_randomized_tree}_${use_barrier}.out
 
   preload=/home/morelbt/libjemalloc.so
   write "LD_PRELOAD=$preload mpirun -np $threads ./main synchronized_ftt $path_data/$data/$data.phy $path_data/$data/${data}${part_suffix}.part $states $use_repeats $update_repeats $lookupsize $iterations $randomized $seed $trees_number $use_randomized_tree $use_barrier $use_update_operations &> $outputfile"
 
   sbatch $submit_file
-  cat $submit_file 
   rm $submit_file
-
 }
 
 
@@ -66,15 +64,16 @@ export LD_LIBRARY_PATH=../../lib/current:../common
 #launch kyte 128 1 1 300
 
 data=kyte
-threads=128
-iterations=1000
+threads=1024
+iterations=10000
 use_repeats=1
 
 #launch $data $threads 1 $use_repeats $iterations 20 0 1 0
 
-# 1 trees, no barriers
-#launch $data $threads 0 $use_repeats $iterations 1 0 0 1
-launch $data $threads 1 $use_repeats $iterations 1 0 0 1
+# always recreate tree, no barriers
+launch $data $threads 0 $use_repeats $iterations 1 1 0 1
+launch $data $threads 1 $use_repeats $iterations 1 1 0 1
+
 
 
 # always recreate tree,  barriers
