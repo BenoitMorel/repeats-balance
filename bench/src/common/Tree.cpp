@@ -269,7 +269,7 @@ void Tree::update_operations(int (*traverse)(pll_unode_t *))
 
 
 void Tree::randomize_pll_utree(const MSA *msa) {
-  pll_utree_destroy(pll_utree, free);
+  pll_utree_destroy(pll_utree, 0);
   pll_utree = create_random(msa->get_pll_msa()->count, msa->get_pll_msa()->label);
   init(msa);
 }

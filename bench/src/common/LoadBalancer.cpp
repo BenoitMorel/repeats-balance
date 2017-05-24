@@ -63,7 +63,6 @@ void LoadBalancer::compute_limit_weight()
   for (unsigned int i = 0; i < sorted_partitions.size(); ++i) {
     limit_weight_percore += sorted_partitions[i].get_total_weight() / double(cores_number);
   }  
-  std::cout << "Limit weight " << limit_weight_percore << std::endl;
 }
 
 // Assign partitions in a cyclic manner to cores until one is too big 
@@ -144,8 +143,8 @@ void LoadBalancer::fill_first_core(std::stack<CoreAssignment *> *stack)
   stack->pop();
   const WeightedMSA &partition = sorted_partitions[current_part];
   double weight_to_assign = limit_weight_percore - core->get_core_weight();
-  unsigned int sites_to_assign = weight_to_assign / 
-    partition.persite_weight;
+  unsigned int sites_to_assign = ceil(weight_to_assign / 
+    partition.persite_weight);
   unsigned int available_sites = partition.msa->get_length() - curr_part_ass_sites;
   // in case we exceed the available number of sites
   sites_to_assign = std::min(sites_to_assign, available_sites);
