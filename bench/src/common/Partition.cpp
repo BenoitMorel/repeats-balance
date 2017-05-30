@@ -132,7 +132,7 @@ void Partition::update_partials(const Tree &tree, bool update_repeats)
 void Partition::update_repeats(const Tree &tree)
 {
   for (unsigned int i = 0; i < tree.get_operations_number(); ++i) {
-    if (partition->attributes && PLL_ATTRIB_SITES_REPEATS) {
+    if (partition->attributes & PLL_ATTRIB_SITES_REPEATS) {
       pll_update_repeats(partition, tree.get_operations() + i);
     }
   }

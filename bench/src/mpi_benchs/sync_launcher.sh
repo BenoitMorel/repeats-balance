@@ -62,15 +62,15 @@ export LD_LIBRARY_PATH=../../lib/current:../common
 #launch kyte 128 0 1 300
 #launch kyte 128 1 1 300
 
-data=1kyte_hyme
-threads=2048
-iterations=10
+data=generate_50_1000
+threads=1024
+iterations=10000
 use_repeats=1
 
 #launch $data $threads 1 $use_repeats $iterations 20 0 1 0
 
 # always recreate tree, no barriers
-#launch $data $threads 0 $use_repeats $iterations 1 1 0 1
+launch $data $threads 0 $use_repeats $iterations 1 1 0 1
 launch $data $threads 1 $use_repeats $iterations 1 1 0 1
 
 
