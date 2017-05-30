@@ -8,10 +8,9 @@ class MSA;
 
 class Tree {
 public:
-  Tree(const MSA *msa, const char *newick_file);
+  // null newick_file for a random tree
+  Tree(const MSA *msa, const char *newick_file = 0);
 
-  // random tree
-  Tree(const MSA *msa); 
   virtual ~Tree();
 
   unsigned int get_tips_number() const {return tips_number;} 

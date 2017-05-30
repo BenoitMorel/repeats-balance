@@ -81,6 +81,11 @@ void synchronized_ftt(int argc, char *params[])
   }
   std::vector<CoreAssignment> assignments;
   balancer.kassian_load_balance(cores, weighted_msas, assignments);
+  if (rank_id == 0) {
+    for (unsigned int i = 0; i < assignments.size(); ++i) {
+      std::cout << assignments[i] << std::endl;
+    }
+  }
   unsigned int attribute = Partition::compute_attribute(use_repeats, 
 		  0, 
 		  "avx");

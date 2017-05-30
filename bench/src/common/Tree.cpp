@@ -8,20 +8,6 @@
 #define PLLMOD_TREE_DEFAULT_BRANCH_LENGTH 0.1
 
 
-Tree::Tree(const MSA *msa, const char *newick_file)
-{
-  if (!newick_file) {
-    std::cerr << "Tree::Tree null newick file" << std::endl;
-    return;
-  }
-  pll_utree = pll_utree_parse_newick(newick_file);
-  tips_number = pll_utree->tip_count;
-  if (!pll_utree) {
-    std::cerr << "Error: Tree::tree null pll_utree" << std::endl;
-  }
-  init(msa);
-}
-  
 int Tree::traverser_full(pll_unode_t * node)
 {
   node->data = (void *)~0;
@@ -227,12 +213,21 @@ pll_utree_t *Tree::create_random(unsigned int taxa_count,
   return (wrapped_tree);
 }
 
-Tree::Tree(const MSA *msa)
+Tree::Tree(const MSA *msa, const char *newick_file)
 {
-  pll_utree = create_random(msa->get_pll_msa()->count, msa->get_pll_msa()->label);
-  tips_number = msa->get_pll_msa()->count;
+  if (!newick_file) {
+    pll_utree = create_random(msa->get_pll_msa()->count, msa->get_pll_msa()->label);
+    tips_number = msa->get_pll_msa()->count;
+  } else {
+    pll_utree = pll_utree_parse_newick(newick_file);
+    tips_number = pll_utree->tip_count;
+  }
+  if (!pll_utree) {
+    std::cerr << "Error: Tree::tree null pll_utree" << std::endl;
+  }
   init(msa);
 }
+  
 
 Tree::~Tree()
 {
