@@ -1,0 +1,1179 @@
+caption data: ../../../data//1kyte_hyme/1kyte_hyme.phy, part: ../../../data//1kyte_hyme/1kyte_hyme.part, lb_randomized, use_rep, update_rep, iterations: 10000, trees: 1, shuffle_tree, no_barriers, update_operations, 
+[haswell-073:15288] *** Process received signal ***
+[haswell-073:15288] Signal: Segmentation fault (11)
+[haswell-073:15288] Signal code: Address not mapped (1)
+[haswell-073:15288] Failing at address: 0x10
+[haswell-073:15288] [ 0] /lib64/libc.so.6(+0x35670)[0x7fa4b3b55670]
+[haswell-073:15288] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7fa4b509ed0c]
+[haswell-073:15288] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7fa4b4a5b3a3]
+[haswell-073:15288] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7fa4b4a62714]
+[haswell-073:15288] [ 4] ./main[0x40dc77]
+[haswell-073:15288] [ 5] ./main[0x4095d4]
+[haswell-073:15288] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7fa4b3b41b15]
+[haswell-073:15288] [ 7] ./main[0x4096c1]
+[haswell-073:15288] *** End of error message ***
+[haswell-073:15290] *** Process received signal ***
+[haswell-073:15290] Signal: Segmentation fault (11)
+[haswell-073:15290] Signal code: Address not mapped (1)
+[haswell-073:15290] Failing at address: 0x10
+[haswell-073:15290] [ 0] /lib64/libc.so.6(+0x35670)[0x7f8ecfd8e670]
+[haswell-073:15290] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f8ed12d7d0c]
+[haswell-073:15290] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f8ed0c943a3]
+[haswell-073:15290] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f8ed0c9b714]
+[haswell-073:15290] [ 4] ./main[0x40dc77]
+[haswell-073:15290] [ 5] ./main[0x4095d4]
+[haswell-073:15290] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f8ecfd7ab15]
+[haswell-073:15290] [ 7] ./main[0x4096c1]
+[haswell-073:15290] *** End of error message ***
+[haswell-073:15294] *** Process received signal ***
+[haswell-073:15294] Signal: Segmentation fault (11)
+[haswell-073:15294] Signal code: Address not mapped (1)
+[haswell-073:15294] Failing at address: 0x10
+[haswell-073:15294] [ 0] /lib64/libc.so.6(+0x35670)[0x7f200698a670]
+[haswell-073:15294] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f2007ed3d0c]
+[haswell-073:15294] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f20078903a3]
+[haswell-073:15294] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f2007897714]
+[haswell-073:15294] [ 4] ./main[0x40dc77]
+[haswell-073:15294] [ 5] ./main[0x4095d4]
+[haswell-073:15294] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f2006976b15]
+[haswell-073:15294] [ 7] ./main[0x4096c1]
+[haswell-073:15294] *** End of error message ***
+[haswell-073:15315] *** Process received signal ***
+[haswell-073:15315] Signal: Segmentation fault (11)
+[haswell-073:15315] Signal code: Address not mapped (1)
+[haswell-073:15315] Failing at address: 0x10
+[haswell-073:15315] [ 0] /lib64/libc.so.6(+0x35670)[0x7f87a4692670]
+[haswell-073:15315] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f87a5bdbd0c]
+[haswell-073:15315] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f87a55983a3]
+[haswell-073:15315] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f87a559f714]
+[haswell-073:15315] [ 4] ./main[0x40dc77]
+[haswell-073:15315] [ 5] ./main[0x4095d4]
+[haswell-073:15315] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f87a467eb15]
+[haswell-073:15315] [ 7] ./main[0x4096c1]
+[haswell-073:15315] *** End of error message ***
+[haswell-073:15307] *** Process received signal ***
+[haswell-073:15307] Signal: Segmentation fault (11)
+[haswell-073:15307] Signal code: Address not mapped (1)
+[haswell-073:15307] Failing at address: 0x10
+[haswell-073:15307] [ 0] /lib64/libc.so.6(+0x35670)[0x7f05b10bd670]
+[haswell-073:15307] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f05b2606d0c]
+[haswell-073:15307] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f05b1fc33a3]
+[haswell-073:15307] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f05b1fca714]
+[haswell-073:15307] [ 4] ./main[0x40dc77]
+[haswell-073:15307] [ 5] ./main[0x4095d4]
+[haswell-073:15307] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f05b10a9b15]
+[haswell-073:15307] [ 7] ./main[0x4096c1]
+[haswell-073:15307] *** End of error message ***
+[haswell-073:15309] *** Process received signal ***
+[haswell-073:15309] Signal: Segmentation fault (11)
+[haswell-073:15309] Signal code: Address not mapped (1)
+[haswell-073:15309] Failing at address: 0x10
+[haswell-208:01411] *** Process received signal ***
+[haswell-010:21521] *** Process received signal ***
+[haswell-073:15309] [ 0] /lib64/libc.so.6(+0x35670)[0x7f1323ea2670]
+[haswell-073:15309] [ 1] [haswell-061:16023] *** Process received signal ***
+[haswell-061:16023] Signal: Segmentation fault (11)
+[haswell-061:16023] Signal code: Address not mapped (1)
+[haswell-061:16023] Failing at address: 0x10
+[haswell-208:01411] Signal: Segmentation fault (11)
+[haswell-208:01411] Signal code: Address not mapped (1)
+[haswell-208:01411] Failing at address: 0x10
+[haswell-010:21521] Signal: Segmentation fault (11)
+[haswell-010:21521] Signal code: Address not mapped (1)
+[haswell-010:21521] Failing at address: 0x10
+../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f13253ebd0c]
+[haswell-073:15309] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f1324da83a3]
+[haswell-073:15309] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f1324daf714]
+[haswell-073:15309] [ 4] ./main[0x40dc77]
+[haswell-073:15309] [ 5] ./main[0x4095d4]
+[haswell-073:15309] [ 6] [haswell-208:01411] [haswell-010:21521] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f1323e8eb15]
+[haswell-073:15309] [ 7] ./main[0x4096c1]
+[haswell-073:15309] *** End of error message ***
+[haswell-061:16023] [ 0] [ 0] [ 0] /lib64/libc.so.6(+0x35670)[0x7fa9d23b8670]
+/lib64/libc.so.6(+0x35670)[0x7f6350cc1670]
+[haswell-073:15311] *** Process received signal ***
+[haswell-073:15311] Signal: Segmentation fault (11)
+[haswell-073:15311] Signal code: Address not mapped (1)
+[haswell-073:15311] Failing at address: 0x10
+/lib64/libc.so.6(+0x35670)[0x7f02b1040670]
+[haswell-208:01411] [haswell-010:21521] [haswell-073:15311] [ 0] [haswell-061:16023] [ 1] [ 1] [ 1] /lib64/libc.so.6(+0x35670)[0x7fa70bf58670]
+[haswell-073:15311] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7fa70d4a1d0c]
+[haswell-073:15311] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7fa70ce5e3a3]
+[haswell-073:15311] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7fa70ce65714]
+[haswell-073:15311] [ 4] ./main[0x40dc77]
+[haswell-073:15311] [ 5] ./main[0x4095d4]
+[haswell-073:15311] [ 6] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7fa9d38ffd0c]
+../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f6352208d0c]
+/lib64/libc.so.6(__libc_start_main+0xf5)[0x7fa70bf44b15]
+[haswell-073:15311] [ 7] ./main[0x4096c1]
+../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f02b2589d0c]
+[haswell-061:16023] [haswell-208:01411] [haswell-010:21521] [haswell-073:15311] *** End of error message ***
+[ 2] [ 2] [haswell-073:15287] *** Process received signal ***
+[haswell-073:15287] Signal: Segmentation fault (11)
+[haswell-073:15287] Signal code: Address not mapped (1)
+[haswell-073:15287] Failing at address: 0x10
+[ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7fa9d32be3a3]
+../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f6351bc73a3]
+[haswell-073:15287] [ 0] /lib64/libc.so.6(+0x35670)[0x7fcf4b52d670]
+[haswell-073:15287] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7fcf4ca76d0c]
+[haswell-073:15287] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7fcf4c4333a3]
+[haswell-073:15287] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7fcf4c43a714]
+[haswell-073:15287] [ 4] ./main[0x40dc77]
+[haswell-073:15287] [ 5] ./main[0x4095d4]
+[haswell-073:15287] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7fcf4b519b15]
+[haswell-073:15287] [ 7] ./main[0x4096c1]
+[haswell-073:15287] *** End of error message ***
+../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f02b1f463a3]
+[haswell-208:01411] [haswell-010:21521] [haswell-073:15303] *** Process received signal ***
+[haswell-061:16023] [ 3] [ 3] [haswell-073:15303] Signal: Segmentation fault (11)
+[haswell-073:15303] Signal code: Address not mapped (1)
+[haswell-073:15303] Failing at address: 0x10
+[ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f02b1f4d714]
+../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7fa9d32c5714]
+../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f6351bce714]
+[haswell-073:15303] [ 0] [haswell-208:01411] [haswell-010:21521] /lib64/libc.so.6(+0x35670)[0x7f1aef9c2670]
+[haswell-073:15303] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f1af0f0bd0c]
+[haswell-073:15303] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f1af08c83a3]
+[haswell-073:15303] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f1af08cf714]
+[haswell-073:15303] [ 4] ./main[0x40dc77]
+[haswell-061:16023] [ 4] [ 4] [haswell-073:15303] [ 5] ./main[0x4095d4]
+[haswell-073:15303] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f1aef9aeb15]
+[haswell-073:15303] [ 7] ./main[0x4096c1]
+[haswell-073:15303] *** End of error message ***
+[ 4] ./main[0x40dc77]
+./main[0x40dc77]
+./main[0x40dc77]
+[haswell-010:21521] [haswell-061:16023] [haswell-208:01411] [haswell-146:26544] *** Process received signal ***
+[haswell-146:26544] Signal: Segmentation fault (11)
+[haswell-146:26544] Signal code: Address not mapped (1)
+[haswell-146:26544] Failing at address: 0x10
+[ 5] [ 5] [ 5] [haswell-146:26544] [ 0] ./main[0x4095d4]
+./main[0x4095d4]
+./main[0x4095d4]
+[haswell-061:16023] /lib64/libc.so.6(+0x35670)[0x7fc98d192670]
+[haswell-146:26544] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7fc98e6dbd0c]
+[haswell-146:26544] [ 2] [haswell-208:01411] [haswell-010:21521] [ 6] [ 6] [haswell-073:15289] *** Process received signal ***
+[ 6] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7fc98e0983a3]
+[haswell-146:26544] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7fc98e09f714]
+[haswell-146:26544] [ 4] ./main[0x40dc77]
+[haswell-146:26544] [ 5] ./main[0x4095d4]
+[haswell-146:26544] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7fc98d17eb15]
+[haswell-146:26544] [ 7] ./main[0x4096c1]
+[haswell-146:26544] *** End of error message ***
+/lib64/libc.so.6(__libc_start_main+0xf5)[0x7fa9d23a4b15]
+/lib64/libc.so.6(__libc_start_main+0xf5)[0x7f6350cadb15]
+[haswell-073:15289] Signal: Segmentation fault (11)
+[haswell-073:15289] Signal code: Address not mapped (1)
+[haswell-073:15289] Failing at address: 0x10
+/lib64/libc.so.6(__libc_start_main+0xf5)[0x7f02b102cb15]
+[haswell-083:30726] *** Process received signal ***
+[haswell-146:26520] *** Process received signal ***
+[haswell-208:01411] [haswell-010:21521] [haswell-073:15289] [ 0] [haswell-061:16023] /lib64/libc.so.6(+0x35670)[0x7f94b1843670]
+[haswell-073:15289] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f94b2d8ad0c]
+[haswell-073:15289] [ 7] [haswell-083:30726] Signal: Segmentation fault (11)
+[haswell-083:30726] Signal code: Address not mapped (1)
+[haswell-083:30726] Failing at address: 0x10
+[haswell-146:26520] Signal: Segmentation fault (11)
+[haswell-146:26520] Signal code: Address not mapped (1)
+[haswell-146:26520] Failing at address: 0x10
+[ 7] [ 7] [haswell-083:30726] [haswell-146:26520] [ 0] ./main[0x4096c1]
+./main[0x4096c1]
+[ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f94b27493a3]
+[haswell-073:15289] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f94b2750714]
+[haswell-073:15289] [ 4] ./main[0x40dc77]
+[haswell-073:15289] [ 5] ./main[0x4095d4]
+[haswell-073:15289] [ 6] ./main[0x4096c1]
+[ 0] /lib64/libc.so.6(+0x35670)[0x7fbcb828e670]
+[haswell-146:26520] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7fbcb97d7d0c]
+[haswell-146:26520] [ 2] [haswell-208:01411] *** End of error message ***
+[haswell-010:21521] *** End of error message ***
+/lib64/libc.so.6(__libc_start_main+0xf5)[0x7f94b182fb15]
+[haswell-073:15289] [ 7] [haswell-061:16023] *** End of error message ***
+[haswell-010:21507] *** Process received signal ***
+[haswell-010:21507] Signal: Segmentation fault (11)
+[haswell-010:21507] Signal code: Address not mapped (1)
+[haswell-010:21507] Failing at address: 0x10
+./main[0x4096c1]
+[haswell-073:15289] *** End of error message ***
+/lib64/libc.so.6(+0x35670)[0x7f8f4d50e670]
+../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7fbcb91943a3]
+[haswell-146:26520] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7fbcb919b714]
+[haswell-146:26520] [ 4] ./main[0x40dc77]
+[haswell-146:26520] [ 5] ./main[0x4095d4]
+[haswell-146:26520] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7fbcb827ab15]
+[haswell-146:26520] [ 7] ./main[0x4096c1]
+[haswell-208:01397] *** Process received signal ***
+[haswell-061:16045] *** Process received signal ***
+[haswell-061:16045] Signal: Segmentation fault (11)
+[haswell-061:16045] Signal code: Address not mapped (1)
+[haswell-061:16045] Failing at address: 0x10
+[haswell-083:30726] [haswell-146:26520] *** End of error message ***
+[haswell-208:01397] Signal: Segmentation fault (11)
+[haswell-208:01397] Signal code: Address not mapped (1)
+[haswell-208:01397] Failing at address: 0x10
+[haswell-010:21507] [ 0] [haswell-061:16045] [ 0] [ 1] [haswell-146:26522] *** Process received signal ***
+[haswell-146:26522] Signal: Segmentation fault (11)
+[haswell-146:26522] Signal code: Address not mapped (1)
+[haswell-146:26522] Failing at address: 0x10
+[haswell-208:01397] /lib64/libc.so.6(+0x35670)[0x7fe15220b670]
+[haswell-010:21507] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7fe153754d0c]
+[haswell-010:21507] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7fe1531113a3]
+[haswell-010:21507] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7fe153118714]
+/lib64/libc.so.6(+0x35670)[0x7f75b34c2670]
+[haswell-061:16045] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f75b4a0bd0c]
+[haswell-061:16045] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f75b43c83a3]
+[haswell-061:16045] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f75b43cf714]
+[haswell-061:16045] [ 4] ./main[0x40dc77]
+[haswell-061:16045] [ 5] ./main[0x4095d4]
+[haswell-061:16045] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f75b34aeb15]
+[haswell-061:16045] [ 7] ./main[0x4096c1]
+[haswell-061:16045] *** End of error message ***
+../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f8f4ea57d0c]
+[haswell-146:26522] [ 0] [ 0] [haswell-010:21507] [ 4] ./main[0x40dc77]
+[haswell-010:21507] [ 5] ./main[0x4095d4]
+[haswell-010:21507] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7fe1521f7b15]
+[haswell-010:21507] [ 7] ./main[0x4096c1]
+[haswell-010:21507] *** End of error message ***
+[haswell-083:30726] /lib64/libc.so.6(+0x35670)[0x7ff73bc67670]
+[haswell-146:26522] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7ff73d1aed0c]
+[haswell-146:26522] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7ff73cb6d3a3]
+[haswell-146:26522] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7ff73cb74714]
+[haswell-146:26522] /lib64/libc.so.6(+0x35670)[0x7fa66d548670]
+[haswell-073:15291] *** Process received signal ***
+[haswell-061:16019] *** Process received signal ***
+[haswell-061:16019] Signal: Segmentation fault (11)
+[haswell-061:16019] Signal code: Address not mapped (1)
+[haswell-061:16019] Failing at address: 0x10
+[haswell-061:16019] [ 0] [ 2] [ 4] ./main[0x40dc77]
+[haswell-146:26522] [ 5] ./main[0x4095d4]
+[haswell-146:26522] [ 6] [haswell-208:01397] [haswell-073:15291] Signal: Segmentation fault (11)
+[haswell-073:15291] Signal code: Address not mapped (1)
+[haswell-073:15291] Failing at address: 0x10
+/lib64/libc.so.6(+0x35670)[0x7f2cfc2c4670]
+[haswell-061:16019] [ 1] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f8f4e4143a3]
+/lib64/libc.so.6(__libc_start_main+0xf5)[0x7ff73bc53b15]
+[haswell-146:26522] [ 7] ./main[0x4096c1]
+[haswell-146:26522] *** End of error message ***
+[ 1] [haswell-010:21523] *** Process received signal ***
+[haswell-010:21523] Signal: Segmentation fault (11)
+[haswell-010:21523] Signal code: Address not mapped (1)
+[haswell-010:21523] Failing at address: 0x10
+[haswell-073:15291] [ 0] [haswell-010:21523] [ 0] /lib64/libc.so.6(+0x35670)[0x7f8aa277e670]
+[haswell-010:21523] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f8aa3cc7d0c]
+[haswell-010:21523] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f8aa36843a3]
+[haswell-010:21523] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f8aa368b714]
+[haswell-010:21523] /lib64/libc.so.6(+0x35670)[0x7f4a14bf3670]
+[haswell-073:15291] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f4a1613cd0c]
+[haswell-073:15291] [ 2] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f2cfd80dd0c]
+[haswell-061:16019] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f2cfd1ca3a3]
+[haswell-061:16019] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f2cfd1d1714]
+[haswell-061:16019] [ 4] ./main[0x40dc77]
+[haswell-061:16019] [ 5] ./main[0x4095d4]
+[haswell-061:16019] [ 6] [haswell-201:28470] *** Process received signal ***
+[haswell-201:28470] Signal: Segmentation fault (11)
+[haswell-201:28470] Signal code: Address not mapped (1)
+[haswell-201:28470] Failing at address: 0x10
+[haswell-201:28470] [ 0] /lib64/libc.so.6(+0x35670)[0x7f8f9f9da670]
+[haswell-201:28470] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f8fa0f23d0c]
+[haswell-201:28470] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f8fa08e03a3]
+[haswell-201:28470] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f8fa08e7714]
+[haswell-201:28470] [ 4] ./main[0x40dc77]
+[haswell-201:28470] [ 5] ./main[0x4095d4]
+[haswell-201:28470] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f8f9f9c6b15]
+[haswell-201:28470] [ 7] ./main[0x4096c1]
+[haswell-201:28470] *** End of error message ***
+[haswell-083:30726] [haswell-146:26540] *** Process received signal ***
+../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7fa66ea91d0c]
+[ 3] [haswell-146:26540] Signal: Segmentation fault (11)
+[haswell-146:26540] Signal code: Address not mapped (1)
+[haswell-146:26540] Failing at address: 0x10
+[haswell-208:01397] [ 4] ./main[0x40dc77]
+[haswell-010:21523] [ 5] ./main[0x4095d4]
+[haswell-010:21523] [ 6] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f4a15af93a3]
+[haswell-073:15291] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f4a15b00714]
+[haswell-073:15291] [ 4] ./main[0x40dc77]
+[haswell-073:15291] [ 5] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f2cfc2b0b15]
+[haswell-061:16019] [ 7] ./main[0x4096c1]
+[haswell-061:16019] *** End of error message ***
+[haswell-109:27805] *** Process received signal ***
+[haswell-109:27805] Signal: Segmentation fault (11)
+[haswell-109:27805] Signal code: Address not mapped (1)
+[haswell-109:27805] Failing at address: 0x10
+[haswell-109:27805] [ 0] /lib64/libc.so.6(+0x35670)[0x7f70ee6dd670]
+[haswell-109:27805] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f70efc26d0c]
+[haswell-109:27805] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f70ef5e33a3]
+[haswell-109:27805] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f70ef5ea714]
+[haswell-109:27805] [ 4] ./main[0x40dc77]
+[haswell-109:27805] [ 5] ./main[0x4095d4]
+[haswell-109:27805] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f70ee6c9b15]
+[haswell-109:27805] [ 7] ./main[0x4096c1]
+[haswell-109:27805] *** End of error message ***
+/lib64/libc.so.6(__libc_start_main+0xf5)[0x7f8aa276ab15]
+[haswell-010:21523] [ 7] ./main[0x4096c1]
+[haswell-010:21523] *** End of error message ***
+./main[0x4095d4]
+[haswell-073:15291] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f4a14bdfb15]
+[haswell-073:15291] [ 7] [haswell-119:26219] *** Process received signal ***
+[haswell-119:26219] Signal: Segmentation fault (11)
+[haswell-119:26219] Signal code: Address not mapped (1)
+[haswell-119:26219] Failing at address: 0x10
+../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f8f4e41b714]
+[haswell-146:26540] [ 0] [ 2] [haswell-083:30726] /lib64/libc.so.6(+0x35670)[0x7fa544e02670]
+[haswell-146:26540] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7fa54634bd0c]
+[haswell-146:26540] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7fa66e44e3a3]
+[haswell-010:21525] *** Process received signal ***
+[haswell-010:21525] Signal: Segmentation fault (11)
+[haswell-010:21525] Signal code: Address not mapped (1)
+[haswell-010:21525] Failing at address: 0x10
+./main[0x4096c1]
+[haswell-073:15291] *** End of error message ***
+[haswell-119:26221] *** Process received signal ***
+[haswell-119:26221] Signal: Segmentation fault (11)
+[haswell-119:26221] Signal code: Address not mapped (1)
+[haswell-119:26221] Failing at address: 0x10
+[haswell-119:26221] [ 0] /lib64/libc.so.6(+0x35670)[0x7f7a3a7ac670]
+[haswell-119:26221] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f7a3bcf5d0c]
+[haswell-119:26221] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f7a3b6b23a3]
+[haswell-119:26221] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f7a3b6b9714]
+[haswell-119:26221] [ 4] ./main[0x40dc77]
+[haswell-119:26221] [ 5] ./main[0x4095d4]
+[haswell-119:26221] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f7a3a798b15]
+[haswell-119:26221] [ 7] ./main[0x4096c1]
+[haswell-119:26221] *** End of error message ***
+[haswell-073:15313] *** Process received signal ***
+[haswell-061:16016] *** Process received signal ***
+[haswell-061:16016] Signal: Segmentation fault (11)
+[haswell-061:16016] Signal code: Address not mapped (1)
+[haswell-061:16016] Failing at address: 0x10
+[ 4] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7fa545d083a3]
+[haswell-146:26540] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7fa545d0f714]
+[haswell-146:26540] [ 4] ./main[0x40dc77]
+[haswell-146:26540] [ 5] ./main[0x4095d4]
+[haswell-146:26540] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7fa544deeb15]
+[haswell-146:26540] [ 7] [haswell-208:01397] [haswell-010:21525] [ 0] ./main[0x40dc77]
+./main[0x4096c1]
+[haswell-146:26540] *** End of error message ***
+[ 3] /lib64/libc.so.6(+0x35670)[0x7fb4ed3f0670]
+[haswell-010:21525] [ 1] [haswell-073:15313] Signal: Segmentation fault (11)
+[haswell-073:15313] Signal code: Address not mapped (1)
+[haswell-073:15313] Failing at address: 0x10
+[haswell-061:16016] [ 0] [haswell-073:15313] [ 0] /lib64/libc.so.6(+0x35670)[0x7f9e61636670]
+[haswell-061:16016] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f9e62b7fd0c]
+[haswell-061:16016] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f9e6253c3a3]
+[haswell-061:16016] [ 3] [haswell-083:30726] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7fa66e455714]
+../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7fb4ee939d0c]
+[haswell-010:21525] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7fb4ee2f63a3]
+[haswell-010:21525] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7fb4ee2fd714]
+[haswell-010:21525] [ 4] ./main[0x40dc77]
+[haswell-010:21525] [ 5] ./main[0x4095d4]
+[haswell-010:21525] [ 6] [ 5] [haswell-208:01397] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7fb4ed3dcb15]
+[haswell-010:21525] [ 7] ./main[0x4096c1]
+[haswell-010:21525] *** End of error message ***
+../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f9e62543714]
+[haswell-061:16016] [ 4] ./main[0x40dc77]
+[haswell-061:16016] [ 5] ./main[0x4095d4]
+[haswell-061:16016] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f9e61622b15]
+[haswell-061:16016] [ 7] ./main[0x4096c1]
+[haswell-061:16016] *** End of error message ***
+/lib64/libc.so.6(+0x35670)[0x7ff7ae26d670]
+[haswell-073:15313] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7ff7af7b6d0c]
+[haswell-073:15313] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7ff7af1733a3]
+[haswell-073:15313] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7ff7af17a714]
+[haswell-073:15313] [ 4] [haswell-218:18508] *** Process received signal ***
+[haswell-218:18508] Signal: Segmentation fault (11)
+[haswell-218:18508] Signal code: Address not mapped (1)
+[haswell-218:18508] Failing at address: 0x10
+[haswell-218:18508] [ 0] /lib64/libc.so.6(+0x35670)[0x7fcda6ca3670]
+[haswell-218:18508] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7fcda81ecd0c]
+[haswell-218:18508] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7fcda7ba93a3]
+[haswell-218:18508] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7fcda7bb0714]
+[haswell-218:18508] [ 4] ./main[0x40dc77]
+[haswell-218:18508] [ 5] ./main[0x4095d4]
+[haswell-218:18508] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7fcda6c8fb15]
+[haswell-218:18508] [ 7] ./main[0x4096c1]
+[haswell-218:18508] *** End of error message ***
+./main[0x4095d4]
+[ 4] [haswell-010:21526] *** Process received signal ***
+[haswell-010:21526] Signal: Segmentation fault (11)
+[haswell-010:21526] Signal code: Address not mapped (1)
+[haswell-010:21526] Failing at address: 0x10
+[haswell-061:16027] *** Process received signal ***
+[haswell-061:16027] Signal: Segmentation fault (11)
+[haswell-061:16027] Signal code: Address not mapped (1)
+[haswell-061:16027] Failing at address: 0x10
+./main[0x40dc77]
+[haswell-073:15313] [ 5] ./main[0x4095d4]
+[haswell-073:15313] [ 6] [haswell-218:18509] *** Process received signal ***
+[haswell-218:18509] Signal: Segmentation fault (11)
+[haswell-218:18509] Signal code: Address not mapped (1)
+[haswell-218:18509] Failing at address: 0x10
+[haswell-218:18509] [ 0] /lib64/libc.so.6(+0x35670)[0x7f7b7fc2e670]
+[haswell-218:18509] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f7b81177d0c]
+[haswell-218:18509] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f7b80b343a3]
+[haswell-218:18509] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f7b80b3b714]
+[haswell-218:18509] [ 4] ./main[0x40dc77]
+[haswell-218:18509] [ 5] ./main[0x4095d4]
+[haswell-218:18509] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f7b7fc1ab15]
+[haswell-218:18509] [ 7] ./main[0x4096c1]
+[haswell-218:18509] *** End of error message ***
+[haswell-083:30726] [haswell-146:26541] *** Process received signal ***
+./main[0x40dc77]
+[haswell-010:21526] [ 0] [haswell-061:16027] [ 0] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7ff7ae259b15]
+[haswell-073:15313] [ 7] ./main[0x4096c1]
+[haswell-073:15313] *** End of error message ***
+[haswell-218:18512] *** Process received signal ***
+[haswell-218:18512] Signal: Segmentation fault (11)
+[haswell-218:18512] Signal code: Address not mapped (1)
+[haswell-218:18512] Failing at address: 0x10
+[haswell-218:18512] [ 0] /lib64/libc.so.6(+0x35670)[0x7f7ba2d41670]
+[haswell-218:18512] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f7ba428ad0c]
+[haswell-218:18512] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f7ba3c473a3]
+[haswell-218:18512] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f7ba3c4e714]
+[haswell-218:18512] [ 4] ./main[0x40dc77]
+[haswell-218:18512] [ 5] ./main[0x4095d4]
+[haswell-218:18512] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f7ba2d2db15]
+[haswell-218:18512] [ 7] ./main[0x4096c1]
+[haswell-218:18512] *** End of error message ***
+[ 6] [haswell-146:26541] Signal: Segmentation fault (11)
+[haswell-146:26541] Signal code: Address not mapped (1)
+[haswell-146:26541] Failing at address: 0x10
+[haswell-208:01397] /lib64/libc.so.6(+0x35670)[0x7fd54f692670]
+[haswell-010:21526] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7fd550bdbd0c]
+[haswell-010:21526] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7fd5505983a3]
+[haswell-010:21526] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7fd55059f714]
+[haswell-010:21526] [ 4] /lib64/libc.so.6(+0x35670)[0x7fcaeec6c670]
+[haswell-061:16027] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7fcaf01b5d0c]
+[haswell-061:16027] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7fcaefb723a3]
+[haswell-061:16027] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7fcaefb79714]
+[haswell-061:16027] [ 4] ./main[0x40dc77]
+[haswell-061:16027] [ 5] ./main[0x4095d4]
+[haswell-061:16027] [haswell-073:15306] *** Process received signal ***
+[haswell-073:15306] Signal: Segmentation fault (11)
+[haswell-073:15306] Signal code: Address not mapped (1)
+[haswell-073:15306] Failing at address: 0x10
+[haswell-218:18513] *** Process received signal ***
+[haswell-218:18513] Signal: Segmentation fault (11)
+[haswell-218:18513] Signal code: Address not mapped (1)
+[haswell-218:18513] Failing at address: 0x10
+[haswell-218:18513] [ 0] /lib64/libc.so.6(+0x35670)[0x7f7094ea0670]
+[haswell-218:18513] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f70963e9d0c]
+[haswell-218:18513] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f7095da63a3]
+[haswell-218:18513] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f7095dad714]
+[haswell-218:18513] [ 4] ./main[0x40dc77]
+[haswell-218:18513] [ 5] ./main[0x4095d4]
+[haswell-218:18513] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f7094e8cb15]
+[haswell-218:18513] [ 7] ./main[0x4096c1]
+[haswell-218:18513] *** End of error message ***
+/lib64/libc.so.6(__libc_start_main+0xf5)[0x7f8f4d4fab15]
+[haswell-146:26541] [ 0] /lib64/libc.so.6(+0x35670)[0x7f0a26af7670]
+[haswell-146:26541] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f0a28040d0c]
+[haswell-146:26541] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f0a279fd3a3]
+[haswell-146:26541] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f0a27a04714]
+[haswell-146:26541] [ 4] [ 5] ./main[0x40dc77]
+[haswell-010:21526] [ 5] ./main[0x4095d4]
+[haswell-010:21526] [ 6] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7fcaeec58b15]
+[haswell-073:15306] [ 0] [haswell-218:18514] *** Process received signal ***
+[haswell-218:18514] Signal: Segmentation fault (11)
+[haswell-218:18514] Signal code: Address not mapped (1)
+[haswell-218:18514] Failing at address: 0x10
+[haswell-218:18514] [ 0] /lib64/libc.so.6(+0x35670)[0x7f96faa5f670]
+[haswell-218:18514] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f96fbfa8d0c]
+[haswell-218:18514] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f96fb9653a3]
+[haswell-218:18514] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f96fb96c714]
+[haswell-218:18514] [ 4] ./main[0x40dc77]
+[haswell-218:18514] [ 5] ./main[0x4095d4]
+[haswell-218:18514] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f96faa4bb15]
+[haswell-218:18514] [ 7] ./main[0x4096c1]
+[haswell-218:18514] *** End of error message ***
+[haswell-083:30726] ./main[0x40dc77]
+[haswell-146:26541] [ 5] ./main[0x4095d4]
+[haswell-146:26541] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f0a26ae3b15]
+[haswell-146:26541] [ 7] ./main[0x4096c1]
+[haswell-146:26541] *** End of error message ***
+./main[0x4095d4]
+/lib64/libc.so.6(__libc_start_main+0xf5)[0x7fd54f67eb15]
+[haswell-010:21526] [ 7] ./main[0x4096c1]
+[haswell-010:21526] *** End of error message ***
+[haswell-061:16027] [ 7] ./main[0x4096c1]
+[haswell-061:16027] *** End of error message ***
+[haswell-073:15293] *** Process received signal ***
+[haswell-218:18515] *** Process received signal ***
+[haswell-218:18515] Signal: Segmentation fault (11)
+[haswell-218:18515] Signal code: Address not mapped (1)
+[haswell-218:18515] Failing at address: 0x10
+[haswell-218:18515] [ 0] /lib64/libc.so.6(+0x35670)[0x7ff26a07e670]
+[haswell-218:18515] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7ff26b5c7d0c]
+[haswell-218:18515] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7ff26af843a3]
+[haswell-218:18515] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7ff26af8b714]
+[haswell-218:18515] [ 4] ./main[0x40dc77]
+[haswell-218:18515] [ 5] ./main[0x4095d4]
+[haswell-218:18515] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7ff26a06ab15]
+[haswell-218:18515] [ 7] ./main[0x4096c1]
+[haswell-218:18515] *** End of error message ***
+[haswell-208:01397] [haswell-061:16021] *** Process received signal ***
+/lib64/libc.so.6(+0x35670)[0x7f6f7ba7e670]
+[haswell-073:15306] [ 1] [haswell-218:18517] *** Process received signal ***
+[haswell-218:18517] Signal: Segmentation fault (11)
+[haswell-218:18517] Signal code: Address not mapped (1)
+[haswell-218:18517] Failing at address: 0x10
+[haswell-218:18517] [ 0] /lib64/libc.so.6(+0x35670)[0x7fa301f62670]
+[haswell-218:18517] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7fa3034abd0c]
+[haswell-218:18517] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7fa302e683a3]
+[haswell-218:18517] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7fa302e6f714]
+[haswell-218:18517] [ 4] ./main[0x40dc77]
+[haswell-218:18517] [ 5] ./main[0x4095d4]
+[haswell-218:18517] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7fa301f4eb15]
+[haswell-218:18517] [ 7] ./main[0x4096c1]
+[haswell-218:18517] *** End of error message ***
+[ 7] [haswell-146:26534] *** Process received signal ***
+[ 6] [haswell-010:21527] *** Process received signal ***
+[haswell-061:16021] Signal: Segmentation fault (11)
+[haswell-061:16021] Signal code: Address not mapped (1)
+[haswell-061:16021] Failing at address: 0x10
+[haswell-073:15293] Signal: Segmentation fault (11)
+[haswell-073:15293] Signal code: Address not mapped (1)
+[haswell-073:15293] Failing at address: 0x10
+[haswell-218:18530] *** Process received signal ***
+[haswell-218:18530] Signal: Segmentation fault (11)
+[haswell-218:18530] Signal code: Address not mapped (1)
+[haswell-218:18530] Failing at address: 0x10
+[haswell-218:18530] [ 0] /lib64/libc.so.6(+0x35670)[0x7f5a190e1670]
+[haswell-218:18530] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f5a1a62ad0c]
+[haswell-218:18530] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f5a19fe73a3]
+[haswell-218:18530] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f5a19fee714]
+[haswell-218:18530] [ 4] ./main[0x40dc77]
+[haswell-218:18530] [ 5] ./main[0x4095d4]
+[haswell-218:18530] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f5a190cdb15]
+[haswell-218:18530] [ 7] ./main[0x4096c1]
+[haswell-218:18530] *** End of error message ***
+./main[0x4096c1]
+[haswell-146:26534] Signal: Segmentation fault (11)
+[haswell-146:26534] Signal code: Address not mapped (1)
+[haswell-146:26534] Failing at address: 0x10
+/lib64/libc.so.6(__libc_start_main+0xf5)[0x7fa66d534b15]
+[haswell-010:21527] Signal: Segmentation fault (11)
+[haswell-010:21527] Signal code: Address not mapped (1)
+[haswell-010:21527] Failing at address: 0x10
+[haswell-061:16021] [ 0] /lib64/libc.so.6(+0x35670)[0x7f7a8d9ac670]
+[haswell-061:16021] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f6f7cfc7d0c]
+[haswell-073:15306] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f6f7c9843a3]
+[haswell-073:15306] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f6f7c98b714]
+[haswell-073:15306] [ 4] ./main[0x40dc77]
+[haswell-073:15306] [ 5] ./main[0x4095d4]
+[haswell-073:15306] [ 6] [haswell-218:18533] *** Process received signal ***
+[haswell-218:18533] Signal: Segmentation fault (11)
+[haswell-218:18533] Signal code: Address not mapped (1)
+[haswell-218:18533] Failing at address: 0x10
+[haswell-218:18533] [ 0] /lib64/libc.so.6(+0x35670)[0x7f74ac93b670]
+[haswell-218:18533] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f74ade84d0c]
+[haswell-218:18533] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f74ad8413a3]
+[haswell-218:18533] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f74ad848714]
+[haswell-218:18533] [ 4] ./main[0x40dc77]
+[haswell-218:18533] [ 5] ./main[0x4095d4]
+[haswell-218:18533] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f74ac927b15]
+[haswell-218:18533] [ 7] ./main[0x4096c1]
+[haswell-218:18533] *** End of error message ***
+[haswell-083:30726] *** End of error message ***
+[haswell-146:26534] [ 0] [haswell-208:01397] [haswell-010:21527] [ 0] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f7a8eef5d0c]
+[haswell-061:16021] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f7a8e8b23a3]
+[haswell-061:16021] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f7a8e8b9714]
+[haswell-061:16021] [ 4] ./main[0x40dc77]
+[haswell-061:16021] [ 5] ./main[0x4095d4]
+[haswell-061:16021] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f7a8d998b15]
+[haswell-061:16021] [ 7] ./main[0x4096c1]
+[haswell-061:16021] *** End of error message ***
+/lib64/libc.so.6(__libc_start_main+0xf5)[0x7f6f7ba6ab15]
+[haswell-073:15306] [ 7] ./main[0x4096c1]
+[haswell-073:15306] *** End of error message ***
+[haswell-218:18534] *** Process received signal ***
+[haswell-218:18534] Signal: Segmentation fault (11)
+[haswell-218:18534] Signal code: Address not mapped (1)
+[haswell-218:18534] Failing at address: 0x10
+[haswell-218:18534] [ 0] /lib64/libc.so.6(+0x35670)[0x7f545649f670]
+[haswell-218:18534] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f54579e8d0c]
+[haswell-218:18534] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f54573a53a3]
+[haswell-218:18534] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f54573ac714]
+[haswell-218:18534] [ 4] ./main[0x40dc77]
+[haswell-218:18534] [ 5] ./main[0x4095d4]
+[haswell-218:18534] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f545648bb15]
+[haswell-218:18534] [ 7] ./main[0x4096c1]
+[haswell-218:18534] *** End of error message ***
+[haswell-083:30753] *** Process received signal ***
+[haswell-083:30753] Signal: Segmentation fault (11)
+[haswell-083:30753] Signal code: Address not mapped (1)
+[haswell-083:30753] Failing at address: 0x10
+/lib64/libc.so.6(+0x35670)[0x7fcda9721670]
+[haswell-146:26534] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7fcdaac6ad0c]
+[haswell-146:26534] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7fcdaa6273a3]
+[haswell-146:26534] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7fcdaa62e714]
+[haswell-146:26534] [ 4] ./main[0x40dc77]
+[haswell-146:26534] [ 5] ./main[0x4095d4]
+[ 7] /lib64/libc.so.6(+0x35670)[0x7fae08a6a670]
+[haswell-010:21527] [ 1] [haswell-073:15293] [ 0] [haswell-083:30753] [ 0] /lib64/libc.so.6(+0x35670)[0x7f834c6a7670]
+[haswell-083:30753] [ 1] [haswell-146:26534] [ 6] ./main[0x4096c1]
+../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7fae09fb3d0c]
+[haswell-010:21527] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7fae099703a3]
+[haswell-010:21527] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7fae09977714]
+[haswell-010:21527] [ 4] ./main[0x40dc77]
+[haswell-010:21527] [ 5] ./main[0x4095d4]
+[haswell-010:21527] [ 6] [haswell-061:16020] *** Process received signal ***
+/lib64/libc.so.6(+0x35670)[0x7fb9a13a2670]
+[haswell-073:15293] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7fb9a28ebd0c]
+[haswell-073:15293] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7fb9a22a83a3]
+[haswell-073:15293] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7fb9a22af714]
+/lib64/libc.so.6(__libc_start_main+0xf5)[0x7fae08a56b15]
+[haswell-010:21527] [ 7] ./main[0x4096c1]
+[haswell-010:21527] *** End of error message ***
+[haswell-061:16020] Signal: Segmentation fault (11)
+[haswell-061:16020] Signal code: Address not mapped (1)
+[haswell-061:16020] Failing at address: 0x10
+[haswell-073:15293] [ 4] ./main[0x40dc77]
+[haswell-073:15293] [ 5] ./main[0x4095d4]
+[haswell-073:15293] [ 6] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f834dbf0d0c]
+[haswell-083:30753] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f834d5ad3a3]
+[haswell-083:30753] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f834d5b4714]
+[haswell-083:30753] [ 4] ./main[0x40dc77]
+[haswell-083:30753] [ 5] ./main[0x4095d4]
+[haswell-083:30753] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7fcda970db15]
+[haswell-146:26534] [ 7] ./main[0x4096c1]
+[haswell-146:26534] *** End of error message ***
+[haswell-208:01397] *** End of error message ***
+/lib64/libc.so.6(__libc_start_main+0xf5)[0x7f834c693b15]
+[haswell-083:30753] [ 7] ./main[0x4096c1]
+[haswell-083:30753] *** End of error message ***
+[haswell-208:01395] *** Process received signal ***
+[haswell-208:01395] Signal: Segmentation fault (11)
+[haswell-208:01395] Signal code: Address not mapped (1)
+[haswell-208:01395] Failing at address: 0x10
+[haswell-061:16020] [ 0] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7fb9a138eb15]
+[haswell-073:15293] [ 7] ./main[0x4096c1]
+[haswell-073:15293] *** End of error message ***
+[haswell-010:21519] *** Process received signal ***
+/lib64/libc.so.6(+0x35670)[0x7f59ffe2d670]
+[haswell-061:16020] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f5a01376d0c]
+[haswell-061:16020] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f5a00d333a3]
+[haswell-061:16020] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f5a00d3a714]
+[haswell-061:16020] [ 4] ./main[0x40dc77]
+[haswell-061:16020] [ 5] ./main[0x4095d4]
+[haswell-083:30734] *** Process received signal ***
+[haswell-208:01395] [ 0] /lib64/libc.so.6(+0x35670)[0x7f6e36845670]
+[haswell-208:01395] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f6e37d8ed0c]
+[haswell-083:30734] Signal: Segmentation fault (11)
+[haswell-083:30734] Signal code: Address not mapped (1)
+[haswell-083:30734] Failing at address: 0x10
+[haswell-146:26545] *** Process received signal ***
+[haswell-146:26545] Signal: Segmentation fault (11)
+[haswell-146:26545] Signal code: Address not mapped (1)
+[haswell-146:26545] Failing at address: 0x10
+[haswell-208:01395] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f6e3774b3a3]
+[haswell-208:01395] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f6e37752714]
+[haswell-208:01395] [ 4] ./main[0x40dc77]
+[haswell-208:01395] [ 5] ./main[0x4095d4]
+[haswell-208:01395] [haswell-010:21519] Signal: Segmentation fault (11)
+[haswell-010:21519] Signal code: Address not mapped (1)
+[haswell-010:21519] Failing at address: 0x10
+[haswell-061:16020] [ 6] [haswell-083:30734] [ 0] /lib64/libc.so.6(+0x35670)[0x7f583fe33670]
+[haswell-083:30734] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f584137cd0c]
+[haswell-083:30734] [haswell-146:26545] [ 0] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f6e36831b15]
+[haswell-208:01395] [ 7] ./main[0x4096c1]
+[haswell-208:01395] *** End of error message ***
+[haswell-010:21519] [ 0] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f59ffe19b15]
+[haswell-061:16020] [ 7] ./main[0x4096c1]
+[haswell-061:16020] *** End of error message ***
+/lib64/libc.so.6(+0x35670)[0x7f3b5099d670]
+[haswell-010:21519] [ 1] [haswell-061:16018] *** Process received signal ***
+[ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f5840d393a3]
+[haswell-083:30734] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f5840d40714]
+[haswell-083:30734] [ 4] ./main[0x40dc77]
+[haswell-083:30734] [ 5] ./main[0x4095d4]
+[haswell-083:30734] [ 6] /lib64/libc.so.6(+0x35670)[0x7f964b4ad670]
+[haswell-146:26545] [ 1] [haswell-208:01417] *** Process received signal ***
+/lib64/libc.so.6(__libc_start_main+0xf5)[0x7f583fe1fb15]
+[haswell-083:30734] [ 7] ./main[0x4096c1]
+[haswell-083:30734] *** End of error message ***
+../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f964c9f6d0c]
+[haswell-146:26545] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f964c3b33a3]
+[haswell-146:26545] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f964c3ba714]
+[haswell-146:26545] [ 4] ./main[0x40dc77]
+[haswell-146:26545] [ 5] ./main[0x4095d4]
+[haswell-146:26545] [ 6] [haswell-208:01417] Signal: Segmentation fault (11)
+[haswell-208:01417] Signal code: Address not mapped (1)
+[haswell-208:01417] Failing at address: 0x10
+../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f3b51ee6d0c]
+[haswell-010:21519] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f3b518a33a3]
+[haswell-010:21519] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f3b518aa714]
+[haswell-010:21519] [ 4] ./main[0x40dc77]
+[haswell-010:21519] [ 5] ./main[0x4095d4]
+[haswell-010:21519] [ 6] [haswell-061:16018] Signal: Segmentation fault (11)
+[haswell-061:16018] Signal code: Address not mapped (1)
+[haswell-061:16018] Failing at address: 0x10
+[haswell-073:15292] *** Process received signal ***
+[haswell-083:30749] *** Process received signal ***
+/lib64/libc.so.6(__libc_start_main+0xf5)[0x7f964b499b15]
+[haswell-146:26545] [ 7] ./main[0x4096c1]
+[haswell-146:26545] *** End of error message ***
+[haswell-208:01417] [ 0] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f3b50989b15]
+[haswell-010:21519] [ 7] ./main[0x4096c1]
+[haswell-010:21519] *** End of error message ***
+[haswell-061:16018] [ 0] [haswell-073:15292] Signal: Segmentation fault (11)
+[haswell-073:15292] Signal code: Address not mapped (1)
+[haswell-073:15292] Failing at address: 0x10
+[haswell-083:30749] Signal: Segmentation fault (11)
+[haswell-083:30749] Signal code: Address not mapped (1)
+[haswell-083:30749] Failing at address: 0x10
+[haswell-146:26537] *** Process received signal ***
+/lib64/libc.so.6(+0x35670)[0x7f924a93a670]
+[haswell-208:01417] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f924be83d0c]
+[haswell-208:01417] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f924b8403a3]
+[haswell-208:01417] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f924b847714]
+[haswell-208:01417] [ 4] /lib64/libc.so.6(+0x35670)[0x7fdcd9055670]
+[haswell-061:16018] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7fdcda59ed0c]
+[haswell-061:16018] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7fdcd9f5b3a3]
+[haswell-061:16018] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7fdcd9f62714]
+[haswell-061:16018] [ 4] [haswell-073:15292] [ 0] [haswell-010:21509] *** Process received signal ***
+./main[0x40dc77]
+[haswell-061:16018] [ 5] ./main[0x4095d4]
+[haswell-061:16018] [ 6] /lib64/libc.so.6(+0x35670)[0x7fb321332670]
+[haswell-073:15292] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7fb32287bd0c]
+[haswell-073:15292] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7fb3222383a3]
+[haswell-073:15292] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7fb32223f714]
+[haswell-073:15292] [ 4] [haswell-083:30749] [ 0] /lib64/libc.so.6(+0x35670)[0x7fd723fc9670]
+[haswell-083:30749] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7fd725512d0c]
+[haswell-083:30749] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7fd724ecf3a3]
+[haswell-083:30749] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7fd724ed6714]
+[haswell-083:30749] [ 4] ./main[0x40dc77]
+[haswell-083:30749] [haswell-146:26537] Signal: Segmentation fault (11)
+[haswell-146:26537] Signal code: Address not mapped (1)
+[haswell-146:26537] Failing at address: 0x10
+./main[0x40dc77]
+[haswell-208:01417] [ 5] ./main[0x4095d4]
+[haswell-208:01417] [ 6] [haswell-010:21509] Signal: Segmentation fault (11)
+[haswell-010:21509] Signal code: Address not mapped (1)
+[haswell-010:21509] Failing at address: 0x10
+/lib64/libc.so.6(__libc_start_main+0xf5)[0x7fdcd9041b15]
+[haswell-061:16018] [ 7] ./main[0x4096c1]
+[haswell-061:16018] *** End of error message ***
+./main[0x40dc77]
+[haswell-073:15292] [ 5] ./main[0x4095d4]
+[haswell-073:15292] [ 6] [ 5] ./main[0x4095d4]
+[haswell-083:30749] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7fd723fb5b15]
+[haswell-083:30749] [ 7] ./main[0x4096c1]
+[haswell-083:30749] *** End of error message ***
+[haswell-146:26537] [ 0] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f924a926b15]
+[haswell-208:01417] [ 7] ./main[0x4096c1]
+[haswell-208:01417] *** End of error message ***
+[haswell-083:30730] *** Process received signal ***
+/lib64/libc.so.6(+0x35670)[0x7efffa2fa670]
+[haswell-146:26537] [ 1] [haswell-208:01413] *** Process received signal ***
+[haswell-208:01413] Signal: Segmentation fault (11)
+[haswell-208:01413] Signal code: Address not mapped (1)
+[haswell-208:01413] Failing at address: 0x10
+[haswell-010:21509] [ 0] /lib64/libc.so.6(+0x35670)[0x7fc7ccf72670]
+[haswell-010:21509] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7fc7ce4bbd0c]
+[haswell-010:21509] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7fc7cde783a3]
+[haswell-010:21509] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7fc7cde7f714]
+[haswell-010:21509] [ 4] ./main[0x40dc77]
+[haswell-010:21509] [ 5] [haswell-061:16017] *** Process received signal ***
+[haswell-061:16017] Signal: Segmentation fault (11)
+[haswell-061:16017] Signal code: Address not mapped (1)
+[haswell-061:16017] Failing at address: 0x10
+/lib64/libc.so.6(__libc_start_main+0xf5)[0x7fb32131eb15]
+[haswell-073:15292] [ 7] ./main[0x4096c1]
+[haswell-073:15292] *** End of error message ***
+../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7efffb843d0c]
+[haswell-146:26537] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7efffb2003a3]
+[haswell-146:26537] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7efffb207714]
+[haswell-146:26537] [ 4] ./main[0x40dc77]
+[haswell-146:26537] [ 5] ./main[0x4095d4]
+[haswell-146:26537] [ 6] [haswell-208:01413] [ 0] ./main[0x4095d4]
+[haswell-010:21509] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7fc7ccf5eb15]
+[haswell-010:21509] [ 7] ./main[0x4096c1]
+[haswell-010:21509] *** End of error message ***
+[haswell-061:16017] [ 0] [haswell-073:15305] *** Process received signal ***
+[haswell-083:30730] Signal: Segmentation fault (11)
+[haswell-083:30730] Signal code: Address not mapped (1)
+[haswell-083:30730] Failing at address: 0x10
+[haswell-073:15305] Signal: Segmentation fault (11)
+[haswell-073:15305] Signal code: Address not mapped (1)
+[haswell-073:15305] Failing at address: 0x10
+[haswell-083:30730] [ 0] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7efffa2e6b15]
+[haswell-146:26537] [ 7] ./main[0x4096c1]
+[haswell-146:26537] *** End of error message ***
+/lib64/libc.so.6(+0x35670)[0x7efec26ce670]
+[haswell-208:01413] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7efec3c17d0c]
+[haswell-208:01413] [ 2] [haswell-010:21522] *** Process received signal ***
+[haswell-010:21522] Signal: Segmentation fault (11)
+[haswell-010:21522] Signal code: Address not mapped (1)
+[haswell-010:21522] Failing at address: 0x10
+/lib64/libc.so.6(+0x35670)[0x7f36307ff670]
+[haswell-061:16017] [ 1] /lib64/libc.so.6(+0x35670)[0x7f7f4fd02670]
+[haswell-083:30730] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f7f5124bd0c]
+[haswell-083:30730] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f7f50c083a3]
+[haswell-083:30730] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f7f50c0f714]
+[haswell-083:30730] [ 4] ./main[0x40dc77]
+[haswell-083:30730] [ 5] ./main[0x4095d4]
+../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7efec35d43a3]
+[haswell-208:01413] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7efec35db714]
+[haswell-208:01413] [ 4] ./main[0x40dc77]
+[haswell-208:01413] [ 5] ./main[0x4095d4]
+[haswell-208:01413] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7efec26bab15]
+[haswell-208:01413] [ 7] ./main[0x4096c1]
+[haswell-208:01413] *** End of error message ***
+[haswell-010:21522] [ 0] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f3631d48d0c]
+[haswell-061:16017] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f36317053a3]
+[haswell-061:16017] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f363170c714]
+[haswell-061:16017] [ 4] ./main[0x40dc77]
+[haswell-061:16017] [ 5] ./main[0x4095d4]
+[haswell-061:16017] [ 6] [haswell-073:15305] [ 0] [haswell-208:01416] *** Process received signal ***
+/lib64/libc.so.6(+0x35670)[0x7fb455698670]
+[haswell-010:21522] [ 1] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f36307ebb15]
+[haswell-061:16017] [ 7] ./main[0x4096c1]
+[haswell-061:16017] *** End of error message ***
+/lib64/libc.so.6(+0x35670)[0x7f94a1a34670]
+[haswell-073:15305] [ 1] [haswell-083:30730] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f7f4fceeb15]
+[haswell-083:30730] [ 7] ./main[0x4096c1]
+[haswell-083:30730] *** End of error message ***
+[haswell-083:30732] *** Process received signal ***
+[haswell-083:30732] Signal: Segmentation fault (11)
+[haswell-083:30732] Signal code: Address not mapped (1)
+[haswell-083:30732] Failing at address: 0x10
+[haswell-146:26523] *** Process received signal ***
+[haswell-208:01416] Signal: Segmentation fault (11)
+[haswell-208:01416] Signal code: Address not mapped (1)
+[haswell-208:01416] Failing at address: 0x10
+../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7fb456be1d0c]
+[haswell-010:21522] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7fb45659e3a3]
+[haswell-010:21522] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7fb4565a5714]
+[haswell-010:21522] [ 4] ./main[0x40dc77]
+[haswell-010:21522] [ 5] ./main[0x4095d4]
+[haswell-010:21522] [ 6] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f94a2f7dd0c]
+[haswell-073:15305] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f94a293a3a3]
+[haswell-073:15305] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f94a2941714]
+[haswell-073:15305] [ 4] ./main[0x40dc77]
+[haswell-073:15305] [ 5] ./main[0x4095d4]
+[haswell-073:15305] [haswell-083:30732] [ 0] [haswell-146:26523] Signal: Segmentation fault (11)
+[haswell-146:26523] Signal code: Address not mapped (1)
+[haswell-146:26523] Failing at address: 0x10
+[haswell-208:01416] [ 0] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7fb455684b15]
+[haswell-010:21522] [ 7] ./main[0x4096c1]
+[haswell-010:21522] *** End of error message ***
+[ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f94a1a20b15]
+[haswell-073:15305] [ 7] /lib64/libc.so.6(+0x35670)[0x7f7a0ec59670]
+[haswell-083:30732] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f7a101a2d0c]
+[haswell-083:30732] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f7a0fb5f3a3]
+[haswell-083:30732] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f7a0fb66714]
+[haswell-083:30732] [ 4] ./main[0x40dc77]
+[haswell-083:30732] [ 5] [haswell-146:26523] [ 0] /lib64/libc.so.6(+0x35670)[0x7f48feb4f670]
+[haswell-208:01416] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f4900098d0c]
+[haswell-208:01416] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f48ffa553a3]
+[haswell-208:01416] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f48ffa5c714]
+[haswell-208:01416] [ 4] ./main[0x40dc77]
+[haswell-208:01416] [ 5] ./main[0x4096c1]
+[haswell-073:15305] *** End of error message ***
+./main[0x4095d4]
+[haswell-083:30732] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f7a0ec45b15]
+[haswell-083:30732] [ 7] ./main[0x4096c1]
+[haswell-083:30732] *** End of error message ***
+/lib64/libc.so.6(+0x35670)[0x7fdc8ab1b670]
+[haswell-146:26523] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7fdc8c064d0c]
+[haswell-146:26523] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7fdc8ba213a3]
+[haswell-146:26523] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7fdc8ba28714]
+[haswell-146:26523] [ 4] ./main[0x4095d4]
+[haswell-208:01416] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f48feb3bb15]
+[haswell-208:01416] [ 7] ./main[0x4096c1]
+[haswell-208:01416] *** End of error message ***
+./main[0x40dc77]
+[haswell-146:26523] [ 5] ./main[0x4095d4]
+[haswell-146:26523] [ 6] [haswell-208:01392] *** Process received signal ***
+/lib64/libc.so.6(__libc_start_main+0xf5)[0x7fdc8ab07b15]
+[haswell-146:26523] [ 7] ./main[0x4096c1]
+[haswell-146:26523] *** End of error message ***
+[haswell-208:01392] Signal: Segmentation fault (11)
+[haswell-208:01392] Signal code: Address not mapped (1)
+[haswell-208:01392] Failing at address: 0x10
+[haswell-146:26533] *** Process received signal ***
+[haswell-208:01392] [ 0] /lib64/libc.so.6(+0x35670)[0x7f9d0c5e9670]
+[haswell-208:01392] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f9d0db32d0c]
+[haswell-208:01392] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f9d0d4ef3a3]
+[haswell-208:01392] [ 3] [haswell-010:21510] *** Process received signal ***
+[haswell-010:21510] Signal: Segmentation fault (11)
+[haswell-010:21510] Signal code: Address not mapped (1)
+[haswell-010:21510] Failing at address: 0x10
+[haswell-146:26533] Signal: Segmentation fault (11)
+[haswell-146:26533] Signal code: Address not mapped (1)
+[haswell-146:26533] Failing at address: 0x10
+../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f9d0d4f6714]
+[haswell-208:01392] [ 4] ./main[0x40dc77]
+[haswell-208:01392] [ 5] ./main[0x4095d4]
+[haswell-208:01392] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f9d0c5d5b15]
+[haswell-208:01392] [ 7] [haswell-010:21510] [ 0] [haswell-146:26533] [ 0] ./main[0x4096c1]
+[haswell-208:01392] *** End of error message ***
+/lib64/libc.so.6(+0x35670)[0x7f81e6c3c670]
+[haswell-010:21510] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f81e8185d0c]
+[haswell-010:21510] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f81e7b423a3]
+[haswell-010:21510] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f81e7b49714]
+[haswell-010:21510] [ 4] /lib64/libc.so.6(+0x35670)[0x7fc2e5ad5670]
+[haswell-146:26533] [ 1] [haswell-208:01388] *** Process received signal ***
+./main[0x40dc77]
+[haswell-010:21510] [ 5] ./main[0x4095d4]
+[haswell-010:21510] [ 6] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7fc2e701ed0c]
+[haswell-146:26533] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7fc2e69db3a3]
+[haswell-146:26533] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7fc2e69e2714]
+[haswell-146:26533] [ 4] ./main[0x40dc77]
+[haswell-146:26533] [ 5] ./main[0x4095d4]
+[haswell-146:26533] [ 6] [haswell-208:01388] Signal: Segmentation fault (11)
+[haswell-208:01388] Signal code: Address not mapped (1)
+[haswell-208:01388] Failing at address: 0x10
+/lib64/libc.so.6(__libc_start_main+0xf5)[0x7f81e6c28b15]
+[haswell-010:21510] [ 7] ./main[0x4096c1]
+[haswell-010:21510] *** End of error message ***
+/lib64/libc.so.6(__libc_start_main+0xf5)[0x7fc2e5ac1b15]
+[haswell-146:26533] [ 7] ./main[0x4096c1]
+[haswell-146:26533] *** End of error message ***
+[haswell-208:01388] [ 0] /lib64/libc.so.6(+0x35670)[0x7f2e02bea670]
+[haswell-208:01388] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f2e04133d0c]
+[haswell-208:01388] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f2e03af03a3]
+[haswell-208:01388] [ 3] [haswell-010:21520] *** Process received signal ***
+[haswell-061:16022] *** Process received signal ***
+[haswell-061:16022] Signal: Segmentation fault (11)
+[haswell-061:16022] Signal code: Address not mapped (1)
+[haswell-061:16022] Failing at address: 0x10
+[haswell-061:16022] [ 0] /lib64/libc.so.6(+0x35670)[0x7f1049d06670]
+[haswell-061:16022] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f104b24fd0c]
+[haswell-061:16022] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f104ac0c3a3]
+[haswell-061:16022] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f104ac13714]
+[haswell-061:16022] [ 4] ./main[0x40dc77]
+[haswell-061:16022] [ 5] ./main[0x4095d4]
+[haswell-061:16022] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f1049cf2b15]
+[haswell-061:16022] [ 7] ./main[0x4096c1]
+[haswell-061:16022] *** End of error message ***
+[haswell-083:30748] *** Process received signal ***
+[haswell-083:30748] Signal: Segmentation fault (11)
+[haswell-083:30748] Signal code: Address not mapped (1)
+[haswell-083:30748] Failing at address: 0x10
+[haswell-083:30748] [ 0] /lib64/libc.so.6(+0x35670)[0x7f54a38bc670]
+[haswell-083:30748] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f54a4e05d0c]
+[haswell-083:30748] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f54a47c23a3]
+[haswell-083:30748] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f54a47c9714]
+[haswell-083:30748] [ 4] ./main[0x40dc77]
+[haswell-083:30748] [ 5] ./main[0x4095d4]
+[haswell-083:30748] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f54a38a8b15]
+[haswell-083:30748] [ 7] ./main[0x4096c1]
+[haswell-083:30748] *** End of error message ***
+[haswell-146:26548] *** Process received signal ***
+[haswell-146:26548] Signal: Segmentation fault (11)
+[haswell-146:26548] Signal code: Address not mapped (1)
+[haswell-146:26548] Failing at address: 0x10
+../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f2e03af7714]
+[haswell-208:01388] [ 4] ./main[0x40dc77]
+[haswell-208:01388] [ 5] ./main[0x4095d4]
+[haswell-208:01388] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f2e02bd6b15]
+[haswell-208:01388] [ 7] [haswell-010:21520] Signal: Segmentation fault (11)
+[haswell-010:21520] Signal code: Address not mapped (1)
+[haswell-010:21520] Failing at address: 0x10
+[haswell-061:16025] *** Process received signal ***
+[haswell-061:16025] Signal: Segmentation fault (11)
+[haswell-061:16025] Signal code: Address not mapped (1)
+[haswell-061:16025] Failing at address: 0x10
+[haswell-061:16025] [ 0] /lib64/libc.so.6(+0x35670)[0x7f5050bb5670]
+[haswell-061:16025] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f50520fed0c]
+[haswell-061:16025] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f5051abb3a3]
+[haswell-061:16025] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f5051ac2714]
+[haswell-061:16025] [ 4] ./main[0x40dc77]
+[haswell-061:16025] [ 5] ./main[0x4095d4]
+[haswell-061:16025] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f5050ba1b15]
+[haswell-061:16025] [ 7] ./main[0x4096c1]
+[haswell-061:16025] *** End of error message ***
+[haswell-083:30751] *** Process received signal ***
+[haswell-083:30751] Signal: Segmentation fault (11)
+[haswell-083:30751] Signal code: Address not mapped (1)
+[haswell-083:30751] Failing at address: 0x10
+[haswell-083:30751] [ 0] /lib64/libc.so.6(+0x35670)[0x7f1350b66670]
+[haswell-083:30751] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f13520afd0c]
+[haswell-083:30751] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f1351a6c3a3]
+[haswell-083:30751] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f1351a73714]
+[haswell-083:30751] [ 4] ./main[0x40dc77]
+[haswell-083:30751] [ 5] ./main[0x4095d4]
+[haswell-083:30751] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f1350b52b15]
+[haswell-083:30751] [ 7] ./main[0x4096c1]
+[haswell-083:30751] *** End of error message ***
+[haswell-146:26548] [ 0] ./main[0x4096c1]
+[haswell-208:01388] *** End of error message ***
+[haswell-010:21520] [ 0] [haswell-061:16043] *** Process received signal ***
+[haswell-061:16043] Signal: Segmentation fault (11)
+[haswell-061:16043] Signal code: Address not mapped (1)
+[haswell-061:16043] Failing at address: 0x10
+[haswell-061:16043] [ 0] /lib64/libc.so.6(+0x35670)[0x7f69c5ab6670]
+[haswell-061:16043] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f69c6fffd0c]
+[haswell-061:16043] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f69c69bc3a3]
+[haswell-061:16043] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f69c69c3714]
+[haswell-061:16043] [ 4] ./main[0x40dc77]
+[haswell-061:16043] [ 5] ./main[0x4095d4]
+[haswell-061:16043] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f69c5aa2b15]
+[haswell-061:16043] [ 7] ./main[0x4096c1]
+[haswell-061:16043] *** End of error message ***
+[haswell-083:30754] *** Process received signal ***
+[haswell-083:30754] Signal: Segmentation fault (11)
+[haswell-083:30754] Signal code: Address not mapped (1)
+[haswell-083:30754] Failing at address: 0x10
+[haswell-083:30754] [ 0] /lib64/libc.so.6(+0x35670)[0x7f911fd4f670]
+[haswell-083:30754] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f9121298d0c]
+[haswell-083:30754] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f9120c553a3]
+[haswell-083:30754] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f9120c5c714]
+[haswell-083:30754] [ 4] ./main[0x40dc77]
+[haswell-083:30754] [ 5] ./main[0x4095d4]
+[haswell-083:30754] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f911fd3bb15]
+[haswell-083:30754] [ 7] ./main[0x4096c1]
+[haswell-083:30754] *** End of error message ***
+/lib64/libc.so.6(+0x35670)[0x7f312936e670]
+[haswell-146:26548] [haswell-208:01398] *** Process received signal ***
+/lib64/libc.so.6(+0x35670)[0x7f73f41fd670]
+[haswell-010:21520] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f73f5746d0c]
+[haswell-010:21520] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f73f51033a3]
+[haswell-010:21520] [ 3] [haswell-061:16028] *** Process received signal ***
+[haswell-061:16028] Signal: Segmentation fault (11)
+[haswell-061:16028] Signal code: Address not mapped (1)
+[haswell-061:16028] Failing at address: 0x10
+[haswell-061:16028] [ 0] /lib64/libc.so.6(+0x35670)[0x7fef7c5e0670]
+[haswell-061:16028] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7fef7db29d0c]
+[haswell-061:16028] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7fef7d4e63a3]
+[haswell-061:16028] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7fef7d4ed714]
+[haswell-061:16028] [ 4] ./main[0x40dc77]
+[haswell-061:16028] [ 5] ./main[0x4095d4]
+[haswell-061:16028] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7fef7c5ccb15]
+[haswell-061:16028] [ 7] ./main[0x4096c1]
+[haswell-061:16028] *** End of error message ***
+[ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f312a8b7d0c]
+[haswell-146:26548] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f312a2743a3]
+[haswell-146:26548] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f312a27b714]
+[haswell-146:26548] [ 4] ./main[0x40dc77]
+[haswell-146:26548] [ 5] ./main[0x4095d4]
+[haswell-146:26548] [ 6] [haswell-208:01398] Signal: Segmentation fault (11)
+[haswell-208:01398] Signal code: Address not mapped (1)
+[haswell-208:01398] Failing at address: 0x10
+../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f73f510a714]
+[haswell-010:21520] [ 4] ./main[0x40dc77]
+[haswell-010:21520] [ 5] ./main[0x4095d4]
+[haswell-010:21520] [ 6] [haswell-083:30729] *** Process received signal ***
+[haswell-083:30729] Signal: Segmentation fault (11)
+[haswell-083:30729] Signal code: Address not mapped (1)
+[haswell-083:30729] Failing at address: 0x10
+[haswell-083:30729] [ 0] /lib64/libc.so.6(+0x35670)[0x7f6d75061670]
+[haswell-083:30729] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f6d765aad0c]
+[haswell-083:30729] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f6d75f673a3]
+[haswell-083:30729] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f6d75f6e714]
+[haswell-083:30729] [ 4] ./main[0x40dc77]
+[haswell-083:30729] [ 5] ./main[0x4095d4]
+[haswell-083:30729] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f6d7504db15]
+[haswell-083:30729] [ 7] ./main[0x4096c1]
+[haswell-083:30729] *** End of error message ***
+/lib64/libc.so.6(__libc_start_main+0xf5)[0x7f312935ab15]
+[haswell-146:26548] [ 7] ./main[0x4096c1]
+[haswell-146:26548] *** End of error message ***
+[haswell-208:01398] [ 0] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f73f41e9b15]
+[haswell-010:21520] [ 7] ./main[0x4096c1]
+[haswell-010:21520] *** End of error message ***
+/lib64/libc.so.6(+0x35670)[0x7feb72e9a670]
+[haswell-208:01398] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7feb743e3d0c]
+[haswell-208:01398] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7feb73da03a3]
+[haswell-208:01398] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7feb73da7714]
+[haswell-208:01398] [ 4] ./main[0x40dc77]
+[haswell-208:01398] [ 5] ./main[0x4095d4]
+[haswell-208:01398] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7feb72e86b15]
+[haswell-208:01398] [ 7] ./main[0x4096c1]
+[haswell-208:01398] *** End of error message ***
+[haswell-010:21515] *** Process received signal ***
+[haswell-208:01389] *** Process received signal ***
+[haswell-208:01389] Signal: Segmentation fault (11)
+[haswell-208:01389] Signal code: Address not mapped (1)
+[haswell-208:01389] Failing at address: 0x10
+[haswell-010:21515] Signal: Segmentation fault (11)
+[haswell-010:21515] Signal code: Address not mapped (1)
+[haswell-010:21515] Failing at address: 0x10
+[haswell-208:01389] [ 0] [haswell-010:21515] [ 0] /lib64/libc.so.6(+0x35670)[0x7f118a917670]
+[haswell-208:01389] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f118be60d0c]
+[haswell-208:01389] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f118b81d3a3]
+[haswell-208:01389] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f118b824714]
+[haswell-208:01389] [ 4] ./main[0x40dc77]
+[haswell-208:01389] [ 5] /lib64/libc.so.6(+0x35670)[0x7efe82018670]
+[haswell-010:21515] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7efe83561d0c]
+[haswell-010:21515] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7efe82f1e3a3]
+[haswell-010:21515] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7efe82f25714]
+[haswell-010:21515] [ 4] ./main[0x40dc77]
+[haswell-010:21515] [ 5] ./main[0x4095d4]
+[haswell-010:21515] [ 6] ./main[0x4095d4]
+[haswell-208:01389] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f118a903b15]
+[haswell-208:01389] [ 7] ./main[0x4096c1]
+[haswell-208:01389] *** End of error message ***
+/lib64/libc.so.6(__libc_start_main+0xf5)[0x7efe82004b15]
+[haswell-010:21515] [ 7] ./main[0x4096c1]
+[haswell-010:21515] *** End of error message ***
+[haswell-208:01394] *** Process received signal ***
+[haswell-208:01394] Signal: Segmentation fault (11)
+[haswell-208:01394] Signal code: Address not mapped (1)
+[haswell-208:01394] Failing at address: 0x10
+[haswell-010:21518] *** Process received signal ***
+[haswell-010:21518] Signal: Segmentation fault (11)
+[haswell-010:21518] Signal code: Address not mapped (1)
+[haswell-010:21518] Failing at address: 0x10
+[haswell-208:01394] [ 0] [haswell-010:21518] [ 0] /lib64/libc.so.6(+0x35670)[0x7fe50c9ac670]
+[haswell-208:01394] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7fe50def5d0c]
+[haswell-208:01394] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7fe50d8b23a3]
+[haswell-208:01394] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7fe50d8b9714]
+[haswell-208:01394] [ 4] ./main[0x40dc77]
+[haswell-208:01394] [ 5] ./main[0x4095d4]
+[haswell-208:01394] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7fe50c998b15]
+[haswell-208:01394] [ 7] ./main[0x4096c1]
+/lib64/libc.so.6(+0x35670)[0x7effdf099670]
+[haswell-010:21518] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7effe05e2d0c]
+[haswell-010:21518] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7effdff9f3a3]
+[haswell-010:21518] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7effdffa6714]
+[haswell-010:21518] [ 4] ./main[0x40dc77]
+[haswell-010:21518] [ 5] ./main[0x4095d4]
+[haswell-010:21518] [ 6] [haswell-208:01394] *** End of error message ***
+/lib64/libc.so.6(__libc_start_main+0xf5)[0x7effdf085b15]
+[haswell-010:21518] [ 7] ./main[0x4096c1]
+[haswell-010:21518] *** End of error message ***
+[haswell-010:21524] *** Process received signal ***
+[haswell-146:26525] *** Process received signal ***
+[haswell-146:26525] Signal: Segmentation fault (11)
+[haswell-146:26525] Signal code: Address not mapped (1)
+[haswell-146:26525] Failing at address: 0x10
+[haswell-146:26525] [ 0] /lib64/libc.so.6(+0x35670)[0x7fd923152670]
+[haswell-146:26525] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7fd92469bd0c]
+[haswell-146:26525] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7fd9240583a3]
+[haswell-146:26525] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7fd92405f714]
+[haswell-146:26525] [ 4] ./main[0x40dc77]
+[haswell-146:26525] [ 5] ./main[0x4095d4]
+[haswell-146:26525] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7fd92313eb15]
+[haswell-146:26525] [ 7] ./main[0x4096c1]
+[haswell-146:26525] *** End of error message ***
+[haswell-010:21524] Signal: Segmentation fault (11)
+[haswell-010:21524] Signal code: Address not mapped (1)
+[haswell-010:21524] Failing at address: 0x10
+[haswell-010:21524] [ 0] /lib64/libc.so.6(+0x35670)[0x7febfb12f670]
+[haswell-010:21524] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7febfc678d0c]
+[haswell-010:21524] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7febfc0353a3]
+[haswell-010:21524] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7febfc03c714]
+[haswell-010:21524] [ 4] ./main[0x40dc77]
+[haswell-010:21524] [ 5] ./main[0x4095d4]
+[haswell-010:21524] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7febfb11bb15]
+[haswell-010:21524] [ 7] ./main[0x4096c1]
+[haswell-010:21524] *** End of error message ***
+[haswell-208:01393] *** Process received signal ***
+[haswell-208:01393] Signal: Segmentation fault (11)
+[haswell-208:01393] Signal code: Address not mapped (1)
+[haswell-208:01393] Failing at address: 0x10
+[haswell-208:01393] [ 0] /lib64/libc.so.6(+0x35670)[0x7f14b1988670]
+[haswell-208:01393] [ 1] ../../lib/current/libpll.so.0(pll_update_repeats+0x2c)[0x7f14b2ed1d0c]
+[haswell-208:01393] [ 2] ../common/librepeatsbalance.so(_ZN9Partition14update_repeatsERK4Tree+0x53)[0x7f14b288e3a3]
+[haswell-208:01393] [ 3] ../common/librepeatsbalance.so(_ZN12LoadBalancer20compute_weighted_msaERKSt6vectorIP3MSASaIS2_EERS0_I11WeightedMSASaIS7_EEj+0x1b4)[0x7f14b2895714]
+[haswell-208:01393] [ 4] ./main[0x40dc77]
+[haswell-208:01393] [ 5] ./main[0x4095d4]
+[haswell-208:01393] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f14b1974b15]
+[haswell-208:01393] [ 7] ./main[0x4096c1]
+[haswell-208:01393] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 81 with PID 0 on node haswell-073 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+12 total processes killed (some possibly by mpirun during cleanup)

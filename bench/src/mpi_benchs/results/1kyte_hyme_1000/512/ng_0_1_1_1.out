@@ -1,0 +1,3 @@
+caption data: ../../../data//1kyte_hyme/1kyte_hyme.phy, lb_kassian, use_rep, update_rep, iterations: 10000, trees: 1, shuffle_tree, mpi_barriers, update_operations, 
+Time spent in load balancing in rank 0: 0ms
+0 166860ms
