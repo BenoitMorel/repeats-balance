@@ -62,8 +62,9 @@ export LD_LIBRARY_PATH=../../lib/current:../common
 #launch kyte 128 0 1 300
 #launch kyte 128 1 1 300
 
-data=generate_50_1000
-threads=1024
+data=kyte
+#data=generated_50_10000
+threads=128
 iterations=10000
 use_repeats=1
 

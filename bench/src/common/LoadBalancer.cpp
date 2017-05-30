@@ -25,7 +25,7 @@ void LoadBalancer::compute_weighted_msa(const std::vector<MSA *> &input_msas,
     Partition partition(input_msas[m], pll_attribute, input_msas[0]->get_states_number(), 4, 0); 
     for (unsigned int t = 0; t < trees.size(); ++t) {
       partition.update_repeats(*trees[t]);
-      weighted_msa[m].persite_weight += partition.get_unique_repeats_pattern_ratio();
+      weighted_msa[m].persite_weight += std::max(0.05, partition.get_unique_repeats_pattern_ratio());
     }   
   }
 }

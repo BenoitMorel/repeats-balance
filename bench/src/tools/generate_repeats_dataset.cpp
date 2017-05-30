@@ -14,7 +14,7 @@ public:
     msa(taxas) {
     for (unsigned int t = 0; t < taxas_number(); ++t) {
       std::stringstream ss;
-      ss << "partition" << t;
+      ss << "superfrog" << t;
       labels[t] = ss.str();
     }
   }
@@ -46,7 +46,7 @@ public:
     std::ofstream part_file(filename);
     unsigned int curr_offset = 0;
     for (unsigned int i = 0; i < lengths.size(); ++i) {
-      part_file << "DNA Partition" << i << " = " << curr_offset + 1 << "-" << curr_offset + lengths[i] << std::endl;
+      part_file << "DNA, Partition" << i << " = " << curr_offset + 1 << "-" << curr_offset + lengths[i] << std::endl;
       curr_offset += lengths[i];
     }
   }
