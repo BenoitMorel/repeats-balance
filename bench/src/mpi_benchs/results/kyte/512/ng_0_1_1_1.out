@@ -512,4 +512,4 @@ caption data: ../../../data//kyte/kyte.phy, part: ../../../data//kyte/kyte.part,
 {p29 (1020, 353) , p40 (0, 373) , }
 {p45 (796, 132) , p29 (0, 594) , }
 Time spent in load balancing in rank 0: 1ms
-0 38668ms
+0 38902ms

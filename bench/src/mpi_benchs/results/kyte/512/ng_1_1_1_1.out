@@ -511,5 +511,5 @@ caption data: ../../../data//kyte/kyte.phy, part: ../../../data//kyte/kyte.part,
 {p45 (336, 455) , }
 {p14 (605, 117) , p45 (0, 336) , }
 {p49 (521, 199) , p14 (0, 251) , }
-Time spent in load balancing in rank 0: 2369ms
-0 34749ms
+Time spent in load balancing in rank 0: 2315ms
+0 35091ms

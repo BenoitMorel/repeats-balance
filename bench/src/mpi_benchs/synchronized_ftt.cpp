@@ -57,6 +57,10 @@ void synchronized_ftt(int argc, char *params[])
 
   MSA full_msa(seq, states_number);
   std::vector<Tree *> trees;
+  if (trees_number == 0) { // temp hack
+    trees.push_back(new Tree(&full_msa, "../../../data/kyte/kyte.besttree"));
+    trees_number = 1;
+  }
   for (unsigned int i = 0; i < trees_number; ++i) {
       trees.push_back(new Tree(&full_msa));
   }

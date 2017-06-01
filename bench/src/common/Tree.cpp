@@ -217,11 +217,10 @@ Tree::Tree(const MSA *msa, const char *newick_file)
 {
   if (!newick_file) {
     pll_utree = create_random(msa->get_pll_msa()->count, msa->get_pll_msa()->label);
-    tips_number = msa->get_pll_msa()->count;
   } else {
     pll_utree = pll_utree_parse_newick(newick_file);
-    tips_number = pll_utree->tip_count;
   }
+  tips_number = msa->get_pll_msa()->count;
   if (!pll_utree) {
     std::cerr << "Error: Tree::tree null pll_utree" << std::endl;
   }

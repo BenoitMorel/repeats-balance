@@ -24,7 +24,7 @@ launch()
   part_suffix=
 
   use_repeats=1
-  seed=42
+  seed=45
   states=4
   lookupsize=0
   path_data=../../../data/
@@ -63,8 +63,8 @@ export LD_LIBRARY_PATH=../../lib/current:../common
 #launch kyte 128 1 1 300
 
 #data=kyte
-data=1kyte_hyme
-threads=2048
+data=kyte
+threads=254
 iterations=10000
 use_repeats=1
 

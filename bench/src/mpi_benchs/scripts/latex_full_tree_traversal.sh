@@ -13,7 +13,7 @@ echo "\\begin{minipage}{0.24\\textwidth}"
 echo "  \\begin{tikzpicture}[scale=0.50]"
 echo "    \\begin{axis}[ybar interval, xtick=\\empty, ymax=$maxy,ymin=0, minor y tick num = 3, xlabel={Cores}, ylabel={Elapsed time (ms)}]"
 echo "      \\addplot coordinates {$plop};"
-echo "        \\draw [red, dashed] ({rel axis cs:0,0}|-{axis cs:0,$max}) -- ({rel axis cs:1,0}|-{axis cs:$threads,$max}) node [pos=0.5, below] {worst cpu time};
+echo "        \\draw [red, dashed] ({rel axis cs:0,0}|-{axis cs:0,$max}) -- ({rel axis cs:1,0}|-{axis cs:$threads,$max}) node [pos=0.5, below] {ODDA worst cpu time};
 "
 echo "     \\end{axis}"
 echo "  \\end{tikzpicture}"

@@ -2,7 +2,7 @@
 
 source ../sequential_benchs/scripts/common.sh
 
-data_name=generated
+data_name=1kite_matc_red
 #empty string for a random tree
 tree=
 #tree=$path_data/$data_name/unrooted.newick
