@@ -27,7 +27,7 @@ launch()
   seed=45
   states=4
   lookupsize=0
-  path_data=../../../data/
+  path_data=../../data/
   submit_file="submit_${data}_${threads}_${randomized}_${update_repeats}_${iterations}"
   rm -f  $submit_file
   write  "#!/bin/bash"
@@ -42,7 +42,7 @@ launch()
   write "source /etc/profile.d/modules.sh"
   write "module load gompi"
   write "export LD_LIBRARY_PATH=../../lib/current:../common"
-  write "path_data=../../../data/"
+  write "path_data=../../data/"
 
   mkdir -p results
   mkdir -p results/$data$part_suffix
@@ -64,7 +64,7 @@ export LD_LIBRARY_PATH=../../lib/current:../common
 
 #data=kyte
 data=kyte
-threads=254
+threads=26
 iterations=10000
 use_repeats=1
 

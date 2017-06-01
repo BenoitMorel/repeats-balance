@@ -2,7 +2,7 @@
 
 source scripts/common.sh
 
-data_name=antl_1_1_nt2
+data_name=kyte
 
 states=4
 lookupsize=0
