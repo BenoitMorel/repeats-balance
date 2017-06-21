@@ -6,10 +6,20 @@
 
 class MSA;
 
+/**
+ * Some of the code is copy-pasted from pll-modules
+ */
+
+
 class Tree {
 public:
   // null newick_file for a random tree
   Tree(const MSA *msa, const char *newick_file = 0);
+  
+  // create a pll_utree_t creating a tree with the first 3 taxa in names, and
+  // iteratively inserting the ith taxon from names at the branch branch_seq[i]
+  // (3 first elements of branch_seq are ignored)
+  Tree(const MSA *msa, const std::vector<unsigned int> &branch_seq);
 
   virtual ~Tree();
 
@@ -38,8 +48,14 @@ public:
 
   static int traverser_full(pll_unode_t * node);
 
+  void print();
 private:
   void init(const MSA *msa);
+  
+  pll_utree_t *create_from_vector(const std::vector<unsigned int> &branches_seq, 
+      unsigned int taxa_count,
+      const char * const* names);
+  // create a random pll_utree_t of size taxa_count  
   pll_utree_t *create_random(unsigned int taxa_count, const char * const* names);
   void map_to_labels(const MSA* msa);
 private:

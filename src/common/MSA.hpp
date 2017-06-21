@@ -28,6 +28,8 @@ public:
   unsigned int get_msa_index() const {return msa_idx;}
 
   unsigned int get_length() const {return msa->length;}
+
+  unsigned int get_tips_number() const {return msa->count;}
 private:
   pll_msa_t *msa;
   unsigned int *weights;

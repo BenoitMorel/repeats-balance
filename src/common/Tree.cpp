@@ -99,6 +99,23 @@ pll_unode_t * pllmod_utree_create_node(unsigned int clv_index,
 pll_utree_t *Tree::create_random(unsigned int taxa_count,
     const char * const* names)
 {
+  unsigned int branches = 3;
+  std::vector<unsigned int> branches_seq;
+  branches_seq.push_back(0);
+  branches_seq.push_back(0);
+  branches_seq.push_back(0);
+  for (unsigned int i = 3; i < taxa_count; ++i) {
+    branches_seq.push_back(rand() % branches);
+    branches += 2;
+  }
+  return create_from_vector(branches_seq, taxa_count, names);
+}
+
+
+pll_utree_t *Tree::create_from_vector(const std::vector<unsigned int> &branches_seq, 
+      unsigned int taxa_count,
+      const char * const* names)
+{
   unsigned int i;
   unsigned int tip_node_count        = taxa_count;
   unsigned int inner_node_count      = taxa_count - 2;
@@ -177,7 +194,7 @@ pll_utree_t *Tree::create_random(unsigned int taxa_count,
     next_inner = nodes[tip_node_count + i - 2];
 
     /* select random branch from the tree */
-    rand_branch_id = (unsigned int) rand() % placed_branches_count;
+    rand_branch_id = (unsigned int) branches_seq[i] % placed_branches_count ;
     next_branch = branches[rand_branch_id];
 
     /* connect tip to selected branch */
@@ -227,6 +244,12 @@ Tree::Tree(const MSA *msa, const char *newick_file)
   init(msa);
 }
   
+Tree::Tree(const MSA *msa, const std::vector<unsigned int> &branch_seq)
+{
+  pll_utree = create_from_vector(branch_seq, branch_seq.size(), msa->get_pll_msa()->label);
+  tips_number = msa->get_pll_msa()->count;
+  init(msa);
+}
 
 Tree::~Tree()
 {
@@ -268,6 +291,19 @@ void Tree::randomize_pll_utree(const MSA *msa) {
   init(msa);
 }
 
+char *cb_serialize(const pll_unode_t *node)
+{
+  unsigned int size = node->label ? strlen(node->label) : 0;
+  char *res = (char*)malloc((size + 1) * sizeof(char));
+  memcpy(res, node->label, size * sizeof(char));
+  res[size] = 0;
+  return res;
+}
+
+void Tree::print()
+{
+  printf("%s\n", pll_utree_export_newick(get_pll_root(), cb_serialize));
+}
 
 void Tree::map_to_labels(const MSA* msa)
 {
