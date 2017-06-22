@@ -300,9 +300,16 @@ char *cb_serialize(const pll_unode_t *node)
   return res;
 }
 
+char *Tree::get_newick() const
+{
+  return pll_utree_export_newick(get_pll_root(), cb_serialize);
+}
+
 void Tree::print()
 {
-  printf("%s\n", pll_utree_export_newick(get_pll_root(), cb_serialize));
+  char *newick = get_newick();
+  printf("%s\n", newick);
+  free(newick);
 }
 
 void Tree::map_to_labels(const MSA* msa)
