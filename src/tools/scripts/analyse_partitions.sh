@@ -2,7 +2,8 @@
 
 source ../sequential_benchs/scripts/common.sh
 
-data_name=1kite_2013_10randomtaxa
+data_name=kyte
+#data_name=1kite_2013_10randomtaxa
 #empty string for a random tree
 tree=1000
 #tree=$path_data/$data_name/unrooted.newick

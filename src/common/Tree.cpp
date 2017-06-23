@@ -239,7 +239,7 @@ Tree::Tree(const MSA *msa, const char *newick_file)
   }
   tips_number = msa->get_pll_msa()->count;
   if (!pll_utree) {
-    std::cerr << "Error: Tree::tree null pll_utree" << std::endl;
+    std::cerr << "Error: Tree::tree null pll_utree " << newick_file << std::endl;
   }
   init(msa);
 }

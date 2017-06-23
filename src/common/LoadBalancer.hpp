@@ -1,6 +1,7 @@
 #ifndef LOADBALANCER_HH
 #define LOADBALANCER_HH
 
+#include "Tree.hpp"
 #include "MSA.hpp"
 #include "CoreAssignment.hpp"
 #include <stack>
@@ -22,6 +23,11 @@ public:
   void compute_weighted_msa(const std::vector<MSA *> &input_msas,
       std::vector<WeightedMSA> &weighted_msa,
       unsigned int pll_attribute);
+  
+  void compute_weighted_msa(const std::vector<MSA *> &input_msas,
+      std::vector<WeightedMSA> &weighted_msa,
+      unsigned int pll_attribute,
+      const std::vector<Tree *> &trees_sample);
   
   void kassian_load_balance(unsigned int cores_number,
       const std::vector<WeightedMSA> &input_msas,

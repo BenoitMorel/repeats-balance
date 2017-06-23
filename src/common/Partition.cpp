@@ -222,6 +222,31 @@ void Partition::create_sub_msa(const pll_msa_t *msa, const unsigned int *weights
   }
 }
 
+double Partition::predict_speedup(const Tree &tree) const
+{
+  if (!partition->repeats) {
+    return 1.0;
+  }
+  const pll_operation_t * operations = tree.get_operations();
+  unsigned int *max_ids=partition->repeats->pernode_max_id;
+  double res = 0;
+  for (unsigned int i = 0; i < tree.get_operations_number(); ++i) {
+    unsigned int parent_ids = max_ids[operations[i].parent_clv_index];
+    unsigned int left_ids = max_ids[operations[i].child1_clv_index];
+    unsigned int right_ids = max_ids[operations[i].child2_clv_index];
+    parent_ids = parent_ids ? parent_ids : partition->sites;
+    left_ids = left_ids ? left_ids : partition->sites;
+    right_ids = right_ids ? right_ids : partition->sites;
+    double speedup = parent_ids / partition->sites;
+    unsigned int min_ids = std::min(left_ids, right_ids);
+    // account for bclv optimization
+    //std::cout << (1.0 + double(min_ids) / double(parent_ids)) / 2.0 << std::endl;
+    speedup *= (1.0 + double(min_ids) / double(parent_ids)) / 2.0;
+    res += speedup / tree.get_operations_number();
+  }
+  
+  return res; 
+}
 
 double Partition::get_unique_repeats_pattern_ratio() const
 {

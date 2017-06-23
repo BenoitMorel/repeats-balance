@@ -44,6 +44,7 @@ public:
 
   // only counts patterns in internal nodes
   double get_unique_repeats_pattern_ratio() const;
+  double predict_speedup(const Tree &tree) const;
 
   unsigned int get_sites_number() const {return partition->sites;}
 public:
