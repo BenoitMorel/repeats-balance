@@ -7,9 +7,16 @@
 
 typedef std::vector< std::vector<unsigned int> > Histogram;
 
-void compute_histogram(Histogram &histogram,
-    const MSA &msa)
+struct ProcessedPartition {
+  MSA *msa;
+  Histogram histogram;
+  std::vector<char> valid_sites;
+};
+
+void compute_histogram(ProcessedPartition &partition)
 {
+  Histogram &histogram = partition.histogram;
+  MSA &msa = *partition.msa;
   histogram.resize(msa.get_length());
   std::fill(histogram.begin(),
       histogram.end(),
@@ -56,34 +63,36 @@ unsigned int count_unichar(Histogram &histogram, unsigned int lim) {
 
 void sites_histogram(int argc, char *params[])
 {
-  if (argc != 1) {
+  if (argc != 2) {
     std::cerr << "Error : syntax is" << std::endl;
     std::cerr 
-      << "phylip" 
+      << "phylip_file partition_file" 
       << std::endl;
     return ;
   }
   unsigned int i = 0;
   const char *phy_filename = params[i++];
+  const char *part_filename = params[i++];
   unsigned int states_number = 4;
-  MSA msa(phy_filename, states_number);
- 
+  MSA full_msa(phy_filename, states_number);
+  std::vector<PartitionIntervals> initial_partitionning;
+  PartitionIntervals::parse(part_filename, initial_partitionning);
+  unsigned int partitions_number = initial_partitionning.size();
+  std::vector<ProcessedPartition> partitions(partitions_number);
+  for (unsigned int i = 0; i < partitions_number; ++i) {
+    partitions[i].msa = new MSA(&full_msa, initial_partitionning[i], i);
+  }
+  
+  
   // histograms[i][0] = gaps
   // histograms[i][1] = A
   // histograms[i][2] = C
   // histograms[i][3] = G
   // histograms[i][4] = T 
-  Histogram histogram; 
-  compute_histogram(histogram, msa);
-  display_histogram(histogram);
-  std::cout << "sites : " << histogram.size() << std::endl;
-  std::cout << "unichar : " << count_unichar(histogram, 0) << std::endl;
-  std::cout << "unichar 1 : " << count_unichar(histogram, 1) << std::endl;
-  std::cout << "unichar 5 : " << count_unichar(histogram, 5) << std::endl;
-  std::cout << "unichar 10 : " << count_unichar(histogram, 10) << std::endl;
-  std::cout << "unichar 25 : " << count_unichar(histogram, 25) << std::endl;
-  std::cout << "unichar 50 : " << count_unichar(histogram, 50) << std::endl;
-  std::cout << "unichar 100 : " << count_unichar(histogram, 100) << std::endl;
+  for (unsigned int i = 0; i < partitions.size(); ++i) { 
+    compute_histogram(partitions[i]);
+    display_histogram(partitions[i].histogram);
+  }
   
 }
 
