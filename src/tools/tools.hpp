@@ -4,6 +4,7 @@
 void analyse_partitions(int argc, char *params[]);
 void generate_partitions(int argc, char *params[]);
 void generate_repeats_dataset(int argc, char *params[]);
+void sites_histogram(int argc, char *params[]);
 
 
 #endif
