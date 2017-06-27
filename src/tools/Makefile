@@ -7,7 +7,7 @@ LDFLAGS= $(DBG) -std=gnu++11 -L$(libpllpath) -I$(libpllpath) -L../common -static
 OBJDIR=obj
 
 EXEC=main
-OBJ= $(addprefix $(OBJDIR)/, main.o analyse_partitions.o generate_partitions.o generate_repeats_dataset.o)
+OBJ= $(addprefix $(OBJDIR)/, main.o analyse_partitions.o generate_partitions.o generate_repeats_dataset.o sites_histogram.o)
 
 
 all: dir $(EXEC) 

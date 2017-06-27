@@ -31,6 +31,7 @@ public:
 
   const pll_unode_t *get_pll_root() const {return pll_utree->nodes[tips_number + innernodes_number - 1];}
 
+  void update_all_operations() {update_operations(traverser_full);}
   void update_operations(int (*traverse)(pll_unode_t *));
  
   const double *get_branch_lengths() const {return &branch_lengths[0];}
@@ -48,6 +49,8 @@ public:
 
   static int traverser_full(pll_unode_t * node);
 
+  char *get_newick() const;
+  
   void print();
 private:
   void init(const MSA *msa);

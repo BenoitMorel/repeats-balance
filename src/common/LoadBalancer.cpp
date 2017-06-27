@@ -9,24 +9,32 @@ void LoadBalancer::compute_weighted_msa(const std::vector<MSA *> &input_msas,
   std::vector<WeightedMSA> &weighted_msa,
   unsigned int pll_attribute)
 {
-  weighted_msa.resize(input_msas.size());
-  const unsigned int iterations = 10;
-  for (unsigned int i = 0; i < input_msas.size(); ++i) {
-    weighted_msa[i].msa = input_msas[i];
-    weighted_msa[i].persite_weight = 0.0;
-  }
   std::vector<Tree *> trees;
-  for (unsigned int i = 0; i < iterations; ++i) {
+  for (unsigned int i = 0; i < 10; ++i) {
     Tree *tree = new Tree(input_msas[0]);
     tree->update_operations(Tree::traverser_full);
     trees.push_back(tree);
   }
+  compute_weighted_msa(input_msas, weighted_msa, pll_attribute, trees);
+}
+
+void LoadBalancer::compute_weighted_msa(const std::vector<MSA *> &input_msas,
+  std::vector<WeightedMSA> &weighted_msa,
+  unsigned int pll_attribute,
+  const std::vector<Tree*> &trees_sample)
+{
+  weighted_msa.resize(input_msas.size());
+  for (unsigned int i = 0; i < input_msas.size(); ++i) {
+    weighted_msa[i].msa = input_msas[i];
+    weighted_msa[i].persite_weight = 0.0;
+  }
   for (unsigned int m = 0; m < input_msas.size(); ++m) {
     Partition partition(input_msas[m], pll_attribute, input_msas[0]->get_states_number(), 4, 0); 
-    for (unsigned int t = 0; t < trees.size(); ++t) {
-      partition.update_repeats(*trees[t]);
-      weighted_msa[m].persite_weight += std::max(0.05, partition.get_unique_repeats_pattern_ratio());
-    }   
+    for (unsigned int t = 0; t < trees_sample.size(); ++t) {
+      partition.update_repeats(*trees_sample[t]);
+      //weighted_msa[m].persite_weight += std::max(0.05, partition.predict_speedup(*trees_sample[t]));
+      weighted_msa[m].persite_weight += std::max(0.10, partition.get_unique_repeats_pattern_ratio());
+    }  
   }
 }
 
