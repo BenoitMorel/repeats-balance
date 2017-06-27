@@ -46,6 +46,8 @@ public:
   double get_unique_repeats_pattern_ratio() const;
 
   unsigned int get_sites_number() const {return partition->sites;}
+
+  void print_partials() const;
 public:
   static unsigned int compute_attribute(unsigned int use_repeats, 
                                         unsigned int additional_attr, 

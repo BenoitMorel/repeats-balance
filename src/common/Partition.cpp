@@ -222,6 +222,19 @@ void Partition::create_sub_msa(const pll_msa_t *msa, const unsigned int *weights
   }
 }
 
+void Partition::print_partials() const
+{
+  unsigned int span = partition->states_padded * partition->rate_cats;
+  for (unsigned int c = 0; c < partition->tips + partition->clv_buffers; ++c) {
+    for (unsigned int s = 0; s < partition->sites; ++s) {
+      std::cout << "|";
+      for (unsigned int i = 0; i < span; ++i) {
+        std::cout << partition->clv[c][s * span + i] << " ";
+      }
+    }
+    std::cout << std::endl;
+  }
+}
 
 double Partition::get_unique_repeats_pattern_ratio() const
 {
