@@ -7,7 +7,7 @@ LDFLAGS= $(DBG) -std=gnu++11 -L$(libpllpath) -I$(libpllpath) -L../common -static
 OBJDIR=obj
 
 EXEC=main
-OBJ= $(addprefix $(OBJDIR)/, main.o print_random_trees.o print_all_trees.o random_trees_likelihoods.o)
+OBJ= $(addprefix $(OBJDIR)/, main.o print_random_trees.o print_all_trees.o random_trees_likelihoods.o tbnni_move.o)
 
 
 all: dir $(EXEC) 
