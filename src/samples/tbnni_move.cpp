@@ -57,7 +57,13 @@ static void utree_swap(pll_unode_t * t1, pll_unode_t * t2)
 //  B--|u   v|--E
 //     |     |
 //     C     D
-void apply_tbnni_move(pll_unode_t *unode, unsigned int tbnni_number) {
+unsigned int tbnni_rollback_table[] = {0, 1, 2, 3, 4, 5, 6, 10, 14, 9, 7, 11, 12, 13, 8};
+struct tbnni_rb {
+  pll_unode_t *node;
+  unsigned int tbnni_number;
+};
+
+void apply_tbnni_move(pll_unode_t *unode, unsigned int tbnni_number, tbnni_rb *rb) {
   unsigned int subtree_move =  tbnni_number % 3;
   unsigned int singlenode_move =  tbnni_number / 3;
   pll_unode_t *nodes[5];
@@ -74,14 +80,14 @@ void apply_tbnni_move(pll_unode_t *unode, unsigned int tbnni_number) {
   if (subtree_move) {
     utree_swap(nodes[2], nodes[2 + subtree_move]); // C and D
   }
+  if (rb) {
+    rb->node = nodes[0];
+    rb->tbnni_number = tbnni_rollback_table[tbnni_number];
+  }
 }
 
 
-void test_tbnni_move(Tree &tree, unsigned int tbnni_number) {
-  pll_utree_t *utree = tree.get_pll_tree();
-  pll_unode_t *unode = utree->nodes[0]->back->next->next->back;
-  apply_tbnni_move(unode, tbnni_number);
-}
+
 
 void tbnni_move(int argc, char *params[])
 {
@@ -106,14 +112,24 @@ void tbnni_move(int argc, char *params[])
 
   std::cout.precision(17);
   for (unsigned int i = 0; i < 15; ++i) {
+    std::cout << i << std::endl;
     Tree tree(&msa, newick_filename);
-    test_tbnni_move(tree, i);
+    //tree.print();
+    pll_utree_t *utree = tree.get_pll_tree();
+    pll_unode_t *unode = utree->nodes[0]->back->next->next->back;
+    tbnni_rb rb;
+    apply_tbnni_move(unode, i, &rb);
     tree.print();
+    apply_tbnni_move(rb.node, rb.tbnni_number, 0);
+    tree.print();
+    std::cout << std::endl;
+    /*
     LikelihoodEngine engine(&tree, &msa, part_filename, attribute, states_number, 4, 0);  
     engine.update_operations();
     engine.update_matrices();
     engine.update_partials();
     std::cout << engine.compute_likelihood() << std::endl;
+    */
   }
 
 }
