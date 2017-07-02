@@ -12,7 +12,9 @@ int main(int argc, char *params[])
   }
   if (!strcmp(params[1], "analyse_partitions")) {
     analyse_partitions(argc - 2, params + 2);
-  } else if (!strcmp(params[1], "generate_repeats_dataset")) {
+  } else if (!strcmp(params[1], "eval_split_loss")) {
+    eval_split_loss(argc - 2, params + 2);
+  } else if (!strcmp(params[0], "generate_repeats_dataset")) {
     generate_repeats_dataset(argc - 2, params + 2);
   } else if (!strcmp(params[1], "generate_partitions")) {
     generate_partitions(argc - 2, params + 2);
