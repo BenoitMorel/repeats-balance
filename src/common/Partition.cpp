@@ -124,6 +124,13 @@ void Partition::update_matrices(const Tree &tree)
     tree.get_matrix_count());
 }
 
+void Partition::update_partials_from_operations(const pll_operation_t *operations, 
+    unsigned int operations_number, 
+    bool update_repeats)
+{
+  pll_update_partials_rep(partition, operations, operations_number, update_repeats); 
+}
+
 void Partition::update_partials(const Tree &tree, bool update_repeats)
 {
   pll_update_partials_rep(partition, tree.get_operations(), tree.get_operations_number(), update_repeats); 

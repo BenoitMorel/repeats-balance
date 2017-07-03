@@ -32,6 +32,8 @@ public:
 
   void update_repeats(const Tree &tree);
 
+  void update_partials_from_operations(const pll_operation_t *operations, unsigned int operations_number, bool update_repeats = true);
+  
   void update_partials(const Tree &tree, bool update_repeats = true);
 
   double compute_likelihood(const Tree &tree);
@@ -41,6 +43,7 @@ public:
   void compute_derivatives(double *d_f, double *dd_f); 
 
   pll_partition_t *get_partition() {return partition;}
+  const pll_partition_t *get_partition() const{return partition;}
 
   // only counts patterns in internal nodes
   double get_unique_repeats_pattern_ratio() const;
