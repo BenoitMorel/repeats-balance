@@ -15,7 +15,7 @@
 
 
 void full_traversal(int argc, char *params[]);
-void derivatives(int argc, char *params[]);
+void core_functions(int argc, char *params[]);
 void sumtables(int argc, char *params[]);
 void partitioned_full_traversal(int argc, char *params[]);
 void pernode(int argc, char *params[]);

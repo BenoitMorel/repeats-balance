@@ -24,8 +24,19 @@
 
 
 \begin{figure}[!htb]
-\figuretitle{avx architecture (computer: my hits computer), 500 iterations}
-\subimport{../sequential_benchs/}{repeats_500_avx.tex}
+\figuretitle{Bench likelihood}
+\subimport{../core_functions/}{core_functions_l1000_s0_d0avx.tex}
+\end{figure}
+
+\begin{figure}[!htb]
+\figuretitle{Bench sumtables}
+\subimport{../core_functions/}{core_functions_l0_s1000_d0avx.tex}
+\end{figure}
+
+
+\begin{figure}[!htb]
+\figuretitle{Bench derivatives (without sumtables)}
+\subimport{../core_functions/}{core_functions_l0_s0_d1000avx.tex}
 \end{figure}
 
 
