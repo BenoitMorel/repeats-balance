@@ -1,0 +1,53 @@
+  \documentclass[a4paper]{article}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{import}
+\usepackage[font=scriptsize,labelfont=bf]{caption}
+\usepackage{array}
+
+\begin{document}
+
+
+\newcommand*{\figuretitle}[1]{%
+    {\centering%   <--------  will only affect the title because of the grouping (by the
+    \textbf{#1}%              braces before \centering and behind \medskip). If you remove
+    \par\medskip}%            these braces the whole body of a {figure} env will be centered.
+}
+
+
+\title{Libpll full tree CLV update benchmarks}
+\maketitle
+
+
+
+\section{Benchmark}
+
+kyte: 144 taxa, 413000 uncompressed sites
+
+all benches are done on one single tree.
+
+\begin{figure}[!htb]
+\figuretitle{Bench update partials (25 iterations)}
+\subimport{../core_functions/}{rates_core_functions_p25_l0_s0_d0avx.tex}
+\end{figure}
+
+
+\begin{figure}[!htb]
+\figuretitle{Bench core likelihood (250 iterations)}
+\subimport{../core_functions/}{rates_core_functions_l250_s0_d0avx.tex}
+\end{figure}
+
+\begin{figure}[!htb]
+\figuretitle{Bench core sumtables (250 iterations)}
+\subimport{../core_functions/}{rates_core_functions_l0_s250_d0avx.tex}
+\end{figure}
+
+
+\begin{figure}[!htb]
+\figuretitle{Bench core derivatives (250 iterations)}
+\subimport{../core_functions/}{rates_core_functions_l0_s0_d250avx.tex}
+\end{figure}
+
+
+
+\end{document}

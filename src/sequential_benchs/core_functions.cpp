@@ -7,21 +7,26 @@
  */
 void core_functions(int argc, char *params[])
 {
-  if (argc != 10) {
+  int expected_argc = 13;
+  if (argc != expected_argc) {
     std::cerr << "Error : syntax is" << std::endl;
     std::cerr 
-      << "newick sequence states use_repeats  additional_attr repeats_lookup_size "
-      << "iterations_likelihood iterations_sumtable iterations_derivatives  arch"
+      << "newick sequence states rates use_repeats update_repeats additional_attr repeats_lookup_size "
+      << "iterations_partials iterations_likelihood iterations_sumtable iterations_derivatives  arch"
       << std::endl;
+    std::cerr << "(" << argc << " arguments instead of " << expected_argc << std::endl;
     return ;
   }
   unsigned int i = 0;
   const char *newick = params[i++];
   const char *seq = params[i++];
   unsigned int states = atoi(params[i++]);
+  unsigned int rates = atoi(params[i++]);
   unsigned int use_repeats = atoi(params[i++]);
+  unsigned int update_repeats = atoi(params[i++]);
   unsigned int additional_attr = atoi(params[i++]);
   unsigned int repeats_lookup_size = atoi(params[i++]);
+  unsigned int iterations_partials = atoi(params[i++]);
   unsigned int iterations_likelihood = atoi(params[i++]);
   unsigned int iterations_sumtable = atoi(params[i++]);
   unsigned int iterations_derivatives = atoi(params[i++]);
@@ -30,7 +35,7 @@ void core_functions(int argc, char *params[])
   unsigned int attribute = Partition::compute_attribute(use_repeats, 
 		  additional_attr, 
 		  arch); 
-  LikelihoodEngine engine(newick, seq, 0, attribute, states, 4, repeats_lookup_size);
+  LikelihoodEngine engine(newick, seq, 0, attribute, states, rates, repeats_lookup_size);
   
   engine.update_operations();
   engine.update_matrices();
@@ -43,6 +48,9 @@ void core_functions(int argc, char *params[])
  
 
   Timer timer;
+  for (i = 0; i < iterations_partials; ++i) {
+    engine.update_partials(update_repeats);
+  } 
   for (i = 0; i < iterations_likelihood; ++i) {
     ll = engine.compute_likelihood();
   } 
