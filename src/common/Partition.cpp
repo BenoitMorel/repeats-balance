@@ -55,6 +55,13 @@ void Partition::init_partition(const pll_msa_t *compressed_msa,
       compressed_msa->sequence[i]);
   }
 
+  if (is_repeats_on())
+    std::cout << "repeats on" << std::endl;
+
+  if (repeats_lookup_size) {
+    std::cout << repeats_lookup_size << std::endl;
+  }
+
   if (is_repeats_on() && repeats_lookup_size) {
     set_lookup_size(repeats_lookup_size);  
   }
