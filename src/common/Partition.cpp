@@ -105,7 +105,7 @@ unsigned int Partition::compute_attribute(unsigned int use_repeats,
     return INVALID_ATTRIBUTE;
   }
   if (use_repeats == 1) {
-    attribute |= PLL_ATTRIB_SITES_REPEATS;
+    attribute |= PLL_ATTRIB_SITE_REPEATS;
   } else if(use_repeats == 0) {
     attribute |= PLL_ATTRIB_PATTERN_TIP;
   }
@@ -146,7 +146,7 @@ void Partition::update_partials(const Tree &tree, bool update_repeats)
 void Partition::update_repeats(const Tree &tree)
 {
   for (unsigned int i = 0; i < tree.get_operations_number(); ++i) {
-    if (partition->attributes & PLL_ATTRIB_SITES_REPEATS) {
+    if (partition->attributes & PLL_ATTRIB_SITE_REPEATS) {
       pll_update_repeats(partition, tree.get_operations() + i);
     }
   }
@@ -256,7 +256,7 @@ double Partition::predict_speedup(const Tree &tree) const
     return 1.0;
   }
   const pll_operation_t * operations = tree.get_operations();
-  unsigned int *max_ids=partition->repeats->pernode_max_id;
+  unsigned int *max_ids=partition->repeats->pernode_ids;
   double res = 0;
   for (unsigned int i = 0; i < tree.get_operations_number(); ++i) {
     unsigned int parent_ids = max_ids[operations[i].parent_clv_index];
@@ -283,7 +283,7 @@ double Partition::get_unique_repeats_pattern_ratio() const
   }
   unsigned int total_patterns = 0;
   for (unsigned int node = partition->tips; node < partition->tips + partition->clv_buffers; ++node) {
-    unsigned int node_patterns = partition->repeats->pernode_max_id[node];
+    unsigned int node_patterns = partition->repeats->pernode_ids[node];
     node_patterns = node_patterns ? node_patterns : partition->sites;
     total_patterns += node_patterns;
   }

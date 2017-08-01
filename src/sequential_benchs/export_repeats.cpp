@@ -27,7 +27,7 @@ void export_repeats_partition(pll_partition_t *partition,
   for (unsigned int n = 0; n < nodes; ++n) {
     unsigned int *site_id = partition->repeats->pernode_site_id[n];
     for (unsigned int s = 0; s < partition->sites; ++s) {
-      os << (partition->repeats->pernode_max_id[n] ? site_id[s] : s) << " ";
+      os << (partition->repeats->pernode_ids[n] ? site_id[s] : s) << " ";
     }
     os << std::endl;
   }
@@ -54,7 +54,7 @@ void export_repeats(int argc, char *params[])
   unsigned int states = 4;
   unsigned int repeats_lookup_size = 2000000;
   LikelihoodEngine engine(newick_file, seq_file, part_file,
-      PLL_ATTRIB_SITES_REPEATS | PLL_ATTRIB_ARCH_AVX, states, 4, repeats_lookup_size);
+      PLL_ATTRIB_SITE_REPEATS | PLL_ATTRIB_ARCH_AVX, states, 4, repeats_lookup_size);
   engine.update_operations();
   engine.update_matrices();
   engine.update_partials();

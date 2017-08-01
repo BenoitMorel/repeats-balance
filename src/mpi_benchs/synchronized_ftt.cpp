@@ -90,7 +90,7 @@ void synchronized_ftt(int argc, char *params[])
       weighted_msas.push_back(WeightedMSA(msas[i], 1.0));
     }
   } else {
-    balancer.compute_weighted_msa(msas, weighted_msas, PLL_ATTRIB_SITES_REPEATS | PLL_ATTRIB_ARCH_AVX, trees_sample);
+    balancer.compute_weighted_msa(msas, weighted_msas, PLL_ATTRIB_SITE_REPEATS | PLL_ATTRIB_ARCH_AVX, trees_sample);
   }
   std::vector<CoreAssignment> assignments;
   balancer.kassian_load_balance(cores, weighted_msas, assignments);
