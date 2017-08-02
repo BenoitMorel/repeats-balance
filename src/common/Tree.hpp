@@ -29,6 +29,7 @@ public:
   
   const pll_utree_t *get_pll_tree() const {return pll_utree;}
 
+  pll_unode_t *get_pll_root() {return pll_utree->nodes[tips_number + innernodes_number - 1];}
   const pll_unode_t *get_pll_root() const {return pll_utree->nodes[tips_number + innernodes_number - 1];}
 
   void update_all_operations() {update_operations(traverser_full);}
