@@ -4,102 +4,106 @@
 #include <iostream>
 
 
-#include <pll_tree.h>
-#include <assert.h>
-#include <stdarg.h>
-#if(USE_HASH)
-#include <search.h>
-#endif
-#include <time.h>
 
-static void fatal (const char * format, ...);
+extern "C" {
+#include "pll_tree.h"
+#include "pllmod_algorithm.h"
+}
+#include "../common/repeatsbalance.hpp"
 
-/* function for printing non-binary trees */
-static void print_newick_recurse(pll_unode_t * node);
-static void print_newick(pll_unode_t * tree);
+typedef std::vector< std::vector <unsigned int> > GapMatrix;
 
+pllmod_treeinfo_t *load_treeinfo(const char *phy_file,
+    const char *part_file)
+{
+  const unsigned int states_number = 4;
+  const unsigned int rates = 4;
+  unsigned int attributes = PLL_ATTRIB_SITE_REPEATS | PLL_ATTRIB_ARCH_AVX;
+  MSA full_msa(phy_file, states_number); 
+  Tree *tree = new Tree(&full_msa);
+  std::vector<PartitionIntervals> partitionning;
+  PartitionIntervals::parse(part_file, partitionning);
+  std::vector<Partition *> partitions; 
+  for (unsigned int i = 0; i < partitionning.size(); ++i) 
+  {
+    MSA submsa(&full_msa, partitionning[i], i);
+    submsa.compress();
+    partitions.push_back(new Partition(&submsa,
+          attributes,
+          states_number,
+          rates,
+          0));
+  }
+
+  // pllmod stuff
+  pllmod_treeinfo_t * treeinfo = pllmod_treeinfo_create(tree->get_pll_root(),
+      tree->get_tips_number(),
+      partitions.size(),
+      PLLMOD_TREE_BRLEN_LINKED);
+  for (unsigned int i = 0; i < partitionning.size(); ++i) 
+  {
+    unsigned int params_indices[4] = {0,0,0,0};
+    const unsigned int params_to_optimize = 0;
+    pllmod_treeinfo_init_partition(treeinfo, i, partitions[i]->get_partition(),
+        params_to_optimize, 0, 1.0, params_indices, NULL);
+  }
+  return treeinfo;
+
+}
+
+bool is_informative(const pllmod_treeinfo_t *treeinfo, 
+    unsigned int partition_index,
+    unsigned int tip_index)
+{
+  pll_partition_t *partition = treeinfo->partitions[partition_index];
+  pll_repeats_t *repeats = partition->repeats;
+  return repeats->pernode_ids[tip_index] != 1;
+}
+
+// matrix[partition][tip]
+void compute_gaps_matrix(const pllmod_treeinfo_t *treeinfo,
+    GapMatrix &matrix)
+{
+  matrix = GapMatrix(treeinfo->partition_count, 
+    std::vector<unsigned int>(treeinfo->tip_count, 0));
+  for (unsigned int i = 0; i < matrix.size(); ++i) 
+  {
+    for (unsigned j = 0; j < matrix[0].size(); ++j)
+    {
+      matrix[i][j] = is_informative(treeinfo, i, j);
+    }
+  }
+
+}
+
+void display_gaps_matrix(const GapMatrix &matrix)
+{
+  double sum = 0;
+  for (unsigned j = 0; j < matrix[0].size(); ++j) 
+  {
+    for (unsigned int i = 0; i < matrix.size(); ++i) 
+    {
+      sum += (double)matrix[i][j];
+      std::cout << matrix[i][j] << " ";
+    }
+    std::cout << std::endl;
+  }
+  std::cout << "Representative data: " << 
+    sum / (double(matrix[0].size() * matrix.size())) << std::endl;
+}
+
+/**
+ * This is full of memory leaks
+ */
 void terraces_experiments(int argc, char *argv[])
 {
-  unsigned int tree_count;
+  srand(42);
+  pllmod_treeinfo_t *treeinfo = load_treeinfo("../../data/404/404.phy", "../../data/404/404.part");
+  //pllmod_treeinfo_t *treeinfo = load_treeinfo("../../data/59/59.phy", "../../data/59/59.part");
+  std::cout << "likelihood: " << pllmod_treeinfo_compute_loglh(treeinfo, 0) << std::endl;
+  GapMatrix gap_matrix;
+  compute_gaps_matrix(treeinfo, gap_matrix);
+  display_gaps_matrix(gap_matrix);
 
-  if (argc != 3)
-    fatal (" syntax: %s [trees_file] [consensus_threshold]", argv[0]);
-
-  /* get arguments */
-  char * filename = argv[1];
-  double threshold = atof(argv[2]);
-
-  /* build consensus tree */
-  pll_consensus_utree_t * constree =
-    pllmod_utree_consensus(filename,
-                          threshold,
-                          &tree_count);
-  if (!constree)
-    fatal("Error %d: %s\n", pll_errno, pll_errmsg);
-
-  /* print it in NEWICK format */
-  print_newick(constree->tree);
-
-  /* clean up */
-  pllmod_utree_consensus_destroy(constree);
-
-}
-
-/******************************************************************************/
-/******************************************************************************/
-/******************************************************************************/
-
-static void fatal (const char * format, ...)
-{
-  va_list argptr;
-  va_start(argptr, format);
-  vfprintf (stderr, format, argptr);
-  va_end(argptr);
-  fprintf (stderr, "\n");
-  exit (EXIT_FAILURE);
-}
-
-
-static void print_newick_recurse(pll_unode_t * node)
-{
-  pll_unode_t * child;
-
-  if (pllmod_utree_is_tip(node))
-  {
-    printf("%s", node->label);
-    return;
-  }
-
-  printf("(");
-  child = node->next;
-  while(child != node)
-  {
-    print_newick_recurse(child->back);
-
-    if (child->next != node)
-      printf(",");
-
-    child = child->next;
-  }
-  printf(")");
-  if (node->data)
-  {
-    consensus_data_t * cdata = (consensus_data_t *) node->data;
-    printf("[%.3f]", cdata->support);
-  }
-}
-
-static void print_newick(pll_unode_t * tree)
-{
-  printf("(");
-  print_newick_recurse(tree->back);
-  pll_unode_t * child = tree->next;
-  while(child != tree)
-  {
-    printf(",");
-    print_newick_recurse(child->back);
-    child = child->next;
-  }
-  printf(");\n");
 }
 

@@ -67,7 +67,7 @@ private:
     unsigned int rate_categories_number = 4,
     unsigned int repeats_lookup_size = 0);
   
-  bool is_repeats_on() const {return partition->attributes & PLL_ATTRIB_SITES_REPEATS;}
+  bool is_repeats_on() const {return partition->attributes & PLL_ATTRIB_SITE_REPEATS;}
   
   void set_lookup_size(unsigned int size);
   

@@ -2,9 +2,9 @@ libpath=../../lib/current
 
 CC=g++
 DBG= -O3 -g 
-CFLAGS=  $(DBG) -std=gnu++11 -W -Wall -ansi -pedantic -I$(libpath)
-LDFLAGS= $(DBG) -std=gnu++11 -L$(libpath) -I$(libpath) -L../common
-EXTERNAL_LINKS=-lrepeatsbalance -lpll_algorithm -lpll_msa -lpll_optimize -lpll_binary -lpll_tree -lpll_util -lpll
+CFLAGS=  $(DBG) -W -Wall -ansi -pedantic -I$(libpath)
+LDFLAGS= $(DBG) -L$(libpath) -I$(libpath) -L../common
+EXTERNAL_LINKS= -lrepeatsbalance -lpll_algorithm -lpll_optimize -lpll_tree -lpll_util -lpll -lm
 OBJDIR=obj
 
 EXEC=main
@@ -17,10 +17,10 @@ dir:
 	mkdir -p obj 
 
 main: $(OBJ) 
-	$(CC) $(LDFLAGS) -o $@  $^ $(EXTERNAL_LINKS)
+	$(CC) $(CFLAGS) -o $@  $^ $(EXTERNAL_LINKS) $(LDFLAGS)
 
 $(OBJDIR)/%.o : %.cpp
-	$(CC) $(CFLAGS) -o $@ -c $< $(EXTERNAL_LINKS)
+	$(CC) $(CFLAGS) -o $@ -c $< $(EXTERNAL_LINKS) $(LDFLAGS)
 
 
 clean:
