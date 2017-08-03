@@ -115,11 +115,7 @@ unsigned int Partition::compute_attribute(unsigned int use_repeats,
 
 void Partition::set_lookup_size(unsigned int size)
 {
-  pll_repeats_t *repeats = partition->repeats;
-  repeats->lookup_buffer_size = size;
-  free(repeats->lookup_buffer);
-  repeats->lookup_buffer = (unsigned int *)
-     calloc(repeats->lookup_buffer_size, sizeof(unsigned int));
+  pll_resize_repeats_lookup(partition, size);
 }
 
 void Partition::update_matrices(const Tree &tree)

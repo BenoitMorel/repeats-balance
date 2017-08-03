@@ -6,17 +6,14 @@ source scripts/common.sh
 outputdir="${path_results}core_functions/"
 iterations_partials=0
 iterations_likelihood=0
-iterations_sumtable=250
-iterations_derivatives=0
+iterations_sumtable=0
+iterations_derivatives=250
 
 datasets=(
           "$path_data/59/unrooted.newick $path_data/59/59.phy 4 4" 
           "$path_data/128/unrooted.newick $path_data/128/128.phy 4 4"
           "$path_data/404/unrooted.newick $path_data/404/404.phy 4 4"
-          #"$path_data/kyte/unrooted.newick $path_data/kyte/kyte.phy 4 1"
-          #"$path_data/kyte/unrooted.newick $path_data/kyte/kyte.phy 4 2"
           "$path_data/kyte/unrooted.newick $path_data/kyte/kyte.phy 4 4"
-          #"$path_data/kyte/unrooted.newick $path_data/kyte/kyte.phy 4 8"
           )
 
 datasets_names=(
@@ -84,19 +81,11 @@ bench_arch() {
   done
   writeln "\\\\"
 
-  cp $path_lib/libpll_repeats_nobclv/* $path_lib/current  
+  cp $path_lib/libpll_repeat/* $path_lib/current  
   make clean 
   make 
   bench_dataset 0 0 0 $srlookupsize $iterations_partials $iterations_likelihood $iterations_sumtable $iterations_derivatives $1 "tipinner" 
-  bench_dataset 1 1 0 $srlookupsize $iterations_partials $iterations_likelihood $iterations_sumtable $iterations_derivatives $1 "nobclv" 
-  cp $path_lib/libpll_repeats_cond_bclv/* $path_lib/current  
-  make clean 
-  make 
-  bench_dataset 1 1 0 $srlookupsize $iterations_partials $iterations_likelihood $iterations_sumtable $iterations_derivatives $1 "condbclv" 
-  cp $path_lib/libpll_repeatsbclv/* $path_lib/current  
-  make clean 
-  make 
-  bench_dataset 1 1 0 $srlookupsize $iterations_partials $iterations_likelihood $iterations_sumtable $iterations_derivatives $1 "bclv" 
+  bench_dataset 1 1 0 $srlookupsize $iterations_partials $iterations_likelihood $iterations_sumtable $iterations_derivatives $1 "repeats" 
   #bench_dataset 1 0 0 $srlookupsize $iterations_partials $iterations_likelihood $iterations_sumtable $iterations_derivatives $1 "repeats no update" 
 
 
